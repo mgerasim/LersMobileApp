@@ -20,7 +20,20 @@ namespace LersMobile.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            LoadPrivateData();
+
             LoadApplication(new App());
+        }
+
+        private void LoadPrivateData()
+        {
+            object token;
+
+            if (Xamarin.Forms.Application.Current.Properties.TryGetValue("LoginToken", out token))
+            {
+                App.Core.Token = (string)token;
+            }
         }
     }
 }

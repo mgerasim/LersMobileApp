@@ -7,9 +7,13 @@ namespace LersMobile
 {
 	public partial class App : Application
 	{
+        public static Core.MobileCore Core { get; private set; }
+
 		public App ()
 		{
 			InitializeComponent();
+
+            Core = new Core.MobileCore();
 
 			MainPage = new MainPage();
 		}
