@@ -15,7 +15,7 @@ namespace LersMobile
 
             Core = new Core.MobileCore();
 
-			MainPage = new MainPage();
+			MainPage = new LoginPage();
 		}
 
 		protected override void OnStart ()

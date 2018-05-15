@@ -10,32 +10,20 @@ namespace LersMobile
 {
 	public partial class MainPage : ContentPage
 	{
+		private readonly Core.MobileCore lersService;
+
 		public MainPage()
 		{
+			lersService = App.Core;
+
 			InitializeComponent();
 		}
 
-		public async void OnLogin()
+		protected override void OnAppearing()
 		{
-			var serverAddressInput = this.FindByName<Entry>("serverAddressInput");
-			var loginInput = this.FindByName<Entry>("loginInput");
-			var passwordInput = this.FindByName<Entry>("passwordInput");
+			base.OnAppearing();
 
-
-			try
-			{
-				this.ShowIndicator("busyIndicator");
-
-				await App.Core.Connect(serverAddressInput.Text, loginInput.Text, passwordInput.Text);
-			}
-			catch (Exception exc)
-			{
-				Toast.MakeText(Android.App.Application.Context, "Ошибка подключения к серверу. " + exc.Message, ToastLength.Short);
-			}
-			finally
-			{
-				this.HideIndicator("busyIndicator");
-			}
+			var notifications = await lersService.GetNotifications();
 		}
 	}
 }

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LersMobile.LoginPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator x:Name="busyIndicator" Color="Red" IsRunning="false" IsVisible="false" />
+
+            <Label Text="Адрес сервера ЛЭРС УЧЁТ" />
+            <Entry x:Name="serverAddressInput" />
+
+            <Label Text="Логин"/>
+            <Entry x:Name="loginInput" />
+
+            <Label Text="Пароль" />
+            <Entry x:Name="passwordInput" IsPassword="True"></Entry>
+
+            <Button x:Name="onLogin" Text="Вход" Clicked="OnLogin"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

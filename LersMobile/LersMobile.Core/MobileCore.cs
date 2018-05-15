@@ -10,12 +10,33 @@ namespace LersMobile.Core
 
         public string Token { get; set; }
 
-		public async Task Connect(string serverAddress, string login, string password)
+		public event EventHandler OnTokenReceived;
+
+		public MobileCore()
 		{
 			this.server = new LersServer("Lers android");
 
-			await this.server.ConnectAsync(serverAddress, 10000, null,
+			this.server.VersionMismatch += (sender, e) => e.Ignore = true;
+		}
+
+		public async Task Connect(string serverAddress, string login, string password)
+		{
+			var token = await this.server.ConnectAsync(serverAddress, 10000, null,
 				new Lers.Networking.BasicAuthenticationInfo(login, Lers.Networking.SecureStringHelper.ConvertToSecureString(password)));
+
+			OnTokenReceived?.Invoke(this, EventArgs.Empty);
+		}
+
+		/*public async Task ConnectToken()
+		{
+			var token = await this.server.ConnectAsync(serverAddress, 10000, null,
+			new Lers.Networking.BasicAuthenticationInfo(login, Lers.Networking.SecureStringHelper.ConvertToSecureString(password)));
+		}*/
+
+
+		public Task<Notification[]> GetNotifications()
+		{
+			return this.server.Notifications.GetListAsync();
 		}
 	}
 }
