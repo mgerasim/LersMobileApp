@@ -5,10 +5,19 @@
              x:Class="LersMobile.MainPage">
 
     <StackLayout>
-        <!-- Place new controls here -->
-    	<Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <ActivityIndicator x:Name="busyIndicator" Color="Red" IsRunning="false" IsVisible="false" />
+
+        <Label Text="Адрес сервера ЛЭРС УЧЁТ" />
+        <Entry x:Name="serverAddressInput" />
+        
+        <Label Text="Логин"/>
+        <Entry x:Name="loginInput" />
+
+        <Label Text="Пароль" />
+        <Entry x:Name="passwordInput" IsPassword="True"></Entry>
+
+        <Button x:Name="onLogin" Text="Вход" Clicked="OnLogin"/>
     </StackLayout>
+    
 
 </ContentPage>

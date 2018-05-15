@@ -21,9 +21,11 @@ namespace LersMobile.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            LoadPrivateData();
+			var app = new App();
 
-            LoadApplication(new App());
+			LoadPrivateData();
+
+            LoadApplication(app);
         }
 
         private void LoadPrivateData()
