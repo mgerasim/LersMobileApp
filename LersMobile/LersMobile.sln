@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{CE47920E-6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{482A6F21-58D4-407C-8F80-5EA3A766F388}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.System.ns", "..\..\..\trunk\Framework\Lers.System\Lers.System.ns.csproj", "{F98B46DC-FFE8-4893-8DF5-648685AD7C50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.System.ns", "..\..\LersUchet\Framework\Lers.System\Lers.System.ns.csproj", "{F98B46DC-FFE8-4893-8DF5-648685AD7C50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Core.ns", "..\..\..\trunk\LersCore\Lers.Core\Lers.Core.ns.csproj", "{3635FC21-A9E0-42B6-A908-F9844FDE9578}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Core.ns", "..\..\LersUchet\LersCore\Lers.Core\Lers.Core.ns.csproj", "{3635FC21-A9E0-42B6-A908-F9844FDE9578}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Proto.ns", "..\..\..\trunk\LersCore\Lers.Proto\Lers.Proto.ns.csproj", "{68B5DC05-750C-41CA-ADBD-C7A965B6FC45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Proto.ns", "..\..\LersUchet\LersCore\Lers.Proto\Lers.Proto.ns.csproj", "{68B5DC05-750C-41CA-ADBD-C7A965B6FC45}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Serialization.ns", "..\..\..\trunk\LersCore\Lers.Serialization\Lers.Serialization.ns.csproj", "{A66F7B2E-149C-400D-9B64-0EEBBAD9E22E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Serialization.ns", "..\..\LersUchet\LersCore\Lers.Serialization\Lers.Serialization.ns.csproj", "{A66F7B2E-149C-400D-9B64-0EEBBAD9E22E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Utils.ns", "..\..\..\trunk\LersCore\Lers.Utils\Lers.Utils.ns.csproj", "{BF54064F-F775-4CA2-8D8D-1806D3B8EAFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Utils.ns", "..\..\LersUchet\LersCore\Lers.Utils\Lers.Utils.ns.csproj", "{BF54064F-F775-4CA2-8D8D-1806D3B8EAFB}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
