@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace LersMobile
@@ -16,6 +17,30 @@ namespace LersMobile
 
 		private Lers.LersServer server => this.lersService.Server;
 
+		private bool _isRefreshing = false;
+
+		public bool IsRefreshing
+		{
+			get { return _isRefreshing; }
+			set
+			{
+				_isRefreshing = value;
+				OnPropertyChanged(nameof(IsRefreshing));
+			}
+		}
+
+
+		public ICommand RefreshCommand
+		{
+			get
+			{
+				return new Command(async () =>
+				{
+					await RefreshData();
+				});
+			}
+		}
+
 		public MainPage()
 		{
 			lersService = App.Core;
@@ -23,6 +48,8 @@ namespace LersMobile
 			InitializeComponent();
 
 			//https://xamarinhelp.com/pull-to-refresh-listview/
+
+			this.nodeListView.RefreshCommand = this.RefreshCommand;
 		}
 
 
@@ -35,14 +62,16 @@ namespace LersMobile
 				return;
 			}
 
-			await RefreshData();
+			await this.lersService.EnsureConnected();
+
+			this.nodeListView.BeginRefresh();
 
 			this.isLoaded = true;
 		}
 
 		private async Task RefreshData()
 		{
-			this.busyIndicator.Show();
+			this.IsRefreshing = true;
 
 			try
 			{
@@ -58,7 +87,7 @@ namespace LersMobile
 			}
 			finally
 			{
-				this.busyIndicator.Hide();
+				this.IsRefreshing = false;
 			}
 		}
 	}

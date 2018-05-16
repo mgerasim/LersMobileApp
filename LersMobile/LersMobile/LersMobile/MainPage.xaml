@@ -5,10 +5,10 @@
              x:Class="LersMobile.MainPage">
 
     <StackLayout>
-        <ActivityIndicator x:Name="busyIndicator" 
-                           VerticalOptions="CenterAndExpand"
-                           HorizontalOptions="CenterAndExpand"/>
-        
-        <ListView x:Name="nodeListView" ItemsSource="{Binding .}" />
+        <ListView x:Name="nodeListView" 
+                  ItemsSource="{Binding .}" 
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefreshing}"/>
     </StackLayout>
 </ContentPage>

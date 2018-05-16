@@ -78,7 +78,7 @@ namespace LersMobile.Core
 					throw new InvalidOperationException("Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен.");
 				}
 
-				await this.ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
+				await ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
 			}
 		}
 
