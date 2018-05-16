@@ -63,6 +63,9 @@ namespace LersMobile
 		{
 			this.loginInput.IsVisible = show;
 			this.passwordInput.IsVisible = show;
+			this.loginLabel.IsVisible = show;
+			this.passwordLabel.IsVisible = show;
+			this.onLogin.IsVisible = show;
 		}
 
 		public async void OnLogin()

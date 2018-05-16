@@ -12,6 +12,8 @@ namespace LersMobile
 	{
 		private readonly Core.MobileCore lersService;
 
+		private Lers.LersServer server => this.lersService.Server;
+
 		public MainPage()
 		{
 			lersService = App.Core;
@@ -23,7 +25,22 @@ namespace LersMobile
 		{
 			base.OnAppearing();
 
-			var notifications = await lersService.GetNotifications();
+			this.busyIndicator.Show();
+
+			try
+			{
+				var nodes = await this.server.Nodes.GetListAsync();
+
+				this.BindingContext = nodes;
+			}
+			catch (Exception exc)
+			{
+				// TODO: show error
+			}
+			finally
+			{
+				this.busyIndicator.Hide();
+			}
 		}
 	}
 }

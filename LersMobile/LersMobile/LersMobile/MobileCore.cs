@@ -11,6 +11,8 @@ namespace LersMobile.Core
 
 		private readonly IAppDataStorage storageService;
 
+		public LersServer Server => this.server;
+
 		public MobileCore()
 		{
 			this.server = new LersServer("Lers android");
@@ -55,10 +57,6 @@ namespace LersMobile.Core
 			await this.server.ConnectAsync(serverAddress, 10000, null, loginInfo);
 		}
 
-		public Task<Notification[]> GetNotifications()
-		{
-			return this.server.Notifications.GetListAsync();
-		}
 
 		private (string, ushort) SplitAddressPort()
 		{

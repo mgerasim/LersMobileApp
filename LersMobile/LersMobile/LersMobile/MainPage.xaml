@@ -4,5 +4,11 @@
              xmlns:local="clr-namespace:LersMobile"
              x:Class="LersMobile.MainPage">
 
-
+    <StackLayout>
+        <ActivityIndicator x:Name="busyIndicator" 
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand"/>
+        
+        <ListView x:Name="nodeListView" ItemsSource="{Binding .}" />
+    </StackLayout>
 </ContentPage>
