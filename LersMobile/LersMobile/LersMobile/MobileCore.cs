@@ -43,8 +43,8 @@ namespace LersMobile.Core
 			catch (Lers.Networking.AuthorizationFailedException)
 			{
 				// Произошла ошибка аутентификации. Нужно очистить токен и выдать ошибку.
-				this.storageService.Token = null;
-				this.storageService.Save();
+
+				ClearStoredToken();
 
 				throw;
 			}
@@ -54,9 +54,39 @@ namespace LersMobile.Core
 		{
 			var loginInfo = new Lers.Networking.TokenAuthenticationInfo(token);
 
-			await this.server.ConnectAsync(serverAddress, 10000, null, loginInfo);
+			try
+			{
+				await this.server.ConnectAsync(serverAddress, 10000, null, loginInfo);
+			}
+			catch (Lers.Networking.AuthorizationFailedException)
+			{
+				// Произошла ошибка аутентификации. Нужно очистить токен и выдать ошибку.
+
+				ClearStoredToken();
+
+				throw;
+			}
 		}
 
+		public async Task EnsureConnected()
+		{
+			if (!this.server.IsConnected)
+			{
+				if (string.IsNullOrEmpty(this.storageService.ServerAddress)
+				|| string.IsNullOrEmpty(this.storageService.Token))
+				{
+					throw new InvalidOperationException("Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен.");
+				}
+
+				await this.ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
+			}
+		}
+
+		private void ClearStoredToken()
+		{
+			this.storageService.Token = null;
+			this.storageService.Save();
+		}
 
 		private (string, ushort) SplitAddressPort()
 		{
