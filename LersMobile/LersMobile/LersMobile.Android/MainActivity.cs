@@ -21,9 +21,7 @@ namespace LersMobile.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-			var app = new App();
-
-            LoadApplication(app);
+            LoadApplication(new App());
         }
     }
 }

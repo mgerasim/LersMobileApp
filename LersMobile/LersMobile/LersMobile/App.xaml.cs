@@ -15,7 +15,14 @@ namespace LersMobile
 
             Core = new Core.MobileCore();
 
+			Core.LoginRequired += Core_LoginRequired;
 			MainPage = new LoginPage();
+		}
+
+		private void Core_LoginRequired(object sender, EventArgs e)
+		{
+			// Возвращаем пользователя на экран входа.
+			MainPage = new NavigationPage(new LoginPage());
 		}
 
 		protected override void OnStart ()

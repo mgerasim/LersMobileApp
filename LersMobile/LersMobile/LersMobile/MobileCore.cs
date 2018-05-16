@@ -13,6 +13,11 @@ namespace LersMobile.Core
 
 		public LersServer Server => this.server;
 
+		/// <summary>
+		/// Вызывается в случае если требуется вернуть пользователя на экран входа.
+		/// </summary>
+		public event EventHandler LoginRequired;
+
 		public MobileCore()
 		{
 			this.server = new LersServer("Lers android");
@@ -60,11 +65,11 @@ namespace LersMobile.Core
 			}
 			catch (Lers.Networking.AuthorizationFailedException)
 			{
-				// Произошла ошибка аутентификации. Нужно очистить токен и выдать ошибку.
+				// Произошла ошибка аутентификации. Нужно очистить токен и сообщить что требуется логин.
 
 				ClearStoredToken();
 
-				throw;
+				LoginRequired?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
