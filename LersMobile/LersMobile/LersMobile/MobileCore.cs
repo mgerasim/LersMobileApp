@@ -9,11 +9,6 @@ namespace LersMobile.Core
     {
 		private LersServer server;
 
-		public string ServerAddress { get; set; }
-
-        public string Token { get; set; }
-
-
 		private readonly IAppDataStorage storageService;
 
 		public MobileCore()
@@ -27,15 +22,19 @@ namespace LersMobile.Core
 
 		public async Task Connect(string serverAddress, string login, string password)
 		{
-			this.ServerAddress = serverAddress;
-
 			try
 			{
-				var token = await this.server.ConnectAsync(serverAddress, 10000, null,
-					new Lers.Networking.BasicAuthenticationInfo(login, Lers.Networking.SecureStringHelper.ConvertToSecureString(password)));
+				var securePassword = Lers.Networking.SecureStringHelper.ConvertToSecureString(password);
+
+				var loginInfo = new Lers.Networking.BasicAuthenticationInfo(login, securePassword)
+				{
+					GetSessionRestoreToken = true
+				};
+
+				var token = await this.server.ConnectAsync(serverAddress, 10000, null, loginInfo);
 
 				this.storageService.Token = token.Token;
-				this.storageService.ServerAddress = ServerAddress;
+				this.storageService.ServerAddress = serverAddress;
 
 				this.storageService.Save();
 			}
@@ -47,6 +46,13 @@ namespace LersMobile.Core
 
 				throw;
 			}
+		}
+
+		public async Task ConnectToken(string serverAddress, string token)
+		{
+			var loginInfo = new Lers.Networking.TokenAuthenticationInfo(token);
+
+			await this.server.ConnectAsync(serverAddress, 10000, null, loginInfo);
 		}
 
 		public Task<Notification[]> GetNotifications()
