@@ -7,23 +7,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LersMobile.Android", "LersM
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LersMobile", "LersMobile\LersMobile\LersMobile.shproj", "{62D5C7D1-CDC9-4AC6-9836-D7C9073AC6FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LersMobile.Core", "LersMobile.Core\LersMobile.Core.csproj", "{34F3558D-1D1B-4858-A32B-B1D250DA006D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lers", "Lers", "{763B3EF6-0D06-42D3-A09E-5FF5767408BF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{CE47920E-69A6-4817-BA91-E5026E86E6D6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{482A6F21-58D4-407C-8F80-5EA3A766F388}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.System.ns", "..\..\LersUchet\Framework\Lers.System\Lers.System.ns.csproj", "{F98B46DC-FFE8-4893-8DF5-648685AD7C50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.System.ns", "..\..\..\trunk\Framework\Lers.System\Lers.System.ns.csproj", "{F98B46DC-FFE8-4893-8DF5-648685AD7C50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Core.ns", "..\..\LersUchet\LersCore\Lers.Core\Lers.Core.ns.csproj", "{3635FC21-A9E0-42B6-A908-F9844FDE9578}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Core.ns", "..\..\..\trunk\LersCore\Lers.Core\Lers.Core.ns.csproj", "{3635FC21-A9E0-42B6-A908-F9844FDE9578}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Proto.ns", "..\..\LersUchet\LersCore\Lers.Proto\Lers.Proto.ns.csproj", "{68B5DC05-750C-41CA-ADBD-C7A965B6FC45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Proto.ns", "..\..\..\trunk\LersCore\Lers.Proto\Lers.Proto.ns.csproj", "{68B5DC05-750C-41CA-ADBD-C7A965B6FC45}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Serialization.ns", "..\..\LersUchet\LersCore\Lers.Serialization\Lers.Serialization.ns.csproj", "{A66F7B2E-149C-400D-9B64-0EEBBAD9E22E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Serialization.ns", "..\..\..\trunk\LersCore\Lers.Serialization\Lers.Serialization.ns.csproj", "{A66F7B2E-149C-400D-9B64-0EEBBAD9E22E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Utils.ns", "..\..\LersUchet\LersCore\Lers.Utils\Lers.Utils.ns.csproj", "{BF54064F-F775-4CA2-8D8D-1806D3B8EAFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Utils.ns", "..\..\..\trunk\LersCore\Lers.Utils\Lers.Utils.ns.csproj", "{BF54064F-F775-4CA2-8D8D-1806D3B8EAFB}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -41,10 +39,6 @@ Global
 		{DEE93B68-C071-4E50-8EB1-03739CF986AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEE93B68-C071-4E50-8EB1-03739CF986AC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DEE93B68-C071-4E50-8EB1-03739CF986AC}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{34F3558D-1D1B-4858-A32B-B1D250DA006D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34F3558D-1D1B-4858-A32B-B1D250DA006D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34F3558D-1D1B-4858-A32B-B1D250DA006D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34F3558D-1D1B-4858-A32B-B1D250DA006D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F98B46DC-FFE8-4893-8DF5-648685AD7C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F98B46DC-FFE8-4893-8DF5-648685AD7C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F98B46DC-FFE8-4893-8DF5-648685AD7C50}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -59,6 +59,8 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDataStorage.cs" />
+    <Compile Include="DataStorageService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,13 +96,13 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\LersUchet\LersCore\Lers.Core\Lers.Core.ns.csproj">
+    <ProjectReference Include="..\..\..\..\..\trunk\Framework\Lers.System\Lers.System.ns.csproj">
+      <Project>{f98b46dc-ffe8-4893-8df5-648685ad7c50}</Project>
+      <Name>Lers.System.ns</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\trunk\LersCore\Lers.Core\Lers.Core.ns.csproj">
       <Project>{3635fc21-a9e0-42b6-a908-f9844fde9578}</Project>
       <Name>Lers.Core.ns</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\LersMobile.Core\LersMobile.Core.csproj">
-      <Project>{34f3558d-1d1b-4858-a32b-b1d250da006d}</Project>
-      <Name>LersMobile.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\LersMobile\LersMobile.projitems" Label="Shared" />

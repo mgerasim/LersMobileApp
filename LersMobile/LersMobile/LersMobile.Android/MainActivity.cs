@@ -23,19 +23,7 @@ namespace LersMobile.Droid
 
 			var app = new App();
 
-			LoadPrivateData();
-
             LoadApplication(app);
-        }
-
-        private void LoadPrivateData()
-        {
-            object token;
-
-            if (Xamarin.Forms.Application.Current.Properties.TryGetValue("LoginToken", out token))
-            {
-                App.Core.Token = (string)token;
-            }
         }
     }
 }
