@@ -30,5 +30,13 @@
       <DependentUpon>NodeListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Core\MobileCore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NodePropertyPage.xaml.cs">
+      <DependentUpon>NodePropertyPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodePropertyPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

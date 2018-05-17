@@ -47,11 +47,27 @@ namespace LersMobile
 
 			InitializeComponent();
 
-			//https://xamarinhelp.com/pull-to-refresh-listview/
-
 			this.nodeListView.RefreshCommand = this.RefreshCommand;
+
+			this.nodeListView.ItemSelected += NodeListView_ItemSelected;
 		}
 
+		/// <summary>
+		/// Обрабатывает выбор элемента управления.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void NodeListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			var nodeDetail = (Core.NodeDetail)e.SelectedItem;
+
+			this.nodeListView.SelectedItem = null;
+
+			if (nodeDetail != null)
+			{
+				this.Navigation.PushAsync(new NodePropertyPage(nodeDetail.Node));
+			}
+		}
 
 		protected override async void OnAppearing()
 		{
