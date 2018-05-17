@@ -1,5 +1,6 @@
 ﻿using Lers;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -85,6 +86,13 @@ namespace LersMobile.Core
 
 				await ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
 			}
+		}
+
+		public async Task<NodeDetail[]> GetNodeDetail()
+		{
+			var nodes = await this.server.Nodes.GetListAsync();
+
+			return nodes.Select(x => new NodeDetail(x)).ToArray();
 		}
 
 		private void ClearStoredToken()

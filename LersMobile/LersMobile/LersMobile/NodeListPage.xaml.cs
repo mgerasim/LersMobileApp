@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace LersMobile
 {
-	public partial class MainPage : ContentPage
+	public partial class NodeListPage : ContentPage
 	{
 		private readonly Core.MobileCore lersService;
 
@@ -41,7 +41,7 @@ namespace LersMobile
 			}
 		}
 
-		public MainPage()
+		public NodeListPage()
 		{
 			lersService = App.Core;
 
@@ -77,7 +77,9 @@ namespace LersMobile
 			{
 				await this.lersService.EnsureConnected();
 
-				var nodes = await this.server.Nodes.GetListAsync();
+				var nodes = await this.lersService.GetNodeDetail();
+
+				//nodes[0].Add
 
 				this.BindingContext = nodes;
 			}

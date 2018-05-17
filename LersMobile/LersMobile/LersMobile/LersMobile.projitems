@@ -14,20 +14,21 @@
       <Generator>
       </Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeListPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Core\NodeDetail.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IndicatorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IAppDataStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)NodeListPage.xaml.cs">
+      <DependentUpon>NodeListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MobileCore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\MobileCore.cs" />
   </ItemGroup>
 </Project>

@@ -128,7 +128,7 @@ namespace LersMobile
 
 		private void RedirectToMainPage()
 		{
-			App.Current.MainPage = new NavigationPage(new MainPage());
+			App.Current.MainPage = new NavigationPage(new NodeListPage());
 		}
 	}
 }
