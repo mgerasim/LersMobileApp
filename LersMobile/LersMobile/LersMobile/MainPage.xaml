@@ -9,6 +9,14 @@
                   ItemsSource="{Binding .}" 
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
-                  IsRefreshing="{Binding IsRefreshing}"/>
+                  IsRefreshing="{Binding IsRefreshing}">
+		
+		<ListView.ItemTemplate>
+			<DataTemplate>
+				<TextCell Text="{Binding .}" DetailText="{Binding Address}">
+			<DataTemplate>
+		</ListView.ItemTemplate>
+		
+		</ListView>
     </StackLayout>
 </ContentPage>
