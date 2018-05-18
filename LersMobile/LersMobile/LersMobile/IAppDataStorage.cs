@@ -23,5 +23,10 @@ namespace LersMobile
 		/// Сохраняет данные приложения.
 		/// </summary>
 		void Save();
+
+		/// <summary>
+		/// Выбранная для отображения группа объектов.
+		/// </summary>
+		int? SelectedGroupId { get; set; }
     }
 }

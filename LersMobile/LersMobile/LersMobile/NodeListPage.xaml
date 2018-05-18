@@ -6,6 +6,8 @@
              Title="Объекты учёта">
 
     <StackLayout>
+        <Picker x:Name="nodeGroupPicker"/>
+
         <ListView x:Name="nodeListView" 
                   ItemsSource="{Binding .}" 
                   IsPullToRefreshEnabled="True"

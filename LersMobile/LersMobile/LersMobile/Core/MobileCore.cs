@@ -88,9 +88,13 @@ namespace LersMobile.Core
 			}
 		}
 
-		public async Task<NodeDetail[]> GetNodeDetail()
+		public async Task<NodeDetail[]> GetNodeDetail(int? nodeGroupId)
 		{
-			var nodes = await this.server.Nodes.GetListAsync();
+			var getNodesTask = nodeGroupId.HasValue
+				? this.server.Nodes.GetListAsync(nodeGroupId.Value)
+				: this.server.Nodes.GetListAsync();
+
+			var nodes = await getNodesTask;
 
 			return nodes.Select(x => new NodeDetail(x)).ToArray();
 		}

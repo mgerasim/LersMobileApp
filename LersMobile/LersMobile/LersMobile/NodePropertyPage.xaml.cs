@@ -16,14 +16,9 @@ namespace LersMobile
 	{
 		private Node _node;
 
-		public string Test => "Hello world";
-
 		public Node Node
 		{
-			get
-			{
-				return _node;
-			}
+			get { return _node; }
 			private set
 			{
 				_node = value;

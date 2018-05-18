@@ -9,13 +9,41 @@ using Xamarin.Forms;
 
 namespace LersMobile
 {
+	/// <summary>
+	/// Список объектов учёта.
+	/// </summary>
 	public partial class NodeListPage : ContentPage
 	{
 		private readonly Core.MobileCore lersService;
+		private readonly IAppDataStorage storageService;
 
 		private bool isLoaded = false;
 
 		private Lers.LersServer server => this.lersService.Server;
+
+		private Lers.Core.NodeGroup[] nodeGroupList;
+
+
+		/// <summary>
+		/// Возвращает выбранную для отображеня группу объектов или null если
+		/// выбрано отображение объектов изо всех групп.
+		/// </summary>
+		private Lers.Core.NodeGroup SelectedGroup
+		{
+			get
+			{
+				if (this.nodeGroupList == null || this.nodeGroupPicker.SelectedIndex == 0)
+				{
+					// Список объектов пуст или выбран первый пункт (все объекты)
+
+					return null;
+				}
+
+				// Возвращаем выбранный объект
+				return this.nodeGroupList[this.nodeGroupPicker.SelectedIndex - 1];
+
+			}
+		}
 
 		private bool _isRefreshing = false;
 
@@ -30,20 +58,16 @@ namespace LersMobile
 		}
 
 
-		public ICommand RefreshCommand
-		{
-			get
-			{
-				return new Command(async () =>
-				{
-					await RefreshData();
-				});
-			}
-		}
+		public ICommand RefreshCommand => new Command(async () => await RefreshData()); 
 
+
+		/// <summary>
+		/// Конструктор.
+		/// </summary>
 		public NodeListPage()
 		{
 			lersService = App.Core;
+			this.storageService = DependencyService.Get<IAppDataStorage>();
 
 			InitializeComponent();
 
@@ -69,6 +93,9 @@ namespace LersMobile
 			}
 		}
 
+		/// <summary>
+		/// Обратаывает появление страницы на экране.
+		/// </summary>
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
@@ -80,11 +107,62 @@ namespace LersMobile
 
 			await this.lersService.EnsureConnected();
 
+			this.IsRefreshing = true;
+
+			// Запрашиваем список объектов
+
+			await LoadNodeGroupList();
+
+			this.IsRefreshing = false;
+
+			this.nodeGroupPicker.SelectedIndexChanged += NodeGroupPicker_SelectedIndexChanged;
+
 			this.nodeListView.BeginRefresh();
 
 			this.isLoaded = true;
 		}
 
+		private async Task LoadNodeGroupList()
+		{
+			this.nodeGroupList = await this.lersService.Server.NodeGroups.GetListAsync();
+
+			this.nodeGroupPicker.Items.Add("Все");
+
+			foreach (var ng in this.nodeGroupList)
+			{
+				this.nodeGroupPicker.Items.Add(ng.ToString());
+			}
+
+			// Установим индекс выбранной для отображения группы объектов.
+
+			int selectedIndex = GetStoredSelectedGroupIndex();
+
+			this.nodeGroupPicker.SelectedIndex = selectedIndex;
+		}
+
+		private int GetStoredSelectedGroupIndex()
+		{
+			int selectedIndex = 0;
+
+			if (this.storageService.SelectedGroupId.HasValue)
+			{
+				var selectedGroup = this.nodeGroupList.FirstOrDefault(x => x.Id == this.storageService.SelectedGroupId.Value);
+
+				if (selectedGroup != null)
+				{
+					// Прибавим 1, чтобы получить индекс с учётом всех объектов.
+
+					selectedIndex = Array.IndexOf(this.nodeGroupList, selectedGroup) + 1;
+				}
+			}
+
+			return selectedIndex;
+		}
+
+		/// <summary>
+		/// Загружает список объектов для выбранной группы.
+		/// </summary>
+		/// <returns></returns>
 		private async Task RefreshData()
 		{
 			this.IsRefreshing = true;
@@ -93,9 +171,7 @@ namespace LersMobile
 			{
 				await this.lersService.EnsureConnected();
 
-				var nodes = await this.lersService.GetNodeDetail();
-
-				//nodes[0].Add
+				var nodes = await this.lersService.GetNodeDetail(this.SelectedGroup?.Id);
 
 				this.BindingContext = nodes;
 			}
@@ -107,6 +183,26 @@ namespace LersMobile
 			{
 				this.IsRefreshing = false;
 			}
+		}
+
+
+		/// <summary>
+		/// Обрабатывает изменение выбранной группы объектов учёта.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void NodeGroupPicker_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (!this.isLoaded || this.IsRefreshing)
+			{
+				return;
+			}
+
+			await RefreshData();
+
+			this.storageService.SelectedGroupId = this.SelectedGroup?.Id ?? 0;
+
+			this.storageService.Save();
 		}
 	}
 }
