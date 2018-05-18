@@ -9,7 +9,7 @@
         <Picker x:Name="nodeGroupPicker"/>
 
         <ListView x:Name="nodeListView" 
-                  ItemsSource="{Binding .}" 
+                  ItemsSource="{Binding Nodes}" 
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing}">

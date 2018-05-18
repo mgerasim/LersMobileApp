@@ -21,8 +21,8 @@ namespace LersMobile
 
 		private Lers.LersServer server => this.lersService.Server;
 
-		private Lers.Core.NodeGroup[] nodeGroupList;
 
+		private Lers.Core.NodeGroup[] nodeGroupList;
 
 		/// <summary>
 		/// Возвращает выбранную для отображеня группу объектов или null если
@@ -45,8 +45,26 @@ namespace LersMobile
 			}
 		}
 
+		private Core.NodeDetail[] _nodes;
+
+		/// <summary>
+		/// Список отображаемых объектов учёта.
+		/// </summary>
+		public Core.NodeDetail[] Nodes
+		{
+			get { return _nodes; }
+			set
+			{
+				_nodes = value;
+				OnPropertyChanged(nameof(Nodes));
+			}
+		}
+
 		private bool _isRefreshing = false;
 
+		/// <summary>
+		/// Флаг указывает что идёт обновление данных.
+		/// </summary>
 		public bool IsRefreshing
 		{
 			get { return _isRefreshing; }
@@ -74,6 +92,8 @@ namespace LersMobile
 			this.nodeListView.RefreshCommand = this.RefreshCommand;
 
 			this.nodeListView.ItemSelected += NodeListView_ItemSelected;
+
+			this.BindingContext = this;
 		}
 
 		/// <summary>
@@ -122,6 +142,10 @@ namespace LersMobile
 			this.isLoaded = true;
 		}
 
+		/// <summary>
+		/// Загружает список групп объектов учёта.
+		/// </summary>
+		/// <returns></returns>
 		private async Task LoadNodeGroupList()
 		{
 			this.nodeGroupList = await this.lersService.Server.NodeGroups.GetListAsync();
@@ -171,9 +195,7 @@ namespace LersMobile
 			{
 				await this.lersService.EnsureConnected();
 
-				var nodes = await this.lersService.GetNodeDetail(this.SelectedGroup?.Id);
-
-				this.BindingContext = nodes;
+				this.Nodes = await this.lersService.GetNodeDetail(this.SelectedGroup?.Id);
 			}
 			catch (Exception exc)
 			{
