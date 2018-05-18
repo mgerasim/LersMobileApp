@@ -21,7 +21,6 @@ namespace LersMobile
 
 		private Lers.LersServer server => this.lersService.Server;
 
-
 		private Lers.Core.NodeGroup[] nodeGroupList;
 
 		/// <summary>
@@ -52,13 +51,29 @@ namespace LersMobile
 		/// </summary>
 		public Core.NodeDetail[] Nodes
 		{
-			get { return _nodes; }
+			get
+			{
+				if (string.IsNullOrEmpty(this.SearchText))
+				{
+					return _nodes;
+				}
+				else
+				{
+					var searchText = this.SearchText.ToLower();
+
+					return _nodes
+						.Where(x => x.Title.ToLower().Contains(searchText)
+							|| x.Address.ToLower().Contains(searchText))
+						.ToArray();
+				}
+			}
 			set
 			{
 				_nodes = value;
 				OnPropertyChanged(nameof(Nodes));
 			}
 		}
+
 
 		private bool _isRefreshing = false;
 
@@ -75,8 +90,34 @@ namespace LersMobile
 			}
 		}
 
+		private bool _isSearchVisible = false;
 
-		public ICommand RefreshCommand => new Command(async () => await RefreshData()); 
+		public bool IsSearchVisible
+		{
+			get => _isSearchVisible;
+			set
+			{
+				_isSearchVisible = value;
+				OnPropertyChanged(nameof(IsSearchVisible));
+			}
+		}
+		private string _searchText;
+
+		/// <summary>
+		/// Текст для поиска.
+		/// </summary>
+		public string SearchText
+		{
+			get => _searchText;
+			set
+			{
+				_searchText = value;
+				OnPropertyChanged(nameof(SearchText));
+			}
+		}
+
+
+		public ICommand RefreshCommand => new Command(async () => await RefreshData());
 
 
 		/// <summary>
@@ -199,7 +240,7 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-				// TODO: show error
+				await DisplayAlert("Ошибка", "Не удалось загрузить список объектов." + Environment.NewLine + exc.Message, "OK");
 			}
 			finally
 			{
@@ -220,11 +261,25 @@ namespace LersMobile
 				return;
 			}
 
+			this.SearchText = string.Empty;
+
 			await RefreshData();
 
 			this.storageService.SelectedGroupId = this.SelectedGroup?.Id ?? 0;
 
 			this.storageService.Save();
 		}
+
+
+		public void OnSearchToggle() => IsSearchVisible = !IsSearchVisible;
+
+		public void OnClearClicked()
+		{
+			this.SearchText = string.Empty;
+
+			OnSearchClicked();
+		}
+
+		public void OnSearchClicked() => OnPropertyChanged(nameof(Nodes));
 	}
 }

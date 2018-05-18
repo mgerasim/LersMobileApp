@@ -5,8 +5,26 @@
              x:Class="LersMobile.NodeListPage"
              Title="Объекты учёта">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Поиск" Clicked="OnSearchToggle" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout>
-        <Picker x:Name="nodeGroupPicker"/>
+        <!-- Фильтрация по группе объектов -->
+        <Label Text="Группа объектов" />
+        <Picker x:Name="nodeGroupPicker" />
+        
+        <!-- Блок, отвечающей за поиск -->
+        <StackLayout IsVisible="{Binding IsSearchVisible}">
+            <!-- Поиск по наименованию или адресу-->
+            <Label Text="Поиск по названию или адресу" />
+            <StackLayout Orientation="Horizontal" Spacing="-6">
+                <Entry x:Name="searchEntry" Placeholder="Поиск..." Text="{Binding SearchText}" 
+                       HorizontalOptions="FillAndExpand" />
+                <Button Clicked="OnClearClicked" Image="close_button.png" WidthRequest="48" />
+                <Button x:Name="searchButton" Clicked="OnSearchClicked" Text="Найти" />
+            </StackLayout>
+        </StackLayout>
 
         <ListView x:Name="nodeListView" 
                   ItemsSource="{Binding Nodes}" 
