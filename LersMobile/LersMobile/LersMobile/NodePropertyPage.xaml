@@ -5,17 +5,29 @@
              Title="Свойства объекта">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="hi"/>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
             
-            <Label
-                Text="{Binding Node.Title}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Label
-                Text="{Binding Node.Address}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition Height="24" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <Label Text="{Binding Node.Title}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                <Label Text="{Binding Node.Address}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+
+                <Label Text="Потребитель:"                    Grid.Row="2" Grid.Column="0"/>
+                <Label Text="{Binding Node.Customer.Title}"   Grid.Row="2" Grid.Column="1" />
+
+                <Label Text="Обслуживающий:"                    Grid.Row="3" Grid.Column="0"/>
+                <Label Text="{Binding Node.Serviceman.Name}"    Grid.Row="3" Grid.Column="1" />
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
