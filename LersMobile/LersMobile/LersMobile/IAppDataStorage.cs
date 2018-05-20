@@ -28,5 +28,15 @@ namespace LersMobile
 		/// Выбранная для отображения группа объектов.
 		/// </summary>
 		int? SelectedGroupId { get; set; }
-    }
+
+		/// <summary>
+		/// Дата последнего уведомления.
+		/// </summary>
+		DateTime LastNotifyDate { get; set; }
+
+		/// <summary>
+		/// Идентификатор последнего уведомления.
+		/// </summary>
+		long LastNotifyId { get; set; }
+	}
 }

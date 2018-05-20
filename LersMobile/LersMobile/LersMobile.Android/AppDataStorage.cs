@@ -37,6 +37,19 @@ namespace LersMobile.Droid
 			set => SetProperty(nameof(SelectedGroupId), value);
 		}
 
+
+		public DateTime LastNotifyDate
+		{
+			get => (DateTime?)GetProperty(nameof(LastNotifyDate)) ?? DateTime.MinValue;
+			set => SetProperty(nameof(LastNotifyDate), value);
+		}
+
+		public long LastNotifyId
+		{
+			get => (long?)GetProperty(nameof(LastNotifyId)) ?? 0;
+			set => SetProperty(nameof(LastNotifyId), value);
+		}
+
 		private object GetProperty(string keyName)
 		{
 			if (Xamarin.Forms.Application.Current.Properties.TryGetValue(keyName, out var value))

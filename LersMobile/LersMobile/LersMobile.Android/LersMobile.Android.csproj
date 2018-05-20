@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="AppDataStorage.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="NotificationService.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -110,6 +111,10 @@
     <ProjectReference Include="..\..\..\..\LersUchet\LersCore\Lers.Core\Lers.Core.ns.csproj">
       <Project>{3635fc21-a9e0-42b6-a908-f9844fde9578}</Project>
       <Name>Lers.Core.ns</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\LersUchet\LersCore\Lers.Utils\Lers.Utils.ns.csproj">
+      <Project>{bf54064f-f775-4ca2-8d8d-1806d3b8eafb}</Project>
+      <Name>Lers.Utils.ns</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

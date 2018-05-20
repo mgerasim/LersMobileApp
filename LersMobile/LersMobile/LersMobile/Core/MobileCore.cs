@@ -107,6 +107,8 @@ namespace LersMobile.Core
 			return list.Select(x => new NotificationDetail(x)).ToArray();
 		}
 
+		public void Disconnect() => this.server.Disconnect(10000);
+
 		public void Logout()
 		{
 			this.server.Disconnect(10000, true);
