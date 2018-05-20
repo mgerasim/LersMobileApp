@@ -14,13 +14,16 @@
       <Generator>
       </Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPageMaster.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage\MainPageMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeListPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)NotificationCenterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -32,13 +35,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainPageMaster.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage\MainPageMaster.xaml.cs">
       <DependentUpon>MainPageMaster.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainPageMenuItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage\MainPageMenuItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeListPage.xaml.cs">
       <DependentUpon>NodeListPage.xaml</DependentUpon>
     </Compile>
@@ -46,10 +49,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)NodePropertyPage.xaml.cs">
       <DependentUpon>NodePropertyPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)NotificationCenterPage.xaml.cs">
+      <DependentUpon>NotificationCenterPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodePropertyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)MainPage\" />
   </ItemGroup>
 </Project>

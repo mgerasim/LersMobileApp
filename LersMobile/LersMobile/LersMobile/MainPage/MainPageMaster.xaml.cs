@@ -34,7 +34,8 @@ namespace LersMobile
 				MenuItems = new ObservableCollection<MainPageMenuItem>(new[]
 				{
 					new MainPageMenuItem() { Id = 0, Title = "Объекты учёта", TargetType = typeof(NodeListPage)},
-					new MainPageMenuItem() { Id = 0, Title = "Выйти из учётной записи", TargetAction = App.Core.Logout }
+					new MainPageMenuItem() { Id = 1, Title = "Уведомления", TargetType = typeof(NotificationCenterPage)},
+					new MainPageMenuItem() { Id = 2, Title = "Выйти из учётной записи", TargetAction = App.Core.Logout }
 				});
 			}
 
