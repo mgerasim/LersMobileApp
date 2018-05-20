@@ -76,8 +76,10 @@ namespace LersMobile
 			if (item != null)
 			{
 				// Маркируем уведомление как прочитанное.
-
 				await item.MarkAsReadAsync();
+
+				// Откроем свойства уведомления
+				await this.Navigation.PushAsync(new NotificationInfoPage(item));
 			}
 
 			this.notificationCenterListView.SelectedItem = null;
