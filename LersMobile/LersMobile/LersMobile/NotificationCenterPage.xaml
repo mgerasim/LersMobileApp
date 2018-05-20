@@ -10,7 +10,12 @@
                 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Message}" Detail="{Binding DateTime}" />
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" BackgroundColor="{Binding BackgroundColor}">
+                                <Label Text="{Binding Message}" LineBreakMode="NoWrap" />
+                                <Label Text="{Binding DateTime}" FontAttributes="{Binding FontAttribute}" />
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

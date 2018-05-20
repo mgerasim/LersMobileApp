@@ -100,6 +100,13 @@ namespace LersMobile.Core
 			return nodes.Select(x => new NodeDetail(x)).ToArray();
 		}
 
+		public async Task<NotificationDetail[]> GetNotifications()
+		{
+			var list = await this.server.Notifications.GetListAsync();
+
+			return list.Select(x => new NotificationDetail(x)).ToArray();
+		}
+
 		public void Logout()
 		{
 			this.server.Disconnect(10000, true);

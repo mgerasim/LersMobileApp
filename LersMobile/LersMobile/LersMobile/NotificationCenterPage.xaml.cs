@@ -20,12 +20,12 @@ namespace LersMobile
 		private bool isLoaded = false;
 
 
-		private Lers.Notification[] _notifications;
+		private Core.NotificationDetail[] _notifications;
 
 		/// <summary>
 		/// Отображаемые уведомления.
 		/// </summary>
-		public Lers.Notification[] Notifications
+		public Core.NotificationDetail[] Notifications
 		{
 			get => _notifications;
 			set
@@ -78,7 +78,7 @@ namespace LersMobile
 
 			try
 			{
-				var notifications = await this.lersService.Server.Notifications.GetListAsync();
+				var notifications = await this.lersService.GetNotifications();
 				this.Notifications = notifications.OrderByDescending(x => x.DateTime).ToArray();
 			}
 			finally

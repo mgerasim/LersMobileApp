@@ -30,6 +30,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Core\NodeDetail.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationDetail.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IndicatorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IAppDataStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginPage.xaml.cs">
