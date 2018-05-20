@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Android.Content.Res;
 using Lers;
 using LersMobile.Droid;
 using Xamarin.Forms;
@@ -15,7 +16,7 @@ namespace LersMobile.Core
 			get
 			{
 				return this.Notification.IsRead
-					? Color.White
+					? Color.Default
 					: Color.LightSteelBlue;
 			}
 		}
