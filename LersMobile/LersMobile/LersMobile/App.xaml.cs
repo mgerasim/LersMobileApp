@@ -21,8 +21,11 @@ namespace LersMobile
 
 		private void Core_LoginRequired(object sender, EventArgs e)
 		{
-			// Возвращаем пользователя на экран входа.
-			MainPage = new NavigationPage(new LoginPage());
+			if (MainPage.GetType() != typeof (LoginPage))
+			{
+				// Возвращаем пользователя на экран входа.
+				MainPage = new LoginPage();
+			};
 		}
 
 		protected override void OnStart ()

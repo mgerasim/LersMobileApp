@@ -37,20 +37,22 @@ namespace LersMobile
 					// Скрываем логин и пароль, так как мы входим по токену.
 					ShowPasswordControls(false);
 
-					await App.Core.ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
+					await this.coreService.ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
 
 					RedirectToMainPage();
 				}
 				catch (Exception exc)
 				{
 					// Произошла ошибка входа, попробуем войти с помощью логина и пароля.
+
 					ShowPasswordControls(true);
 
+					await DisplayAlert("Ошибка подключения", exc.Message, "OK");
+
 					// TODO: для отображение сообщений нужно использовать DependancyService, т.к. Toast.MakeText специфичен для android.
+
 					// https://stackoverflow.com/questions/35279403/toast-equivalent-on-xamarin-forms
 					// https://xamarinhelp.com/toast-notifications-xamarin-forms/
-					Toast.MakeText(Android.App.Application.Context, "Ошибка подключения к серверу. " + exc.Message, ToastLength.Short)
-						.Show();
 				}
 				finally
 				{
@@ -128,7 +130,7 @@ namespace LersMobile
 
 		private void RedirectToMainPage()
 		{
-			App.Current.MainPage = new NavigationPage(new NodeListPage());
+			App.Current.MainPage = new MainPage();
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using Lers;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -39,7 +40,7 @@ namespace LersMobile.Core
 					GetSessionRestoreToken = true
 				};
 
-				var token = await this.server.ConnectAsync(serverAddress, 10000, null, loginInfo);
+				var token = await this.server.ConnectAsync(serverAddress, 10000, null, loginInfo, CancellationToken.None);
 
 				this.storageService.Token = token.Token;
 				this.storageService.ServerAddress = serverAddress;
@@ -62,7 +63,7 @@ namespace LersMobile.Core
 
 			try
 			{
-				await this.server.ConnectAsync(serverAddress, 10000, null, loginInfo);
+				await this.server.ConnectAsync(serverAddress, 10000, loginInfo, CancellationToken.None);
 			}
 			catch (Lers.Networking.AuthorizationFailedException)
 			{
@@ -99,15 +100,21 @@ namespace LersMobile.Core
 			return nodes.Select(x => new NodeDetail(x)).ToArray();
 		}
 
-		private void ClearStoredToken()
+		public void Logout()
 		{
-			this.storageService.Token = null;
-			this.storageService.Save();
+			this.server.Disconnect(10000, true);
+
+			ClearStoredToken();
+
+			// Сообщаем о том что вновнь нужен логин
+
+			LoginRequired?.Invoke(this, EventArgs.Empty);
 		}
 
-		private (string, ushort) SplitAddressPort()
+		private void ClearStoredToken()
 		{
-			throw new NotImplementedException();
+			this.storageService.Token = string.Empty;
+			this.storageService.Save();
 		}
 	}
 }
