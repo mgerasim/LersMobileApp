@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using Android.Content.Res;
 using Lers;
 using LersMobile.Droid;
@@ -7,8 +9,11 @@ using Xamarin.Forms;
 
 namespace LersMobile.Core
 {
-    public class NotificationDetail
-    {
+    public class NotificationDetail : INotifyPropertyChanged
+	{
+		public event PropertyChangedEventHandler PropertyChanged;
+
+
 		public Notification Notification { get; private set; }
 
 		public Color BackgroundColor
@@ -36,9 +41,22 @@ namespace LersMobile.Core
 		public DateTime DateTime => this.Notification.DateTime;
 
 
-		internal  NotificationDetail(Notification notification)
+		internal NotificationDetail(Notification notification)
 		{
 			this.Notification = notification ?? throw new ArgumentNullException(nameof(notification));
 		}
-    }
+
+		internal async Task MarkAsReadAsync()
+		{
+			await this.Notification.MarkAsReadAsync();
+
+			OnPropertyChanged(nameof(BackgroundColor));
+			OnPropertyChanged(nameof(FontAttribute));
+		}
+
+		private void OnPropertyChanged(string propertyName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
 }

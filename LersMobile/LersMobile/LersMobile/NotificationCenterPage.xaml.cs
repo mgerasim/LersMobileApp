@@ -59,7 +59,28 @@ namespace LersMobile
 
 			this.lersService = App.Core;
 
+			this.notificationCenterListView.ItemSelected += NotificationCenterListView_ItemSelected;
+
 			this.BindingContext = this;
+		}
+
+		/// <summary>
+		/// Обрабатывает выбор уведомления в списке.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void NotificationCenterListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			var item = (Core.NotificationDetail)e.SelectedItem;
+
+			if (item != null)
+			{
+				// Маркируем уведомление как прочитанное.
+
+				await item.MarkAsReadAsync();
+			}
+
+			this.notificationCenterListView.SelectedItem = null;
 		}
 
 		/// <summary>
