@@ -50,6 +50,9 @@ namespace LersMobile
 			}
 		}
 
+		/// <summary>
+		/// Конструктор.
+		/// </summary>
 		public NotificationCenterPage()
 		{
 			InitializeComponent();
@@ -59,6 +62,9 @@ namespace LersMobile
 			this.BindingContext = this;
 		}
 
+		/// <summary>
+		/// Вызывается при отображении страницы на экране.
+		/// </summary>
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
