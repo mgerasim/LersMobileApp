@@ -112,8 +112,9 @@ namespace LersMobile.Core
 
 			var list = await this.Server.Notifications.GetListAsync(startDate, endDate);
 
-			return list.Select(x => new NotificationDetail(x))
+			return list
 				.OrderByDescending(x => x.DateTime)
+				.Select(x => new NotificationDetail(x))
 				.ToArray();
 		}
 
