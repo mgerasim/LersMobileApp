@@ -78,8 +78,23 @@ namespace LersMobile
 				// Откроем свойства уведомления
 				await this.Navigation.PushAsync(new NotificationInfoPage(item));
 
-				// Маркируем уведомление как прочитанное.
-				await item.MarkAsReadAsync();
+				if (!item.Notification.IsRead)
+				{
+					try
+					{
+						// Маркируем уведомление как прочитанное.
+						await item.MarkAsReadAsync();
+					}
+					catch (Exception exc)
+					{
+						// TODO: всплывающие уведомления нужно показывать через DependencyService,
+						// так как они специфичины для Андроида.
+
+						Android.Widget.Toast.MakeText(Android.App.Application.Context,
+							exc.Message,
+							Android.Widget.ToastLength.Short).Show();
+					}
+				}
 			}
 
 			this.notificationCenterListView.SelectedItem = null;
@@ -102,13 +117,18 @@ namespace LersMobile
 			try
 			{
 				this.Notifications = await this.lersService.GetNotifications();
+
+				this.isLoaded = true;
+
+			}
+			catch (Exception exc)
+			{
+				await DisplayAlert("Ошибка", "Не удалось загрузить уведомления. " + exc.Message, "OK");
 			}
 			finally
 			{
 				this.IsRefreshing = false;
 			}
-
-			this.isLoaded = true;
 		}
 	}
 }

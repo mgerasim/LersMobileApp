@@ -166,8 +166,6 @@ namespace LersMobile
 				return;
 			}
 
-			await this.lersService.EnsureConnected();
-
 			this.IsRefreshing = true;
 
 			// Запрашиваем список объектов
@@ -234,8 +232,6 @@ namespace LersMobile
 
 			try
 			{
-				await this.lersService.EnsureConnected();
-
 				this.Nodes = await this.lersService.GetNodeDetail(this.SelectedGroup?.Id);
 			}
 			catch (Exception exc)
@@ -270,9 +266,14 @@ namespace LersMobile
 			this.storageService.Save();
 		}
 
-
+		/// <summary>
+		/// Пользователь нажал на кнопку скрытия или отображения панели поиска.
+		/// </summary>
 		public void OnSearchToggle() => IsSearchVisible = !IsSearchVisible;
 
+		/// <summary>
+		/// Пользователь нажал на кнопку очистки строки поиска.
+		/// </summary>
 		public void OnClearClicked()
 		{
 			this.SearchText = string.Empty;
@@ -280,6 +281,9 @@ namespace LersMobile
 			OnSearchClicked();
 		}
 
+		/// <summary>
+		/// Нажата кнопка "Найти".
+		/// </summary>
 		public void OnSearchClicked() => OnPropertyChanged(nameof(Nodes));
 	}
 }

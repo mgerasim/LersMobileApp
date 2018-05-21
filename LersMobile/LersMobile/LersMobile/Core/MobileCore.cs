@@ -9,11 +9,9 @@ namespace LersMobile.Core
 {
     public class MobileCore
     {
-		private LersServer server;
-
 		private readonly IAppDataStorage storageService;
 
-		public LersServer Server => this.server;
+		public LersServer Server { get; }
 
 		/// <summary>
 		/// Вызывается в случае если требуется вернуть пользователя на экран входа.
@@ -22,13 +20,20 @@ namespace LersMobile.Core
 
 		public MobileCore()
 		{
-			this.server = new LersServer("Lers android");
+			this.Server = new LersServer("Lers android");
 
-			this.server.VersionMismatch += (sender, e) => e.Ignore = true;
+			this.Server.VersionMismatch += (sender, e) => e.Ignore = true;
 
 			this.storageService = DependencyService.Get<IAppDataStorage>();
 		}
 
+		/// <summary>
+		/// Подключается к серверу с использованием логина и пароля.
+		/// </summary>
+		/// <param name="serverAddress"></param>
+		/// <param name="login"></param>
+		/// <param name="password"></param>
+		/// <returns></returns>
 		public async Task Connect(string serverAddress, string login, string password)
 		{
 			try
@@ -40,7 +45,7 @@ namespace LersMobile.Core
 					GetSessionRestoreToken = true
 				};
 
-				var token = await this.server.ConnectAsync(serverAddress, 10000, null, loginInfo, CancellationToken.None);
+				var token = await this.Server.ConnectAsync(serverAddress, 10000, null, loginInfo, CancellationToken.None);
 
 				this.storageService.Token = token.Token;
 				this.storageService.ServerAddress = serverAddress;
@@ -57,13 +62,19 @@ namespace LersMobile.Core
 			}
 		}
 
+		/// <summary>
+		/// Подключается к серверу с использованием токена аутентификации.
+		/// </summary>
+		/// <param name="serverAddress"></param>
+		/// <param name="token"></param>
+		/// <returns></returns>
 		public async Task ConnectToken(string serverAddress, string token)
 		{
 			var loginInfo = new Lers.Networking.TokenAuthenticationInfo(token);
 
 			try
 			{
-				await this.server.ConnectAsync(serverAddress, 10000, loginInfo, CancellationToken.None);
+				await this.Server.ConnectAsync(serverAddress, 10000, loginInfo, CancellationToken.None);
 			}
 			catch (Lers.Networking.AuthorizationFailedException)
 			{
@@ -75,25 +86,14 @@ namespace LersMobile.Core
 			}
 		}
 
-		public async Task EnsureConnected()
-		{
-			if (!this.server.IsConnected)
-			{
-				if (string.IsNullOrEmpty(this.storageService.ServerAddress)
-				|| string.IsNullOrEmpty(this.storageService.Token))
-				{
-					throw new InvalidOperationException("Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен.");
-				}
-
-				await ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
-			}
-		}
 
 		public async Task<NodeDetail[]> GetNodeDetail(int? nodeGroupId)
 		{
+			await EnsureConnected();
+
 			var getNodesTask = nodeGroupId.HasValue
-				? this.server.Nodes.GetListAsync(nodeGroupId.Value)
-				: this.server.Nodes.GetListAsync();
+				? this.Server.Nodes.GetListAsync(nodeGroupId.Value)
+				: this.Server.Nodes.GetListAsync();
 
 			var nodes = await getNodesTask;
 
@@ -102,24 +102,31 @@ namespace LersMobile.Core
 
 		public async Task<NotificationDetail[]> GetNotifications()
 		{
+			await EnsureConnected();
+
 			// Уведомления запрашиваем только за последние три месяца.
 			// Их может быть много, а толку от старых уведомлений нет.
 
 			var endDate = DateTime.Now.AddDays(1);
 			var startDate = endDate.AddMonths(-3);
 
-			var list = await this.server.Notifications.GetListAsync(startDate, endDate);
+			var list = await this.Server.Notifications.GetListAsync(startDate, endDate);
 
 			return list.Select(x => new NotificationDetail(x))
 				.OrderByDescending(x => x.DateTime)
 				.ToArray();
 		}
 
-		public void Disconnect() => this.server.Disconnect(10000);
+		public void Disconnect() => this.Server.Disconnect(10000);
 
 		public void Logout()
 		{
-			this.server.Disconnect(10000, true);
+			if (!this.Server.IsConnected)
+			{
+				return;
+			}
+
+			this.Server.Disconnect(10000, true);
 
 			ClearStoredToken();
 
@@ -132,6 +139,20 @@ namespace LersMobile.Core
 		{
 			this.storageService.Token = string.Empty;
 			this.storageService.Save();
+		}
+
+		private async Task EnsureConnected()
+		{
+			if (!this.Server.IsConnected)
+			{
+				if (string.IsNullOrEmpty(this.storageService.ServerAddress)
+				|| string.IsNullOrEmpty(this.storageService.Token))
+				{
+					throw new InvalidOperationException("Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен.");
+				}
+
+				await ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
+			}
 		}
 	}
 }
