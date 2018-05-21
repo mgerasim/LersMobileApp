@@ -25,11 +25,14 @@ namespace LersMobile.Droid
 
             LoadApplication(new App());
 
-			SetAlarmForBackgroundServices(this);
-
-			Channels.CreateChannel(this);
+			InitNotificationServices(this);
         }
 
+		public static void InitNotificationServices(Context context)
+		{
+			Channels.CreateChannel(context);
+			SetAlarmForBackgroundServices(context);
+		}
 
 		public static void SetAlarmForBackgroundServices(Context context)
 		{

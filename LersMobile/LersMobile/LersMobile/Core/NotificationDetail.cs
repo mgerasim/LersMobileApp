@@ -38,7 +38,7 @@ namespace LersMobile.Core
 
 		public string Message => this.Notification.Message;
 
-		public DateTime DateTime => this.Notification.DateTime;
+		public string DateTime => this.Notification.DateTime.ToString("dd.MM.yyyy HH:mm:ss");
 
 
 		internal NotificationDetail(Notification notification)

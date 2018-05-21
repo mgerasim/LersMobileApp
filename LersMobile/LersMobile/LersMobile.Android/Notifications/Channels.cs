@@ -33,20 +33,13 @@ namespace LersMobile.Droid.Notifications
 				return;
 			}
 
-			var notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
-
-			var existing = notificationManager.GetNotificationChannel(GeneralChannelId);
-
-			if (existing == null)
-			{
-				return;
-			}
-
 			var importance = NotificationImportance.High;
 			var channel = new NotificationChannel(GeneralChannelId, ChannelName, importance);
 
 			channel.EnableVibration(true);
 			channel.LockscreenVisibility = NotificationVisibility.Public;
+
+			var notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
 
 			notificationManager.CreateNotificationChannel(channel);
 		}
