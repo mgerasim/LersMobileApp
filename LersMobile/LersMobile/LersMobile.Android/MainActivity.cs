@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Content;
+using LersMobile.Droid.Notifications;
 
 namespace LersMobile.Droid
 {
@@ -22,7 +24,26 @@ namespace LersMobile.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App());
+
+			SetAlarmForBackgroundServices(this);
+
+			Channels.CreateChannel(this);
         }
-    }
+
+
+		public static void SetAlarmForBackgroundServices(Context context)
+		{
+			var alarmIntent = new Intent(context.ApplicationContext, typeof(AlarmReceiver));
+			var broadcast = PendingIntent.GetBroadcast(context.ApplicationContext, 0, alarmIntent, PendingIntentFlags.NoCreate);
+			if (broadcast == null)
+			{
+				var pendingIntent = PendingIntent.GetBroadcast(context.ApplicationContext, 0, alarmIntent, 0);
+				var alarmManager = (AlarmManager)context.GetSystemService(Context.AlarmService);
+
+				alarmManager.SetRepeating(AlarmType.ElapsedRealtimeWakeup, SystemClock.ElapsedRealtime(), 
+					15000, pendingIntent);
+			}
+		}
+	}
 }
 

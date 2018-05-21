@@ -102,7 +102,13 @@ namespace LersMobile.Core
 
 		public async Task<NotificationDetail[]> GetNotifications()
 		{
-			var list = await this.server.Notifications.GetListAsync();
+			// Уведомления запрашиваем только за последние три месяца.
+			// Их может быть много, а толку от старых уведомлений нет.
+
+			var endDate = DateTime.Now.AddDays(1);
+			var startDate = endDate.AddMonths(-3);
+
+			var list = await this.server.Notifications.GetListAsync(startDate, endDate);
 
 			return list.Select(x => new NotificationDetail(x)).ToArray();
 		}
