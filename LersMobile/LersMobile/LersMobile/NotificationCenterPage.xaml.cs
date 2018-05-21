@@ -101,8 +101,7 @@ namespace LersMobile
 
 			try
 			{
-				var notifications = await this.lersService.GetNotifications();
-				this.Notifications = notifications.OrderByDescending(x => x.DateTime).ToArray();
+				this.Notifications = await this.lersService.GetNotifications();
 			}
 			finally
 			{

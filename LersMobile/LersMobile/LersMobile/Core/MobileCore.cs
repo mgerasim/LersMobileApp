@@ -110,7 +110,9 @@ namespace LersMobile.Core
 
 			var list = await this.server.Notifications.GetListAsync(startDate, endDate);
 
-			return list.Select(x => new NotificationDetail(x)).ToArray();
+			return list.Select(x => new NotificationDetail(x))
+				.OrderByDescending(x => x.DateTime)
+				.ToArray();
 		}
 
 		public void Disconnect() => this.server.Disconnect(10000);
