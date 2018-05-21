@@ -100,6 +100,10 @@ namespace LersMobile.Core
 			return nodes.Select(x => new NodeDetail(x)).ToArray();
 		}
 
+		/// <summary>
+		/// Запрос уведомлений пользователя.
+		/// </summary>
+		/// <returns></returns>
 		public async Task<NotificationDetail[]> GetNotifications()
 		{
 			await EnsureConnected();

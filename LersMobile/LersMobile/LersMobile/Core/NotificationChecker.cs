@@ -53,8 +53,10 @@ namespace LersMobile.Core
 				if (lastNotifyId != 0)
 				{
 					// Уведомляем обо всех событиях, у которых Id больше чем последний.
+					// Так же пропускаем те уведомления, которые уже прочитаны.
 
-					foreach (var notification in newNotifications.Where(x => x.Id > lastNotifyId))
+					foreach (var notification in newNotifications
+						.Where(x => x.Id > lastNotifyId && !x.IsRead))
 					{
 						handler(notification);
 					}
