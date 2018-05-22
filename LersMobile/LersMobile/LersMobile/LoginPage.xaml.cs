@@ -13,22 +13,20 @@ namespace LersMobile
 	public partial class LoginPage : ContentPage
 	{
 		private readonly Core.MobileCore coreService;
-		private readonly IAppDataStorage storageService;
 
 
 		public LoginPage()
 		{
 			this.coreService = App.Core;
-			this.storageService = DependencyService.Get<IAppDataStorage>();
 
 			InitializeComponent();
 
-			this.serverAddressInput.Text = this.storageService.ServerAddress ?? string.Empty;
+			this.serverAddressInput.Text = AppDataStorage.ServerAddress;
 		}
 
 		protected override async void OnAppearing()
 		{
-			if (!string.IsNullOrEmpty(this.storageService.ServerAddress) && !string.IsNullOrEmpty(this.storageService.Token))
+			if (!string.IsNullOrEmpty(AppDataStorage.ServerAddress) && !string.IsNullOrEmpty(AppDataStorage.Token))
 			{
 				this.busyIndicator.Show();
 
@@ -37,7 +35,7 @@ namespace LersMobile
 					// Скрываем логин и пароль, так как мы входим по токену.
 					ShowPasswordControls(false);
 
-					await this.coreService.ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
+					await this.coreService.ConnectToken(AppDataStorage.ServerAddress, AppDataStorage.Token);
 
 					RedirectToMainPage();
 				}

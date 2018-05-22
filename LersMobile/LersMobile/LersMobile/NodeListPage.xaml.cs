@@ -15,7 +15,6 @@ namespace LersMobile
 	public partial class NodeListPage : ContentPage
 	{
 		private readonly Core.MobileCore lersService;
-		private readonly IAppDataStorage storageService;
 
 		private bool isLoaded = false;
 
@@ -126,7 +125,6 @@ namespace LersMobile
 		public NodeListPage()
 		{
 			lersService = App.Core;
-			this.storageService = DependencyService.Get<IAppDataStorage>();
 
 			InitializeComponent();
 
@@ -207,9 +205,10 @@ namespace LersMobile
 		{
 			int selectedIndex = 0;
 
-			if (this.storageService.SelectedGroupId.HasValue)
+			int storedSelectedGroupId = AppDataStorage.SelectedGroupId;
+			if (storedSelectedGroupId > 0)
 			{
-				var selectedGroup = this.nodeGroupList.FirstOrDefault(x => x.Id == this.storageService.SelectedGroupId.Value);
+				var selectedGroup = this.nodeGroupList.FirstOrDefault(x => x.Id == storedSelectedGroupId);
 
 				if (selectedGroup != null)
 				{
@@ -261,9 +260,7 @@ namespace LersMobile
 
 			await RefreshData();
 
-			this.storageService.SelectedGroupId = this.SelectedGroup?.Id ?? 0;
-
-			this.storageService.Save();
+			AppDataStorage.SelectedGroupId = this.SelectedGroup?.Id ?? -1;
 		}
 
 		/// <summary>

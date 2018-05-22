@@ -15,10 +15,8 @@ namespace LersMobile.Core
     {
 		public static async Task CheckNewNotifications(Action<Lers.Notification> handler)
 		{
-			var storageServie = DependencyService.Get<IAppDataStorage>();
-
-			if (string.IsNullOrEmpty(storageServie.Token)
-				|| string.IsNullOrEmpty(storageServie.ServerAddress))
+			if (string.IsNullOrEmpty(AppDataStorage.Token)
+				|| string.IsNullOrEmpty(AppDataStorage.ServerAddress))
 			{
 				return;
 			}
@@ -26,7 +24,7 @@ namespace LersMobile.Core
 			var appService = new MobileCore();
 
 			// Подключаемся к серверу.
-			await appService.ConnectToken(storageServie.ServerAddress, storageServie.Token);
+			await appService.ConnectToken(AppDataStorage.ServerAddress, AppDataStorage.Token);
 
 			Lers.Notification[] newNotifications = null;
 
@@ -34,7 +32,7 @@ namespace LersMobile.Core
 			{
 				// Получаем дату последнего уведомления.
 
-				DateTime lastNotifyDate = storageServie.LastNotifyDate;
+				DateTime lastNotifyDate = AppDataStorage.LastNotifyDate;
 
 				// Получаем список новых уведомлений.
 				newNotifications = await GetNewNotifications(appService, lastNotifyDate);
@@ -48,9 +46,9 @@ namespace LersMobile.Core
 
 			if (newNotifications != null && newNotifications.Length > 0)
 			{
-				long lastNotifyId = storageServie.LastNotifyId;
+				long lastNotifyId = AppDataStorage.LastNotifyId;
 
-				if (lastNotifyId != 0)
+				if (lastNotifyId > 0)
 				{
 					// Уведомляем обо всех событиях, у которых Id больше чем последний.
 					// Так же пропускаем те уведомления, которые уже прочитаны.
@@ -62,10 +60,8 @@ namespace LersMobile.Core
 					}
 				}
 
-				storageServie.LastNotifyDate = newNotifications.First().DateTime;
-				storageServie.LastNotifyId = newNotifications.First().Id;
-
-				storageServie.Save();
+				AppDataStorage.LastNotifyDate = newNotifications.First().DateTime;
+				AppDataStorage.LastNotifyId = newNotifications.First().Id;
 			}
 		}
 

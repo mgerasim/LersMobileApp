@@ -9,8 +9,6 @@ namespace LersMobile.Core
 {
     public class MobileCore
     {
-		private readonly IAppDataStorage storageService;
-
 		public LersServer Server { get; }
 
 		/// <summary>
@@ -23,8 +21,6 @@ namespace LersMobile.Core
 			this.Server = new LersServer("Lers android");
 
 			this.Server.VersionMismatch += (sender, e) => e.Ignore = true;
-
-			this.storageService = DependencyService.Get<IAppDataStorage>();
 		}
 
 		/// <summary>
@@ -47,10 +43,8 @@ namespace LersMobile.Core
 
 				var token = await this.Server.ConnectAsync(serverAddress, 10000, null, loginInfo, CancellationToken.None);
 
-				this.storageService.Token = token.Token;
-				this.storageService.ServerAddress = serverAddress;
-
-				this.storageService.Save();
+				AppDataStorage.Token = token.Token;
+				AppDataStorage.ServerAddress = serverAddress;
 			}
 			catch (Lers.Networking.AuthorizationFailedException)
 			{
@@ -142,21 +136,20 @@ namespace LersMobile.Core
 
 		private void ClearStoredToken()
 		{
-			this.storageService.Token = string.Empty;
-			this.storageService.Save();
+			AppDataStorage.Token = string.Empty;
 		}
 
 		private async Task EnsureConnected()
 		{
 			if (!this.Server.IsConnected)
 			{
-				if (string.IsNullOrEmpty(this.storageService.ServerAddress)
-				|| string.IsNullOrEmpty(this.storageService.Token))
+				if (string.IsNullOrEmpty(AppDataStorage.ServerAddress)
+				|| string.IsNullOrEmpty(AppDataStorage.Token))
 				{
 					throw new InvalidOperationException("Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен.");
 				}
 
-				await ConnectToken(this.storageService.ServerAddress, this.storageService.Token);
+				await ConnectToken(AppDataStorage.ServerAddress, AppDataStorage.Token);
 			}
 		}
 	}
