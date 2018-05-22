@@ -23,7 +23,7 @@ namespace LersMobile.Core
 				return;
 			}
 
-			var appService = new Core.MobileCore();
+			var appService = new MobileCore();
 
 			// Подключаемся к серверу.
 			await appService.ConnectToken(storageServie.ServerAddress, storageServie.Token);

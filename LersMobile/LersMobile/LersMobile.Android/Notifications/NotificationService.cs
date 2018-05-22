@@ -34,7 +34,6 @@ namespace LersMobile.Droid.Notifications
 		{
 			_context = this;
 			_isRunning = false;
-			_task = new Task(DoWork);
 		}
 
 		public override void OnDestroy()
@@ -60,7 +59,7 @@ namespace LersMobile.Droid.Notifications
 			if (!_isRunning)
 			{
 				_isRunning = true;
-				_task.Start();
+				_task = RunNewNotificationsCheck();
 			}
 
 			return StartCommandResult.Sticky;
@@ -68,24 +67,21 @@ namespace LersMobile.Droid.Notifications
 
 		#endregion
 
-		private void DoWork()
+		private async Task RunNewNotificationsCheck()
 		{
 			try
 			{
-				Core.NotificationChecker.CheckNewNotifications(ShowNotification)
-					.Wait();
+				await Core.NotificationChecker.CheckNewNotifications(ShowNotification);
 			}
-			catch (Exception)
+			catch (Exception exc)
 			{
+				ShowNotification("Error", exc.Message);
 			}
 			finally
 			{
 				StopSelf();
 			}
 		}
-
-
-		
 
 
 		private void ShowNotification(Lers.Notification notification)
@@ -105,5 +101,26 @@ namespace LersMobile.Droid.Notifications
 			notificationManager.Notify(notification.Id, notificationBuilder.Build());
 		}
 
+		/// <summary>
+		/// DEBUG ONLY
+		/// </summary>
+		/// <param name="header"></param>
+		/// <param name="message"></param>
+		private void ShowNotification(string header, string message)
+		{
+			var notificationBuilder = new Notification.Builder(this)
+				.SetSmallIcon(Resource.Drawable.close_button)
+				.SetContentTitle(header)
+				.SetContentText(message);
+
+			if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+			{
+				// Каналы поддерживаются только на OREO и выше.
+				notificationBuilder.SetChannelId(Channels.GeneralChannelId);
+			}
+
+			var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+			notificationManager.Notify(111, notificationBuilder.Build());
+		}
 	}
 }
