@@ -43,8 +43,7 @@ namespace LersMobile.Droid
 				var pendingIntent = PendingIntent.GetBroadcast(context.ApplicationContext, 0, alarmIntent, 0);
 				var alarmManager = (AlarmManager)context.GetSystemService(Context.AlarmService);
 
-				alarmManager.SetRepeating(AlarmType.ElapsedRealtimeWakeup, SystemClock.ElapsedRealtime(), 
-					15000, pendingIntent);
+				alarmManager.SetRepeating(AlarmType.RtcWakeup, SystemClock.ElapsedRealtime(),  60000, pendingIntent);
 			}
 		}
 	}
