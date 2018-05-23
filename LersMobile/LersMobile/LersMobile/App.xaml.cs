@@ -16,6 +16,8 @@ namespace LersMobile
             Core = new Core.MobileCore();
 
 			Core.LoginRequired += Core_LoginRequired;
+
+			ShowLoginPage();
 		}
 
 		private void Core_LoginRequired(object sender, EventArgs e)

@@ -36,7 +36,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\NodeDetail.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationChecker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationDetail.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IndicatorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>

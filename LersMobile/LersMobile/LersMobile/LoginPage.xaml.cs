@@ -22,6 +22,8 @@ namespace LersMobile
 
 			InitializeComponent();
 
+			this.BindingContext = this;
+
 			this.serverAddressInput.Text = AppDataStorage.ServerAddress;
 		}
 
@@ -29,7 +31,7 @@ namespace LersMobile
 		{
 			if (!string.IsNullOrEmpty(AppDataStorage.ServerAddress) && !string.IsNullOrEmpty(AppDataStorage.Token))
 			{
-				this.busyIndicator.Show();
+				this.IsBusy = true;
 
 				try
 				{
@@ -38,7 +40,7 @@ namespace LersMobile
 
 					await this.coreService.ConnectToken(AppDataStorage.ServerAddress, AppDataStorage.Token);
 
-					RedirectToMainPage();
+					SuccessLogin?.Invoke(this, EventArgs.Empty);
 				}
 				catch (Exception exc)
 				{
@@ -55,7 +57,7 @@ namespace LersMobile
 				}
 				finally
 				{
-					this.busyIndicator.Hide();
+					this.IsBusy = false;
 				}
 			}
 		}
@@ -78,11 +80,11 @@ namespace LersMobile
 
 			try
 			{
-				this.busyIndicator.Show();
+				this.IsBusy = true;
 
 				await App.Core.Connect(serverAddressInput.Text, loginInput.Text, passwordInput.Text);
 
-				this.busyIndicator.Hide();
+				this.IsBusy = false;
 
 				SuccessLogin?.Invoke(this, EventArgs.Empty);
 			}
@@ -96,7 +98,7 @@ namespace LersMobile
 			}
 			finally
 			{
-				this.busyIndicator.Hide();
+				this.IsBusy = false;
 			}
 		}
 
