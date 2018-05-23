@@ -100,6 +100,7 @@ namespace LersMobile
 				OnPropertyChanged(nameof(IsSearchVisible));
 			}
 		}
+
 		private string _searchText;
 
 		/// <summary>
@@ -117,6 +118,8 @@ namespace LersMobile
 
 
 		public ICommand RefreshCommand => new Command(async () => await RefreshData());
+
+		public ICommand SearchCommand => new Command(() => OnPropertyChanged(nameof(Nodes)));
 
 
 		/// <summary>
@@ -268,19 +271,12 @@ namespace LersMobile
 		/// </summary>
 		public void OnSearchToggle() => IsSearchVisible = !IsSearchVisible;
 
-		/// <summary>
-		/// Пользователь нажал на кнопку очистки строки поиска.
-		/// </summary>
-		public void OnClearClicked()
+		public void OnSearchBarTextChanged(object sender, TextChangedEventArgs args)
 		{
-			this.SearchText = string.Empty;
-
-			OnSearchClicked();
+			if (string.IsNullOrEmpty(args.NewTextValue))
+			{
+				OnPropertyChanged(nameof(Nodes));
+			}
 		}
-
-		/// <summary>
-		/// Нажата кнопка "Найти".
-		/// </summary>
-		public void OnSearchClicked() => OnPropertyChanged(nameof(Nodes));
 	}
 }
