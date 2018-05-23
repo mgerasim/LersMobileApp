@@ -34,7 +34,7 @@ namespace LersMobile.Droid
 			SetAlarmForBackgroundServices(context);
 		}
 
-		public static void SetAlarmForBackgroundServices(Context context)
+		private static void SetAlarmForBackgroundServices(Context context)
 		{
 			var alarmIntent = new Intent(context.ApplicationContext, typeof(AlarmReceiver));
 			var broadcast = PendingIntent.GetBroadcast(context.ApplicationContext, 0, alarmIntent, PendingIntentFlags.NoCreate);

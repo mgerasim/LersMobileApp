@@ -72,8 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Notifications\BootReceiver.cs" />
     <Compile Include="Notifications\Channels.cs" />
-    <Compile Include="Notifications\NotificationService.cs" />
     <Compile Include="Notifications\AlarmReceiver.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
