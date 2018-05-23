@@ -14,6 +14,7 @@ namespace LersMobile
 	{
 		private readonly Core.MobileCore coreService;
 
+		public event EventHandler SuccessLogin;
 
 		public LoginPage()
 		{
@@ -83,7 +84,7 @@ namespace LersMobile
 
 				this.busyIndicator.Hide();
 
-				RedirectToMainPage();
+				SuccessLogin?.Invoke(this, EventArgs.Empty);
 			}
 			catch (Exception exc)
 			{
@@ -124,11 +125,6 @@ namespace LersMobile
 			}
 
 			return true;
-		}
-
-		private void RedirectToMainPage()
-		{
-			App.Current.MainPage = new MainPage();
 		}
 	}
 }

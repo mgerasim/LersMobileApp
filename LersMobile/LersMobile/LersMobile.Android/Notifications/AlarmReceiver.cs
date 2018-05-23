@@ -35,10 +35,15 @@ namespace LersMobile.Droid.Notifications
 
 		private void ShowNotification(Context context, Lers.Notification notification)
 		{
+			// https://forums.xamarin.com/discussion/69009/notification-click-to-run-activity
+			var intent = new Intent(context, typeof(MainActivity));
+			intent.PutExtra("NotificationId", notification.Id);
+
 			var notificationBuilder = new Notification.Builder(context)
 				.SetSmallIcon(Resource.Drawable.close_button)
 				.SetContentTitle(notification.Type.GetDescription())
 				.SetContentText(notification.Message);
+				// .SetContentIntent(intent);
 
 			if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
 			{

@@ -16,7 +16,6 @@ namespace LersMobile
             Core = new Core.MobileCore();
 
 			Core.LoginRequired += Core_LoginRequired;
-			MainPage = new LoginPage();
 		}
 
 		private void Core_LoginRequired(object sender, EventArgs e)
@@ -24,8 +23,24 @@ namespace LersMobile
 			if (MainPage.GetType() != typeof (LoginPage))
 			{
 				// Возвращаем пользователя на экран входа.
-				MainPage = new LoginPage();
+				ShowLoginPage();
 			};
+		}
+
+		/// <summary>
+		/// Отображает страницу подключения к серверу.
+		/// </summary>
+		public void ShowLoginPage()
+		{
+			var loginPage = new LoginPage();
+
+			loginPage.SuccessLogin += (sender, e) =>
+			{
+				// Перенаправляем на главную страницу приложения.
+				MainPage = new MainPage();
+			};
+
+			MainPage = loginPage;
 		}
 
 		protected override void OnStart ()
