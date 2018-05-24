@@ -43,12 +43,12 @@ namespace LersMobile
 			}
 		}
 
-		private Core.NodeDetail[] _nodes;
+		private Core.NodeView[] _nodes;
 
 		/// <summary>
 		/// Список отображаемых объектов учёта.
 		/// </summary>
-		public Core.NodeDetail[] Nodes
+		public Core.NodeView[] Nodes
 		{
 			get
 			{
@@ -145,13 +145,13 @@ namespace LersMobile
 		/// <param name="e"></param>
 		private void NodeListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
-			var nodeDetail = (Core.NodeDetail)e.SelectedItem;
+			var nodeDetail = (Core.NodeView)e.SelectedItem;
 
 			this.nodeListView.SelectedItem = null;
 
 			if (nodeDetail != null)
 			{
-				this.Navigation.PushAsync(new NodePropertyPage(nodeDetail.Node));
+				this.Navigation.PushAsync(new NodePropertyPage(nodeDetail));
 			}
 		}
 

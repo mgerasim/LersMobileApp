@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace LersMobile
 {
+	/// <summary>
+	/// Главное меню приложения.
+	/// </summary>
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainPageMaster : ContentPage
 	{
@@ -35,7 +38,7 @@ namespace LersMobile
 				{
 					new MainPageMenuItem() { Id = 0, Title = "Объекты учёта", TargetType = typeof(NodeListPage)},
 					new MainPageMenuItem() { Id = 1, Title = "Уведомления", TargetType = typeof(NotificationCenterPage)},
-					new MainPageMenuItem() { Id = 2, Title = "Выйти из учётной записи", TargetAction = App.Core.Logout }
+					new MainPageMenuItem() { Id = 2, Title = "Выйти из учётной записи", TargetAction = App.Core.Logout, BeginGroup = true }
 				});
 			}
 

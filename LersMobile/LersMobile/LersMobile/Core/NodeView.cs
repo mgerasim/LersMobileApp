@@ -5,7 +5,7 @@ using Lers.Core;
 
 namespace LersMobile.Core
 {
-    public class NodeDetail
+    public class NodeView
     {
 		public Node Node { get; private set; }
 
@@ -30,7 +30,26 @@ namespace LersMobile.Core
 			}
 		}
 
-		internal NodeDetail(Node node)
+		public string ServicemanName => this.Node.Serviceman?.Name;
+		public string CustomerTitle => this.Node.Customer?.Title;
+
+		public string State
+		{
+			get
+			{
+				switch (this.Node.State)
+				{
+					case NodeState.Error: return "Есть ошибки";
+					case NodeState.None: return "Неизвестно";
+					case NodeState.Normal: return "Норма";
+					case NodeState.Warning: return "Есть предупреждения";
+					default:
+						throw new NotSupportedException("Неизвестное состояние " + this.Node.State);
+				}
+			}
+		}
+
+		internal NodeView(Node node)
 		{
 			this.Node = node ?? throw new ArgumentNullException(nameof(node));
 		}

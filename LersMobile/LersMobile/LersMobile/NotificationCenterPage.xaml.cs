@@ -20,12 +20,12 @@ namespace LersMobile
 		private bool isLoaded = false;
 
 
-		private Core.NotificationDetail[] _notifications;
+		private Core.NotificationView[] _notifications;
 
 		/// <summary>
 		/// Отображаемые уведомления.
 		/// </summary>
-		public Core.NotificationDetail[] Notifications
+		public Core.NotificationView[] Notifications
 		{
 			get => _notifications;
 			set
@@ -71,7 +71,7 @@ namespace LersMobile
 		/// <param name="e"></param>
 		private async void NotificationCenterListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
-			var item = (Core.NotificationDetail)e.SelectedItem;
+			var item = (Core.NotificationView)e.SelectedItem;
 
 			if (item != null)
 			{

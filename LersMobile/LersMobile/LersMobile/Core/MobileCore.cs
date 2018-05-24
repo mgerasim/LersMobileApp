@@ -81,7 +81,7 @@ namespace LersMobile.Core
 		}
 
 
-		public async Task<NodeDetail[]> GetNodeDetail(int? nodeGroupId)
+		public async Task<NodeView[]> GetNodeDetail(int? nodeGroupId)
 		{
 			await EnsureConnected();
 
@@ -91,14 +91,14 @@ namespace LersMobile.Core
 
 			var nodes = await getNodesTask;
 
-			return nodes.Select(x => new NodeDetail(x)).ToArray();
+			return nodes.Select(x => new NodeView(x)).ToArray();
 		}
 
 		/// <summary>
 		/// Запрос уведомлений пользователя.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<NotificationDetail[]> GetNotifications()
+		public async Task<NotificationView[]> GetNotifications()
 		{
 			await EnsureConnected();
 
@@ -112,7 +112,7 @@ namespace LersMobile.Core
 
 			return list
 				.OrderByDescending(x => x.DateTime)
-				.Select(x => new NotificationDetail(x))
+				.Select(x => new NotificationView(x))
 				.ToArray();
 		}
 

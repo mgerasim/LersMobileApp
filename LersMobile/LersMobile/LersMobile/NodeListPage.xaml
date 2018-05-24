@@ -16,7 +16,8 @@
                    Placeholder="Поиск по имени или адресу"
                    IsVisible="{Binding IsSearchVisible}" 
                    SearchCommand="{Binding SearchCommand}"
-                   TextChanged="OnSearchBarTextChanged"/>
+                   TextChanged="OnSearchBarTextChanged"
+                   HeightRequest="30" />
         
         <!-- Фильтрация по группе объектов -->
         <Label Text="Группа объектов" />

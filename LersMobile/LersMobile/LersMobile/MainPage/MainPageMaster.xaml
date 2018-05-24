@@ -31,8 +31,9 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
-              <Label VerticalOptions="FillAndExpand" 
+            <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand"> 
+                <BoxView HeightRequest="1" Color="DarkGray" IsVisible="{Binding BeginGroup}" />
+                <Label VerticalOptions="FillAndExpand" 
                     VerticalTextAlignment="Center" 
                     Text="{Binding Title}" 
                     FontSize="24"/>

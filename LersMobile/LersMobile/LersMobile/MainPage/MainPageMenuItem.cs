@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LersMobile
 {
@@ -23,5 +19,10 @@ namespace LersMobile
 		/// Действие, которое нужно выполнить при выборе пункта меню.
 		/// </summary>
 		public Action TargetAction { get; set; }
+
+		/// <summary>
+		/// Пункт имеет разделитель.
+		/// </summary>
+		public bool BeginGroup { get; set; }
 	}
 }

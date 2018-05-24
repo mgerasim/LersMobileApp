@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Android.Content.Res;
 using Lers;
-using LersMobile.Droid;
 using Xamarin.Forms;
 
 namespace LersMobile.Core
 {
-    public class NotificationDetail : INotifyPropertyChanged
+    public class NotificationView : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
-
 
 		public Notification Notification { get; private set; }
 
@@ -41,7 +37,7 @@ namespace LersMobile.Core
 		public string DateTime => this.Notification.DateTime.ToString("dd.MM.yyyy HH:mm:ss");
 
 
-		internal NotificationDetail(Notification notification)
+		internal NotificationView(Notification notification)
 		{
 			this.Notification = notification ?? throw new ArgumentNullException(nameof(notification));
 		}

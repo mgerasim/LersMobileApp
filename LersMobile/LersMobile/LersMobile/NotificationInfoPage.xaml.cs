@@ -15,9 +15,9 @@ namespace LersMobile
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NotificationInfoPage : ContentPage
 	{
-		private readonly Core.NotificationDetail notification;
+		private readonly Core.NotificationView notification;
 
-		public NotificationInfoPage(Core.NotificationDetail notification)
+		public NotificationInfoPage(Core.NotificationView notification)
 		{
 			InitializeComponent();
 

@@ -4,30 +4,54 @@
              x:Class="LersMobile.NodePropertyPage"
              Title="Свойства объекта">
     <ContentPage.Content>
-        <StackLayout>
-            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
-            
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                
-                <Label Text="{Binding Node.Title}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
-                <Label Text="{Binding Node.Address}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                <Label Text="Потребитель:"                    Grid.Row="2" Grid.Column="0"/>
-                <Label Text="{Binding Node.Customer.Title}"   Grid.Row="2" Grid.Column="1" />
+                        <!-- Состояние объекта-->
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                <Label Text="Обслуживающий:"                    Grid.Row="3" Grid.Column="0"/>
-                <Label Text="{Binding Node.Serviceman.Name}"    Grid.Row="3" Grid.Column="1" />
-            </Grid>
-        </StackLayout>
+                    <Label Text="{Binding Node.Title}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Label Text="{Binding Node.Address}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+
+                    <Label Text="Потребитель:"                   Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="{Binding Node.CustomerTitle}"   Grid.Row="2" Grid.Column="1" />
+
+                    <Label Text="Обслуживающий:"                    Grid.Row="3" Grid.Column="0"/>
+                    <Label Text="{Binding Node.ServicemanName}"    Grid.Row="3" Grid.Column="1" />
+
+                    <Label Text="Состояние:"            Grid.Row="4" Grid.Column="0" />
+                    <Label Text="{Binding Node.State}"  Grid.Row="4" Grid.Column="1" />
+                </Grid>
+
+                <!-- Диагностическая карточка объекта учёта-->
+                <ListView x:Name="nodeStateListView" ItemsSource="{Binding NodeState}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Text}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
+                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                 AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}" />
+                <Label Text="Загрузка..." HorizontalOptions="Center" />
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
+        
 </ContentPage>
