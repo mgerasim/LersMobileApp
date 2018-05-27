@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <Grid>
+                <Grid BackgroundColor="LightGray">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -18,7 +18,7 @@
                         <RowDefinition Height="Auto" />
 
                         <!-- Состояние объекта-->
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <Label Text="{Binding Node.Title}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
@@ -35,18 +35,22 @@
                 </Grid>
 
                 <!-- Диагностическая карточка объекта учёта-->
-                <ListView x:Name="nodeStateListView" ItemsSource="{Binding NodeState}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding Text}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <StackLayout>
+                    <Label Text="Подробно" IsVisible="{Binding HasDetailedState}"/>
+                    <ListView x:Name="nodeStateListView" ItemsSource="{Binding NodeState}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding Text}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
             </StackLayout>
 
             <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
-                 AbsoluteLayout.LayoutFlags="PositionProportional"
-                 AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                        BackgroundColor="{StaticResource LoadingIndicator}">
 
                 <ActivityIndicator IsRunning="{Binding IsBusy}" />
                 <Label Text="Загрузка..." HorizontalOptions="Center" />

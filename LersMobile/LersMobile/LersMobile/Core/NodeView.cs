@@ -33,6 +33,11 @@ namespace LersMobile.Core
 		public string ServicemanName => this.Node.Serviceman?.Name;
 		public string CustomerTitle => this.Node.Customer?.Title;
 
+        /// <summary>
+        /// Указывает что по объекту есть дополнительная диагностическая информация.
+        /// </summary>
+        public bool HasDetailedState => this.Node.State != NodeState.Normal;
+
 		public string State
 		{
 			get

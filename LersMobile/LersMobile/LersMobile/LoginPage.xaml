@@ -9,7 +9,7 @@
                 <Label Text="Адрес сервера ЛЭРС УЧЁТ" />
                 <Entry x:Name="serverAddressInput" />
 
-                <Label x:Name ="loginLabel" Text="Логин"/>
+                <Label x:Name="loginLabel" Text="Логин"/>
                 <Entry x:Name="loginInput" />
 
                 <Label x:Name ="passwordLabel" Text="Пароль" />

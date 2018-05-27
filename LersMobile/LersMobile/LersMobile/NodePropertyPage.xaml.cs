@@ -29,6 +29,11 @@ namespace LersMobile
 			}
 		}
 
+        /// <summary>
+        /// Указывает что по объекту учёта есть детальное состояние (диагностическая карточка).
+        /// </summary>
+        public bool HasDetailedState => this.Node?.HasDetailedState == true;
+
 		public ObservableCollection<Core.NodeStateView> NodeState { get; private set; } = new ObservableCollection<Core.NodeStateView>();
 
 		public NodePropertyPage(Core.NodeView node)
