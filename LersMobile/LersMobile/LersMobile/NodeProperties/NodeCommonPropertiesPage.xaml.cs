@@ -42,6 +42,13 @@ namespace LersMobile.NodeProperties
             this.BindingContext = this;
 
             this.Node = node ?? throw new ArgumentNullException(nameof(node));
+
+            this.nodeStateListView.ItemSelected += NodeStateListView_ItemSelected;
+        }
+
+        private void NodeStateListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            this.nodeStateListView.SelectedItem = null;
         }
 
 

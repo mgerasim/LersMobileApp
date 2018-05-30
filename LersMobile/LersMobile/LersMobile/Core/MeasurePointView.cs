@@ -37,42 +37,11 @@ namespace LersMobile.Core
         /// <summary>
         /// Изображение типа системы.
         /// </summary>
-        public string SystemTypeImageSource
-        {
-            get
-            {
-                switch (this.MeasurePoint.SystemType)
-                {
-                    case SystemType.ColdWater:
-                        return "SystemType_ColdWater.png";
+        public string SystemTypeImageSource => ResourceHelper.GetSystemTypeImage(this.MeasurePoint.SystemType);
 
-                    case SystemType.Electricity:
-                        return "SystemType_Electricity.png";
-
-                    case SystemType.Gas:
-                        return "SystemType_Gas.png";
-
-                    case SystemType.Heat:
-                        return "SystemType_Heat.png";
-
-                    case SystemType.HotWater:
-                        return "SystemType_HotWater.png";
-
-                    case SystemType.Sewage:
-                        return "SystemType_Sewage.png";
-
-                    case SystemType.Steam:
-                        return "SystemType_Steam.png";
-
-                    default:
-                        throw new NotSupportedException("Неизвестный тип системы: " + this.MeasurePoint.SystemType);
-                }
-            }
-        }
         public MeasurePointView(MeasurePoint measurePoint)
         {
             this.MeasurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));
         }
-
     }
 }

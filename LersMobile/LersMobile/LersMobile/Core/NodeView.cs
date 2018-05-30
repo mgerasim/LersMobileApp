@@ -117,6 +117,8 @@ namespace LersMobile.Core
 
             var state = await node.GetDetailedState();
 
+            this.DetailedState.Clear();
+
             if (state.CriticalIncidentCount > 0)
             {
                 this.DetailedState.Add(new NodeStateView(node.State) { Text = $"Критических НС: {state.CriticalIncidentCount}" });

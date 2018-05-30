@@ -9,11 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace LersMobile.NodeProperties
 {
+    /// <summary>
+    /// Страница отображает список точек учёта объекта.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NodeMeasurePointsPage : ContentPage
     {
-        private bool isLoaded = false;
-
         private Core.NodeView _node;
 
         public Core.NodeView Node
@@ -25,12 +26,6 @@ namespace LersMobile.NodeProperties
                 OnPropertyChanged(nameof(Node));
             }
         }
-
-        /// <summary>
-        /// Указывает что по объекту учёта есть детальное состояние (диагностическая карточка).
-        /// </summary>
-        public bool HasDetailedState => this.Node?.HasDetailedState == true;
-
 
         public NodeMeasurePointsPage(Core.NodeView nodeView)
         {

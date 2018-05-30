@@ -20,6 +20,12 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage\MainPageMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointCommonPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointPropertiesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeListPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeCommonPropertiesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -47,6 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\NodeStateView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationChecker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ResourceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -57,6 +64,12 @@
       <DependentUpon>MainPageMaster.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPage\MainPageMenuItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointCommonPage.xaml.cs">
+      <DependentUpon>MeasurePointCommonPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointPropertiesPage.xaml.cs">
+      <DependentUpon>MeasurePointPropertiesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)NodeListPage.xaml.cs">
       <DependentUpon>NodeListPage.xaml</DependentUpon>
     </Compile>
