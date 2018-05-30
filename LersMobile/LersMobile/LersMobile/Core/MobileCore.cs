@@ -116,7 +116,25 @@ namespace LersMobile.Core
 				.ToArray();
 		}
 
-		public void Disconnect() => this.Server.Disconnect(10000);
+        public async Task<IncidentView[]> GetNewIncidents(int? nodeGroupId)
+        {
+            await EnsureConnected();
+
+            var incidents = await this.Server.Incidents.GetListNewAsync(nodeGroupId);
+
+            return incidents.Select(x => new IncidentView(x)).ToArray();
+        }
+
+        public async Task<IncidentView[]> GetIncidents(DateTime startDate, DateTime endDate, int? nodeGroupId)
+        {
+            await EnsureConnected();
+
+            var incidents = await this.Server.Incidents.GetListAsync(startDate, endDate, nodeGroupId);
+
+            return incidents.Select(x => new IncidentView(x)).ToArray();
+        }
+
+        public void Disconnect() => this.Server.Disconnect(10000);
 
 		public void Logout()
 		{

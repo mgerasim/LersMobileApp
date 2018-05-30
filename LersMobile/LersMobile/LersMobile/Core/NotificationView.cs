@@ -36,6 +36,7 @@ namespace LersMobile.Core
 
 		public string DateTime => this.Notification.DateTime.ToString("dd.MM.yyyy HH:mm:ss");
 
+        public string ImportanceImageSource => ResourceHelper.GetImportanceImage(this.Notification.Importance);
 
 		internal NotificationView(Notification notification)
 		{

@@ -54,6 +54,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)AppDataStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NodeView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NodeStateView.cs" />

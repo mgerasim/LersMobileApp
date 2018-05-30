@@ -11,9 +11,12 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Vertical" BackgroundColor="{Binding BackgroundColor}">
-                                <Label Text="{Binding Message}" LineBreakMode="NoWrap" TextColor="Accent" />
-                                <Label Text="{Binding DateTime}" FontAttributes="{Binding FontAttribute}" />
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding ImportanceImageSource}"/>
+                                <StackLayout Orientation="Vertical" BackgroundColor="{Binding BackgroundColor}">
+                                    <Label Text="{Binding Message}" LineBreakMode="NoWrap" TextColor="Accent" />
+                                    <Label Text="{Binding DateTime}" FontAttributes="{Binding FontAttribute}" />
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

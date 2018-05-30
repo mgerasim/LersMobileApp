@@ -76,8 +76,6 @@ namespace LersMobile.NodeProperties
                 OnPropertyChanged(nameof(Node));
 
                 this.isLoaded = true;
-
-                this.IsBusy = false;
             }
             catch (Exception exc) when (exc is TimeoutException || exc is Lers.LersException)
             {
@@ -86,6 +84,10 @@ namespace LersMobile.NodeProperties
             }
             catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
             {
+            }
+            finally
+            {
+                this.IsBusy = false;
             }
         }
     }

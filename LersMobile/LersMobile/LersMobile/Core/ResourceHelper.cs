@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Lers;
 
 namespace LersMobile.Core
 {
@@ -29,6 +30,33 @@ namespace LersMobile.Core
 
                 default:
                     throw new NotSupportedException("Неизвестный тип системы: " + systemType);
+            }
+        }
+
+        public static string GetIncidentImportanceImage(Lers.Diag.IncidentImportance importance)
+        {
+            switch (importance)
+            {
+                case Lers.Diag.IncidentImportance.Critical: return "Importance_Critical32.png";
+                case Lers.Diag.IncidentImportance.Information: return "Importance_Info32.png";
+                case Lers.Diag.IncidentImportance.Warning: return "Importance_Warn32.png";
+
+                default: throw new NotSupportedException("Неизвестный тип важности НС: " + importance);
+            }
+        }
+
+        public static string GetImportanceImage(Importance importance)
+        {
+            switch (importance)
+            {
+                case Importance.FatalError: return "Importance_Critical32.png";
+                case Importance.Info: return "Importance_Info32.png";
+                case Importance.Warn: return "Importance_Warn32.png";
+                case Importance.Debug: return "Importance_Debug32.png";
+                case Importance.Error: return "Importance_Error32.png";
+
+
+                default: throw new NotSupportedException("Неизвестный тип важности: " + importance);
             }
         }
     }
