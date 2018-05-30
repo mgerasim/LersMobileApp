@@ -34,8 +34,7 @@ namespace LersMobile
         /// </summary>
         public bool HasDetailedState => this.Node?.HasDetailedState == true;
 
-		public ObservableCollection<Core.NodeStateView> NodeState { get; private set; } = new ObservableCollection<Core.NodeStateView>();
-
+    
 		public NodePropertyPage(Core.NodeView node)
 		{
 			InitializeComponent();
@@ -61,76 +60,15 @@ namespace LersMobile
 
 			this.IsBusy = true;
 
-			var requiredFlags = NodeInfoFlags.Serviceman | NodeInfoFlags.Customer;
+            await this.Node.LoadDetail();
 
-			if (!this.Node.Node.AvailableInfo.HasFlag(requiredFlags))
-			{
-				// Нужные данные ещё не загружены
+            // Обновляем свойства объекта.
 
-				await this.Node.Node.RefreshAsync(requiredFlags);
+            OnPropertyChanged(nameof(Node));
 
-				// Обновляем свойства объекта.
-
-				OnPropertyChanged(nameof(Node));
-			}
-
-			if (this.Node.Node.State != Lers.Core.NodeState.None)
-			{
-				// Если состояние объекта отличается от нормального,
-				// загружаем диагностическую карточку.
-				await LoadDiagnostics();
-			}
-
-			this.isLoaded = true;
+            this.isLoaded = true;
 
 			this.IsBusy = false;
-		}
-
-		/// <summary>
-		/// Загружает диагностическую информацию по объекту.
-		/// </summary>
-		/// <returns></returns>
-		private async Task LoadDiagnostics()
-		{
-			var node = this.Node.Node;
-
-			var state = await node.GetDetailedState();
-
-			if (state.CriticalIncidentCount > 0)
-			{
-				this.NodeState.Add(new Core.NodeStateView { Text = $"Критических НС: {state.CriticalIncidentCount}" });
-			}
-
-			if (state.WarningIncidentCount > 0)
-			{
-				this.NodeState.Add(new Core.NodeStateView { Text = $"Нештатных ситуаций: {state.WarningIncidentCount}" });
-			}
-
-			if (state.LastDataOverdue > 0)
-			{
-				this.NodeState.Add(new Core.NodeStateView { Text = $"Данные отсутствуют: {state.LastDataOverdue} дн." });
-			}
-
-			if (state.OverdueJobCount > 0)
-			{
-				this.NodeState.Add(new Core.NodeStateView { Text = $"Просрочено работ: {state.OverdueJobCount}" });
-			}
-
-			if (state.DaysToAdmissionDeadline.HasValue)
-			{
-				this.NodeState.Add(new Core.NodeStateView
-				{
-					Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' заканчивается через: {state.DaysToAdmissionDeadline} дн."
-				});
-			}
-
-			if (state.AdmissionDateOverdue.HasValue)
-			{
-				this.NodeState.Add(new Core.NodeStateView
-				{
-					Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' просрочен на: {state.AdmissionDateOverdue} дн."
-				});
-			}
 		}
 	}
 }

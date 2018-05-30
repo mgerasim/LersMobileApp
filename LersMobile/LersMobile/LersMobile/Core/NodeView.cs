@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using Lers.Core;
 
 namespace LersMobile.Core
@@ -38,7 +40,18 @@ namespace LersMobile.Core
         /// </summary>
         public bool HasDetailedState => this.Node.State != NodeState.Normal;
 
-		public string State
+        /// <summary>
+        /// Список точек учёта в объекте.
+        /// </summary>
+        public ObservableCollection<MeasurePointView> MeasurePoints { get; private set; } = new ObservableCollection<MeasurePointView>();
+
+        /// <summary>
+        /// Список детальной информации о состоянии объекта.
+        /// </summary>
+        public ObservableCollection<NodeStateView> DetailedState { get; private set; } = new ObservableCollection<Core.NodeStateView>();
+
+
+        public string State
 		{
 			get
 			{
@@ -58,5 +71,87 @@ namespace LersMobile.Core
 		{
 			this.Node = node ?? throw new ArgumentNullException(nameof(node));
 		}
+
+        /// <summary>
+        /// Загружает детальную информацию для отображения свойств объекта учёта.
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadDetail()
+        {
+            var requiredFlags = NodeInfoFlags.Serviceman | NodeInfoFlags.Customer | NodeInfoFlags.Systems;
+
+            if (!this.Node.AvailableInfo.HasFlag(requiredFlags))
+            {
+                // Нужные данные ещё не загружены
+
+                await this.Node.RefreshAsync(requiredFlags);
+            }
+
+            // Заполняем список точек учёта.
+
+            if (this.MeasurePoints.Count == 0)
+            {
+                foreach (var measurePoint in this.Node.Systems.GetAllMeasurePoints())
+                {
+                    this.MeasurePoints.Add(new MeasurePointView(measurePoint));
+                }
+            }
+
+            if (this.Node.State != NodeState.Normal)
+            {
+                // Если состояние объекта отличается от нормального,
+                // загружаем диагностическую карточку.
+
+                await LoadDiagnostics();
+            }
+        }
+
+
+        /// <summary>
+		/// Загружает диагностическую информацию по объекту.
+		/// </summary>
+		/// <returns></returns>
+		private async Task LoadDiagnostics()
+        {
+            var node = this.Node;
+
+            var state = await node.GetDetailedState();
+
+            if (state.CriticalIncidentCount > 0)
+            {
+                this.DetailedState.Add(new NodeStateView { Text = $"Критических НС: {state.CriticalIncidentCount}" });
+            }
+
+            if (state.WarningIncidentCount > 0)
+            {
+                this.DetailedState.Add(new NodeStateView { Text = $"Нештатных ситуаций: {state.WarningIncidentCount}" });
+            }
+
+            if (state.LastDataOverdue > 0)
+            {
+                this.DetailedState.Add(new NodeStateView { Text = $"Данные отсутствуют: {state.LastDataOverdue} дн." });
+            }
+
+            if (state.OverdueJobCount > 0)
+            {
+                this.DetailedState.Add(new NodeStateView { Text = $"Просрочено работ: {state.OverdueJobCount}" });
+            }
+
+            if (state.DaysToAdmissionDeadline.HasValue)
+            {
+                this.DetailedState.Add(new NodeStateView
+                {
+                    Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' заканчивается через: {state.DaysToAdmissionDeadline} дн."
+                });
+            }
+
+            if (state.AdmissionDateOverdue.HasValue)
+            {
+                this.DetailedState.Add(new NodeStateView
+                {
+                    Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' просрочен на: {state.AdmissionDateOverdue} дн."
+                });
+            }
+        }
     }
 }
