@@ -119,27 +119,27 @@ namespace LersMobile.Core
 
             if (state.CriticalIncidentCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView { Text = $"Критических НС: {state.CriticalIncidentCount}" });
+                this.DetailedState.Add(new NodeStateView(node.State) { Text = $"Критических НС: {state.CriticalIncidentCount}" });
             }
 
             if (state.WarningIncidentCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView { Text = $"Нештатных ситуаций: {state.WarningIncidentCount}" });
+                this.DetailedState.Add(new NodeStateView(node.State) { Text = $"Нештатных ситуаций: {state.WarningIncidentCount}" });
             }
 
             if (state.LastDataOverdue > 0)
             {
-                this.DetailedState.Add(new NodeStateView { Text = $"Данные отсутствуют: {state.LastDataOverdue} дн." });
+                this.DetailedState.Add(new NodeStateView(node.State) { Text = $"Данные отсутствуют: {state.LastDataOverdue} дн." });
             }
 
             if (state.OverdueJobCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView { Text = $"Просрочено работ: {state.OverdueJobCount}" });
+                this.DetailedState.Add(new NodeStateView(node.State) { Text = $"Просрочено работ: {state.OverdueJobCount}" });
             }
 
             if (state.DaysToAdmissionDeadline.HasValue)
             {
-                this.DetailedState.Add(new NodeStateView
+                this.DetailedState.Add(new NodeStateView(node.State)
                 {
                     Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' заканчивается через: {state.DaysToAdmissionDeadline} дн."
                 });
@@ -147,7 +147,7 @@ namespace LersMobile.Core
 
             if (state.AdmissionDateOverdue.HasValue)
             {
-                this.DetailedState.Add(new NodeStateView
+                this.DetailedState.Add(new NodeStateView(node.State)
                 {
                     Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' просрочен на: {state.AdmissionDateOverdue} дн."
                 });

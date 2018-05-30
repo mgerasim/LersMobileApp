@@ -34,22 +34,33 @@
                 </Grid>
 
                 <!-- Диагностическая карточка объекта учёта-->
-                <StackLayout IsVisible="{Binding HasDetailedState}">
+                <StackLayout IsVisible="{Binding Node.HasDetailedState}">
                     <Label Text="Подробно"/>
                     <ListView x:Name="nodeStateListView" ItemsSource="{Binding Node.DetailedState}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextCell Text="{Binding Text}" />
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                        <Image Source="{Binding StateImageSource}"/>
+                                        <Label Text="{Binding Text}" TextColor="Accent"/>
+                                    </StackLayout>
+                                </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackLayout>
 
+                <!-- Список точек учёта объекта -->
                 <Label Text="Точки учёта:" />
                 <ListView x:Name="measurePointListView" ItemsSource="{Binding Node.MeasurePoints}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="{Binding Title}" />
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                    <Image Source="{Binding StateImageSource}"/>
+                                    <Label Text="{Binding Title}" TextColor="Accent"/>
+                                </StackLayout>
+                            </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

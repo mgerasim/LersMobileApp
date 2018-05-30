@@ -18,20 +18,16 @@ namespace LersMobile.Core
         /// <summary>
         /// Источник изображения с состоянием точки учёта.
         /// </summary>
-        public string StateImageSourcce
+        public string StateImageSource
         {
             get
             {
                 switch (this.MeasurePoint.State)
                 {
-                    case MeasurePointState.Normal:
-                        return "MeasurePointState_Normal.png";
-                    case MeasurePointState.Error:
-                        return "MeasurePointState_Error.png";
-                    case MeasurePointState.None:
-                        return "MeasurePointState_Unknown.png";
-                    case MeasurePointState.Warning:
-                        return "MeasurePointState_Warning.png";
+                    case MeasurePointState.Normal: return "State_Normal.png";
+                    case MeasurePointState.Error: return "State_Error.png";
+                    case MeasurePointState.None: return "State_Unknown.png";
+                    case MeasurePointState.Warning: return "State_Warning.png";
                     default:
                         throw new NotSupportedException("Неизвестное состояние " + this.MeasurePoint.State);
                 }

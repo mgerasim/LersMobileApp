@@ -137,16 +137,16 @@
     <AndroidResource Include="Resources\drawable\close_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\MeasurePointState_Error.png" />
+    <AndroidResource Include="Resources\drawable\State_Error.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\MeasurePointState_Normal.png" />
+    <AndroidResource Include="Resources\drawable\State_Normal.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\MeasurePointState_Unknown.png" />
+    <AndroidResource Include="Resources\drawable\State_Unknown.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\MeasurePointState_Warning.png" />
+    <AndroidResource Include="Resources\drawable\State_Warning.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\SystemType_ColdWater.png" />
