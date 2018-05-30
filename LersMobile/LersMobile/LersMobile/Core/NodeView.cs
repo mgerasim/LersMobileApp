@@ -152,6 +152,14 @@ namespace LersMobile.Core
                     Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' просрочен на: {state.AdmissionDateOverdue} дн."
                 });
             }
+
+            if (state.LastDataOverdue > 0)
+            {
+                this.DetailedState.Add(new NodeStateView(node.State)
+                {
+                    Text = $"Данные не получены {state.LastDataOverdue} дн."
+                });
+            }
         }
     }
 }

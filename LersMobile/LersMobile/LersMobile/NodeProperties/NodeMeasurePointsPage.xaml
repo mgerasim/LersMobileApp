@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LersMobile.NodeProperties.NodeMeasurePointsPage"
+             Title="Точки учёта">
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- Список точек учёта объекта -->
+            <Label Text="Точки учёта:" />
+            <ListView x:Name="measurePointListView" ItemsSource="{Binding Node.MeasurePoints}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                <Image Source="{Binding StateImageSource}"/>
+                                <Label Text="{Binding Title}" TextColor="Accent"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

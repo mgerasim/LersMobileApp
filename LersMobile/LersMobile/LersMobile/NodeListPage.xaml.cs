@@ -151,7 +151,7 @@ namespace LersMobile
 
 			if (nodeDetail != null)
 			{
-				this.Navigation.PushAsync(new NodePropertyPage(nodeDetail));
+				this.Navigation.PushAsync(new NodeProperties.NodePropertyPage(nodeDetail));
 			}
 		}
 

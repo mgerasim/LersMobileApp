@@ -21,6 +21,15 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeListPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeCommonPropertiesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeMeasurePointsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodePropertyPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NotificationCenterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -52,7 +61,13 @@
       <DependentUpon>NodeListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Core\MobileCore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NodePropertyPage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodeCommonPropertiesPage.xaml.cs">
+      <DependentUpon>NodeCommonPropertiesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodeMeasurePointsPage.xaml.cs">
+      <DependentUpon>NodeMeasurePointsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodePropertyPage.xaml.cs">
       <DependentUpon>NodePropertyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)NotificationCenterPage.xaml.cs">
@@ -61,11 +76,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)NotificationInfoPage.xaml.cs">
       <DependentUpon>NotificationInfoPage.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodePropertyPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)MainPage\" />
