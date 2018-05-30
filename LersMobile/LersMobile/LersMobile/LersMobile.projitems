@@ -10,6 +10,12 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Incidents\IncidentListMainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Incidents\IncidentListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)LoginPage.xaml">
       <Generator>
       </Generator>
@@ -54,6 +60,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationChecker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ResourceHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Incidents\IncidentListMainPage.xaml.cs">
+      <DependentUpon>IncidentListMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Incidents\IncidentListPage.xaml.cs">
+      <DependentUpon>IncidentListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Incidents\PageMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
