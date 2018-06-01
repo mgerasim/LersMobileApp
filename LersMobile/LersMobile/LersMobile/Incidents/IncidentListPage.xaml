@@ -4,7 +4,15 @@
              x:Class="LersMobile.Incidents.IncidentListPage">
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding IncidentList}" IsRefreshing="{Binding IsBusy}">
+            <ListView ItemsSource="{Binding IncidentList}" IsRefreshing="{Binding IsBusy}" IsGroupingEnabled="True">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding DateTime}" VerticalTextAlignment="Start" FontAttributes="Bold"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -23,9 +31,10 @@
 
             <StackLayout Orientation="Horizontal" IsVisible="{Binding ShowDateRangeControls}" VerticalOptions="Center">
                 <Label Text="C: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                <DatePicker Format="dd.MM.yyyy"/>
+                <DatePicker x:Name="startDatePicker" Format="dd.MM.yyyy"/>
                 <Label Text="по: " VerticalTextAlignment="Center"/>
-                <DatePicker Format="dd.MM.yyyy"/>
+                <DatePicker x:Name="endDatePicker" Format="dd.MM.yyyy"/>
+                <Button Image="Refresh.png" Clicked="OnRefresh"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

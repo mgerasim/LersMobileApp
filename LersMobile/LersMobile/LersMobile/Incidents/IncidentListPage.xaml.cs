@@ -26,9 +26,13 @@ namespace LersMobile.Incidents
 
         public bool ShowDateRangeControls => this.pageMode == PageMode.Interval;
 
-        public ObservableCollection<Core.IncidentView> IncidentList { get; private set; } = new ObservableCollection<Core.IncidentView>();
+        public ObservableCollection<Core.DayIncidentList> IncidentList { get; private set; } = new ObservableCollection<Core.DayIncidentList>();
 
 
+        /// <summary>
+        /// Конструктор.
+        /// </summary>
+        /// <param name="pageMode"></param>
         public IncidentListPage(PageMode pageMode)
         {
             this.pageMode = pageMode;
@@ -40,18 +44,57 @@ namespace LersMobile.Incidents
             this.core = App.Core;
 
             this.BindingContext = this;
+
+            this.startDatePicker.Date = DateTime.Today.AddDays(-7);
+            this.endDatePicker.Date = DateTime.Today;
         }
 
 
+        /// <summary>
+        /// Вызывается при отображении страницы.
+        /// </summary>
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            await LoadIncidents();
+        }
+
+
+        /// <summary>
+        /// Загружает список нештатных ситуаций.
+        /// </summary>
+        /// <returns></returns>
+        private async Task LoadIncidents()
+        {
+            string message = CheckUserInput();
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                await DisplayAlert("Ошибка", message, "OK");
+                return;
+            }
 
             this.IsBusy = true;
 
             try
             {
-                await LoadIncidents();
+                Task<Core.DayIncidentList[]> getTask;
+
+                if (this.pageMode == PageMode.NewOnly)
+                {
+                    getTask = this.core.GetNewIncidents(this.SelectedNodeGroupId);
+                }
+                else
+                {
+                    getTask = this.core.GetIncidents(this.startDatePicker.Date, this.endDatePicker.Date.Date.AddDays(1), this.SelectedNodeGroupId);
+                }
+            
+                var incidents = await getTask;
+
+                this.IncidentList.Clear();
+
+                this.IncidentList.AddRange(incidents);
             }
             catch (Exception exc) when (exc is TimeoutException || exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
             {
@@ -63,25 +106,28 @@ namespace LersMobile.Incidents
             }
         }
 
-
-        private async Task LoadIncidents()
+        /// <summary>
+        /// Проверяет введённые пользователем данные.
+        /// </summary>
+        /// <returns>Описание ошибки или пустую строку если ошибок нет.</returns>
+        private string CheckUserInput()
         {
-            Task<Core.IncidentView[]> getTask;
-
             if (this.pageMode == PageMode.NewOnly)
             {
-                getTask = this.core.GetNewIncidents(this.SelectedNodeGroupId);
+                return string.Empty;
             }
-            else
+
+            else if (this.endDatePicker.Date < this.startDatePicker.Date)
             {
-                getTask = this.core.GetIncidents(DateTime.Today.AddDays(-7), DateTime.Now, this.SelectedNodeGroupId);
+                return "Дата окончания периода больше даты начала.";
             }
-            
-            var incidents = await getTask;
 
-            this.IncidentList.Clear();
-
-            this.IncidentList.AddRange(incidents);
+            return string.Empty;
         }
+
+        /// <summary>
+        /// Пользователь нажал кнопку "Обновить".
+        /// </summary>
+        public async void OnRefresh() =>  await LoadIncidents();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Lers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -116,22 +117,45 @@ namespace LersMobile.Core
 				.ToArray();
 		}
 
-        public async Task<IncidentView[]> GetNewIncidents(int? nodeGroupId)
+        public async Task<DayIncidentList[]> GetNewIncidents(int? nodeGroupId)
         {
             await EnsureConnected();
 
             var incidents = await this.Server.Incidents.GetListNewAsync(nodeGroupId);
 
-            return incidents.Select(x => new IncidentView(x)).ToArray();
+            return GroupIncidentsByStartDate(incidents);
         }
 
-        public async Task<IncidentView[]> GetIncidents(DateTime startDate, DateTime endDate, int? nodeGroupId)
+        public async Task<DayIncidentList[]> GetIncidents(DateTime startDate, DateTime endDate, int? nodeGroupId)
         {
             await EnsureConnected();
 
             var incidents = await this.Server.Incidents.GetListAsync(startDate, endDate, nodeGroupId);
 
-            return incidents.Select(x => new IncidentView(x)).ToArray();
+            return GroupIncidentsByStartDate(incidents);
+        }
+
+        private static DayIncidentList[] GroupIncidentsByStartDate(Lers.Diag.Incident[] incidents)
+        {
+            var incidentGroups = incidents
+                            .OrderByDescending(x => x.EndDateTime)
+                            .GroupBy(x => x.EndDateTime.Date);
+
+            var result = new List<DayIncidentList>();
+
+            foreach (var dayList in incidentGroups)
+            {
+                var list = new DayIncidentList(dayList.Key);
+
+                foreach (var incident in dayList)
+                {
+                    list.Add(new IncidentView(incident));
+                }
+
+                result.Add(list);
+            }
+
+            return result.ToArray();
         }
 
         public void Disconnect() => this.Server.Disconnect(10000);

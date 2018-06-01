@@ -17,6 +17,11 @@ namespace LersMobile.Core
 
         public string ObjectTitle => this.incident.ObjectTitle;
 
+        /// <summary>
+        /// Дата начала НС.
+        /// </summary>
+        public string StartDate => this.incident.StartDateTime.ToString("dd.MM.yyyy");
+
         public string ImportanceImageSource => ResourceHelper.GetIncidentImportanceImage(this.incident.Importance);
 
         public string StateImageSource => this.incident.IsClosed ? "Check_16.png" : string.Empty;
