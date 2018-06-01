@@ -4,7 +4,10 @@
              x:Class="LersMobile.Incidents.IncidentListPage">
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding IncidentList}" IsRefreshing="{Binding IsBusy}" IsGroupingEnabled="True">
+            <ListView ItemsSource="{Binding IncidentList}" 
+                      IsRefreshing="{Binding IsBusy}" 
+                      IsGroupingEnabled="True"
+                      ItemSelected="OnIncidentSelected">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>

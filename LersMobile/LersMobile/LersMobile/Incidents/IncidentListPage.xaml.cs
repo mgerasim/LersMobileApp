@@ -24,6 +24,8 @@ namespace LersMobile.Incidents
 
         private int? SelectedNodeGroupId => null;
 
+        private bool isLoaded = false;
+
         public bool ShowDateRangeControls => this.pageMode == PageMode.Interval;
 
         public ObservableCollection<Core.DayIncidentList> IncidentList { get; private set; } = new ObservableCollection<Core.DayIncidentList>();
@@ -49,6 +51,30 @@ namespace LersMobile.Incidents
             this.endDatePicker.Date = DateTime.Today;
         }
 
+        /// <summary>
+        /// Пользователь нажал кнопку "Обновить".
+        /// </summary>
+        public async void OnRefresh() => await LoadIncidents();
+
+        /// <summary>
+        /// Пользователь выбрал нештатную ситуацию.
+        /// </summary>
+        public async void OnIncidentSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var listView = (ListView)sender;
+
+            var incidentView = (Core.IncidentView)args.SelectedItem;
+
+            if (incidentView == null)
+            {
+                return;
+            }
+
+            listView.SelectedItem = null;
+
+            await this.Navigation.PushAsync(new IncidentDetailPage(incidentView));
+        }
+
 
         /// <summary>
         /// Вызывается при отображении страницы.
@@ -57,7 +83,12 @@ namespace LersMobile.Incidents
         {
             base.OnAppearing();
 
-            await LoadIncidents();
+            if (!this.isLoaded)
+            {
+                await LoadIncidents();
+            }
+
+            this.isLoaded = true;
         }
 
 
@@ -124,10 +155,5 @@ namespace LersMobile.Incidents
 
             return string.Empty;
         }
-
-        /// <summary>
-        /// Пользователь нажал кнопку "Обновить".
-        /// </summary>
-        public async void OnRefresh() =>  await LoadIncidents();
     }
 }

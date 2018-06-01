@@ -13,6 +13,8 @@ namespace LersMobile.Core
     {
         private readonly Lers.Diag.Incident incident;
 
+        public string Description => this.incident.Description;
+
         public string ShortDescription => this.incident.ShortDescription;
 
         public string ObjectTitle => this.incident.ObjectTitle;
