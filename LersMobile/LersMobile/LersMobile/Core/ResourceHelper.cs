@@ -37,7 +37,7 @@ namespace LersMobile.Core
         {
             switch (importance)
             {
-                case Lers.Diag.IncidentImportance.Critical: return "Importance_Critical32.png";
+                case Lers.Diag.IncidentImportance.Critical: return "Importance_Error32.png";
                 case Lers.Diag.IncidentImportance.Information: return "Importance_Info32.png";
                 case Lers.Diag.IncidentImportance.Warning: return "Importance_Warn32.png";
 
