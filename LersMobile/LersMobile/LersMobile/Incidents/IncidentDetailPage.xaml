@@ -5,7 +5,13 @@
              Title="Нештатная ситуация">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding Incident.Description}"/>
+            <!-- Подробное описание НС -->
+            <StackLayout Orientation="Horizontal">
+                <Image Source="{Binding Incident.ImportanceImageSource}"/>
+                <Label Text="{Binding Incident.Description}"/>
+            </StackLayout>
+            
+            <!-- Журнал НС -->
             <ListView ItemsSource="{Binding Incident.Log}" ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -13,6 +19,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <!-- Кнопка для закрытия НС-->
+            <Button Text="Закрыть" IsVisible="{Binding Incident.IsActive}" Clicked="OnCloseIncidentClicked" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

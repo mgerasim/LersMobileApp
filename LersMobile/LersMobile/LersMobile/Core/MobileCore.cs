@@ -181,7 +181,7 @@ namespace LersMobile.Core
 			AppDataStorage.Token = string.Empty;
 		}
 
-		private async Task EnsureConnected()
+		public async Task EnsureConnected()
 		{
 			if (!this.Server.IsConnected)
 			{

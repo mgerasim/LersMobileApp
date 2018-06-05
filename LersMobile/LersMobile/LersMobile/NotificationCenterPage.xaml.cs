@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -50,10 +50,15 @@ namespace LersMobile
 			}
 		}
 
-		/// <summary>
-		/// Конструктор.
-		/// </summary>
-		public NotificationCenterPage()
+        /// <summary>
+        /// Команда, вызываемая из списка для обновления данных.
+        /// </summary>
+        public ICommand RefreshListView => new Command(async () => await RefreshNotifications());
+
+        /// <summary>
+        /// Конструктор.
+        /// </summary>
+        public NotificationCenterPage()
 		{
 			InitializeComponent();
 
@@ -104,31 +109,41 @@ namespace LersMobile
 		/// Вызывается при отображении страницы на экране.
 		/// </summary>
 		protected override async void OnAppearing()
-		{
-			base.OnAppearing();
+        {
+            base.OnAppearing();
 
-			if (this.isLoaded)
-			{
-				return;
-			}
+            if (this.isLoaded)
+            {
+                return;
+            }
 
-			this.IsRefreshing = true;
+            await RefreshNotifications();
+        }
 
-			try
-			{
-				this.Notifications = await this.lersService.GetNotifications();
 
-				this.isLoaded = true;
+        /// <summary>
+        /// Обновляет список уведомлений.
+        /// </summary>
+        /// <returns></returns>
+        private async Task RefreshNotifications()
+        {
+            this.IsRefreshing = true;
 
-			}
-			catch (Exception exc)
-			{
-				await DisplayAlert("Ошибка", "Не удалось загрузить уведомления. " + exc.Message, "OK");
-			}
-			finally
-			{
-				this.IsRefreshing = false;
-			}
-		}
-	}
+            try
+            {
+                this.Notifications = await this.lersService.GetNotifications();
+
+                this.isLoaded = true;
+
+            }
+            catch (Exception exc)
+            {
+                await DisplayAlert("Ошибка", "Не удалось загрузить уведомления. " + exc.Message, "OK");
+            }
+            finally
+            {
+                this.IsRefreshing = false;
+            }
+        }
+    }
 }

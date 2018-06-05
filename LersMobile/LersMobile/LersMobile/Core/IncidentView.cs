@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,9 +10,16 @@ namespace LersMobile.Core
     /// <summary>
     /// Параметры НС, используемые для вывода на экран.
     /// </summary>
-    public class IncidentView
+    public class IncidentView : INotifyPropertyChanged
     {
         private readonly Lers.Diag.Incident incident;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Определяет что НС открыта.
+        /// </summary>
+        public bool IsActive => !this.incident.IsClosed;
 
         public string Description => this.incident.Description;
 
@@ -55,5 +63,23 @@ namespace LersMobile.Core
                 this.Log.Add(record);
             }
         }
+
+        /// <summary>
+        /// Закрывает нештатную ситуаци.
+        /// </summary>
+        /// <returns></returns>
+        public async Task Close()
+        {
+            await App.Core.EnsureConnected();
+
+            await incident.CloseAsync();
+
+            OnPropertyChanged(nameof(IsActive));
+            OnPropertyChanged(nameof(StateImageSource));
+        }
+
+
+        private void OnPropertyChanged(string propertyName) 
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

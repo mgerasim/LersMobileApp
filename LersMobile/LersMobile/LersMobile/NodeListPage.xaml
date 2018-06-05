@@ -5,20 +5,7 @@
              x:Class="LersMobile.NodeListPage"
              Title="Объекты учёта">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Поиск" Clicked="OnSearchToggle" />
-    </ContentPage.ToolbarItems>
-
     <StackLayout>
-        <!-- Блок, отвечающей за поиск -->
-        <SearchBar x:Name="searchBar" 
-                   Text="{Binding SearchText}"
-                   Placeholder="Поиск по имени или адресу"
-                   IsVisible="{Binding IsSearchVisible}" 
-                   SearchCommand="{Binding SearchCommand}"
-                   TextChanged="OnSearchBarTextChanged"
-                   HeightRequest="30" />
-        
         <!-- Фильтрация по группе объектов -->
         <Label Text="Группа объектов" />
         <Picker x:Name="nodeGroupPicker" />
@@ -44,5 +31,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <!-- Блок, отвечающей за поиск -->
+        <SearchBar x:Name="searchBar" 
+                   Text="{Binding SearchText}"
+                   Placeholder="Поиск по имени или адресу"
+                   SearchCommand="{Binding SearchCommand}"
+                   TextChanged="OnSearchBarTextChanged"
+                   HeightRequest="30" />
     </StackLayout>
 </ContentPage>

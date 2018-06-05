@@ -7,7 +7,10 @@
             <ListView ItemsSource="{Binding IncidentList}" 
                       IsRefreshing="{Binding IsBusy}" 
                       IsGroupingEnabled="True"
-                      ItemSelected="OnIncidentSelected">
+                      ItemSelected="OnIncidentSelected"
+                      
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshListView}">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>

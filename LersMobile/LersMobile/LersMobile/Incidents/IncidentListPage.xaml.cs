@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -9,6 +6,7 @@ using Xamarin.Forms.Xaml;
 
 using Lers.Utils;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace LersMobile.Incidents
 {
@@ -30,6 +28,11 @@ namespace LersMobile.Incidents
 
         public ObservableCollection<Core.DayIncidentList> IncidentList { get; private set; } = new ObservableCollection<Core.DayIncidentList>();
 
+
+        /// <summary>
+        /// Команда, вызываемая из списка для обновления данных.
+        /// </summary>
+        public ICommand RefreshListView => new Command(async () => await LoadIncidents());
 
         /// <summary>
         /// Конструктор.
@@ -55,6 +58,7 @@ namespace LersMobile.Incidents
         /// Пользователь нажал кнопку "Обновить".
         /// </summary>
         public async void OnRefresh() => await LoadIncidents();
+
 
         /// <summary>
         /// Пользователь выбрал нештатную ситуацию.

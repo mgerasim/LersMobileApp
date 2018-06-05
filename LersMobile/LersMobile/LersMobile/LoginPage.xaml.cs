@@ -49,11 +49,6 @@ namespace LersMobile
 					ShowPasswordControls(true);
 
 					await DisplayAlert("Ошибка подключения", exc.Message, "OK");
-
-					// TODO: для отображение сообщений нужно использовать DependancyService, т.к. Toast.MakeText специфичен для android.
-
-					// https://stackoverflow.com/questions/35279403/toast-equivalent-on-xamarin-forms
-					// https://xamarinhelp.com/toast-notifications-xamarin-forms/
 				}
 				finally
 				{
@@ -90,11 +85,7 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-				// TODO: для отображение сообщений нужно использовать DependancyService, т.к. Toast.MakeText специфичен для android.
-				// https://stackoverflow.com/questions/35279403/toast-equivalent-on-xamarin-forms
-				// https://xamarinhelp.com/toast-notifications-xamarin-forms/
-				Toast.MakeText(Android.App.Application.Context, "Ошибка подключения к серверу. " + exc.Message, ToastLength.Short)
-					.Show();
+                await DisplayAlert("Ошибка подключения к серверу", exc.Message, "OK");
 			}
 			finally
 			{

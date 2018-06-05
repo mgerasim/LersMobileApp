@@ -89,18 +89,6 @@ namespace LersMobile
 			}
 		}
 
-		private bool _isSearchVisible = false;
-
-		public bool IsSearchVisible
-		{
-			get => _isSearchVisible;
-			set
-			{
-				_isSearchVisible = value;
-				OnPropertyChanged(nameof(IsSearchVisible));
-			}
-		}
-
 		private string _searchText;
 
 		/// <summary>
@@ -265,11 +253,6 @@ namespace LersMobile
 
 			AppDataStorage.SelectedGroupId = this.SelectedGroup?.Id ?? -1;
 		}
-
-		/// <summary>
-		/// Пользователь нажал на кнопку скрытия или отображения панели поиска.
-		/// </summary>
-		public void OnSearchToggle() => IsSearchVisible = !IsSearchVisible;
 
 		public void OnSearchBarTextChanged(object sender, TextChangedEventArgs args)
 		{

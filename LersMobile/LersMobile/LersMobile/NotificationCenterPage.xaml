@@ -6,7 +6,10 @@
         <StackLayout>
             <ListView x:Name="notificationCenterListView" 
                   ItemsSource="{Binding Notifications}" 
-                  IsRefreshing="{Binding IsRefreshing}">
+                  IsRefreshing="{Binding IsRefreshing}"
+                      
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshListView}">
                 
                 <ListView.ItemTemplate>
                     <DataTemplate>

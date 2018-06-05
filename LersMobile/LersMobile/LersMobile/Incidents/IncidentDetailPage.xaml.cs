@@ -9,11 +9,19 @@ using Xamarin.Forms.Xaml;
 
 namespace LersMobile.Incidents
 {
+    /// <summary>
+    /// Детальная информация о нештатной ситуации.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class IncidentDetailPage : ContentPage
     {
+        private bool isLoaded = false;
+
         private Core.IncidentView incidentView;
 
+        /// <summary>
+        /// Параметры отображаемой НС.
+        /// </summary>
         public Core.IncidentView Incident
         {
             get => this.incidentView;
@@ -33,10 +41,16 @@ namespace LersMobile.Incidents
             this.BindingContext = this;
         }
 
-        public void OnItemSelected(object sender, EventArgs e) => ((ListView)sender).SelectedItem = null;
-
+        /// <summary>
+        /// Вызывается при отображении страницы на экране.
+        /// </summary>
         protected override async void OnAppearing()
         {
+            if (this.isLoaded)
+            {
+                return;
+            }
+
             this.IsBusy = true;
 
             try
@@ -44,6 +58,8 @@ namespace LersMobile.Incidents
                 await this.incidentView.LoadLog();
 
                 OnPropertyChanged(nameof(Incident));
+
+                this.isLoaded = true;
             }
             catch (Exception exc) when (exc is TimeoutException || exc is Lers.LersException)
             {
@@ -55,6 +71,36 @@ namespace LersMobile.Incidents
             finally
             {
                 this.IsBusy = false;
+            }
+        }
+
+        public void OnItemSelected(object sender, EventArgs e) => ((ListView)sender).SelectedItem = null;
+
+
+        /// <summary>
+        /// Пользователь нажал на кнопку закрытия НС.
+        /// </summary>
+        public async void OnCloseIncidentClicked()
+        {
+            try
+            {
+                await this.Incident.Close();
+
+                // TODO: для отображение сообщений нужно использовать DependancyService, т.к. Toast.MakeText специфичен для android.
+                // https://stackoverflow.com/questions/35279403/toast-equivalent-on-xamarin-forms
+                // https://xamarinhelp.com/toast-notifications-xamarin-forms/
+                Android.Widget.Toast.MakeText(
+                    Android.App.Application.Context,
+                    "НС успешно закрыта",
+                    Android.Widget.ToastLength.Short)
+                    .Show();
+            }
+            catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
+            {
+            }
+            catch (Exception exc)
+            {
+                await DisplayAlert("Ошибка закрытия НС", exc.Message, "OK");
             }
         }
     }
