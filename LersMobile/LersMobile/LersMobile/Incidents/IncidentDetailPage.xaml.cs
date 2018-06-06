@@ -82,6 +82,15 @@ namespace LersMobile.Incidents
         /// </summary>
         public async void OnCloseIncidentClicked()
         {
+            // Запрашиваем подтверждение.
+
+            bool confirmed = await DisplayAlert("Закрыть НС", "Закрыть нештатную ситуацию?", "Да", "Нет");
+
+            if (!confirmed)
+            {
+                return;
+            }
+
             try
             {
                 await this.Incident.Close();

@@ -10,7 +10,7 @@
                 <Image Source="{Binding Incident.ImportanceImageSource}"/>
                 <Label Text="{Binding Incident.Description}"/>
             </StackLayout>
-            
+
             <!-- Журнал НС -->
             <ListView ItemsSource="{Binding Incident.Log}" ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
@@ -20,9 +20,8 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!-- Кнопка для закрытия НС-->
+            <!-- Кнопка закрытия -->
             <Button Text="Закрыть" IsVisible="{Binding Incident.IsActive}" Clicked="OnCloseIncidentClicked" />
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
