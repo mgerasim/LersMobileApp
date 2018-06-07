@@ -35,7 +35,7 @@ namespace LersMobile.Droid.Notifications
 			}
 			catch (Exception exc)
 			{
-				ShowNotification(context, "Error", exc.Message);
+				//ShowNotification(context, "Error", exc.Message);
 			}
 		}
 
