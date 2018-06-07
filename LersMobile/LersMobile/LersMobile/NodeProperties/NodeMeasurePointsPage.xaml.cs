@@ -33,7 +33,29 @@ namespace LersMobile.NodeProperties
 
             this.BindingContext = this;
 
-            this.Node = nodeView ?? throw new ArgumentNullException(nameof(nodeView));
+            this.Node = nodeView ?? throw new ArgumentNullException(nameof(nodeView));						
         }
-    }
+
+
+		/// <summary>
+		/// Пользователь щёлкнул на точке учёта объекта.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			var measurePoint = (Core.MeasurePointView)e.SelectedItem;
+
+			var listView = (ListView)sender;
+
+			listView.SelectedItem = null;
+
+			if (measurePoint == null)
+			{
+				return;
+			}
+
+			await this.Navigation.PushAsync(new MeasurePointProperties.MeasurePointPropertiesPage(measurePoint));
+		}
+	}
 }

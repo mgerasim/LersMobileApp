@@ -3,10 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LersMobile.MeasurePointProperties.MeasurePointCommonPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="{Binding MeasurePoint.SystemTypeImageSource}"/>
+                    <Label Text="{Binding MeasurePoint.FullTitle}"/>
+                </StackLayout>
+
+                <Label>Устройство:</Label>
+                <Label FontAttributes="Bold" Text="{Binding MeasurePoint.Device}"/>
+            </StackLayout>
+
+
+            <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                        BackgroundColor="{StaticResource LoadingIndicator}">
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}" />
+                <Label Text="Загрузка..." HorizontalOptions="Center" />
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

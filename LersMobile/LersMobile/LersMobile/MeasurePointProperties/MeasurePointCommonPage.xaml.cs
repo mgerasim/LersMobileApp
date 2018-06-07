@@ -16,6 +16,8 @@ namespace LersMobile.MeasurePointProperties
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MeasurePointCommonPage : ContentPage
     {
+		private bool isLoaded = false;
+
 		public MeasurePointView MeasurePoint { get; private set; }
 
         public MeasurePointCommonPage(MeasurePointView measurePointView)
@@ -26,5 +28,32 @@ namespace LersMobile.MeasurePointProperties
 
 			this.BindingContext = this;
         }
-    }
+
+		protected override async void OnAppearing()
+		{
+			base.OnAppearing();
+
+			if (this.isLoaded)
+			{
+				return;
+			}
+
+			this.IsBusy = true;
+
+			try
+			{
+				await this.MeasurePoint.LoadData();
+			}
+			catch (Exception exc)
+			{
+				await DisplayAlert("Ошибка загрузки", $"Не удалось загрузить информацию о точке учёта. {exc.Message}", "OK");
+			}
+			finally
+			{
+				this.IsBusy = false;
+			}
+
+			this.isLoaded = true;
+		}
+	}
 }
