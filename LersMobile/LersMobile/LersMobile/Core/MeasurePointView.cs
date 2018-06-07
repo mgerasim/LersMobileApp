@@ -24,7 +24,7 @@ namespace LersMobile.Core
 		/// <summary>
 		/// Связанное с точкой учёта оборудование.
 		/// </summary>
-		public Equipment Device => this.MeasurePoint.Device;
+		public string Device => this.MeasurePoint.Device?.ToString();
 
         /// <summary>
         /// Источник изображения с состоянием точки учёта.

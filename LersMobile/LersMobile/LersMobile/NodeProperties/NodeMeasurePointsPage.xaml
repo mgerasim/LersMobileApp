@@ -7,7 +7,7 @@
         <StackLayout>
             <!-- Список точек учёта объекта -->
             <Label Text="Точки учёта:" />
-            <ListView x:Name="measurePointListView" ItemsSource="{Binding Node.MeasurePoints}">
+            <ListView x:Name="measurePointListView" ItemsSource="{Binding Node.MeasurePoints}" ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

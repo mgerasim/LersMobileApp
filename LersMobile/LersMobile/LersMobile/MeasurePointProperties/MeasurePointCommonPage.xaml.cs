@@ -38,11 +38,18 @@ namespace LersMobile.MeasurePointProperties
 				return;
 			}
 
+			await LoadMeasurePointData();
+		}
+
+		private async Task LoadMeasurePointData()
+		{
 			this.IsBusy = true;
 
 			try
 			{
 				await this.MeasurePoint.LoadData();
+
+				OnPropertyChanged(nameof(MeasurePoint));
 			}
 			catch (Exception exc)
 			{
