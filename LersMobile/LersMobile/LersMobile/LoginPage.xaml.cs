@@ -32,6 +32,7 @@ namespace LersMobile
 			if (!string.IsNullOrEmpty(AppDataStorage.ServerAddress) && !string.IsNullOrEmpty(AppDataStorage.Token))
 			{
 				this.IsBusy = true;
+				this.onLoginButton.IsEnabled = false;
 
 				try
 				{
@@ -53,6 +54,7 @@ namespace LersMobile
 				finally
 				{
 					this.IsBusy = false;
+					this.onLoginButton.IsEnabled = true;
 				}
 			}
 		}
@@ -63,7 +65,7 @@ namespace LersMobile
 			this.passwordInput.IsVisible = show;
 			this.loginLabel.IsVisible = show;
 			this.passwordLabel.IsVisible = show;
-			this.onLogin.IsVisible = show;
+			this.onLoginButton.IsVisible = show;
 		}
 
 		public async void OnLogin()

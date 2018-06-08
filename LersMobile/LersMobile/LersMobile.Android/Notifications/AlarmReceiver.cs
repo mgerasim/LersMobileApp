@@ -33,7 +33,7 @@ namespace LersMobile.Droid.Notifications
 			{
 				await Core.NotificationChecker.CheckNewNotifications((n) => ShowNotification(context, n));
 			}
-			catch (Exception exc)
+			catch (Exception)
 			{
 				//ShowNotification(context, "Error", exc.Message);
 			}
@@ -68,27 +68,6 @@ namespace LersMobile.Droid.Notifications
 
 			var notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
 			notificationManager.Notify(notification.Id, notificationBuilder.Build());
-		}
-
-		/// <summary>
-		/// DEBUG ONLY
-		/// </summary>
-		private void ShowNotification(Context context, string header, string message)
-		{
-			var notificationBuilder = new Notification.Builder(context)
-				.SetSmallIcon(Resource.Drawable.close_button)
-				.SetContentTitle(header)
-				.SetContentText(message)
-				.SetStyle(new Notification.BigTextStyle());
-
-			if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
-			{
-				// Каналы поддерживаются только на OREO и выше.
-				notificationBuilder.SetChannelId(Channels.GeneralChannelId);
-			}
-
-			var notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
-			notificationManager.Notify(111, notificationBuilder.Build());
 		}
 	}
 }

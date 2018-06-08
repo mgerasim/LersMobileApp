@@ -35,6 +35,9 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointPropertiesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointDataPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeListPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeCommonPropertiesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -90,6 +93,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointPropertiesPage.xaml.cs">
       <DependentUpon>MeasurePointPropertiesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointDataPage.xaml.cs">
+      <DependentUpon>MeasurePointDataPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)NodeListPage.xaml.cs">
       <DependentUpon>NodeListPage.xaml</DependentUpon>

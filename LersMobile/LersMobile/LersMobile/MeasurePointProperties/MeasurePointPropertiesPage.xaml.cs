@@ -17,8 +17,15 @@ namespace LersMobile.MeasurePointProperties
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MeasurePointPropertiesPage : TabbedPage
     {
+		/// <summary>
+		/// Точка учёта, данные которой отображаются.
+		/// </summary>
 		public MeasurePointView MeasurePoint { get; private set; }
 
+		/// <summary>
+		/// Конструктор.
+		/// </summary>
+		/// <param name="measurePoint"></param>
         public MeasurePointPropertiesPage(MeasurePointView measurePoint)
         {
 			this.MeasurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));
@@ -26,6 +33,7 @@ namespace LersMobile.MeasurePointProperties
             InitializeComponent();
 
 			this.Children.Add(new MeasurePointCommonPage(measurePoint));
+			this.Children.Add(new MeasurePointDataPage(measurePoint));
 
 			this.BindingContext = this;
         }

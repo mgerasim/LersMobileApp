@@ -15,7 +15,7 @@
                 <Label x:Name ="passwordLabel" Text="Пароль" />
                 <Entry x:Name="passwordInput" IsPassword="True"></Entry>
 
-                <Button x:Name="onLogin" Text="Вход" Clicked="OnLogin"/>
+                <Button x:Name="onLoginButton" Text="Вход" Clicked="OnLogin"/>
             </StackLayout>
 
             <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
