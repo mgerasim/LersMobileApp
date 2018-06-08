@@ -84,12 +84,18 @@ namespace LersMobile.MeasurePointProperties
 
 			try
 			{
-				using (var cts = new CancellationTokenSource())
+				using (var poller = new Core.MeasurePointPoller(App.Core, this.MeasurePoint.MeasurePoint))
 				{
-					// Две минуты на окончание опроса.
-					cts.CancelAfter(timeoutMinutes * 60 * 1000);
+					using (var cts = new CancellationTokenSource())
+					{
+						// Две минуты на окончание опроса.
+						cts.CancelAfter(timeoutMinutes * 60 * 1000);
 
-					await this.MeasurePoint.Poller.PollCurrent(cts.Token);
+						// Подпишемся на событие добавления новой записи в журнал опроса.
+						poller.PollLog += Poller_PollLog;
+
+						await poller.PollCurrent(cts.Token);
+					}
 				}
 
 				await LoadLastData();
@@ -107,6 +113,14 @@ namespace LersMobile.MeasurePointProperties
 				this.pollCurrentButton.IsEnabled = true;
 				this.IsBusy = false;
 			}
+		}
+
+		private void Poller_PollLog(object sender, Core.PollLogEventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				this.LoadingText = e.Message;
+			});
 		}
 
 		/// <summary>

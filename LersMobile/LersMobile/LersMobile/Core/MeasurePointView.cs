@@ -63,18 +63,11 @@ namespace LersMobile.Core
 		/// Признак, указывающий что у точки учёта есть диагностическая карточка.
 		/// </summary>
 		public bool HasDetailedState => this.DetailedState.Count > 0;
-
-		/// <summary>
-		/// Объект для опроса данных по точке учёта.
-		/// </summary>
-		internal MeasurePointPoller Poller { get; private set; }
-
+		
 
 		public MeasurePointView(MeasurePoint measurePoint)
         {
-            this.MeasurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));
-
-			this.Poller = new MeasurePointPoller(App.Core, measurePoint);
+            this.MeasurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));			
         }
 
 		/// <summary>

@@ -116,6 +116,10 @@
       <Project>{3635fc21-a9e0-42b6-a908-f9844fde9578}</Project>
       <Name>Lers.Core.ns</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\LersUchet\LersCore\Lers.Serialization\Lers.Serialization.ns.csproj">
+      <Project>{a66f7b2e-149c-400d-9b64-0eebbad9e22e}</Project>
+      <Name>Lers.Serialization.ns</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\LersUchet\LersCore\Lers.Utils\Lers.Utils.ns.csproj">
       <Project>{bf54064f-f775-4ca2-8d8d-1806d3b8eafb}</Project>
       <Name>Lers.Utils.ns</Name>

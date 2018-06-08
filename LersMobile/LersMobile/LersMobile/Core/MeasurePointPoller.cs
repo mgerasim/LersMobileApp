@@ -1,4 +1,6 @@
-﻿using Lers.Core;
+﻿using Lers.Common;
+using Lers.Core;
+using Lers.Serialization.Extensions;
 using Lers.Utils;
 using System;
 using System.Collections.Generic;
@@ -10,13 +12,17 @@ namespace LersMobile.Core
 	/// <summary>
 	/// Содержит методы для опроса данных по точке учёта.
 	/// </summary>
-	class MeasurePointPoller
+	class MeasurePointPoller : IDisposable
     {
 		private readonly MeasurePoint measurePoint;
 		private readonly MobileCore core;
 
 		private Dictionary<int, TaskCompletionSource<bool>> tasks = new Dictionary<int, TaskCompletionSource<bool>>();
 
+		/// <summary>
+		/// Вызывается при добавлении новой записи в журнал запущенного опроса.
+		/// </summary>
+		public event EventHandler<PollLogEventArgs> PollLog;
 
 		/// <summary>
 		/// Конструктор.
@@ -27,6 +33,11 @@ namespace LersMobile.Core
 		{
 			this.core = core ?? throw new ArgumentNullException(nameof(core));
 			this.measurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));
+		}
+
+		public void Dispose()
+		{
+			this.core.Server.RemoveNotification(PollLogMessageEventHandler);
 		}
 
 		/// <summary>
@@ -43,13 +54,15 @@ namespace LersMobile.Core
 			var server = core.Server;
 
 			server.PollSessions.PollSessionChanged += PollSessions_PollSessionChanged;
-
+			
 			var tcs = new TaskCompletionSource<bool>();
 
 			var pollSessionId = await this.measurePoint.PollCurrentAsync(new MeasurePointPollCurrentOptions
 			{
-				StartMode = Lers.Common.PollManualStartMode.Force
+				StartMode = PollManualStartMode.Force
 			});
+
+			SubscribePollMessage(pollSessionId);
 
 			this.tasks[pollSessionId] = tcs;
 
@@ -59,8 +72,15 @@ namespace LersMobile.Core
 			}
 
 			server.PollSessions.PollSessionChanged -= PollSessions_PollSessionChanged;
+
+			this.core.Server.RemoveNotification(PollLogMessageEventHandler);
 		}
 
+
+		private void SubscribePollMessage(int pollSessionId)
+		{
+			this.core.Server.AddNotification(Lers.Interop.Operation.NOTIFY_POLL_LOG_MESSAGE, Lers.Interop.EntityType.PollSession, pollSessionId, true, PollLogMessageEventHandler, null);
+		}		
 
 		private void PollSessions_PollSessionChanged(object sender, Lers.Poll.PollSessionChangedEventArgs e)
 		{
@@ -88,6 +108,15 @@ namespace LersMobile.Core
 				}
 			}
 		}
-	
-    }
+
+		private void PollLogMessageEventHandler(PropertyBag notifyData, object userState)
+		{			
+			var message = notifyData.GetParameter<Lers.Models.PollSessionLogMessage>();
+
+			PollLog?.Invoke(this, new PollLogEventArgs
+			{
+				Message = message.Message
+			});
+		}
+	}
 }
