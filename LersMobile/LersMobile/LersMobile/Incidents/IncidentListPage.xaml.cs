@@ -28,6 +28,10 @@ namespace LersMobile.Incidents
 
         public ObservableCollection<Core.DayIncidentList> IncidentList { get; private set; } = new ObservableCollection<Core.DayIncidentList>();
 
+		/// <summary>
+		/// Объект, по которому запрашиваются НС. Используется в режиме <see cref="PageMode.ObjectActive"/>
+		/// </summary>
+		public Lers.Diag.IIncidentContainer IncidentFilter { get; set; }
 
         /// <summary>
         /// Команда, вызываемая из списка для обновления данных.
@@ -39,7 +43,7 @@ namespace LersMobile.Incidents
         /// </summary>
         /// <param name="pageMode"></param>
         public IncidentListPage(PageMode pageMode)
-        {
+        {			
             this.pageMode = pageMode;
 
             InitializeComponent();
@@ -120,10 +124,14 @@ namespace LersMobile.Incidents
                 {
                     getTask = this.core.GetNewIncidents(this.SelectedNodeGroupId);
                 }
-                else
+                else if (this.pageMode == PageMode.Interval)
                 {
                     getTask = this.core.GetIncidents(this.startDatePicker.Date, this.endDatePicker.Date.Date.AddDays(1), this.SelectedNodeGroupId);
                 }
+				else
+				{
+					getTask = this.core.GetActiveIncidents(this.IncidentFilter);
+				}
             
                 var incidents = await getTask;
 
@@ -131,7 +139,7 @@ namespace LersMobile.Incidents
 
                 this.IncidentList.AddRange(incidents);
             }
-            catch (Exception exc) when (exc is TimeoutException || exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
+            catch (Exception exc)
             {
                 await DisplayAlert("Ошибка загрузка списка НС.", exc.Message, "OK");
             }

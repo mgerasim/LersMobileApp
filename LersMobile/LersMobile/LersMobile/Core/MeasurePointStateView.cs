@@ -11,10 +11,17 @@ namespace LersMobile.Core
 	public class MeasurePointStateView
 	{
         private readonly Lers.Core.MeasurePointState state;
+		
+		/// <summary>
+		/// Идентификатор состояния.
+		/// </summary>
+		public DetailedStateId Id { get; private set; }
 
-        public MeasurePointStateView(Lers.Core.MeasurePointState state)
+
+        public MeasurePointStateView(Lers.Core.MeasurePointState state, DetailedStateId stateId = DetailedStateId.None)
         {
-            this.state = state;
+			this.Id = stateId;
+			this.state = state;			
         }
 
 		public string Text { get; set; }
@@ -23,8 +30,5 @@ namespace LersMobile.Core
 		/// Изображение, описывающее состояние объекта.
 		/// </summary>
 		public string StateImageSource => ResourceHelper.GetMeasurePointStateImage(this.state);
-
-
-		public Action Action { get;set; }
     }
 }

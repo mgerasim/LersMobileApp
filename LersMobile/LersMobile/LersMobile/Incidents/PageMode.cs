@@ -8,6 +8,12 @@ namespace LersMobile.Incidents
         NewOnly,
 
         [Description("За период")]
-        Interval
+        Interval,
+
+		/// <summary>
+		/// Активные НС по объекту или точке.
+		/// </summary>
+		[Description("Активные НС")]
+		ObjectActive
     }
 }

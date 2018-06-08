@@ -29,16 +29,6 @@ namespace LersMobile.MeasurePointProperties
 			this.BindingContext = this;
         }
 
-		public void OnDisableSelection(object sender, EventArgs e)
-		{
-			var listView = (ListView)sender;
-
-			if (listView != null)
-			{
-				listView.SelectedItem = null;
-			}
-		}
-
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
@@ -71,6 +61,51 @@ namespace LersMobile.MeasurePointProperties
 			}
 
 			this.isLoaded = true;
+		}
+
+
+		/// <summary>
+		/// Пользователь щёлкнул на детальной информации объекта.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public async void OnDetailStateSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			var listView = (ListView)sender;
+
+			// Получаем детальную информацию
+			var detailState = (MeasurePointStateView)e.SelectedItem;
+
+			if (listView != null)
+			{
+				listView.SelectedItem = null;
+			}
+
+			if (detailState == null)
+			{
+				return;
+			}
+
+			// Проверим идентификатор детальной информации.
+
+			switch (detailState.Id)
+			{
+				case DetailedStateId.CriticalIncidents:
+				case DetailedStateId.Incidents:
+					// При щелчке на НС откроем отфильтрованную страницу.
+					await ShowIncidentsForMeasurePoint();
+					break;
+			}
+		}
+
+		private Task ShowIncidentsForMeasurePoint()
+		{
+			var incidentListPage = new Incidents.IncidentListPage(Incidents.PageMode.ObjectActive)
+			{
+				IncidentFilter = this.MeasurePoint.MeasurePoint
+			};
+
+			return this.Navigation.PushAsync(incidentListPage);
 		}
 	}
 }

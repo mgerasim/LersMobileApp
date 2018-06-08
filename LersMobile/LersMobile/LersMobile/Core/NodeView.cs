@@ -12,7 +12,7 @@ namespace LersMobile.Core
 	/// </summary>
     public class NodeView
     {
-		public Node Node { get; private set; }
+		public Node Node { get; private set; }		
 
 		public string Address => this.Node.Address;
 
@@ -125,12 +125,12 @@ namespace LersMobile.Core
 
             if (state.CriticalIncidentCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView(node.State) { Text = $"Критических НС: {state.CriticalIncidentCount}" });
+                this.DetailedState.Add(new NodeStateView(node.State, DetailedStateId.CriticalIncidents) { Text = $"Критических НС: {state.CriticalIncidentCount}" });
             }
 
             if (state.WarningIncidentCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView(node.State) { Text = $"Нештатных ситуаций: {state.WarningIncidentCount}" });
+                this.DetailedState.Add(new NodeStateView(node.State, DetailedStateId.Incidents) { Text = $"Нештатных ситуаций: {state.WarningIncidentCount}" });
             }
 
             if (state.LastDataOverdue > 0)

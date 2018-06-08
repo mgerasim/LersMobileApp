@@ -11,10 +11,12 @@
                       
                       IsPullToRefreshEnabled="True"
                       RefreshCommand="{Binding RefreshListView}">
+                
+                <!-- Шаблон группировки (по дате) -->
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding DateTime}" VerticalTextAlignment="Start" FontAttributes="Bold"/>
+                            <Label Text="{Binding DateTime}" VerticalTextAlignment="Center" FontAttributes="Bold"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>

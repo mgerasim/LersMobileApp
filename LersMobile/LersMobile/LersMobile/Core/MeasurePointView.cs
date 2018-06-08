@@ -115,12 +115,18 @@ namespace LersMobile.Core
 
 			if (state.CriticalIncidentCount > 0)
 			{
-				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State) { Text = $"Критических НС: {state.CriticalIncidentCount}" });
+				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State, DetailedStateId.CriticalIncidents)
+				{
+					Text = $"Критических НС: {state.CriticalIncidentCount}"
+				});
 			}
 
 			if (state.WarningIncidentCount > 0)
 			{
-				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State) { Text = $"Нештатных ситуаций: {state.WarningIncidentCount}" });
+				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State, DetailedStateId.Incidents)
+				{
+					Text = $"Нештатных ситуаций: {state.WarningIncidentCount}"
+				});
 			}
 
 			if (state.LastDataOverdue > 0)

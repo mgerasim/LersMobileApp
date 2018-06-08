@@ -135,6 +135,20 @@ namespace LersMobile.Core
             return GroupIncidentsByStartDate(incidents);
         }
 
+		/// <summary>
+		/// Возвращает активные НС для объекта.
+		/// </summary>
+		/// <param name="incidentContainer"></param>
+		/// <returns></returns>
+		public async Task<DayIncidentList[]> GetActiveIncidents(Lers.Diag.IIncidentContainer incidentContainer)
+		{
+			await EnsureConnected();
+
+			var incidents = await incidentContainer.GetActiveIncidents();
+
+			return GroupIncidentsByStartDate(incidents);
+		}
+
         private static DayIncidentList[] GroupIncidentsByStartDate(Lers.Diag.Incident[] incidents)
         {
             var incidentGroups = incidents

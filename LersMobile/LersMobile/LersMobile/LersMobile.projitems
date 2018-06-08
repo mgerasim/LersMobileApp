@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)AppDataStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DayIncidentList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\DetailedStateId.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointPoller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointView.cs" />

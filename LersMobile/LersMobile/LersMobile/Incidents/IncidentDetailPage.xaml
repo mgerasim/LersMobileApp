@@ -8,7 +8,10 @@
             <!-- Подробное описание НС -->
             <StackLayout Orientation="Horizontal">
                 <Image Source="{Binding Incident.ImportanceImageSource}"/>
-                <Label Text="{Binding Incident.Description}"/>
+                <StackLayout>
+                    <Label Text="{Binding Incident.Description}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Incident.ObjectTitle}" />
+                </StackLayout>
             </StackLayout>
 
             <!-- Журнал НС -->

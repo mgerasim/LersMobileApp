@@ -42,15 +42,51 @@ namespace LersMobile.NodeProperties
             this.BindingContext = this;
 
             this.Node = node ?? throw new ArgumentNullException(nameof(node));
-
-            this.nodeStateListView.ItemSelected += NodeStateListView_ItemSelected;
         }
 
-        private void NodeStateListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            this.nodeStateListView.SelectedItem = null;
-        }
+		/// <summary>
+		/// Пользователь щёлкнул на детальной информации объекта.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public async void OnDetailStateSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			var listView = (ListView)sender;
 
+			// Получаем детальную информацию
+			var detailState = (Core.NodeStateView)e.SelectedItem;
+
+			if (listView != null)
+			{
+				listView.SelectedItem = null;
+			}
+
+			if (detailState == null)
+			{
+				return;
+			}
+
+			// Проверим идентификатор детальной информации.
+
+			switch (detailState.Id)
+			{
+				case Core.DetailedStateId.CriticalIncidents:
+				case Core.DetailedStateId.Incidents:
+					// При щелчке на НС откроем отфильтрованную страницу.
+					await ShowIncidentsForNode();
+					break;
+			}
+		}
+
+		private Task ShowIncidentsForNode()
+		{
+			var incidentListPage = new Incidents.IncidentListPage(Incidents.PageMode.ObjectActive)
+			{
+				IncidentFilter = this.Node.Node
+			};
+
+			return this.Navigation.PushAsync(incidentListPage);
+		}
 
         /// <summary>
         /// Вызывается при отображении страницы на экране.
@@ -90,16 +126,5 @@ namespace LersMobile.NodeProperties
                 this.IsBusy = false;
             }
         }
-
-
-		public void OnDisableSelection(object sender, EventArgs e)
-		{
-			var listView = (ListView)sender;
-
-			if (listView != null)
-			{
-				listView.SelectedItem = null;
-			}
-		}
     }
 }
