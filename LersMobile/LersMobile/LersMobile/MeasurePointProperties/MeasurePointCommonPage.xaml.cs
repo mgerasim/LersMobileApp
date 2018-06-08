@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace LersMobile.MeasurePointProperties
 {
 	/// <summary>
-	/// Общие свойства точки учёта.
+	/// Страница общих свойств точки учёта.
 	/// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MeasurePointCommonPage : ContentPage
@@ -28,6 +28,16 @@ namespace LersMobile.MeasurePointProperties
 
 			this.BindingContext = this;
         }
+
+		public void OnDisableSelection(object sender, EventArgs e)
+		{
+			var listView = (ListView)sender;
+
+			if (listView != null)
+			{
+				listView.SelectedItem = null;
+			}
+		}
 
 		protected override async void OnAppearing()
 		{

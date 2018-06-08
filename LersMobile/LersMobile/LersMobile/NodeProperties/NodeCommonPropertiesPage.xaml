@@ -38,7 +38,7 @@
 
                         <StackLayout IsVisible="{Binding Node.HasDetailedState}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
                             <Label Text="Подробно"/>
-                            <ListView x:Name="nodeStateListView" ItemsSource="{Binding Node.DetailedState}">
+                            <ListView x:Name="nodeStateListView" ItemsSource="{Binding Node.DetailedState}" SelectedItem="OnDisableSelection">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>

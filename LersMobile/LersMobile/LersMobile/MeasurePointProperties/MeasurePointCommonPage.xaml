@@ -13,6 +13,23 @@
 
                 <Label>Устройство:</Label>
                 <Label FontAttributes="Bold" Text="{Binding MeasurePoint.Device}"/>
+
+                <!-- Диагностическая карточка точки учёта -->
+                <StackLayout IsVisible="{Binding MeasurePoint.HasDetailedState}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label Text="Подробно"/>
+                    <ListView x:Name="nodeStateListView" ItemsSource="{Binding MeasurePoint.DetailedState}" SelectedItem="OnDisableSelection">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                        <Image Source="{Binding StateImageSource}"/>
+                                        <Label Text="{Binding Text}" TextColor="Accent"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
             </StackLayout>
 
 

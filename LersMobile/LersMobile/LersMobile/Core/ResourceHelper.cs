@@ -59,5 +59,35 @@ namespace LersMobile.Core
                 default: throw new NotSupportedException("Неизвестный тип важности: " + importance);
             }
         }
-    }
+
+
+		public static string GetNodeStateImage(NodeState nodeState)
+		{
+			switch (nodeState)
+			{
+				case NodeState.None: return "State_Unknown.png";
+				case NodeState.Error: return "State_Error.png";
+				case NodeState.Normal: return "State_Normal.png";
+				case NodeState.Warning: return "State_Warning.png";
+
+				default:
+					throw new NotSupportedException("Неизвестное состояние объекта " + nodeState);
+			}
+		}
+
+
+		public static string GetMeasurePointStateImage(MeasurePointState state)
+		{
+			switch (state)
+			{
+				case MeasurePointState.None: return "State_Unknown.png";
+				case MeasurePointState.Error: return "State_Error.png";
+				case MeasurePointState.Normal: return "State_Normal.png";
+				case MeasurePointState.Warning: return "State_Warning.png";
+
+				default:
+					throw new NotSupportedException("Неизвестное состояние объекта " + state);
+			}
+		}
+	}
 }

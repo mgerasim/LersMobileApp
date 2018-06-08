@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -53,9 +54,27 @@ namespace LersMobile.Core
         public string SystemTypeImageSource => ResourceHelper.GetSystemTypeImage(this.MeasurePoint.SystemType);
 
 
-        public MeasurePointView(MeasurePoint measurePoint)
+		/// <summary>
+		/// Список детальной информации о состоянии точки учёта.
+		/// </summary>
+		public ObservableCollection<MeasurePointStateView> DetailedState { get; private set; } = new ObservableCollection<MeasurePointStateView>();
+
+		/// <summary>
+		/// Признак, указывающий что у точки учёта есть диагностическая карточка.
+		/// </summary>
+		public bool HasDetailedState => this.DetailedState.Count > 0;
+
+		/// <summary>
+		/// Объект для опроса данных по точке учёта.
+		/// </summary>
+		internal MeasurePointPoller Poller { get; private set; }
+
+
+		public MeasurePointView(MeasurePoint measurePoint)
         {
             this.MeasurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));
+
+			this.Poller = new MeasurePointPoller(App.Core, measurePoint);
         }
 
 		/// <summary>
@@ -72,67 +91,70 @@ namespace LersMobile.Core
 			{
 				await this.MeasurePoint.RefreshAsync(requiredFlags);
 			}
+
+			// Загружаем диагностическую карточку точки учёта.
+
+			if (this.MeasurePoint.State != MeasurePointState.Normal && this.DetailedState.Count == 0)
+			{
+				await LoadDiagnostics();
+			}
 		}
 
 
 		/// <summary>
-		/// Опрашивает текущие данные. Функция завершается после окончания опроса.
+		/// Загружает диагностическую информацию по объекту.
 		/// </summary>
-		/// <param name="cancellationToken">Токен, используемый для отмены ожидания.</param>
 		/// <returns></returns>
-		public async Task PollCurrent(CancellationToken cancellationToken)
+		private async Task LoadDiagnostics()
 		{
-			var core = App.Core;
+			var measurePoint = this.MeasurePoint;
 
-			await core.EnsureConnected();
+			var state = await measurePoint.GetDetailedState();
 
-			var server = core.Server;
+			this.DetailedState.Clear();
 
-			server.PollSessions.PollSessionChanged += PollSessions_PollSessionChanged;
-
-			var tcs = new TaskCompletionSource<bool>();
-
-			var pollSessionId = await MeasurePoint.PollCurrentAsync(new MeasurePointPollCurrentOptions
+			if (state.CriticalIncidentCount > 0)
 			{
-				StartMode = Lers.Common.PollManualStartMode.Force
-			});
-
-			this.tasks[pollSessionId] = tcs;
-
-			using (var registration = cancellationToken.Register(() => tcs.TrySetCanceled()))
-			{
-				await tcs.Task;
+				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State) { Text = $"Критических НС: {state.CriticalIncidentCount}" });
 			}
 
-			server.PollSessions.PollSessionChanged -= PollSessions_PollSessionChanged;
-		}
-
-		private Dictionary<int, TaskCompletionSource<bool>> tasks = new Dictionary<int, TaskCompletionSource<bool>>();
-
-		private void PollSessions_PollSessionChanged(object sender, Lers.Poll.PollSessionChangedEventArgs e)
-		{
-			if (e.PollSession == null)
+			if (state.WarningIncidentCount > 0)
 			{
-				return;
+				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State) { Text = $"Нештатных ситуаций: {state.WarningIncidentCount}" });
 			}
 
-			if (e.PollSession.EndDateTime.HasValue && e.Operation== Lers.Common.EntityOperationType.Updated)
+			if (state.LastDataOverdue > 0)
 			{
-				// Сессия опроса завершена.
+				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State) { Text = $"Данные отсутствуют: {state.LastDataOverdue} дн." });
+			}
 
-				if (tasks.TryGetValue(e.PollSessionId, out TaskCompletionSource<bool> completion))
+			if (state.OverdueJobCount > 0)
+			{
+				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State) { Text = $"Просрочено работ: {state.OverdueJobCount}" });
+			}
+
+			if (state.DaysToAdmissionDeadline.HasValue)
+			{
+				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State)
 				{
-					tasks.Remove(e.PollSessionId);
+					Text = $"Допуск заканчивается через: {state.DaysToAdmissionDeadline} дн."
+				});
+			}
 
-					if (e.PollSession.ResultCode == Lers.Poll.PollError.None || e.PollSession.ResultCode == Lers.Poll.PollError.DEV_NOT_ALL_DATA_READ)
-					{
-						completion.TrySetResult(true);
-					}
-					else
-					{
-						completion.TrySetException(new Exception($"Опрос завершён с ошибкой. {e.PollSession.ResultCode.GetDescription()}"));
-					}					
-				}
+			if (state.AdmissionDateOverdue.HasValue)
+			{
+				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State)
+				{
+					Text = $"Допуск просрочен на: {state.AdmissionDateOverdue} дн."
+				});
+			}
+
+			if (state.LastDataOverdue > 0)
+			{
+				this.DetailedState.Add(new MeasurePointStateView(measurePoint.State)
+				{
+					Text = $"Данные не получены {state.LastDataOverdue} дн."
+				});
 			}
 		}
 	}

@@ -7,6 +7,9 @@ using Lers.Core;
 
 namespace LersMobile.Core
 {
+	/// <summary>
+	/// Используется для отображения на экране параметров объекта учёта.
+	/// </summary>
     public class NodeView
     {
 		public Node Node { get; private set; }
@@ -33,6 +36,7 @@ namespace LersMobile.Core
 		}
 
 		public string ServicemanName => this.Node.Serviceman?.Name;
+
 		public string CustomerTitle => this.Node.Customer?.Title;
 
         /// <summary>
@@ -48,7 +52,7 @@ namespace LersMobile.Core
         /// <summary>
         /// Список детальной информации о состоянии объекта.
         /// </summary>
-        public ObservableCollection<NodeStateView> DetailedState { get; private set; } = new ObservableCollection<Core.NodeStateView>();
+        public ObservableCollection<NodeStateView> DetailedState { get; private set; } = new ObservableCollection<NodeStateView>();
 
 
         public string State
@@ -141,9 +145,9 @@ namespace LersMobile.Core
 
             if (state.DaysToAdmissionDeadline.HasValue)
             {
-                this.DetailedState.Add(new NodeStateView(node.State)
-                {
-                    Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' заканчивается через: {state.DaysToAdmissionDeadline} дн."
+				this.DetailedState.Add(new NodeStateView(node.State)
+				{
+					Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' заканчивается через: {state.DaysToAdmissionDeadline} дн."					
                 });
             }
 

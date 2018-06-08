@@ -90,5 +90,16 @@ namespace LersMobile.NodeProperties
                 this.IsBusy = false;
             }
         }
+
+
+		public void OnDisableSelection(object sender, EventArgs e)
+		{
+			var listView = (ListView)sender;
+
+			if (listView != null)
+			{
+				listView.SelectedItem = null;
+			}
+		}
     }
 }

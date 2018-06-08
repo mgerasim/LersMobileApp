@@ -62,7 +62,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)AppDataStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DayIncidentList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointPoller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointStateView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NodeView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NodeStateView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationChecker.cs" />

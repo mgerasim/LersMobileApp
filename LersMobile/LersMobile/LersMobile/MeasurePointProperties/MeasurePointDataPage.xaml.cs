@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Lers.Data;
-using Lers.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace LersMobile.MeasurePointProperties
 {
-    /// <summary>
-    /// Страница отображает последние данные по точке учёта и предоставляет возможность запустить опрос текущих.
-    /// </summary>
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+	/// <summary>
+	/// Страница отображает последние данные по точке учёта и предоставляет возможность запустить опрос текущих.
+	/// </summary>
+	[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MeasurePointDataPage : ContentPage
     {
 		private bool isLoaded = false;
@@ -82,7 +78,7 @@ namespace LersMobile.MeasurePointProperties
 		{
 			this.pollCurrentButton.IsEnabled = false;
 			this.IsBusy = true;
-			this.LoadingText = "Опрос текущих...";
+			this.LoadingText = "Идёт опрос текущих...";
 
 			const int timeoutMinutes = 2;
 
@@ -93,7 +89,7 @@ namespace LersMobile.MeasurePointProperties
 					// Две минуты на окончание опроса.
 					cts.CancelAfter(timeoutMinutes * 60 * 1000);
 
-					await this.MeasurePoint.PollCurrent(cts.Token);
+					await this.MeasurePoint.Poller.PollCurrent(cts.Token);
 				}
 
 				await LoadLastData();
@@ -193,7 +189,7 @@ namespace LersMobile.MeasurePointProperties
 
 				var parameterLabel = new Label { Text = $"{desc.ShortTitle}" };
 				var valueLabel     = new Label { Text = $"{record.Value.Value:0.00}", BackgroundColor = valueColor };				
-				var unitLabel      = new Label { Text = $"{desc.SystemUnitTitle}" };
+				var unitLabel      = new Label { Text = $"{unit}" };
 
 				var rowDef = new RowDefinition();
 				
