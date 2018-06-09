@@ -1,9 +1,4 @@
-﻿using LersMobile.Droid;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LersMobile.Core
+﻿namespace LersMobile.Core
 {
 	/// <summary>
 	/// Состояние объекта учёта, пригодное для вывода на экран.

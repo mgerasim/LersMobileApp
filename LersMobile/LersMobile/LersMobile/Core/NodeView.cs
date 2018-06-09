@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Lers.Core;
+using System;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
-using Lers.Core;
 
 namespace LersMobile.Core
 {
 	/// <summary>
 	/// Используется для отображения на экране параметров объекта учёта.
 	/// </summary>
-    public class NodeView
+	public class NodeView
     {
 		public Node Node { get; private set; }		
 
@@ -125,27 +123,33 @@ namespace LersMobile.Core
 
             if (state.CriticalIncidentCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView(node.State, DetailedStateId.CriticalIncidents) { Text = $"Критических НС: {state.CriticalIncidentCount}" });
+                this.DetailedState.Add(new NodeStateView(NodeState.Error, DetailedStateId.CriticalIncidents)
+				{
+					Text = $"Критических НС: {state.CriticalIncidentCount}"
+				});
             }
 
             if (state.WarningIncidentCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView(node.State, DetailedStateId.Incidents) { Text = $"Нештатных ситуаций: {state.WarningIncidentCount}" });
+                this.DetailedState.Add(new NodeStateView(NodeState.Warning, DetailedStateId.Incidents)
+				{
+					Text = $"Нештатных ситуаций: {state.WarningIncidentCount}"
+				});
             }
 
             if (state.LastDataOverdue > 0)
             {
-                this.DetailedState.Add(new NodeStateView(node.State) { Text = $"Данные отсутствуют: {state.LastDataOverdue} дн." });
+                this.DetailedState.Add(new NodeStateView(NodeState.Warning) { Text = $"Данные отсутствуют: {state.LastDataOverdue} дн." });
             }
 
             if (state.OverdueJobCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView(node.State) { Text = $"Просрочено работ: {state.OverdueJobCount}" });
+                this.DetailedState.Add(new NodeStateView(NodeState.Error) { Text = $"Просрочено работ: {state.OverdueJobCount}" });
             }
 
             if (state.DaysToAdmissionDeadline.HasValue)
             {
-				this.DetailedState.Add(new NodeStateView(node.State)
+				this.DetailedState.Add(new NodeStateView(NodeState.Warning)
 				{
 					Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' заканчивается через: {state.DaysToAdmissionDeadline} дн."					
                 });
@@ -153,19 +157,27 @@ namespace LersMobile.Core
 
             if (state.AdmissionDateOverdue.HasValue)
             {
-                this.DetailedState.Add(new NodeStateView(node.State)
+                this.DetailedState.Add(new NodeStateView(NodeState.Error)
                 {
                     Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' просрочен на: {state.AdmissionDateOverdue} дн."
                 });
             }
 
-            if (state.LastDataOverdue > 0)
-            {
-                this.DetailedState.Add(new NodeStateView(node.State)
-                {
-                    Text = $"Данные не получены {state.LastDataOverdue} дн."
-                });
-            }
-        }
+			if (state.DueEquipmentCalibrationCount > 0)
+			{
+				this.DetailedState.Add(new NodeStateView(NodeState.Warning)
+				{
+					Text = $"Приближается поверка {state.DueEquipmentCalibrationCount} устр."
+				});
+			}
+
+			if (state.OverdueEquipmentCalibrationCount > 0)
+			{
+				this.DetailedState.Add(new NodeStateView(NodeState.Error)
+				{
+					Text = $"Просрочена поверка {state.OverdueEquipmentCalibrationCount} устр."
+				});
+			}
+		}
     }
 }

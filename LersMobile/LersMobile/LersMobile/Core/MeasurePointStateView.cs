@@ -1,9 +1,4 @@
-﻿using LersMobile.Droid;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LersMobile.Core
+﻿namespace LersMobile.Core
 {
 	/// <summary>
 	/// Параметры вывода на экран состояния точки учёта.
