@@ -60,6 +60,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)AppDataStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ConnectionView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DayIncidentList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DetailedStateId.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />

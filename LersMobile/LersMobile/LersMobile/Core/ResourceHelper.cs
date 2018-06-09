@@ -89,5 +89,19 @@ namespace LersMobile.Core
 					throw new NotSupportedException("Неизвестное состояние объекта " + state);
 			}
 		}
+
+		public static string GetConnectionTypeImage(Lers.Poll.CommunicationLink link)
+		{
+			switch (link)
+			{
+				case Lers.Poll.CommunicationLink.Dialup: return "CommLinkType_Dialup.png";
+				case Lers.Poll.CommunicationLink.Direct: return "CommLinkType_Direct.png";
+				case Lers.Poll.CommunicationLink.Gprs: return "CommLinkType_Gprs.png";
+				case Lers.Poll.CommunicationLink.Gsm: return "CommLinkType_Gsm.png";
+				case Lers.Poll.CommunicationLink.Ip: return "CommLinkType_Ip.png";
+
+				default: throw new ArgumentOutOfRangeException($"Неизвестный тип канала связи {link}");
+			}
+		}
 	}
 }

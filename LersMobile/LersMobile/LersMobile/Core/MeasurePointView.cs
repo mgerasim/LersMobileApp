@@ -1,6 +1,7 @@
 ﻿using Lers.Core;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LersMobile.Core
@@ -9,13 +10,13 @@ namespace LersMobile.Core
 	/// Параметры точки учёта, используемые для вывода на экран.
 	/// </summary>
 	public class MeasurePointView
-    {
-        public MeasurePoint MeasurePoint { get; private set; }
+	{
+		public MeasurePoint MeasurePoint { get; private set; }
 
 		/// <summary>
 		/// Наименование точки учёта.
 		/// </summary>
-        public string Title => this.MeasurePoint.Title;
+		public string Title => this.MeasurePoint.Title;
 
 		/// <summary>
 		/// Полное наименование точки учёта, включая наименование объекта.
@@ -26,6 +27,16 @@ namespace LersMobile.Core
 		/// Связанное с точкой учёта оборудование.
 		/// </summary>
 		public string Device => this.MeasurePoint.Device?.ToString();
+
+		/// <summary>
+		/// Указывает что по точке учёта включен автоопрос.
+		/// </summary>
+		public bool AutoPollEnabled => this.MeasurePoint.AutoPoll?.Enabled == true;
+
+		/// <summary>
+		/// Подключение, используемое для автоопроса.
+		/// </summary>
+		public ConnectionView AutoPollConnection { get; private set; }
 
         /// <summary>
         /// Источник изображения с состоянием точки учёта.
@@ -76,7 +87,7 @@ namespace LersMobile.Core
 		{
 			await App.Core.EnsureConnected();
 
-			var requiredFlags = MeasurePointInfoFlags.Equipment;
+			var requiredFlags = MeasurePointInfoFlags.Equipment | MeasurePointInfoFlags.AutoPoll;
 
 			if (!this.MeasurePoint.AvailableInfo.HasFlag(requiredFlags))
 			{
@@ -88,6 +99,13 @@ namespace LersMobile.Core
 			if (this.MeasurePoint.State != MeasurePointState.Normal && this.DetailedState.Count == 0)
 			{
 				await LoadDiagnostics();
+			}
+			
+			if (this.MeasurePoint.AutoPoll.Enabled && this.AutoPollConnection == null)
+			{
+				var connection = this.MeasurePoint.Device.PollSettings.Connections.First(c => c.Id == this.MeasurePoint.AutoPoll.PollConnectionId);
+
+				this.AutoPollConnection = new ConnectionView(connection);
 			}
 		}
 

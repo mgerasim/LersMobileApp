@@ -6,17 +6,29 @@
     <ContentPage.Content>
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+                <!-- Наименование точки учёта -->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="{Binding MeasurePoint.SystemTypeImageSource}"/>
                     <Label Text="{Binding MeasurePoint.FullTitle}"/>
                 </StackLayout>
 
-                <Label>Устройство:</Label>
-                <Label FontAttributes="Bold" Text="{Binding MeasurePoint.Device}"/>
+                <!-- Связанное с точкой учёта устройства -->
+                <Label FontAttributes="Bold" >Устройство:</Label>
+                <Label Text="{Binding MeasurePoint.Device}"/>
+
+                <!-- Подключение для автоопроса -->
+                <StackLayout IsVisible="{Binding MeasurePoint.AutoPollEnabled}">
+                    <Label Text="Автоопрос через:" FontAttributes="Bold" />
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="{Binding MeasurePoint.AutoPollConnection.TypeImage}"/>
+                        <Label Text="{Binding MeasurePoint.AutoPollConnection.Title}"/>
+                    </StackLayout>
+                </StackLayout>
 
                 <!-- Диагностическая карточка точки учёта -->
                 <StackLayout IsVisible="{Binding MeasurePoint.HasDetailedState}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
-                    <Label Text="Подробно"/>
+                    <Label Text="Подробно" FontAttributes="Bold" />
                     <ListView x:Name="nodeStateListView" ItemsSource="{Binding MeasurePoint.DetailedState}" ItemSelected="OnDetailStateSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -32,7 +44,7 @@
                 </StackLayout>
             </StackLayout>
 
-
+            <!-- Индикатор активности (при загрузке и при опросе) -->
             <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
                         AbsoluteLayout.LayoutFlags="PositionProportional"
                         AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
