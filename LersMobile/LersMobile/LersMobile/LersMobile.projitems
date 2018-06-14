@@ -10,6 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\MeasurePointDataControl.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Incidents\IncidentDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -60,6 +63,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)AppDataStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MeasurePointDataControl.xaml.cs">
+      <DependentUpon>MeasurePointDataControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Core\ConnectionView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DayIncidentList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DetailedStateId.cs" />

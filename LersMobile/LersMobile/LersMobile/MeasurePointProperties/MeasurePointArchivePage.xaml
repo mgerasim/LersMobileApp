@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LersMobile.MeasurePointProperties.MeasurePointArchivePage"
+             xmlns:dxGrid="clr-namespace:DevExpress.Mobile.DataGrid;assembly=DevExpress.Mobile.Grid.v18.1"
+             Title="Архив">
+    <ContentPage.Content>
+        <ScrollView>
+            <dxGrid:GridControl x:Name="grid" ItemsSource="{Binding Orders}">
+                <dxGrid:GridControl.Columns>
+                    <dxGrid:TextColumn FieldName="Product.Name" Caption="Product" Width="170" />
+                    <dxGrid:NumberColumn FieldName="Product.UnitPrice" Caption="Price" DisplayFormat="C0"/>
+                    <dxGrid:NumberColumn FieldName="Quantity"/>
+                    <dxGrid:NumberColumn FieldName="Total" 
+                              UnboundType="Integer" UnboundExpression="[Quantity] * [Product.UnitPrice]" 
+                              IsReadOnly="True" DisplayFormat="C0"/>
+                    <dxGrid:DateColumn FieldName="Date" DisplayFormat="d"/>
+                    <dxGrid:SwitchColumn FieldName="Shipped" />
+                </dxGrid:GridControl.Columns>
+            </dxGrid:GridControl>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

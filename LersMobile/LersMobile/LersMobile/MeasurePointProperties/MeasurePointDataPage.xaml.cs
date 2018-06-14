@@ -43,18 +43,15 @@ namespace LersMobile.MeasurePointProperties
 		}
 
 
-		private DateTime? _lastDataDate;
+		private Lers.Data.DataRecord _lastDataRecord;
 
-		/// <summary>
-		/// Дата последних данных по точке учёта.
-		/// </summary>
-		public DateTime? LastDataDate
+		public Lers.Data.DataRecord LastDataRecord
 		{
-			get => _lastDataDate;
+			get => _lastDataRecord;
 			set
 			{
-				_lastDataDate = value;
-				OnPropertyChanged(nameof(LastDataDate));
+				_lastDataRecord = value;
+				OnPropertyChanged(nameof(LastDataRecord));
 			}
 		}
 
@@ -159,9 +156,7 @@ namespace LersMobile.MeasurePointProperties
 
 				var lastConsumption = await measurePoint.Data.GetLastConsumptionAsync();
 				
-				this.LastDataDate = lastConsumption.DateTime;
-
-				DisplayLastConsumption(lastConsumption);
+				this.LastDataRecord = lastConsumption;				
 			}
 			catch (Exception exc)
 			{
@@ -171,50 +166,6 @@ namespace LersMobile.MeasurePointProperties
 			{
 				this.IsBusy = false;
 			}
-		}
-
-		/// <summary>
-		/// Отображает последние данные по точке учёта.
-		/// </summary>
-		/// <param name="lastConsumption"></param>
-		private void DisplayLastConsumption(MeasurePointLastConsumptionRecord lastConsumption)
-		{
-			// Удаляем существующие записи.
-
-			this.dataGrid.RowDefinitions.Clear();
-			this.dataGrid.Children.Clear();
-
-			int rowNumber = 0;
-
-			// Добавляем последние данные в грид.
-
-			foreach (var record in lastConsumption)
-			{
-				var desc = DataParameterDescriptor.Get(record.Key);
-
-				var valueColor = record.Value.IsBad ? Color.LightCoral : Color.Default;
-
-				string unit = desc.SystemUnitTitle;
-
-				if (desc.IsAdditive)
-				{
-					unit += "/ч.";
-				}
-
-				var parameterLabel = new Label { Text = $"{desc.ShortTitle}" };
-				var valueLabel     = new Label { Text = $"{record.Value.Value:0.00}", BackgroundColor = valueColor };				
-				var unitLabel      = new Label { Text = $"{unit}" };
-
-				var rowDef = new RowDefinition();
-				
-				this.dataGrid.RowDefinitions.Add(rowDef);
-
-				this.dataGrid.Children.Add(parameterLabel, 0, rowNumber);
-				this.dataGrid.Children.Add(valueLabel, 1, rowNumber);
-				this.dataGrid.Children.Add(unitLabel, 2, rowNumber);
-
-				++rowNumber;
-			}			
 		}
 	}
 }

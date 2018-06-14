@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:LersMobile.Controls"
              x:Class="LersMobile.MeasurePointProperties.MeasurePointDataPage"
              Title="Данные">
     <ContentPage.Content>
@@ -8,18 +9,11 @@
             <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 
                 <!-- Заголовок отображает дату последних данных -->
-                <Label Text="{Binding LastDataDate, StringFormat='Дата последних данных: {0}'}" FontAttributes="Bold"/>
-                
-                <ScrollView>
-                    <Grid x:Name="dataGrid">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ScrollView>
-            
+                <Label Text="{Binding LastDataRecord.DateTime, StringFormat='Дата последних данных: {0}'}" FontAttributes="Bold"/>
+
+                <!-- Контрол, отображающий данные -->
+                <controls:MeasurePointDataControl DisplayRecord="{Binding LastDataRecord}" />
+
                 <!-- Кнопка запуска опроса текущих -->
                 <Button x:Name="pollCurrentButton" Text="Опросить текущие" Clicked="OnPollCurrentClicked" />
             </StackLayout>
