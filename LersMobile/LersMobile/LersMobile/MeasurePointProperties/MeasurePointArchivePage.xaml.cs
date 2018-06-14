@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lers.Data;
+using Lers.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +14,108 @@ namespace LersMobile.MeasurePointProperties
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MeasurePointArchivePage : ContentPage
 	{
-		private Core.MeasurePointView _measurePoint;
+		private static DeviceDataType[] DataTypes = new DeviceDataType[]
+		{
+			DeviceDataType.Day, DeviceDataType.Hour, DeviceDataType.Month
+		};
 
+		/// <summary>
+		/// Выбранный для отображения тип данных.
+		/// </summary>
+		private DeviceDataType SelectedDataType => DataTypes[this.dataTypePicker.SelectedIndex];
+
+		private readonly Core.MeasurePointView _measurePoint;
+
+		private readonly Core.MobileCore core;
+
+		private bool isLoaded = false;
+
+		private readonly List<DataRecord> consumptionList = new List<DataRecord>();
+
+
+		private DataRecord _currentDataRecord;
+
+		public DataRecord CurrentDataRecord
+		{
+			get => _currentDataRecord;
+			set
+			{
+				_currentDataRecord = value;
+				OnPropertyChanged(nameof(CurrentDataRecord));
+			}
+		}
+			
+		
 		public MeasurePointArchivePage(Core.MeasurePointView measurePoint)
 		{
 			InitializeComponent();
 
+			this.core = App.Core;
+
 			_measurePoint = measurePoint;
 
-			this.BindingContext = this;
+			FillDataTypes();
+
+			this.BindingContext = this;			
+		}
+
+		private void FillDataTypes()
+		{
+			foreach (var dataType in DataTypes)
+			{
+				this.dataTypePicker.Items.Add(dataType.GetDescription());
+			}
+
+			this.dataTypePicker.SelectedIndex = 0;
+		}
+
+		/// <summary>
+		/// Вызывается при отображении на экране.
+		/// </summary>
+		protected override async void OnAppearing()
+		{
+			base.OnAppearing();
+
+			if (this.isLoaded)
+			{
+				return;
+			}
+			
+			this.isLoaded = true;
+
+			await CacheRecords();
+
+			this.CurrentDataRecord = this.consumptionList.LastOrDefault();
+		}
+
+		private async Task CacheRecords()
+		{
+			DateTime endDate;
+
+			if (this.CurrentDataRecord == null)
+			{
+				endDate = DateTime.Today.AddDays(1);
+			}
+			else
+			{
+				endDate = this.CurrentDataRecord.DateTime.AddSeconds(-1);
+			}
+
+			DateTime startDate = DateTimeUtils.Increment(endDate, this.SelectedDataType, -48);
+
+			await this.core.EnsureConnected();
+
+			var records = await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDate, endDate, this.SelectedDataType);
+
+			this.consumptionList.InsertRange(0, records);
+		}
+
+		public void OnDataTypeSelected(object sender, EventArgs e)
+		{
+			if (!this.IsVisible)
+			{
+				return;
+			}
 		}
 	}
 }

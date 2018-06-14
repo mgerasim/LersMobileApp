@@ -66,6 +66,8 @@ namespace LersMobile.Controls
 		public MeasurePointDataControl()
 		{
 			InitializeComponent();
+
+			ShowNoData();
 		}
 
 
@@ -92,6 +94,8 @@ namespace LersMobile.Controls
 
 			if (dataRecord == null)
 			{
+				ShowNoData();
+
 				return;
 			}
 
@@ -103,7 +107,7 @@ namespace LersMobile.Controls
 			{
 				if (this.DisplayParameters != null && !this.DisplayParameters.Contains(record.Key))
 				{
-					// Данный параметр не отображается для точки учёта.
+					// Данный параметр не отображается для точки учёта.					
 					continue;
 				}
 
@@ -132,6 +136,20 @@ namespace LersMobile.Controls
 
 				++rowNumber;
 			}
+		}
+
+
+		private void ShowNoData()
+		{
+			var noDataLabel = new Label { Text = $"Нет данных" };						
+
+			var rowDef = new RowDefinition();
+
+			this.dataGrid.RowDefinitions.Add(rowDef);
+
+			this.dataGrid.Children.Add(noDataLabel, 0, 0);
+
+			Grid.SetRowSpan(noDataLabel, 3);
 		}
 	}
 }

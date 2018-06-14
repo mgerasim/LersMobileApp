@@ -1,13 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LersMobile.MeasurePointProperties.MeasurePointArchivePage"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             x:Class="LersMobile.MeasurePointProperties.MeasurePointArchivePage"             
+             xmlns:Controls="clr-namespace:LersMobile.Controls"
              Title="Архив">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Тип данных"/>
+            <Picker x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
+
+            <Label Text="{Binding CurrentDataRecord.DateTime, StringFormat='Дата: {0}'}" FontAttributes="Bold"/>
+            
+            <!-- Контрол, отображающий данные -->
+            <ScrollView>
+                <Controls:MeasurePointDataControl DisplayRecord="{Binding CurrentDataRecord}" DisplayParameters="{Binding MeasurePoint.DisplayParameters}" IsPerHour="False" />
+            </ScrollView>
+           
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                <Button Text="Назад"/>
+                <DatePicker x:Name="datePicker"/>
+                <Button Text="Вперёд"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
