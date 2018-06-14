@@ -12,7 +12,7 @@
                 <Label Text="{Binding LastDataRecord.DateTime, StringFormat='Дата последних данных: {0}'}" FontAttributes="Bold"/>
 
                 <!-- Контрол, отображающий данные -->
-                <controls:MeasurePointDataControl DisplayRecord="{Binding LastDataRecord}" />
+                <controls:MeasurePointDataControl DisplayRecord="{Binding LastDataRecord}" DisplayParameters="{Binding MeasurePoint.DisplayParameters}" IsPerHour="True" />
 
                 <!-- Кнопка запуска опроса текущих -->
                 <Button x:Name="pollCurrentButton" Text="Опросить текущие" Clicked="OnPollCurrentClicked" />

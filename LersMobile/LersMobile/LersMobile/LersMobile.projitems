@@ -32,6 +32,9 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage\MainPageMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointArchivePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointCommonPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -99,6 +102,9 @@
       <DependentUpon>MainPageMaster.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPage\MainPageMenuItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointArchivePage.xaml.cs">
+      <DependentUpon>MeasurePointArchivePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointCommonPage.xaml.cs">
       <DependentUpon>MeasurePointCommonPage.xaml</DependentUpon>
     </Compile>

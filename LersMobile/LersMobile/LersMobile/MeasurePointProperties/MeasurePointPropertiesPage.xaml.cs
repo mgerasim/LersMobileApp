@@ -34,6 +34,7 @@ namespace LersMobile.MeasurePointProperties
 
 			this.Children.Add(new MeasurePointCommonPage(measurePoint));
 			this.Children.Add(new MeasurePointDataPage(measurePoint));
+			this.Children.Add(new MeasurePointArchivePage(measurePoint));
 
 			this.BindingContext = this;
         }

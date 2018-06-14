@@ -19,9 +19,18 @@ namespace LersMobile.Controls
 		public static readonly BindableProperty DisplayRecordProperty = BindableProperty.Create(
 			nameof(DisplayRecord), 
 			typeof(DataRecord), 
-			typeof(DataRecord), 
-			null, 
-			BindingMode.OneWay);
+			typeof(DataRecord));
+
+		public static readonly BindableProperty DisplayParametersProperty = BindableProperty.Create(
+			nameof(DisplayParameters),
+			typeof(DataParameter[]),
+			typeof(DataParameter[]));
+
+		public static readonly BindableProperty IsPerHourProperty = BindableProperty.Create(
+			nameof(IsPerHour),
+			typeof(bool),
+			typeof(bool),
+			false);
 
 
 		/// <summary>
@@ -33,6 +42,23 @@ namespace LersMobile.Controls
 			set => SetValue(DisplayRecordProperty, value);
 		}
 
+		/// <summary>
+		/// Отображаемые параметры точки учёта.
+		/// </summary>
+		public DataParameter[] DisplayParameters
+		{
+			get => (DataParameter[])GetValue(DisplayParametersProperty);
+			set => SetValue(DisplayParametersProperty, value);
+		}
+
+		/// <summary>
+		/// Определяет что значения приведены к часу.
+		/// </summary>
+		public bool IsPerHour
+		{
+			get => (bool)GetValue(IsPerHourProperty);
+			set => SetValue(IsPerHourProperty, value);
+		}
 
 		/// <summary>
 		/// Создаёт экземпляр объекта.
@@ -75,13 +101,19 @@ namespace LersMobile.Controls
 
 			foreach (var record in dataRecord)
 			{
+				if (this.DisplayParameters != null && !this.DisplayParameters.Contains(record.Key))
+				{
+					// Данный параметр не отображается для точки учёта.
+					continue;
+				}
+
 				var desc = DataParameterDescriptor.Get(record.Key);
 
 				var valueColor = record.Value.IsBad ? Color.LightCoral : Color.Default;
 
 				string unit = desc.SystemUnitTitle;
 
-				if (desc.IsAdditive)
+				if (desc.IsAdditive && this.IsPerHour)
 				{
 					unit += "/ч.";
 				}

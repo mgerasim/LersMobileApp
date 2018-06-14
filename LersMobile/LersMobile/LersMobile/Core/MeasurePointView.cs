@@ -38,6 +38,11 @@ namespace LersMobile.Core
 		/// </summary>
 		public ConnectionView AutoPollConnection { get; private set; }
 
+		/// <summary>
+		/// Отображаемые параметры точки учёта.
+		/// </summary>
+		public Lers.Data.DataParameter[] DisplayParameters => this.MeasurePoint.DataParameters;
+
         /// <summary>
         /// Источник изображения с состоянием точки учёта.
         /// </summary>
