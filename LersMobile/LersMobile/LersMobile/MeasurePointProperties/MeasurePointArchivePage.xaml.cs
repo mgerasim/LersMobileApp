@@ -2,6 +2,7 @@
 using Lers.Utils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,8 +31,8 @@ namespace LersMobile.MeasurePointProperties
 
 		private bool isLoaded = false;
 
-		private readonly List<DataRecord> consumptionList = new List<DataRecord>();
 
+		public ObservableCollection<DataRecord> Data { get; private set; } = new ObservableCollection<DataRecord>();
 
 		private DataRecord _currentDataRecord;
 
@@ -54,9 +55,15 @@ namespace LersMobile.MeasurePointProperties
 
 			_measurePoint = measurePoint;
 
+			SetColumns();
+
 			FillDataTypes();
 
-			this.BindingContext = this;			
+			this.BindingContext = this;		
+		}
+
+		private void SetColumns()
+		{
 		}
 
 		private void FillDataTypes()
@@ -83,31 +90,39 @@ namespace LersMobile.MeasurePointProperties
 			
 			this.isLoaded = true;
 
-			await CacheRecords();
-
-			this.CurrentDataRecord = this.consumptionList.LastOrDefault();
+			await LoadRecords();
 		}
 
-		private async Task CacheRecords()
+		private async Task LoadRecords()
 		{
-			DateTime endDate;
+			this.IsBusy = true;
 
-			if (this.CurrentDataRecord == null)
+			try
 			{
-				endDate = DateTime.Today.AddDays(1);
+				DateTime endDate;
+
+				if (this.CurrentDataRecord == null)
+				{
+					endDate = DateTime.Today.AddDays(1);
+				}
+				else
+				{
+					endDate = this.CurrentDataRecord.DateTime.AddSeconds(-1);
+				}
+
+				DateTime startDate = DateTimeUtils.Increment(endDate, this.SelectedDataType, -48);
+
+				await this.core.EnsureConnected();
+
+				var records = await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDate, endDate, this.SelectedDataType);
+
+				this.Data.Clear();
+				this.Data.AddRange(records);
 			}
-			else
+			finally
 			{
-				endDate = this.CurrentDataRecord.DateTime.AddSeconds(-1);
+				this.IsBusy = false;
 			}
-
-			DateTime startDate = DateTimeUtils.Increment(endDate, this.SelectedDataType, -48);
-
-			await this.core.EnsureConnected();
-
-			var records = await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDate, endDate, this.SelectedDataType);
-
-			this.consumptionList.InsertRange(0, records);
 		}
 
 		public void OnDataTypeSelected(object sender, EventArgs e)

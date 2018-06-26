@@ -28,6 +28,11 @@ namespace LersMobile.Droid
 			InitNotificationServices(this);
         }
 
+		protected override void OnNewIntent(Intent intent)
+		{
+			base.OnNewIntent(intent);
+		}
+
 		public static void InitNotificationServices(Context context)
 		{
 			Channels.CreateChannel(context);

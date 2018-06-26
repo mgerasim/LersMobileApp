@@ -50,15 +50,35 @@ namespace LersMobile.Droid.Notifications
 
 			// По взаимодействию с формами.
 			// https://stackoverflow.com/questions/34754149/android-xamarin-make-push-notification-not-create-a-new-activity-but-use-the-cur
-			var intent = new Intent(context, typeof(MainActivity));
-			intent.PutExtra("NotificationId", notification.Id);
+
+			// Setup an intent for SecondActivity:
+			var secondIntent = new Intent(context, typeof(MainActivity));
+
+			// Pass some information to SecondActivity:
+			secondIntent.PutExtra("NotificationId", notification.Id);
+
+			// Create a task stack builder to manage the back stack:
+			var stackBuilder = TaskStackBuilder.Create(context);
+
+			// Add all parents of SecondActivity to the stack: 
+			stackBuilder.AddParentStack(Java.Lang.Class.FromType(typeof(MainActivity)));
+
+			// Push the intent that starts SecondActivity onto the stack:
+			stackBuilder.AddNextIntent(secondIntent);
+
+			// Obtain the PendingIntent for launching the task constructed by
+			// stackbuilder. The pending intent can be used only once (one shot):
+			const int pendingIntentId = 0;
+
+			PendingIntent pendingIntent =
+			stackBuilder.GetPendingIntent(pendingIntentId, PendingIntentFlags.OneShot);
 
 			var notificationBuilder = new Notification.Builder(context)
 				.SetSmallIcon(Resource.Drawable.close_button)
 				.SetContentTitle(notification.Type.GetDescription())
 				.SetContentText(notification.Message)
-				.SetStyle(new Notification.BigTextStyle());
-				// .SetContentIntent(intent);
+				.SetStyle(new Notification.BigTextStyle())
+				.SetContentIntent(pendingIntent);
 
 			if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
 			{
@@ -67,6 +87,7 @@ namespace LersMobile.Droid.Notifications
 			}
 
 			var notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
+
 			notificationManager.Notify(notification.Id, notificationBuilder.Build());
 		}
 	}

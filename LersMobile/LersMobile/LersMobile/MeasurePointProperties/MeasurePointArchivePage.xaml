@@ -2,25 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              x:Class="LersMobile.MeasurePointProperties.MeasurePointArchivePage"             
-             xmlns:Controls="clr-namespace:LersMobile.Controls"
+             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
              Title="Архив">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Тип данных"/>
             <Picker x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
+<!--
+            <dg:DataGrid
+                         x:Name="dataGrid"
+                         ItemsSource="{Binding Data}" 
+                         RowHeight="70" HeaderHeight="50" BorderColor="#CCCCCC"
+                         HeaderBackground="#E0E6F8"
+                         IsRefreshing="{Binding IsBusy}">
+            </dg:DataGrid>
+            -->
 
-            <Label Text="{Binding CurrentDataRecord.DateTime, StringFormat='Дата: {0}'}" FontAttributes="Bold"/>
-            
-            <!-- Контрол, отображающий данные -->
-            <ScrollView>
-                <Controls:MeasurePointDataControl DisplayRecord="{Binding CurrentDataRecord}" DisplayParameters="{Binding MeasurePoint.DisplayParameters}" IsPerHour="False" />
-            </ScrollView>
-           
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-                <Button Text="Назад"/>
-                <DatePicker x:Name="datePicker"/>
-                <Button Text="Вперёд"/>
-            </StackLayout>
+            <ListView ItemsSource="{Binding Data}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding DateTime}"/>
+                                <Label Text="{Binding M_in, StringFormat='{0:0.00}'}"/>
+                                <Label Text="{Binding M_out, StringFormat='{0:0.00}'}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -46,6 +46,11 @@ namespace LersMobile
 			MainPage = loginPage;
 		}
 
+		public void ShowNotification(int notificationId)
+		{
+
+		}
+
 		protected override void OnStart ()
 		{
 			// Handle when your app starts
