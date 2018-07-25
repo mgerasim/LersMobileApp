@@ -137,4 +137,18 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)MainPage\" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Lang\en-US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>
+      </Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Lang\ru-RU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>
+      </Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

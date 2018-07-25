@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Threading;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,8 +13,10 @@ namespace LersMobile
         public static Core.MobileCore Core { get; private set; }
 
 		public App ()
-		{
-			InitializeComponent();
+		{            
+            InitializeComponent();
+
+            SetCulture("en-US");
 
             Core = new Core.MobileCore();
 
@@ -21,7 +25,35 @@ namespace LersMobile
 			ShowLoginPage();
 		}
 
-		private void Core_LoginRequired(object sender, EventArgs e)
+        private static void SetCulture(String culture)
+        {            
+            // Установить ресурс, соответствующий culture      
+            var dictionaryList = new List<ResourceDictionary>(Current.Resources.MergedDictionaries);
+
+            String requestedCulture = $"{culture}.xaml";
+            ResourceDictionary resourceDictionary = dictionaryList.Find(d => d.Source.OriginalString == "Lang\\" + requestedCulture);
+            if (resourceDictionary == null)
+            {
+                // Культура по умолчанию
+                requestedCulture = "en-US.xaml";
+                resourceDictionary = dictionaryList.Find(d => d.Source.OriginalString == "Lang\\" + requestedCulture);
+            }
+  
+            if (resourceDictionary != null)
+            {
+                Current.Resources.MergedDictionaries.Remove(resourceDictionary);
+                Current.Resources.MergedDictionaries.Add(resourceDictionary);
+            }
+
+            var cultureInfo = new System.Globalization.CultureInfo(culture);
+
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+        }
+        
+        private void Core_LoginRequired(object sender, EventArgs e)
 		{
 			if (MainPage.GetType() != typeof (LoginPage))
 			{
