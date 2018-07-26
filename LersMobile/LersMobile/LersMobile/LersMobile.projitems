@@ -133,22 +133,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)NotificationInfoPage.xaml.cs">
       <DependentUpon>NotificationInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)TranslateExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)MainPage\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Lang\en-US.xaml">
-      <SubType>Designer</SubType>
-      <Generator>
-      </Generator>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Lang\ru-RU.xaml">
-      <SubType>Designer</SubType>
-      <Generator>
-      </Generator>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>

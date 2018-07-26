@@ -117,7 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="acceptSsl" xml:space="preserve">
+    <value>Использовать SSL</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Подключение ...</value>
+  </data>
+  <data name="EmptyLogin" xml:space="preserve">
+    <value>Не указан пользователь</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>Не указан пароль</value>
+  </data>
+  <data name="EmptyServer" xml:space="preserve">
+    <value>Не указан сервер ЛЭРС УЧЁТ</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="ErrorConnect" xml:space="preserve">
+    <value>Ошибка подключения</value>
+  </data>
+  <data name="ErrorConnectServer" xml:space="preserve">
+    <value>Ошибка подключения к серверу</value>
+  </data>
   <data name="Login" xml:space="preserve">
-    <value>Test</value>
+    <value>Пользователь</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Server" xml:space="preserve">
+    <value>Адрес сервера ЛЭРС УЧЁТ</value>
   </data>
 </root>

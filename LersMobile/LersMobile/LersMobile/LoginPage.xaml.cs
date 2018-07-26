@@ -52,7 +52,7 @@ namespace LersMobile
 
 					ShowPasswordControls(true);
 
-					await DisplayAlert("Ошибка подключения", exc.Message, "OK");
+					await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorConnect, exc.Message, "OK");
 				}
 				finally
 				{
@@ -82,7 +82,7 @@ namespace LersMobile
 			{
 				this.IsBusy = true;
                 
-                bool acceptSSL = this.acceptSSL_Switch.IsToggled;
+                bool acceptSSL = this.acceptSsl.IsToggled;
 
                 await App.Core.Connect(serverAddressInput.Text, loginInput.Text, passwordInput.Text, acceptSSL);
 
@@ -92,7 +92,7 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-                await DisplayAlert("Ошибка подключения к серверу", exc.Message, "OK");
+                await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorConnectServer, exc.Message, "OK");
 			}
 			finally
 			{
@@ -105,7 +105,7 @@ namespace LersMobile
 
             if (string.IsNullOrEmpty(serverAddressInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, "D", ToastLength.Short)
+				Toast.MakeText(Android.App.Application.Context, LersMobile.Droid.Resources.Messages.EmptyServer, ToastLength.Short)
 					.Show();
 
 				return false;
@@ -113,14 +113,14 @@ namespace LersMobile
 
 			if (string.IsNullOrEmpty(this.loginInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, LersMobile.Droid.Resources.Messages.Login, ToastLength.Short)
+				Toast.MakeText(Android.App.Application.Context, LersMobile.Droid.Resources.Messages.EmptyLogin, ToastLength.Short)
 					.Show();
 				return false;
 			}
 
 			if (string.IsNullOrEmpty(this.passwordInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, "D", ToastLength.Short)
+				Toast.MakeText(Android.App.Application.Context, LersMobile.Droid.Resources.Messages.EmptyPassword, ToastLength.Short)
 					.Show();
 				return false;
 			}

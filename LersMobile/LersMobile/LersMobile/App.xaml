@@ -11,11 +11,6 @@
             <Color x:Key="NodeUnknown">#FF000000</Color>
 
             <Color x:Key="LoadingIndicator">#CCFFFFFF</Color>
-
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Lang\en-US.xaml" />
-                <ResourceDictionary Source="Lang\ru-RU.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>
     </Application.Resources>

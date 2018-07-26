@@ -1,26 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LersMobile"
              x:Class="LersMobile.LoginPage">
     <ContentPage.Content>
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
             <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <Label Text="Адрес сервера ЛЭРС УЧЁТ" />
+                <Label Text="{local:Translate Server}" />
                 <Entry x:Name="serverAddressInput" />
 
-                <Label x:Name="loginLabel" Text="{StaticResource Login}"/>
+                <Label x:Name="loginLabel" Text="{local:Translate Login}"/>
                 <Entry x:Name="loginInput" />
 
-                <Label x:Name ="passwordLabel" Text="Пароль" />
+                <Label x:Name ="passwordLabel" Text="{local:Translate Password}" />
                 <Entry x:Name="passwordInput" IsPassword="True"></Entry>
 
                 <StackLayout Orientation="Horizontal" Spacing="0">
-                    <Label Text="Использовать SSL" VerticalOptions="Center" HorizontalOptions="Start" />
-                    <Switch x:Name="acceptSSL_Switch" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label Text="{local:Translate acceptSsl}" VerticalOptions="Center" HorizontalOptions="Start" />
+                    <Switch x:Name="acceptSsl" HorizontalOptions="Start" VerticalOptions="Center" />
                 </StackLayout>
 
-                <Button x:Name="onLoginButton" Text="Вход" Clicked="OnLogin"/>
+                <Button x:Name="onLoginButton" Text="{local:Translate Enter}" Clicked="OnLogin"/>
             </StackLayout>
 
             <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
@@ -30,7 +31,7 @@
 
                 <ActivityIndicator IsRunning="{Binding IsBusy}" />
 
-                <Label Text="Подключение..." HorizontalOptions="Center" />
+                <Label Text="{local:Translate Connecting}" HorizontalOptions="Center" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
