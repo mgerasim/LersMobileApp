@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace LersMobile
@@ -97,9 +98,10 @@ namespace LersMobile
 
 		private bool CheckUserInput()
 		{
-			if (string.IsNullOrEmpty(serverAddressInput.Text))
+
+            if (string.IsNullOrEmpty(serverAddressInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, "Не задан адрес сервера.", ToastLength.Short)
+				Toast.MakeText(Android.App.Application.Context, "D", ToastLength.Short)
 					.Show();
 
 				return false;
@@ -107,14 +109,14 @@ namespace LersMobile
 
 			if (string.IsNullOrEmpty(this.loginInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, "Не задано имя входа.", ToastLength.Short)
+				Toast.MakeText(Android.App.Application.Context, LersMobile.Droid.Resources.Messages.Login, ToastLength.Short)
 					.Show();
 				return false;
 			}
 
 			if (string.IsNullOrEmpty(this.passwordInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, "Не задан пароль.", ToastLength.Short)
+				Toast.MakeText(Android.App.Application.Context, "D", ToastLength.Short)
 					.Show();
 				return false;
 			}
