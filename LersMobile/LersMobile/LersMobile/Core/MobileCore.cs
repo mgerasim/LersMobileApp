@@ -24,14 +24,15 @@ namespace LersMobile.Core
 			this.Server.VersionMismatch += (sender, e) => e.Ignore = true;
 		}
 
-		/// <summary>
-		/// Подключается к серверу с использованием логина и пароля.
-		/// </summary>
-		/// <param name="serverAddress"></param>
-		/// <param name="login"></param>
-		/// <param name="password"></param>
-		/// <returns></returns>
-		public async Task Connect(string serverAddress, string login, string password)
+        /// <summary>
+        /// Подключается к серверу с использованием логина и пароля.
+        /// </summary>
+        /// <param name="serverAddress"></param>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <param name="acceptSsl"></param>
+        /// <returns></returns>
+        public async Task Connect(string serverAddress, string login, string password, bool acceptSsl = false)
 		{
 			try
 			{
@@ -42,8 +43,18 @@ namespace LersMobile.Core
 					GetSessionRestoreToken = true
 				};
 
-				var token = await this.Server.ConnectAsync(serverAddress, 10000, null, loginInfo, CancellationToken.None);
+                string schemeName = Lers.LersScheme.Plain;
 
+                if (acceptSsl == true)
+                {
+                    schemeName = Lers.LersScheme.Secure;
+                }
+
+
+                var uriBuilder = new UriBuilder(schemeName, serverAddress);
+                
+				var token = await this.Server.ConnectAsync(uriBuilder.Uri, null, loginInfo, CancellationToken.None);
+                
 				AppDataStorage.Token = token.Token;
 				AppDataStorage.ServerAddress = serverAddress;
 			}

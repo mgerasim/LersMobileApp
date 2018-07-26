@@ -15,6 +15,11 @@
                 <Label x:Name ="passwordLabel" Text="Пароль" />
                 <Entry x:Name="passwordInput" IsPassword="True"></Entry>
 
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <Label Text="Использовать SSL" VerticalOptions="Center" HorizontalOptions="Start" />
+                    <Switch x:Name="acceptSSL_Switch" HorizontalOptions="Start" VerticalOptions="Center" />
+                </StackLayout>
+
                 <Button x:Name="onLoginButton" Text="Вход" Clicked="OnLogin"/>
             </StackLayout>
 

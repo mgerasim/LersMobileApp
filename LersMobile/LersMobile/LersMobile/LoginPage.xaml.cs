@@ -17,7 +17,9 @@ namespace LersMobile
 
 		public event EventHandler SuccessLogin;
 
-		public LoginPage()
+
+
+        public LoginPage()
 		{
 			this.coreService = App.Core;
 
@@ -79,8 +81,10 @@ namespace LersMobile
 			try
 			{
 				this.IsBusy = true;
+                
+                bool acceptSSL = this.acceptSSL_Switch.IsToggled;
 
-				await App.Core.Connect(serverAddressInput.Text, loginInput.Text, passwordInput.Text);
+                await App.Core.Connect(serverAddressInput.Text, loginInput.Text, passwordInput.Text, acceptSSL);
 
 				this.IsBusy = false;
 
