@@ -12,13 +12,16 @@ namespace LersMobile
 	{
         public static Core.MobileCore Core { get; private set; }
 
+		// Параметр идентификатора из push-уведомления
+		public static int NotificationId { get; set; }
+
 		public App ()
-		{            
-            InitializeComponent();
+		{
+			InitializeComponent();
 
-            SetCulture("en-US");
+			SetCulture("en-US");
 
-            Core = new Core.MobileCore();
+			Core = new Core.MobileCore();
 
 			Core.LoginRequired += Core_LoginRequired;
 
@@ -53,7 +56,7 @@ namespace LersMobile
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
         }
         
-        private void Core_LoginRequired(object sender, EventArgs e)
+		private void Core_LoginRequired(object sender, EventArgs e)
 		{
 			if (MainPage.GetType() != typeof (LoginPage))
 			{

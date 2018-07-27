@@ -46,6 +46,12 @@ namespace LersMobile.Core
 
 			if (newNotifications != null && newNotifications.Length > 0)
 			{
+
+#if (DEBUG)
+				{
+					handler(newNotifications.Last());
+				}
+#endif
 				long lastNotifyId = AppDataStorage.LastNotifyId;
 
 				if (lastNotifyId > 0)

@@ -23,6 +23,18 @@ namespace LersMobile
 		}
 
 		/// <summary>
+        /// Вызывается при отображении страницы на экране.
+        /// </summary>
+		protected override void OnAppearing()
+		{
+			if (App.NotificationId > 0)
+			{
+				var item = new MainPageMenuItem() { Id = 2, Title = "Уведомления", TargetType = typeof(NotificationCenterPage) };
+				SwitchDetailToItem(item);
+			}
+		}
+
+		/// <summary>
 		/// Пользователь выбрал пункт в навигационном меню.
 		/// </summary>
 		/// <param name="sender"></param>
