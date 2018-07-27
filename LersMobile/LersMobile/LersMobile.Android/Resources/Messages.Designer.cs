@@ -61,11 +61,11 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Использовать SSL.
+        ///   Looks up a localized string similar to ЛЭРС УЧЁТ.
         /// </summary>
-        public static string acceptSsl {
+        public static string Application {
             get {
-                return ResourceManager.GetString("acceptSsl", resourceCulture);
+                return ResourceManager.GetString("Application", resourceCulture);
             }
         }
         
@@ -133,11 +133,47 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выйти из учётной записи.
+        /// </summary>
+        public static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нештатные ситуации.
+        /// </summary>
+        public static string IncidentList {
+            get {
+                return ResourceManager.GetString("IncidentList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пользователь.
         /// </summary>
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Объекты учёта.
+        /// </summary>
+        public static string NodeList {
+            get {
+                return ResourceManager.GetString("NodeList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Уведомления.
+        /// </summary>
+        public static string Notifications {
+            get {
+                return ResourceManager.GetString("Notifications", resourceCulture);
             }
         }
         
@@ -156,6 +192,15 @@ namespace LersMobile.Droid.Resources {
         public static string Server {
             get {
                 return ResourceManager.GetString("Server", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Использовать SSL.
+        /// </summary>
+        public static string Ssl {
+            get {
+                return ResourceManager.GetString("Ssl", resourceCulture);
             }
         }
     }

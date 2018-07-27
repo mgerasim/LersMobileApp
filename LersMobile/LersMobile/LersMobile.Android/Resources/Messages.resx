@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="acceptSsl" xml:space="preserve">
+  <data name="Ssl" xml:space="preserve">
     <value>Использовать SSL</value>
   </data>
   <data name="Connecting" xml:space="preserve">
@@ -149,5 +149,20 @@
   </data>
   <data name="Server" xml:space="preserve">
     <value>Адрес сервера ЛЭРС УЧЁТ</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>ЛЭРС УЧЁТ</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Выйти из учётной записи</value>
+  </data>
+  <data name="IncidentList" xml:space="preserve">
+    <value>Нештатные ситуации</value>
+  </data>
+  <data name="NodeList" xml:space="preserve">
+    <value>Объекты учёта</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Уведомления</value>
   </data>
 </root>

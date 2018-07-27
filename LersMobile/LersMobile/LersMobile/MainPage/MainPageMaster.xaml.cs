@@ -36,10 +36,10 @@ namespace LersMobile
 			{
 				MenuItems = new ObservableCollection<MainPageMenuItem>(new[]
 				{
-					new MainPageMenuItem() { Id = 0, Title = "Объекты учёта", TargetType = typeof(NodeListPage)},
-                    new MainPageMenuItem() { Id = 1, Title = "Нештатные ситуации", TargetType = typeof(Incidents.IncidentListMainPage) },
-                    new MainPageMenuItem() { Id = 2, Title = "Уведомления", TargetType = typeof(NotificationCenterPage)},
-					new MainPageMenuItem() { Id = 3, Title = "Выйти из учётной записи", TargetAction = App.Core.Logout, BeginGroup = true }
+					new MainPageMenuItem() { Id = 0, Title = LersMobile.Droid.Resources.Messages.NodeList, TargetType = typeof(NodeListPage)},
+                    new MainPageMenuItem() { Id = 1, Title = LersMobile.Droid.Resources.Messages.IncidentList, TargetType = typeof(Incidents.IncidentListMainPage) },
+                    new MainPageMenuItem() { Id = 2, Title = LersMobile.Droid.Resources.Messages.Notifications, TargetType = typeof(NotificationCenterPage)},
+					new MainPageMenuItem() { Id = 3, Title = LersMobile.Droid.Resources.Messages.Exit, TargetAction = App.Core.Logout, BeginGroup = true }
 				});
 			}
 
