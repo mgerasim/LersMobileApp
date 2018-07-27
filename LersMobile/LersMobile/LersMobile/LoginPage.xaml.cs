@@ -69,6 +69,8 @@ namespace LersMobile
 			this.loginLabel.IsVisible = show;
 			this.passwordLabel.IsVisible = show;
 			this.onLoginButton.IsVisible = show;
+			this.sslLabel.IsVisible = show;
+			this.sslSwitch.IsVisible = show;
 		}
 
 		public async void OnLogin()
@@ -82,9 +84,9 @@ namespace LersMobile
 			{
 				this.IsBusy = true;
                 
-                bool acceptSSL = this.acceptSsl.IsToggled;
+                bool acceptSsl = sslSwitch.IsToggled;
 
-                await App.Core.Connect(serverAddressInput.Text, loginInput.Text, passwordInput.Text, acceptSSL);
+                await App.Core.Connect(serverAddressInput.Text, loginInput.Text, passwordInput.Text, acceptSsl);
 
 				this.IsBusy = false;
 
