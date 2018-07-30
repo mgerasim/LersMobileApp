@@ -6,7 +6,7 @@
 	<ContentPage.Content>
         <StackLayout>
 			<Label Text="{local:Translate NotificationInfoPage_Date}" FontAttributes="Bold" />
-            <Label Text="{Binding Date}" />
+            <Label Text="{Binding DateTime}" />
 
 			<Label Text="{local:Translate NotificationInfoPage_Message}" FontAttributes="Bold" />
             <Label Text="{Binding Message}" />
