@@ -43,7 +43,7 @@ namespace LersMobile.NodeProperties
 
             this.Node = node ?? throw new ArgumentNullException(nameof(node));
 
-			this.Title = LersMobile.Droid.Resources.Messages.Total;
+			this.Title = Droid.Resources.Messages.NodeCommonPropertiesPage_Title;
         }
 
 		/// <summary>
@@ -117,8 +117,8 @@ namespace LersMobile.NodeProperties
             }
             catch (Exception exc) when (exc is TimeoutException || exc is Lers.LersException)
             {
-                await DisplayAlert(LersMobile.Droid.Resources.Messages.Error, 
-					LersMobile.Droid.Resources.Messages.ErrorLoadDetail + Environment.NewLine + exc.Message,
+                await DisplayAlert(Droid.Resources.Messages.Text_Error, 
+					Droid.Resources.Messages.NodeCommonPropertiesPage_Error_Load_Detail + Environment.NewLine + exc.Message,
                     "OK");
             }
             catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)

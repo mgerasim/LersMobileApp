@@ -40,7 +40,7 @@ namespace LersMobile.Incidents
 
             this.BindingContext = this;
 
-			this.Title = LersMobile.Droid.Resources.Messages.Incedent;
+			this.Title = Droid.Resources.Messages.IncidentDetailPage_Title;
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace LersMobile.Incidents
             }
             catch (Exception exc) when (exc is TimeoutException || exc is Lers.LersException)
             {
-                await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorIncidentLoad, exc.Message, "OK");
+                await DisplayAlert(Droid.Resources.Messages.IncidentDetailPage_Error_Load_Incident, exc.Message, "OK");
             }
             catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
             {
@@ -86,10 +86,10 @@ namespace LersMobile.Incidents
         {
             // Запрашиваем подтверждение.
 
-            bool confirmed = await DisplayAlert(LersMobile.Droid.Resources.Messages.ConfirmedIncidentHeader, 
-												LersMobile.Droid.Resources.Messages.ConfirmedIncidentBody, 
-												LersMobile.Droid.Resources.Messages.Yes,
-												LersMobile.Droid.Resources.Messages.No);
+            bool confirmed = await DisplayAlert(Droid.Resources.Messages.Text_Close_Incident_Short, 
+												Droid.Resources.Messages.Text_Close_Incident_Full_Confirm, 
+												Droid.Resources.Messages.Text_Yes,
+												Droid.Resources.Messages.Text_No);
 
             if (!confirmed)
             {
@@ -105,7 +105,7 @@ namespace LersMobile.Incidents
                 // https://xamarinhelp.com/toast-notifications-xamarin-forms/
                 Android.Widget.Toast.MakeText(
                     Android.App.Application.Context,
-                    LersMobile.Droid.Resources.Messages.IncidentCloseSuccessed,
+                    Droid.Resources.Messages.IncidentDetailPage_IncidentCloseSuccessed,
                     Android.Widget.ToastLength.Short)
                     .Show();
             }
@@ -114,7 +114,7 @@ namespace LersMobile.Incidents
             }
             catch (Exception exc)
             {
-                await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrotIncidentClose, exc.Message, "OK");
+                await DisplayAlert(Droid.Resources.Messages.IncidentDetailPage_Errot_Incident_Close, exc.Message, "OK");
             }
         }
     }

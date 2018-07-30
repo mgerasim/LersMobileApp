@@ -117,226 +117,328 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Ssl" xml:space="preserve">
+  <data name="LoginPage_Ssl" xml:space="preserve">
     <value>Использовать SSL</value>
+    <comment>Использовать SSL</comment>
   </data>
-  <data name="Connecting" xml:space="preserve">
+  <data name="Text_Connecting" xml:space="preserve">
     <value>Подключение ...</value>
+    <comment>Подключение ...</comment>
   </data>
-  <data name="EmptyLogin" xml:space="preserve">
+  <data name="LoginPage_Empty_Login" xml:space="preserve">
     <value>Не указан пользователь</value>
+    <comment>Не указан пользователь</comment>
   </data>
-  <data name="EmptyPassword" xml:space="preserve">
+  <data name="LoginPage_Empty_Password" xml:space="preserve">
     <value>Не указан пароль</value>
+    <comment>Не указан пароль</comment>
   </data>
-  <data name="EmptyServer" xml:space="preserve">
+  <data name="LoginPage_Empty_Server" xml:space="preserve">
     <value>Не указан сервер ЛЭРС УЧЁТ</value>
+    <comment>Не указан сервер ЛЭРС УЧЁТ</comment>
   </data>
-  <data name="Enter" xml:space="preserve">
+  <data name="LoginPage_Enter" xml:space="preserve">
     <value>Вход</value>
+    <comment>Наименование кнопки входа</comment>
   </data>
-  <data name="ErrorConnect" xml:space="preserve">
+  <data name="LoginPage_Error_Connect" xml:space="preserve">
     <value>Ошибка подключения</value>
+    <comment>Ошибка подключения</comment>
   </data>
-  <data name="ErrorConnectServer" xml:space="preserve">
+  <data name="LoginPage_Error_Connect_to_Server" xml:space="preserve">
     <value>Ошибка подключения к серверу</value>
+    <comment>Ошибка подключения к серверу</comment>
   </data>
-  <data name="Login" xml:space="preserve">
+  <data name="LoginPage_Label_Login" xml:space="preserve">
     <value>Пользователь</value>
+    <comment>Пользователь</comment>
   </data>
-  <data name="Password" xml:space="preserve">
+  <data name="LoginPage_Password" xml:space="preserve">
     <value>Пароль</value>
+    <comment>Пароль</comment>
   </data>
-  <data name="Server" xml:space="preserve">
+  <data name="LoginPage_Server" xml:space="preserve">
     <value>Адрес сервера ЛЭРС УЧЁТ</value>
+    <comment>Адрес сервера ЛЭРС УЧЁТ</comment>
   </data>
-  <data name="Application" xml:space="preserve">
+  <data name="Text_Application" xml:space="preserve">
     <value>ЛЭРС УЧЁТ</value>
+    <comment>ЛЭРС УЧЁТ</comment>
   </data>
-  <data name="Exit" xml:space="preserve">
+  <data name="MainPage_MenuItem_Exit" xml:space="preserve">
     <value>Выйти из учётной записи</value>
+    <comment>Выйти из учётной записи</comment>
   </data>
-  <data name="IncidentList" xml:space="preserve">
+  <data name="MainPage_MenuItem_IncidentList" xml:space="preserve">
     <value>Нештатные ситуации</value>
+    <comment>Заголовок главного меню</comment>
   </data>
-  <data name="NodeList" xml:space="preserve">
+  <data name="MainPage_MenuItem_NodeList" xml:space="preserve">
     <value>Объекты учёта</value>
+    <comment>Заголовок главного меню</comment>
   </data>
-  <data name="Notifications" xml:space="preserve">
+  <data name="MainPage_MenuItem_NotificationList" xml:space="preserve">
     <value>Уведомления</value>
+    <comment>Заголовок главного меню</comment>
   </data>
-  <data name="AdmissionDateOverdue" xml:space="preserve">
-    <value>Допуск просрочен на (в днях)</value>
+  <data name="MeasurePointView_Admission_Overdue" xml:space="preserve">
+    <value>Допуск просрочен на {0} дн.</value>
+    <comment>Допуск просрочен на {0} дн.</comment>
   </data>
-  <data name="Archive" xml:space="preserve">
+  <data name="MeasurePointArchivePage_Title" xml:space="preserve">
     <value>Архив</value>
+    <comment>Заголовок страницы</comment>
   </data>
-  <data name="AutoPoll" xml:space="preserve">
+  <data name="MeasurePointCommonPage_Label_AutoPoll" xml:space="preserve">
     <value>Автоопрос через</value>
+    <comment>Автоопрос через</comment>
   </data>
-  <data name="Close" xml:space="preserve">
+  <data name="Text_Close" xml:space="preserve">
     <value>Закрыть</value>
+    <comment>Закрыть</comment>
   </data>
-  <data name="ConfirmedIncidentBody" xml:space="preserve">
+  <data name="Text_Close_Incident_Full_Confirm" xml:space="preserve">
     <value>Закрыть нештатную ситуацию?</value>
+    <comment>Закрыть нештатную ситуацию?</comment>
   </data>
-  <data name="ConfirmedIncidentHeader" xml:space="preserve">
+  <data name="Text_Close_Incident_Short" xml:space="preserve">
     <value>Закрыть НС</value>
+    <comment>Закрыть НС</comment>
   </data>
-  <data name="CriticalIncidentCount" xml:space="preserve">
+  <data name="MeasurePointView_CriticalIncident_Count" xml:space="preserve">
     <value>Критических НС</value>
+    <comment>Количество критических нештатных ситуаций</comment>
   </data>
-  <data name="Data" xml:space="preserve">
+  <data name="MeasurePointDataPage_Title" xml:space="preserve">
     <value>Данные</value>
+    <comment>Заголовок страницы данных точки учёта</comment>
   </data>
-  <data name="DataType" xml:space="preserve">
-    <value>Тип данных</value>
+  <data name="MeasurePointView_Admission_Deadline" xml:space="preserve">
+    <value>Допуск заканчивается через {0} дн.</value>
+    <comment>Допуск заканчивается через {0} дн.</comment>
   </data>
-  <data name="DaysToAdmissionDeadline" xml:space="preserve">
-    <value>Допуск заканчивается через (в днях)</value>
-  </data>
-  <data name="Device" xml:space="preserve">
+  <data name="MeasurePointCommonPage_Device" xml:space="preserve">
     <value>Устройство</value>
+    <comment>Устройство</comment>
   </data>
-  <data name="DueEquipmentCalibrationCount" xml:space="preserve">
-    <value>Приближается поверка (кол-во устр)</value>
+  <data name="NodeView_DueEquipmentCalibrationCount" xml:space="preserve">
+    <value>Приближается поверка {0} устр.</value>
+    <comment>Приближается поверка {0} устр.</comment>
   </data>
-  <data name="Error" xml:space="preserve">
+  <data name="Text_Error" xml:space="preserve">
     <value>Ошибка</value>
+    <comment>Ошибка</comment>
   </data>
-  <data name="ErrorDateStartEnd" xml:space="preserve">
-    <value>Дата окончания периода больше даты начала</value>
+  <data name="IncidentListPage_Error_DateStart_More_Than_DateEnd" xml:space="preserve">
+    <value>Дата начало периода больше чем дата окончания</value>
+    <comment>Дата начало периода больше чем дата окончания</comment>
   </data>
-  <data name="ErrorEnsureConnected" xml:space="preserve">
+  <data name="MobileCore_Connect_Failed" xml:space="preserve">
     <value>Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен.</value>
+    <comment>Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен.</comment>
   </data>
-  <data name="ErrorIncidentLoad" xml:space="preserve">
+  <data name="IncidentDetailPage_Error_Load_Incident" xml:space="preserve">
     <value>Ошибка загрузки НС</value>
+    <comment>Ошибка загрузки НС</comment>
   </data>
-  <data name="ErrorLoaded" xml:space="preserve">
+  <data name="Text_Error_Load" xml:space="preserve">
     <value>Ошибка загрузки</value>
+    <comment>Ошибка загрузки</comment>
   </data>
-  <data name="ErrorLoadedDescription" xml:space="preserve">
+  <data name="IncidentDetailPage_Error_Load_Description" xml:space="preserve">
     <value>Не удалось загрузить информацию о точке учёта</value>
+    <comment>Не удалось загрузить информацию о точке учёта</comment>
   </data>
-  <data name="ErrorPollSession" xml:space="preserve">
+  <data name="MeasurePointPoller_Error_Poll" xml:space="preserve">
     <value>Опрос завершён с ошибкой</value>
+    <comment>Опрос завершён с ошибкой</comment>
   </data>
-  <data name="ErrotIncidentClose" xml:space="preserve">
+  <data name="IncidentDetailPage_Errot_Incident_Close" xml:space="preserve">
     <value>Ошибка закрытия НС</value>
+    <comment>Ошибка закрытия НС</comment>
   </data>
-  <data name="Incedent" xml:space="preserve">
+  <data name="IncidentDetailPage_Title" xml:space="preserve">
     <value>Нештатная ситуация</value>
+    <comment>Заголовок страницы IncidentDetailPage</comment>
   </data>
-  <data name="IncidentCloseSuccessed" xml:space="preserve">
+  <data name="IncidentDetailPage_IncidentCloseSuccessed" xml:space="preserve">
     <value>НС успешно закрыта</value>
+    <comment>НС успешно закрыта</comment>
   </data>
-  <data name="LastDataOverdue" xml:space="preserve">
-    <value>Данные отсутствуют (в днях)</value>
+  <data name="MeasurePointView_Overdue_Data" xml:space="preserve">
+    <value>Данные отсутствуют {0} дн.</value>
+    <comment>Данные отсутствуют {0} дн.</comment>
   </data>
-  <data name="Loading" xml:space="preserve">
+  <data name="MeasurePointDataPage_Loading" xml:space="preserve">
     <value>Загрузка...</value>
+    <comment>Загрузка...</comment>
   </data>
-  <data name="No" xml:space="preserve">
+  <data name="Text_No" xml:space="preserve">
     <value>Нет</value>
+    <comment>Нет</comment>
   </data>
-  <data name="NodeStateError" xml:space="preserve">
+  <data name="NodeView_Sate_Error" xml:space="preserve">
     <value>Есть ошибки</value>
+    <comment>Есть ошибки</comment>
   </data>
-  <data name="NodeStateNone" xml:space="preserve">
+  <data name="NodeView_State_None" xml:space="preserve">
     <value>Неизвестно</value>
+    <comment>Неизвестно</comment>
   </data>
-  <data name="NodeStateNormal" xml:space="preserve">
+  <data name="NodeView_State_Normal" xml:space="preserve">
     <value>Норма</value>
+    <comment>Норма</comment>
   </data>
-  <data name="NodeStateWarning" xml:space="preserve">
+  <data name="NodeView_State_Warning" xml:space="preserve">
     <value>Есть предупреждения</value>
+    <comment>Есть предупреждения</comment>
   </data>
-  <data name="NotSupportedCommunicationLink" xml:space="preserve">
+  <data name="ResourceHelper_Not_Supported_Communication_Link" xml:space="preserve">
     <value>Неизвестный тип канала связи</value>
+    <comment>Неизвестный тип канала связи</comment>
   </data>
-  <data name="NotSupportedException" xml:space="preserve">
+  <data name="Text_State_Not_Supported" xml:space="preserve">
     <value>Неизвестное состояние</value>
+    <comment>Неизвестное состояние</comment>
   </data>
-  <data name="NotSupportedImportance" xml:space="preserve">
+  <data name="ResourceHelper_Not_Supported_Importance" xml:space="preserve">
     <value>Неизвестный тип важности</value>
+    <comment>Неизвестный тип важности</comment>
   </data>
-  <data name="NotSupportedIncidentImportance" xml:space="preserve">
+  <data name="ResourceHelper_Not_Supported_Incident_Importance" xml:space="preserve">
     <value>Неизвестный тип важности НС</value>
+    <comment>Неизвестный тип важности НС</comment>
   </data>
-  <data name="NotSupportedSystemType" xml:space="preserve">
+  <data name="ResourceHelper_Not_Supported_SystemType" xml:space="preserve">
     <value>Неизвестный тип системы</value>
+    <comment>Неизвестный тип системы</comment>
   </data>
-  <data name="OverdueEquipmentCalibrationCount" xml:space="preserve">
-    <value>Просрочена поверка (кол-во устр)</value>
+  <data name="NodeView_OverdueEquipmentCalibrationCount" xml:space="preserve">
+    <value>Просрочена поверка {0} устр.</value>
+    <comment>Просрочена поверка {0} устр.</comment>
   </data>
-  <data name="OverdueJobCount" xml:space="preserve">
-    <value>Просрочено работ</value>
+  <data name="NodeView_OverdueJobCount" xml:space="preserve">
+    <value>Просрочено работ: {0}</value>
+    <comment>Просрочено работ: {0}</comment>
   </data>
-  <data name="PollCurrent" xml:space="preserve">
+  <data name="MeasurePointDataPage_PollCurrent" xml:space="preserve">
     <value>Опросить текущие</value>
+    <comment>Опросить текущие</comment>
   </data>
-  <data name="Summary" xml:space="preserve">
+  <data name="Text_Summary" xml:space="preserve">
     <value>Подробно</value>
+    <comment>Подробно</comment>
   </data>
-  <data name="Total" xml:space="preserve">
+  <data name="Text_Total" xml:space="preserve">
     <value>Общие</value>
+    <comment>Заголовок страницы NodeCommonPropertiesPage</comment>
   </data>
-  <data name="WarningIncidentCount" xml:space="preserve">
-    <value>Нештатных ситуаций</value>
+  <data name="MeasurePointView_Warning_Incident_Count" xml:space="preserve">
+    <value>Нештатных ситуаций: {0}</value>
+    <comment>Нештатных ситуаций</comment>
   </data>
-  <data name="Yes" xml:space="preserve">
+  <data name="Text_Yes" xml:space="preserve">
     <value>Да</value>
+    <comment>Да</comment>
   </data>
-  <data name="Customer" xml:space="preserve">
-    <value> Потребитель:</value>
+  <data name="NodeCommonPropertiesPage_Customer" xml:space="preserve">
+    <value>Потребитель:</value>
+    <comment>Потребитель:</comment>
   </data>
-  <data name="DateLabel" xml:space="preserve">
+  <data name="NotificationInfoPage_Date" xml:space="preserve">
     <value>Дата</value>
+    <comment>Дата</comment>
   </data>
-  <data name="ErrorLoadDetail" xml:space="preserve">
+  <data name="NodeCommonPropertiesPage_Error_Load_Detail" xml:space="preserve">
     <value>Не удалось загрузить свойства объекта</value>
+    <comment>Не удалось загрузить свойства объекта</comment>
   </data>
-  <data name="ErrorLoadedData" xml:space="preserve">
-    <value>Ошибка загрузки данных</value>
-  </data>
-  <data name="ErrorLoadedNodeList" xml:space="preserve">
+  <data name="NodeListPage_Error_Loaded" xml:space="preserve">
     <value>Не удалось загрузить список объектов</value>
+    <comment>Не удалось загрузить список объектов</comment>
   </data>
-  <data name="ErrorLoadedNotifications" xml:space="preserve">
+  <data name="NotificationCenterPage_Error_Loaded_Notifications" xml:space="preserve">
     <value>Не удалось загрузить уведомления</value>
+    <comment>Не удалось загрузить уведомления</comment>
   </data>
-  <data name="MeasurePointsTitle" xml:space="preserve">
-    <value>Точки учёта</value>
+  <data name="MeasurePointDataPage_ErrorData_Loaded" xml:space="preserve">
+    <value>Ошибка загрузки данных</value>
+    <comment>Ошибка загрузки данных</comment>
   </data>
-  <data name="MessageLabel" xml:space="preserve">
-    <value>Сообщение</value>
-  </data>
-  <data name="Node" xml:space="preserve">
-    <value>Объект учёта</value>
-  </data>
-  <data name="NodeGroup" xml:space="preserve">
-    <value>Группа объектов</value>
-  </data>
-  <data name="NodeGroupSearch" xml:space="preserve">
-    <value>Поиск по имени или адресу</value>
-  </data>
-  <data name="PollCurrentLoadingText" xml:space="preserve">
-    <value>Идёт опрос текущих...</value>
-  </data>
-  <data name="PollCurrentText" xml:space="preserve">
-    <value>Опрос текущих</value>
-  </data>
-  <data name="PollCurrentTextError" xml:space="preserve">
+  <data name="MeasurePointDataPage_Error_Poll_Current" xml:space="preserve">
     <value>Ошибка опроса текущих</value>
+    <comment>Ошибка опроса текущих</comment>
   </data>
-  <data name="PollCurrentTimeoutError" xml:space="preserve">
+  <data name="MeasurePointDataPage_Poll_Current" xml:space="preserve">
+    <value>Опрос текущих</value>
+    <comment>Опрос текущих</comment>
+  </data>
+  <data name="MeasurePointDataPage_Poll_Current_Loading" xml:space="preserve">
+    <value>Идёт опрос текущих...</value>
+    <comment>Идёт опрос текущих...</comment>
+  </data>
+  <data name="NodeMeasurePointsPage_Title" xml:space="preserve">
+    <value>Точки учёта</value>
+    <comment>Заголовок страницы</comment>
+  </data>
+  <data name="NotificationInfoPage_Message" xml:space="preserve">
+    <value>Сообщение</value>
+    <comment>Сообщение</comment>
+  </data>
+  <data name="NodePropertyPage_Title" xml:space="preserve">
+    <value>Объект учёта</value>
+    <comment>Объект учёта</comment>
+  </data>
+  <data name="NodeListPage_NodeGroup" xml:space="preserve">
+    <value>Группа объектов</value>
+    <comment>Группа объектов</comment>
+  </data>
+  <data name="NodeListPage_NodeGroup_Search" xml:space="preserve">
+    <value>Поиск по имени или адресу</value>
+    <comment>Поиск по имени или адресу</comment>
+  </data>
+  <data name="NodeView_Admission_Deadline" xml:space="preserve">
+    <value>Допуск '{0}' заканчивается через {1} дн.</value>
+    <comment>Допуск '{0}' заканчивается через {1} дн.</comment>
+  </data>
+  <data name="NodeView_CriticalIncident_Count" xml:space="preserve">
+    <value>Критических НС: {0}</value>
+    <comment>Количество критических нештатных ситуаций</comment>
+  </data>
+  <data name="NodeView_Overdue_Data" xml:space="preserve">
+    <value>Данные отсутствуют {0} дн.</value>
+    <comment>Данные отсутствуют {0} дн.</comment>
+  </data>
+  <data name="NodeView_Warning_Incident_Count" xml:space="preserve">
+    <value>Нештатных ситуаций: {0}</value>
+    <comment>Нештатных ситуаций</comment>
+  </data>
+  <data name="MeasurePointDataPage_PollCurrent_Timeout_Error" xml:space="preserve">
     <value>Не удалось завершить опрос за {0} мин.</value>
+    <comment>Не удалось завершить опрос за {0} мин.</comment>
   </data>
-  <data name="Serviceman" xml:space="preserve">
+  <data name="NodeCommonPropertiesPage_Serviceman" xml:space="preserve">
     <value>Обслуживающий:</value>
+    <comment>Обслуживающий:</comment>
   </data>
-  <data name="State" xml:space="preserve">
+  <data name="NodeCommonPropertiesPage_State" xml:space="preserve">
     <value>Состояние:</value>
+    <comment>Состояние:</comment>
+  </data>
+  <data name="MeasurePointCommonPage_Title" xml:space="preserve">
+    <value>Общие</value>
+    <comment>Общие</comment>
+  </data>
+  <data name="MeasurePointView_OverdueJobCount" xml:space="preserve">
+    <value>Просрочено работ: {0}</value>
+    <comment>Просрочено работ: {0}</comment>
+  </data>
+  <data name="NodeCommonPropertiesPage_Title" xml:space="preserve">
+    <value>Общие</value>
+    <comment>Общие</comment>
+  </data>
+  <data name="NodeView_Admission_Overdue" xml:space="preserve">
+    <value>Допуск '{0}' просрочен на {1} дн.</value>
+    <comment>Допуск '{0}' просрочен на {1} дн.</comment>
   </data>
 </root>

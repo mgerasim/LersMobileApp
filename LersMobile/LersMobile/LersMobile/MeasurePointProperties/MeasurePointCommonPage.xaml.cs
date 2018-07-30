@@ -28,7 +28,7 @@ namespace LersMobile.MeasurePointProperties
 
 			this.BindingContext = this;
 
-			this.Title = LersMobile.Droid.Resources.Messages.Total;
+			this.Title = Droid.Resources.Messages.MeasurePointCommonPage_Title;
         }
 
 		protected override async void OnAppearing()
@@ -55,7 +55,8 @@ namespace LersMobile.MeasurePointProperties
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorLoaded, $"{LersMobile.Droid.Resources.Messages.ErrorLoadedDescription}. {exc.Message}", "OK");
+				await DisplayAlert(Droid.Resources.Messages.Text_Error_Load, 
+					$"{Droid.Resources.Messages.IncidentDetailPage_Error_Load_Description}. {exc.Message}", "OK");
 			}
 			finally
 			{

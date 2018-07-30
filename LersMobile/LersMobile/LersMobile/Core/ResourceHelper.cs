@@ -29,7 +29,7 @@ namespace LersMobile.Core
                 case SystemType.Steam: return "SystemType_Steam.png";
 
                 default:
-                    throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedSystemType}:  + {systemType}");
+                    throw new NotSupportedException($"{Droid.Resources.Messages.ResourceHelper_Not_Supported_SystemType}:  + {systemType}");
             }
         }
 
@@ -41,7 +41,7 @@ namespace LersMobile.Core
                 case Lers.Diag.IncidentImportance.Information: return "Importance_Info32.png";
                 case Lers.Diag.IncidentImportance.Warning: return "Importance_Warn32.png";
 
-                default: throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedIncidentImportance}: " + importance);
+                default: throw new NotSupportedException($"{Droid.Resources.Messages.ResourceHelper_Not_Supported_Incident_Importance}: " + importance);
             }
         }
 
@@ -56,7 +56,7 @@ namespace LersMobile.Core
                 case Importance.Error: return "Importance_Error32.png";
 
 
-                default: throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedImportance}: " + importance);
+                default: throw new NotSupportedException($"{Droid.Resources.Messages.ResourceHelper_Not_Supported_Importance}: " + importance);
             }
         }
 
@@ -71,7 +71,7 @@ namespace LersMobile.Core
 				case NodeState.Warning: return "State_Warning.png";
 
 				default:
-					throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedException}: " + nodeState);
+					throw new NotSupportedException($"{Droid.Resources.Messages.Text_State_Not_Supported}: " + nodeState);
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace LersMobile.Core
 				case MeasurePointState.Warning: return "State_Warning.png";
 
 				default:
-					throw new NotSupportedException("Неизвестное состояние объекта " + state);
+					throw new NotSupportedException($"{Droid.Resources.Messages.Text_State_Not_Supported} " + state);
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace LersMobile.Core
 				case Lers.Poll.CommunicationLink.Gsm: return "CommLinkType_Gsm.png";
 				case Lers.Poll.CommunicationLink.Ip: return "CommLinkType_Ip.png";
 
-				default: throw new ArgumentOutOfRangeException($"{LersMobile.Droid.Resources.Messages.NotSupportedCommunicationLink}: {link}");
+				default: throw new ArgumentOutOfRangeException($"{Droid.Resources.Messages.ResourceHelper_Not_Supported_Communication_Link}: {link}");
 			}
 		}
 	}

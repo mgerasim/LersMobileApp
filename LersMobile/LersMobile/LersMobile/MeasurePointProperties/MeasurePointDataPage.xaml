@@ -15,7 +15,7 @@
                 <controls:MeasurePointDataControl DisplayRecord="{Binding LastDataRecord}" DisplayParameters="{Binding MeasurePoint.DisplayParameters}" IsPerHour="True" />
 
                 <!-- Кнопка запуска опроса текущих -->
-				<Button x:Name="pollCurrentButton" Text="{local:Translate PollCurrent}" Clicked="OnPollCurrentClicked" />
+				<Button x:Name="pollCurrentButton" Text="{local:Translate MeasurePointDataPage_PollCurrent}" Clicked="OnPollCurrentClicked" />
             </StackLayout>
 
             <!-- Отображает индикатор загрузки данных -->

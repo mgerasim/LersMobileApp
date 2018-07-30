@@ -103,7 +103,7 @@ namespace LersMobile.Core
 					}
 					else
 					{
-						completion.TrySetException(new Exception($"{LersMobile.Droid.Resources.Messages.ErrorPollSession}. {e.PollSession.ResultCode.GetDescription()}"));
+						completion.TrySetException(new Exception($"{Droid.Resources.Messages.MeasurePointPoller_Error_Poll}. {e.PollSession.ResultCode.GetDescription()}"));
 					}
 				}
 			}

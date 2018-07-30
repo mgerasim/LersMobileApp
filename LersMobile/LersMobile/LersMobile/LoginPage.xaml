@@ -7,13 +7,13 @@
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
             <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <Label Text="{local:Translate Server}" />
+                <Label Text="{local:Translate LoginPage_Server}" />
                 <Entry x:Name="serverAddressInput" />
 
-                <Label x:Name="loginLabel" Text="{local:Translate Login}"/>
+				<Label x:Name="loginLabel" Text="{local:Translate LoginPage_Label_Login}"/>
                 <Entry x:Name="loginInput" />
 
-                <Label x:Name ="passwordLabel" Text="{local:Translate Password}" />
+                <Label x:Name ="passwordLabel" Text="{local:Translate LoginPage_Password}" />
                 <Entry x:Name="passwordInput" IsPassword="True"></Entry>
 
                 <StackLayout Orientation="Horizontal" Spacing="0">
@@ -21,7 +21,7 @@
                     <Switch x:Name="sslSwitch" HorizontalOptions="Start" VerticalOptions="Center" />
                 </StackLayout>
 
-                <Button x:Name="onLoginButton" Text="{local:Translate Enter}" Clicked="OnLogin"/>
+                <Button x:Name="onLoginButton" Text="{local:Translate LoginPage_Enter}" Clicked="OnLogin"/>
             </StackLayout>
 
             <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
@@ -31,7 +31,7 @@
 
                 <ActivityIndicator IsRunning="{Binding IsBusy}" />
 
-                <Label Text="{local:Translate Connecting}" HorizontalOptions="Center" />
+				<Label Text="{local:Translate Text_Connecting}" HorizontalOptions="Center" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

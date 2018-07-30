@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
             <!-- Список точек учёта объекта -->
-			<Label Text="{local:Translate Summary}" />
+			<Label Text="{local:Translate Text_Summary}" />
             <ListView x:Name="measurePointListView" ItemsSource="{Binding Node.MeasurePoints}" ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>

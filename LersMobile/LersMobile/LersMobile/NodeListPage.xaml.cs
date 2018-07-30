@@ -125,7 +125,7 @@ namespace LersMobile
 
 			this.BindingContext = this;
 
-			this.Title = LersMobile.Droid.Resources.Messages.NodeList;
+			this.Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList;
 		}
 
 		/// <summary>
@@ -228,8 +228,8 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert(LersMobile.Droid.Resources.Messages.Error, 
-					LersMobile.Droid.Resources.Messages.ErrorLoadedNodeList + Environment.NewLine + exc.Message, "OK");
+				await DisplayAlert(Droid.Resources.Messages.Text_Error, 
+					Droid.Resources.Messages.NodeListPage_Error_Loaded + Environment.NewLine + exc.Message, "OK");
 			}
 			finally
 			{

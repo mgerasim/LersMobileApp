@@ -25,7 +25,7 @@ namespace LersMobile
 
 			this.BindingContext = this.notification;
 
-			this.Title = LersMobile.Droid.Resources.Messages.Notifications;
+			this.Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList;
 		}
 	}
 }

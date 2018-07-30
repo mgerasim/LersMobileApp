@@ -146,8 +146,8 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert(LersMobile.Droid.Resources.Messages.Error,
-					$"{LersMobile.Droid.Resources.Messages.ErrorLoadedNotifications}. {exc.Message}", "OK");
+				await DisplayAlert(Droid.Resources.Messages.Text_Error,
+					$"{Droid.Resources.Messages.NotificationCenterPage_Error_Loaded_Notifications}. {exc.Message}", "OK");
 			}
 			finally
 			{

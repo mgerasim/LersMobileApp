@@ -18,44 +18,14 @@ namespace LersMobile
 		public App ()
 		{
 			InitializeComponent();
-
-			SetCulture("en-US");
-
+			
 			Core = new Core.MobileCore();
 
 			Core.LoginRequired += Core_LoginRequired;
 
 			ShowLoginPage();
 		}
-
-        private static void SetCulture(String culture)
-        {            
-            // Установить ресурс, соответствующий culture      
-            var dictionaryList = new List<ResourceDictionary>(Current.Resources.MergedDictionaries);
-
-            String requestedCulture = $"{culture}.xaml";
-            ResourceDictionary resourceDictionary = dictionaryList.Find(d => d.Source.OriginalString == "Lang\\" + requestedCulture);
-            if (resourceDictionary == null)
-            {
-                // Культура по умолчанию
-                requestedCulture = "en-US.xaml";
-                resourceDictionary = dictionaryList.Find(d => d.Source.OriginalString == "Lang\\" + requestedCulture);
-            }
-  
-            if (resourceDictionary != null)
-            {
-                Current.Resources.MergedDictionaries.Remove(resourceDictionary);
-                Current.Resources.MergedDictionaries.Add(resourceDictionary);
-            }
-
-            var cultureInfo = new System.Globalization.CultureInfo(culture);
-
-            Thread.CurrentThread.CurrentCulture = cultureInfo;
-            Thread.CurrentThread.CurrentUICulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-        }
-        
+		        
 		private void Core_LoginRequired(object sender, EventArgs e)
 		{
 			if (MainPage.GetType() != typeof (LoginPage))

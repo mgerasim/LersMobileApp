@@ -68,7 +68,7 @@ namespace LersMobile.MeasurePointProperties
 
             this.MeasurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));
 
-			this.Title = LersMobile.Droid.Resources.Messages.Data;
+			this.Title = Droid.Resources.Messages.MeasurePointDataPage_Title;
         }
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace LersMobile.MeasurePointProperties
 		{
 			this.pollCurrentButton.IsEnabled = false;
 			this.IsBusy = true;
-			this.LoadingText = LersMobile.Droid.Resources.Messages.PollCurrentLoadingText;
+			this.LoadingText = Droid.Resources.Messages.MeasurePointDataPage_Poll_Current_Loading;
 
 			const int timeoutMinutes = 2;
 
@@ -102,11 +102,11 @@ namespace LersMobile.MeasurePointProperties
 			}
 			catch (OperationCanceledException)
 			{
-				await DisplayAlert(LersMobile.Droid.Resources.Messages.PollCurrentText, String.Format(LersMobile.Droid.Resources.Messages.PollCurrentTimeoutError, timeoutMinutes), "OK");
+				await DisplayAlert(Droid.Resources.Messages.MeasurePointDataPage_Poll_Current, String.Format(Droid.Resources.Messages.MeasurePointDataPage_PollCurrent_Timeout_Error, timeoutMinutes), "OK");
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert(LersMobile.Droid.Resources.Messages.PollCurrentTextError, exc.Message, "OK");
+				await DisplayAlert(Droid.Resources.Messages.MeasurePointDataPage_Error_Poll_Current, exc.Message, "OK");
 			}
 			finally
 			{
@@ -148,7 +148,7 @@ namespace LersMobile.MeasurePointProperties
 		{
 			// Обновляем последние текущие данные.
 
-			this.LoadingText = LersMobile.Droid.Resources.Messages.Loading;
+			this.LoadingText = Droid.Resources.Messages.MeasurePointDataPage_Loading;
 			this.IsBusy = true;
 
 			try
@@ -163,7 +163,7 @@ namespace LersMobile.MeasurePointProperties
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorLoadedData, exc.Message, "OK");
+				await DisplayAlert(Droid.Resources.Messages.MeasurePointDataPage_ErrorData_Loaded, exc.Message, "OK");
 			}
 			finally
 			{

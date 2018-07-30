@@ -110,7 +110,7 @@ namespace LersMobile.Incidents
 
             if (!string.IsNullOrEmpty(message))
             {
-                await DisplayAlert(LersMobile.Droid.Resources.Messages.Error, message, "OK");
+                await DisplayAlert(Droid.Resources.Messages.Text_Error, message, "OK");
                 return;
             }
 
@@ -141,7 +141,7 @@ namespace LersMobile.Incidents
             }
             catch (Exception exc)
             {
-                await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorIncidentLoad, exc.Message, "OK");
+                await DisplayAlert(Droid.Resources.Messages.Text_Error_Load, exc.Message, "OK");
             }
             finally
             {
@@ -162,7 +162,7 @@ namespace LersMobile.Incidents
 
             else if (this.endDatePicker.Date < this.startDatePicker.Date)
             {
-                return LersMobile.Droid.Resources.Messages.ErrorDateStartEnd;
+                return Droid.Resources.Messages.IncidentListPage_Error_DateStart_More_Than_DateEnd;
             }
 
             return string.Empty;
