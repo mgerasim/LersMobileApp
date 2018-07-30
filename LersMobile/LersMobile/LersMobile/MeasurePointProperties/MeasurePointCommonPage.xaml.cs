@@ -27,6 +27,8 @@ namespace LersMobile.MeasurePointProperties
             InitializeComponent();
 
 			this.BindingContext = this;
+
+			this.Title = LersMobile.Droid.Resources.Messages.Total;
         }
 
 		protected override async void OnAppearing()
@@ -53,7 +55,7 @@ namespace LersMobile.MeasurePointProperties
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert("Ошибка загрузки", $"Не удалось загрузить информацию о точке учёта. {exc.Message}", "OK");
+				await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorLoaded, $"{LersMobile.Droid.Resources.Messages.ErrorLoadedDescription}. {exc.Message}", "OK");
 			}
 			finally
 			{

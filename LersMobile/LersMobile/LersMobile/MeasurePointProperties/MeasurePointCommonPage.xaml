@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LersMobile.MeasurePointProperties.MeasurePointCommonPage"
-             Title="Общие">
+			 xmlns:local="clr-namespace:LersMobile"
+             x:Class="LersMobile.MeasurePointProperties.MeasurePointCommonPage">
     <ContentPage.Content>
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
@@ -14,12 +14,12 @@
                 </StackLayout>
 
                 <!-- Связанное с точкой учёта устройства -->
-                <Label FontAttributes="Bold" >Устройство:</Label>
-                <Label Text="{Binding MeasurePoint.Device}"/>
+				<Label Text="{local:Translate Device}" FontAttributes="Bold" />
+				<Label Text="{Binding MeasurePoint.Device}"/>
 
                 <!-- Подключение для автоопроса -->
                 <StackLayout IsVisible="{Binding MeasurePoint.AutoPollEnabled}">
-                    <Label Text="Автоопрос через:" FontAttributes="Bold" />
+					<Label Text="{local:Translate AutoPoll}" FontAttributes="Bold" />
                     <StackLayout Orientation="Horizontal">
                         <Image Source="{Binding MeasurePoint.AutoPollConnection.TypeImage}"/>
                         <Label Text="{Binding MeasurePoint.AutoPollConnection.Title}"/>
@@ -28,7 +28,7 @@
 
                 <!-- Диагностическая карточка точки учёта -->
                 <StackLayout IsVisible="{Binding MeasurePoint.HasDetailedState}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
-                    <Label Text="Подробно" FontAttributes="Bold" />
+					<Label Text="{local:Translate Summary}" FontAttributes="Bold" />
                     <ListView x:Name="nodeStateListView" ItemsSource="{Binding MeasurePoint.DetailedState}" ItemSelected="OnDetailStateSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -51,7 +51,7 @@
                         BackgroundColor="{StaticResource LoadingIndicator}">
 
                 <ActivityIndicator IsRunning="{Binding IsBusy}" />
-                <Label Text="Загрузка..." HorizontalOptions="Center" />
+				<Label Text="{local:Translate Loading}" HorizontalOptions="Center" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

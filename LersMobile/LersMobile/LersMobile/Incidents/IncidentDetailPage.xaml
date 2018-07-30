@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LersMobile.Incidents.IncidentDetailPage"
-             Title="Нештатная ситуация">
+			 xmlns:local="clr-namespace:LersMobile"
+             x:Class="LersMobile.Incidents.IncidentDetailPage">
     <ContentPage.Content>
         <StackLayout>
             <!-- Подробное описание НС -->
@@ -24,7 +24,7 @@
             </ListView>
 
             <!-- Кнопка закрытия -->
-            <Button Text="Закрыть" IsVisible="{Binding Incident.IsActive}" Clicked="OnCloseIncidentClicked" />
+			<Button Text="{local:Translate Close}" IsVisible="{Binding Incident.IsActive}" Clicked="OnCloseIncidentClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

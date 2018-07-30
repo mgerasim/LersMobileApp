@@ -42,6 +42,8 @@ namespace LersMobile.NodeProperties
             this.BindingContext = this;
 
             this.Node = node ?? throw new ArgumentNullException(nameof(node));
+
+			this.Title = LersMobile.Droid.Resources.Messages.Total;
         }
 
 		/// <summary>
@@ -115,7 +117,8 @@ namespace LersMobile.NodeProperties
             }
             catch (Exception exc) when (exc is TimeoutException || exc is Lers.LersException)
             {
-                await DisplayAlert("Ошибка", "Не удалось загрузить свойства объекта." + Environment.NewLine + exc.Message,
+                await DisplayAlert(LersMobile.Droid.Resources.Messages.Error, 
+					LersMobile.Droid.Resources.Messages.ErrorLoadDetail + Environment.NewLine + exc.Message,
                     "OK");
             }
             catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)

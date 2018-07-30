@@ -110,7 +110,7 @@ namespace LersMobile.Incidents
 
             if (!string.IsNullOrEmpty(message))
             {
-                await DisplayAlert("Ошибка", message, "OK");
+                await DisplayAlert(LersMobile.Droid.Resources.Messages.Error, message, "OK");
                 return;
             }
 
@@ -141,7 +141,7 @@ namespace LersMobile.Incidents
             }
             catch (Exception exc)
             {
-                await DisplayAlert("Ошибка загрузка списка НС.", exc.Message, "OK");
+                await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorIncidentLoad, exc.Message, "OK");
             }
             finally
             {
@@ -162,7 +162,7 @@ namespace LersMobile.Incidents
 
             else if (this.endDatePicker.Date < this.startDatePicker.Date)
             {
-                return "Дата окончания периода больше даты начала.";
+                return LersMobile.Droid.Resources.Messages.ErrorDateStartEnd;
             }
 
             return string.Empty;

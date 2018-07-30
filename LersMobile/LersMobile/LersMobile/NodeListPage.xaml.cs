@@ -124,6 +124,8 @@ namespace LersMobile
 			this.nodeListView.ItemSelected += NodeListView_ItemSelected;
 
 			this.BindingContext = this;
+
+			this.Title = LersMobile.Droid.Resources.Messages.NodeList;
 		}
 
 		/// <summary>
@@ -226,7 +228,8 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert("Ошибка", "Не удалось загрузить список объектов." + Environment.NewLine + exc.Message, "OK");
+				await DisplayAlert(LersMobile.Droid.Resources.Messages.Error, 
+					LersMobile.Droid.Resources.Messages.ErrorLoadedNodeList + Environment.NewLine + exc.Message, "OK");
 			}
 			finally
 			{

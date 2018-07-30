@@ -61,6 +61,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Допуск просрочен на (в днях).
+        /// </summary>
+        public static string AdmissionDateOverdue {
+            get {
+                return ResourceManager.GetString("AdmissionDateOverdue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ЛЭРС УЧЁТ.
         /// </summary>
         public static string Application {
@@ -70,11 +79,128 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Архив.
+        /// </summary>
+        public static string Archive {
+            get {
+                return ResourceManager.GetString("Archive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Автоопрос через.
+        /// </summary>
+        public static string AutoPoll {
+            get {
+                return ResourceManager.GetString("AutoPoll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Закрыть.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Закрыть нештатную ситуацию?.
+        /// </summary>
+        public static string ConfirmedIncidentBody {
+            get {
+                return ResourceManager.GetString("ConfirmedIncidentBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Закрыть НС.
+        /// </summary>
+        public static string ConfirmedIncidentHeader {
+            get {
+                return ResourceManager.GetString("ConfirmedIncidentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подключение ....
         /// </summary>
         public static string Connecting {
             get {
                 return ResourceManager.GetString("Connecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Критических НС.
+        /// </summary>
+        public static string CriticalIncidentCount {
+            get {
+                return ResourceManager.GetString("CriticalIncidentCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Потребитель:.
+        /// </summary>
+        public static string Customer {
+            get {
+                return ResourceManager.GetString("Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данные.
+        /// </summary>
+        public static string Data {
+            get {
+                return ResourceManager.GetString("Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип данных.
+        /// </summary>
+        public static string DataType {
+            get {
+                return ResourceManager.GetString("DataType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дата.
+        /// </summary>
+        public static string DateLabel {
+            get {
+                return ResourceManager.GetString("DateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Допуск заканчивается через (в днях).
+        /// </summary>
+        public static string DaysToAdmissionDeadline {
+            get {
+                return ResourceManager.GetString("DaysToAdmissionDeadline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Устройство.
+        /// </summary>
+        public static string Device {
+            get {
+                return ResourceManager.GetString("Device", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Приближается поверка (кол-во устр).
+        /// </summary>
+        public static string DueEquipmentCalibrationCount {
+            get {
+                return ResourceManager.GetString("DueEquipmentCalibrationCount", resourceCulture);
             }
         }
         
@@ -115,6 +241,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ошибка.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ошибка подключения.
         /// </summary>
         public static string ErrorConnect {
@@ -133,11 +268,128 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дата окончания периода больше даты начала.
+        /// </summary>
+        public static string ErrorDateStartEnd {
+            get {
+                return ResourceManager.GetString("ErrorDateStartEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен..
+        /// </summary>
+        public static string ErrorEnsureConnected {
+            get {
+                return ResourceManager.GetString("ErrorEnsureConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка загрузки НС.
+        /// </summary>
+        public static string ErrorIncidentLoad {
+            get {
+                return ResourceManager.GetString("ErrorIncidentLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить свойства объекта.
+        /// </summary>
+        public static string ErrorLoadDetail {
+            get {
+                return ResourceManager.GetString("ErrorLoadDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка загрузки.
+        /// </summary>
+        public static string ErrorLoaded {
+            get {
+                return ResourceManager.GetString("ErrorLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка загрузки данных.
+        /// </summary>
+        public static string ErrorLoadedData {
+            get {
+                return ResourceManager.GetString("ErrorLoadedData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить информацию о точке учёта.
+        /// </summary>
+        public static string ErrorLoadedDescription {
+            get {
+                return ResourceManager.GetString("ErrorLoadedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить список объектов.
+        /// </summary>
+        public static string ErrorLoadedNodeList {
+            get {
+                return ResourceManager.GetString("ErrorLoadedNodeList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить уведомления.
+        /// </summary>
+        public static string ErrorLoadedNotifications {
+            get {
+                return ResourceManager.GetString("ErrorLoadedNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Опрос завершён с ошибкой.
+        /// </summary>
+        public static string ErrorPollSession {
+            get {
+                return ResourceManager.GetString("ErrorPollSession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка закрытия НС.
+        /// </summary>
+        public static string ErrotIncidentClose {
+            get {
+                return ResourceManager.GetString("ErrotIncidentClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выйти из учётной записи.
         /// </summary>
         public static string Exit {
             get {
                 return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нештатная ситуация.
+        /// </summary>
+        public static string Incedent {
+            get {
+                return ResourceManager.GetString("Incedent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to НС успешно закрыта.
+        /// </summary>
+        public static string IncidentCloseSuccessed {
+            get {
+                return ResourceManager.GetString("IncidentCloseSuccessed", resourceCulture);
             }
         }
         
@@ -151,11 +403,83 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Данные отсутствуют (в днях).
+        /// </summary>
+        public static string LastDataOverdue {
+            get {
+                return ResourceManager.GetString("LastDataOverdue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузка....
+        /// </summary>
+        public static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пользователь.
         /// </summary>
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Точки учёта.
+        /// </summary>
+        public static string MeasurePointsTitle {
+            get {
+                return ResourceManager.GetString("MeasurePointsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сообщение.
+        /// </summary>
+        public static string MessageLabel {
+            get {
+                return ResourceManager.GetString("MessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нет.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Объект учёта.
+        /// </summary>
+        public static string Node {
+            get {
+                return ResourceManager.GetString("Node", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Группа объектов.
+        /// </summary>
+        public static string NodeGroup {
+            get {
+                return ResourceManager.GetString("NodeGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поиск по имени или адресу.
+        /// </summary>
+        public static string NodeGroupSearch {
+            get {
+                return ResourceManager.GetString("NodeGroupSearch", resourceCulture);
             }
         }
         
@@ -169,11 +493,110 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Есть ошибки.
+        /// </summary>
+        public static string NodeStateError {
+            get {
+                return ResourceManager.GetString("NodeStateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неизвестно.
+        /// </summary>
+        public static string NodeStateNone {
+            get {
+                return ResourceManager.GetString("NodeStateNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Норма.
+        /// </summary>
+        public static string NodeStateNormal {
+            get {
+                return ResourceManager.GetString("NodeStateNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Есть предупреждения.
+        /// </summary>
+        public static string NodeStateWarning {
+            get {
+                return ResourceManager.GetString("NodeStateWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Уведомления.
         /// </summary>
         public static string Notifications {
             get {
                 return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неизвестный тип канала связи.
+        /// </summary>
+        public static string NotSupportedCommunicationLink {
+            get {
+                return ResourceManager.GetString("NotSupportedCommunicationLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неизвестное состояние.
+        /// </summary>
+        public static string NotSupportedException {
+            get {
+                return ResourceManager.GetString("NotSupportedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неизвестный тип важности.
+        /// </summary>
+        public static string NotSupportedImportance {
+            get {
+                return ResourceManager.GetString("NotSupportedImportance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неизвестный тип важности НС.
+        /// </summary>
+        public static string NotSupportedIncidentImportance {
+            get {
+                return ResourceManager.GetString("NotSupportedIncidentImportance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неизвестный тип системы.
+        /// </summary>
+        public static string NotSupportedSystemType {
+            get {
+                return ResourceManager.GetString("NotSupportedSystemType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Просрочена поверка (кол-во устр).
+        /// </summary>
+        public static string OverdueEquipmentCalibrationCount {
+            get {
+                return ResourceManager.GetString("OverdueEquipmentCalibrationCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Просрочено работ.
+        /// </summary>
+        public static string OverdueJobCount {
+            get {
+                return ResourceManager.GetString("OverdueJobCount", resourceCulture);
             }
         }
         
@@ -187,6 +610,51 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Опросить текущие.
+        /// </summary>
+        public static string PollCurrent {
+            get {
+                return ResourceManager.GetString("PollCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Идёт опрос текущих....
+        /// </summary>
+        public static string PollCurrentLoadingText {
+            get {
+                return ResourceManager.GetString("PollCurrentLoadingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Опрос текущих.
+        /// </summary>
+        public static string PollCurrentText {
+            get {
+                return ResourceManager.GetString("PollCurrentText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка опроса текущих.
+        /// </summary>
+        public static string PollCurrentTextError {
+            get {
+                return ResourceManager.GetString("PollCurrentTextError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось завершить опрос за {0} мин..
+        /// </summary>
+        public static string PollCurrentTimeoutError {
+            get {
+                return ResourceManager.GetString("PollCurrentTimeoutError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Адрес сервера ЛЭРС УЧЁТ.
         /// </summary>
         public static string Server {
@@ -196,11 +664,65 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Обслуживающий:.
+        /// </summary>
+        public static string Serviceman {
+            get {
+                return ResourceManager.GetString("Serviceman", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Использовать SSL.
         /// </summary>
         public static string Ssl {
             get {
                 return ResourceManager.GetString("Ssl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Состояние:.
+        /// </summary>
+        public static string State {
+            get {
+                return ResourceManager.GetString("State", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подробно.
+        /// </summary>
+        public static string Summary {
+            get {
+                return ResourceManager.GetString("Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Общие.
+        /// </summary>
+        public static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нештатных ситуаций.
+        /// </summary>
+        public static string WarningIncidentCount {
+            get {
+                return ResourceManager.GetString("WarningIncidentCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Да.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

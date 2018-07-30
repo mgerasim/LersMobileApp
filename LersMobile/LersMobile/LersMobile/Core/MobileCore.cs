@@ -213,7 +213,7 @@ namespace LersMobile.Core
 				if (string.IsNullOrEmpty(AppDataStorage.ServerAddress)
 				|| string.IsNullOrEmpty(AppDataStorage.Token))
 				{
-					throw new InvalidOperationException("Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен.");
+					throw new InvalidOperationException(LersMobile.Droid.Resources.Messages.ErrorEnsureConnected);
 				}
 
 				await ConnectToken(AppDataStorage.ServerAddress, AppDataStorage.Token);

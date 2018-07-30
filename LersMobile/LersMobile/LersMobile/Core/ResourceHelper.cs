@@ -29,7 +29,7 @@ namespace LersMobile.Core
                 case SystemType.Steam: return "SystemType_Steam.png";
 
                 default:
-                    throw new NotSupportedException("Неизвестный тип системы: " + systemType);
+                    throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedSystemType}:  + {systemType}");
             }
         }
 
@@ -41,7 +41,7 @@ namespace LersMobile.Core
                 case Lers.Diag.IncidentImportance.Information: return "Importance_Info32.png";
                 case Lers.Diag.IncidentImportance.Warning: return "Importance_Warn32.png";
 
-                default: throw new NotSupportedException("Неизвестный тип важности НС: " + importance);
+                default: throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedIncidentImportance}: " + importance);
             }
         }
 
@@ -56,7 +56,7 @@ namespace LersMobile.Core
                 case Importance.Error: return "Importance_Error32.png";
 
 
-                default: throw new NotSupportedException("Неизвестный тип важности: " + importance);
+                default: throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedImportance}: " + importance);
             }
         }
 
@@ -71,7 +71,7 @@ namespace LersMobile.Core
 				case NodeState.Warning: return "State_Warning.png";
 
 				default:
-					throw new NotSupportedException("Неизвестное состояние объекта " + nodeState);
+					throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedException}: " + nodeState);
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace LersMobile.Core
 				case Lers.Poll.CommunicationLink.Gsm: return "CommLinkType_Gsm.png";
 				case Lers.Poll.CommunicationLink.Ip: return "CommLinkType_Ip.png";
 
-				default: throw new ArgumentOutOfRangeException($"Неизвестный тип канала связи {link}");
+				default: throw new ArgumentOutOfRangeException($"{LersMobile.Droid.Resources.Messages.NotSupportedCommunicationLink}: {link}");
 			}
 		}
 	}

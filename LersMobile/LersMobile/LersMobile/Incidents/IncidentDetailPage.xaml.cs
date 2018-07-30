@@ -39,6 +39,8 @@ namespace LersMobile.Incidents
             InitializeComponent();
 
             this.BindingContext = this;
+
+			this.Title = LersMobile.Droid.Resources.Messages.Incedent;
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace LersMobile.Incidents
             }
             catch (Exception exc) when (exc is TimeoutException || exc is Lers.LersException)
             {
-                await DisplayAlert("Ошибка загрузки НС", exc.Message, "OK");
+                await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorIncidentLoad, exc.Message, "OK");
             }
             catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
             {
@@ -84,7 +86,10 @@ namespace LersMobile.Incidents
         {
             // Запрашиваем подтверждение.
 
-            bool confirmed = await DisplayAlert("Закрыть НС", "Закрыть нештатную ситуацию?", "Да", "Нет");
+            bool confirmed = await DisplayAlert(LersMobile.Droid.Resources.Messages.ConfirmedIncidentHeader, 
+												LersMobile.Droid.Resources.Messages.ConfirmedIncidentBody, 
+												LersMobile.Droid.Resources.Messages.Yes,
+												LersMobile.Droid.Resources.Messages.No);
 
             if (!confirmed)
             {
@@ -100,7 +105,7 @@ namespace LersMobile.Incidents
                 // https://xamarinhelp.com/toast-notifications-xamarin-forms/
                 Android.Widget.Toast.MakeText(
                     Android.App.Application.Context,
-                    "НС успешно закрыта",
+                    LersMobile.Droid.Resources.Messages.IncidentCloseSuccessed,
                     Android.Widget.ToastLength.Short)
                     .Show();
             }
@@ -109,7 +114,7 @@ namespace LersMobile.Incidents
             }
             catch (Exception exc)
             {
-                await DisplayAlert("Ошибка закрытия НС", exc.Message, "OK");
+                await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrotIncidentClose, exc.Message, "OK");
             }
         }
     }

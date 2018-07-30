@@ -33,8 +33,10 @@ namespace LersMobile.NodeProperties
 
             this.BindingContext = this;
 
-            this.Node = nodeView ?? throw new ArgumentNullException(nameof(nodeView));						
-        }
+            this.Node = nodeView ?? throw new ArgumentNullException(nameof(nodeView));
+
+			this.Title = LersMobile.Droid.Resources.Messages.MeasurePointsTitle;
+		}
 
 
 		/// <summary>

@@ -146,7 +146,8 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert("Ошибка", "Не удалось загрузить уведомления. " + exc.Message, "OK");
+				await DisplayAlert(LersMobile.Droid.Resources.Messages.Error,
+					$"{LersMobile.Droid.Resources.Messages.ErrorLoadedNotifications}. {exc.Message}", "OK");
 			}
 			finally
 			{

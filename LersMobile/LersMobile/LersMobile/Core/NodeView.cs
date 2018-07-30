@@ -59,12 +59,12 @@ namespace LersMobile.Core
 			{
 				switch (this.Node.State)
 				{
-					case NodeState.Error: return "Есть ошибки";
-					case NodeState.None: return "Неизвестно";
-					case NodeState.Normal: return "Норма";
-					case NodeState.Warning: return "Есть предупреждения";
+					case NodeState.Error: return LersMobile.Droid.Resources.Messages.NodeStateError;
+					case NodeState.None: return LersMobile.Droid.Resources.Messages.NodeStateNone;
+					case NodeState.Normal: return LersMobile.Droid.Resources.Messages.NodeStateNormal;
+					case NodeState.Warning: return LersMobile.Droid.Resources.Messages.NodeStateWarning;
 					default:
-						throw new NotSupportedException("Неизвестное состояние " + this.Node.State);
+						throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedException} {this.Node.State}");
 				}
 			}
 		}
@@ -125,7 +125,7 @@ namespace LersMobile.Core
             {
                 this.DetailedState.Add(new NodeStateView(NodeState.Error, DetailedStateId.CriticalIncidents)
 				{
-					Text = $"Критических НС: {state.CriticalIncidentCount}"
+					Text = $"{LersMobile.Droid.Resources.Messages.CriticalIncidentCount}: {state.CriticalIncidentCount}"
 				});
             }
 
@@ -133,25 +133,25 @@ namespace LersMobile.Core
             {
                 this.DetailedState.Add(new NodeStateView(NodeState.Warning, DetailedStateId.Incidents)
 				{
-					Text = $"Нештатных ситуаций: {state.WarningIncidentCount}"
+					Text = $"{LersMobile.Droid.Resources.Messages.WarningIncidentCount}: {state.WarningIncidentCount}"
 				});
             }
 
             if (state.LastDataOverdue > 0)
             {
-                this.DetailedState.Add(new NodeStateView(NodeState.Warning) { Text = $"Данные отсутствуют: {state.LastDataOverdue} дн." });
+                this.DetailedState.Add(new NodeStateView(NodeState.Warning) { Text = $"{LersMobile.Droid.Resources.Messages.LastDataOverdue}: {state.LastDataOverdue} " });
             }
 
             if (state.OverdueJobCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView(NodeState.Error) { Text = $"Просрочено работ: {state.OverdueJobCount}" });
+                this.DetailedState.Add(new NodeStateView(NodeState.Error) { Text = $"{LersMobile.Droid.Resources.Messages.OverdueJobCount}: {state.OverdueJobCount}" });
             }
 
             if (state.DaysToAdmissionDeadline.HasValue)
             {
 				this.DetailedState.Add(new NodeStateView(NodeState.Warning)
 				{
-					Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' заканчивается через: {state.DaysToAdmissionDeadline} дн."					
+					Text = $"{state.AdmissionMeasurePoint.Title} - {LersMobile.Droid.Resources.Messages.DaysToAdmissionDeadline}: {state.DaysToAdmissionDeadline} "
                 });
             }
 
@@ -159,7 +159,7 @@ namespace LersMobile.Core
             {
                 this.DetailedState.Add(new NodeStateView(NodeState.Error)
                 {
-                    Text = $"Допуск '{state.AdmissionMeasurePoint.Title}' просрочен на: {state.AdmissionDateOverdue} дн."
+                    Text = $"{state.AdmissionMeasurePoint.Title}- {LersMobile.Droid.Resources.Messages.AdmissionDateOverdue}: {state.AdmissionDateOverdue} "
                 });
             }
 
@@ -167,7 +167,7 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new NodeStateView(NodeState.Warning)
 				{
-					Text = $"Приближается поверка {state.DueEquipmentCalibrationCount} устр."
+					Text = $"{LersMobile.Droid.Resources.Messages.DueEquipmentCalibrationCount}: {state.DueEquipmentCalibrationCount} "
 				});
 			}
 
@@ -175,7 +175,7 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new NodeStateView(NodeState.Error)
 				{
-					Text = $"Просрочена поверка {state.OverdueEquipmentCalibrationCount} устр."
+					Text = $"{LersMobile.Droid.Resources.Messages.OverdueEquipmentCalibrationCount}: {state.OverdueEquipmentCalibrationCount} "
 				});
 			}
 		}

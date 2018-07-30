@@ -57,7 +57,7 @@ namespace LersMobile.Core
                     case MeasurePointState.None: return "State_Unknown.png";
                     case MeasurePointState.Warning: return "State_Warning.png";
                     default:
-                        throw new NotSupportedException("Неизвестное состояние " + this.MeasurePoint.State);
+                        throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedException} {this.MeasurePoint.State}");
                 }
             }
         }
@@ -131,7 +131,7 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error, DetailedStateId.CriticalIncidents)
 				{
-					Text = $"Критических НС: {state.CriticalIncidentCount}"
+					Text = $"{LersMobile.Droid.Resources.Messages.CriticalIncidentCount}: {state.CriticalIncidentCount}"
 				});
 			}
 
@@ -139,20 +139,20 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning, DetailedStateId.Incidents)
 				{
-					Text = $"Нештатных ситуаций: {state.WarningIncidentCount}"
+					Text = $"{LersMobile.Droid.Resources.Messages.WarningIncidentCount}: {state.WarningIncidentCount}"
 				});
 			}
 
 			if (state.OverdueJobCount > 0)
 			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error) { Text = $"Просрочено работ: {state.OverdueJobCount}" });
+				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error) { Text = $"{LersMobile.Droid.Resources.Messages.OverdueJobCount}: {state.OverdueJobCount}" });
 			}
 
 			if (state.DaysToAdmissionDeadline.HasValue)
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning)
 				{
-					Text = $"Допуск заканчивается через: {state.DaysToAdmissionDeadline} дн."
+					Text = $"{LersMobile.Droid.Resources.Messages.DaysToAdmissionDeadline}: {state.DaysToAdmissionDeadline} "
 				});
 			}
 
@@ -160,7 +160,7 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error)
 				{
-					Text = $"Допуск просрочен на: {state.AdmissionDateOverdue} дн."
+					Text = $"{LersMobile.Droid.Resources.Messages.AdmissionDateOverdue}: {state.AdmissionDateOverdue} "
 				});
 			}
 
@@ -168,7 +168,7 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning)
 				{
-					Text = $"Данные отсутствуют: {state.LastDataOverdue} дн."
+					Text = $"{LersMobile.Droid.Resources.Messages.LastDataOverdue}: {state.LastDataOverdue} "
 				});
 			}
 		}

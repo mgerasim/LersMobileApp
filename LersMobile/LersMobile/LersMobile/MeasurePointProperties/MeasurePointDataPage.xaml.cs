@@ -25,6 +25,7 @@ namespace LersMobile.MeasurePointProperties
                 _measurePoint = value;
                 OnPropertyChanged(nameof(MeasurePoint));
             }
+
         }
 
 		private string _loadingText;
@@ -65,7 +66,9 @@ namespace LersMobile.MeasurePointProperties
 
             this.BindingContext = this;
 
-            this.MeasurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));						
+            this.MeasurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));
+
+			this.Title = LersMobile.Droid.Resources.Messages.Data;
         }
 
 		/// <summary>
@@ -75,7 +78,7 @@ namespace LersMobile.MeasurePointProperties
 		{
 			this.pollCurrentButton.IsEnabled = false;
 			this.IsBusy = true;
-			this.LoadingText = "Идёт опрос текущих...";
+			this.LoadingText = LersMobile.Droid.Resources.Messages.PollCurrentLoadingText;
 
 			const int timeoutMinutes = 2;
 
@@ -99,11 +102,11 @@ namespace LersMobile.MeasurePointProperties
 			}
 			catch (OperationCanceledException)
 			{
-				await DisplayAlert("Опрос текущих", $"Не удалось завершить опрос за {timeoutMinutes} мин.", "OK");
+				await DisplayAlert(LersMobile.Droid.Resources.Messages.PollCurrentText, String.Format(LersMobile.Droid.Resources.Messages.PollCurrentTimeoutError, timeoutMinutes), "OK");
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert("Ошибка опроса текущих", exc.Message, "OK");
+				await DisplayAlert(LersMobile.Droid.Resources.Messages.PollCurrentTextError, exc.Message, "OK");
 			}
 			finally
 			{
@@ -145,7 +148,7 @@ namespace LersMobile.MeasurePointProperties
 		{
 			// Обновляем последние текущие данные.
 
-			this.LoadingText = "Загрузка...";
+			this.LoadingText = LersMobile.Droid.Resources.Messages.Loading;
 			this.IsBusy = true;
 
 			try
@@ -160,7 +163,7 @@ namespace LersMobile.MeasurePointProperties
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert("Ошибка загрузки данных", exc.Message, "OK");
+				await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorLoadedData, exc.Message, "OK");
 			}
 			finally
 			{

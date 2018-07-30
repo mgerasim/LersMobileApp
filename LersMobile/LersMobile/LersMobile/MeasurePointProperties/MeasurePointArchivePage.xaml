@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
-             x:Class="LersMobile.MeasurePointProperties.MeasurePointArchivePage"             
-             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
-             Title="Архив">
+             x:Class="LersMobile.MeasurePointProperties.MeasurePointArchivePage"      
+			 xmlns:local="clr-namespace:LersMobile"
+             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Тип данных"/>
+			<Label Text="{local:Translate Close}"/>
             <Picker x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
 <!--
             <dg:DataGrid

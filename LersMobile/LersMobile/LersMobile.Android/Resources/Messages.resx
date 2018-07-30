@@ -165,4 +165,178 @@
   <data name="Notifications" xml:space="preserve">
     <value>Уведомления</value>
   </data>
+  <data name="AdmissionDateOverdue" xml:space="preserve">
+    <value>Допуск просрочен на (в днях)</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>Архив</value>
+  </data>
+  <data name="AutoPoll" xml:space="preserve">
+    <value>Автоопрос через</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="ConfirmedIncidentBody" xml:space="preserve">
+    <value>Закрыть нештатную ситуацию?</value>
+  </data>
+  <data name="ConfirmedIncidentHeader" xml:space="preserve">
+    <value>Закрыть НС</value>
+  </data>
+  <data name="CriticalIncidentCount" xml:space="preserve">
+    <value>Критических НС</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Данные</value>
+  </data>
+  <data name="DataType" xml:space="preserve">
+    <value>Тип данных</value>
+  </data>
+  <data name="DaysToAdmissionDeadline" xml:space="preserve">
+    <value>Допуск заканчивается через (в днях)</value>
+  </data>
+  <data name="Device" xml:space="preserve">
+    <value>Устройство</value>
+  </data>
+  <data name="DueEquipmentCalibrationCount" xml:space="preserve">
+    <value>Приближается поверка (кол-во устр)</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="ErrorDateStartEnd" xml:space="preserve">
+    <value>Дата окончания периода больше даты начала</value>
+  </data>
+  <data name="ErrorEnsureConnected" xml:space="preserve">
+    <value>Невозможно подключиться к серверу ЛЭРС УЧЁТ. Отсутствует адрес сервера или токен.</value>
+  </data>
+  <data name="ErrorIncidentLoad" xml:space="preserve">
+    <value>Ошибка загрузки НС</value>
+  </data>
+  <data name="ErrorLoaded" xml:space="preserve">
+    <value>Ошибка загрузки</value>
+  </data>
+  <data name="ErrorLoadedDescription" xml:space="preserve">
+    <value>Не удалось загрузить информацию о точке учёта</value>
+  </data>
+  <data name="ErrorPollSession" xml:space="preserve">
+    <value>Опрос завершён с ошибкой</value>
+  </data>
+  <data name="ErrotIncidentClose" xml:space="preserve">
+    <value>Ошибка закрытия НС</value>
+  </data>
+  <data name="Incedent" xml:space="preserve">
+    <value>Нештатная ситуация</value>
+  </data>
+  <data name="IncidentCloseSuccessed" xml:space="preserve">
+    <value>НС успешно закрыта</value>
+  </data>
+  <data name="LastDataOverdue" xml:space="preserve">
+    <value>Данные отсутствуют (в днях)</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Загрузка...</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="NodeStateError" xml:space="preserve">
+    <value>Есть ошибки</value>
+  </data>
+  <data name="NodeStateNone" xml:space="preserve">
+    <value>Неизвестно</value>
+  </data>
+  <data name="NodeStateNormal" xml:space="preserve">
+    <value>Норма</value>
+  </data>
+  <data name="NodeStateWarning" xml:space="preserve">
+    <value>Есть предупреждения</value>
+  </data>
+  <data name="NotSupportedCommunicationLink" xml:space="preserve">
+    <value>Неизвестный тип канала связи</value>
+  </data>
+  <data name="NotSupportedException" xml:space="preserve">
+    <value>Неизвестное состояние</value>
+  </data>
+  <data name="NotSupportedImportance" xml:space="preserve">
+    <value>Неизвестный тип важности</value>
+  </data>
+  <data name="NotSupportedIncidentImportance" xml:space="preserve">
+    <value>Неизвестный тип важности НС</value>
+  </data>
+  <data name="NotSupportedSystemType" xml:space="preserve">
+    <value>Неизвестный тип системы</value>
+  </data>
+  <data name="OverdueEquipmentCalibrationCount" xml:space="preserve">
+    <value>Просрочена поверка (кол-во устр)</value>
+  </data>
+  <data name="OverdueJobCount" xml:space="preserve">
+    <value>Просрочено работ</value>
+  </data>
+  <data name="PollCurrent" xml:space="preserve">
+    <value>Опросить текущие</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Подробно</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Общие</value>
+  </data>
+  <data name="WarningIncidentCount" xml:space="preserve">
+    <value>Нештатных ситуаций</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value> Потребитель:</value>
+  </data>
+  <data name="DateLabel" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="ErrorLoadDetail" xml:space="preserve">
+    <value>Не удалось загрузить свойства объекта</value>
+  </data>
+  <data name="ErrorLoadedData" xml:space="preserve">
+    <value>Ошибка загрузки данных</value>
+  </data>
+  <data name="ErrorLoadedNodeList" xml:space="preserve">
+    <value>Не удалось загрузить список объектов</value>
+  </data>
+  <data name="ErrorLoadedNotifications" xml:space="preserve">
+    <value>Не удалось загрузить уведомления</value>
+  </data>
+  <data name="MeasurePointsTitle" xml:space="preserve">
+    <value>Точки учёта</value>
+  </data>
+  <data name="MessageLabel" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="Node" xml:space="preserve">
+    <value>Объект учёта</value>
+  </data>
+  <data name="NodeGroup" xml:space="preserve">
+    <value>Группа объектов</value>
+  </data>
+  <data name="NodeGroupSearch" xml:space="preserve">
+    <value>Поиск по имени или адресу</value>
+  </data>
+  <data name="PollCurrentLoadingText" xml:space="preserve">
+    <value>Идёт опрос текущих...</value>
+  </data>
+  <data name="PollCurrentText" xml:space="preserve">
+    <value>Опрос текущих</value>
+  </data>
+  <data name="PollCurrentTextError" xml:space="preserve">
+    <value>Ошибка опроса текущих</value>
+  </data>
+  <data name="PollCurrentTimeoutError" xml:space="preserve">
+    <value>Не удалось завершить опрос за {0} мин.</value>
+  </data>
+  <data name="Serviceman" xml:space="preserve">
+    <value>Обслуживающий:</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Состояние:</value>
+  </data>
 </root>

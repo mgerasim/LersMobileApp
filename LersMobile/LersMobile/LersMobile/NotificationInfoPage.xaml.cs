@@ -24,6 +24,8 @@ namespace LersMobile
 			this.notification = notification ?? throw new ArgumentNullException(nameof(notification));
 
 			this.BindingContext = this.notification;
+
+			this.Title = LersMobile.Droid.Resources.Messages.Notifications;
 		}
 	}
 }

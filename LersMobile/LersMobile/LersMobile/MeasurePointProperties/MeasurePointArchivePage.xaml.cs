@@ -59,7 +59,9 @@ namespace LersMobile.MeasurePointProperties
 
 			FillDataTypes();
 
-			this.BindingContext = this;		
+			this.BindingContext = this;
+
+			this.Title = LersMobile.Droid.Resources.Messages.Archive;
 		}
 
 		private void SetColumns()
