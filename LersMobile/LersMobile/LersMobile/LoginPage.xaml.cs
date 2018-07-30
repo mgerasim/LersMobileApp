@@ -75,6 +75,12 @@ namespace LersMobile
 
 		public async void OnLogin()
 		{
+			if (this.IsBusy == true)
+			{
+				// Исключить повторную авторизации
+				return;
+			}
+
 			if (!CheckUserInput())
 			{
 				return;
