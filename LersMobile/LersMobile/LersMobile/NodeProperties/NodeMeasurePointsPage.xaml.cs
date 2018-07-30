@@ -35,7 +35,7 @@ namespace LersMobile.NodeProperties
 
             this.Node = nodeView ?? throw new ArgumentNullException(nameof(nodeView));
 
-			this.Title = LersMobile.Droid.Resources.Messages.MeasurePointsTitle;
+			this.Title = Droid.Resources.Messages.NodeMeasurePointsPage_Title;
 		}
 
 

@@ -6,7 +6,7 @@
              xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid">
     <ContentPage.Content>
         <StackLayout>
-			<Label Text="{local:Translate Close}"/>
+			<Label Text="{local:Translate Text_Close}"/>
             <Picker x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
 <!--
             <dg:DataGrid

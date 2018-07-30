@@ -25,7 +25,7 @@
           <Label
               Grid.Column="1"
               Grid.Row="2"
-              Text="{local:Translate Application}"
+              Text="{local:Translate Text_Application}"
               Style="{DynamicResource SubtitleStyle}"/>
         </Grid>
       </ListView.Header>

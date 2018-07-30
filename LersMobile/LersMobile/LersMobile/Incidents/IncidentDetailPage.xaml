@@ -24,7 +24,7 @@
             </ListView>
 
             <!-- Кнопка закрытия -->
-			<Button Text="{local:Translate Close}" IsVisible="{Binding Incident.IsActive}" Clicked="OnCloseIncidentClicked" />
+			<Button Text="{local:Translate Text_Close}" IsVisible="{Binding Incident.IsActive}" Clicked="OnCloseIncidentClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

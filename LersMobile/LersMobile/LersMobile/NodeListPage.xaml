@@ -6,7 +6,7 @@
 
     <StackLayout>
         <!-- Фильтрация по группе объектов -->
-		<Label Text="{local:Translate NodeGroup}" />
+		<Label Text="{local:Translate NodeListPage_NodeGroup}" />
         <Picker x:Name="nodeGroupPicker" />
         
 
@@ -34,7 +34,7 @@
         <!-- Блок, отвечающей за поиск -->
         <SearchBar x:Name="searchBar" 
                    Text="{Binding SearchText}"
-                   Placeholder="{local:Translate NodeGroupSearch}"
+                   Placeholder="{local:Translate NodeListPage_NodeGroup_Search}"
                    SearchCommand="{Binding SearchCommand}"
                    TextChanged="OnSearchBarTextChanged"
                    HeightRequest="30" />

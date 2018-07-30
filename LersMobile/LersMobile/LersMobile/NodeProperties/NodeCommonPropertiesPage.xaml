@@ -25,19 +25,19 @@
                         <Label Text="{Binding Node.Title}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
                         <Label Text="{Binding Node.Address}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
 
-						<Label Text="{local:Translate Customer}"                   Grid.Row="2" Grid.Column="0"/>
+						<Label Text="{local:Translate NodeCommonPropertiesPage_Customer}"                   Grid.Row="2" Grid.Column="0"/>
                         <Label Text="{Binding Node.CustomerTitle}"   Grid.Row="2" Grid.Column="1" />
 
-						<Label Text="{local:Translate Serviceman}"                    Grid.Row="3" Grid.Column="0"/>
+						<Label Text="{local:Translate NodeCommonPropertiesPage_Serviceman	}"                    Grid.Row="3" Grid.Column="0"/>
                         <Label Text="{Binding Node.ServicemanName}"    Grid.Row="3" Grid.Column="1" />
 
-						<Label Text="{local:Translate State}"            Grid.Row="4" Grid.Column="0" />
+						<Label Text="{local:Translate NodeCommonPropertiesPage_State}"            Grid.Row="4" Grid.Column="0" />
                         <Label Text="{Binding Node.State}"  Grid.Row="4" Grid.Column="1" />
 
                         <!-- Диагностическая карточка объекта учёта-->
 
                         <StackLayout IsVisible="{Binding Node.HasDetailedState}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
-							<Label Text="{local:Translate Serviceman}"/>
+							<Label Text="{local:Translate NodeCommonPropertiesPage_Serviceman}"/>
                             <ListView x:Name="nodeStateListView" ItemsSource="{Binding Node.DetailedState}" ItemSelected="OnDetailStateSelected">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -62,7 +62,7 @@
                         BackgroundColor="{StaticResource LoadingIndicator}">
 
                 <ActivityIndicator IsRunning="{Binding IsBusy}" />
-				<Label Text="{local:Translate Loading}" HorizontalOptions="Center" />
+				<Label Text="{local:Translate Text_Connecting}" HorizontalOptions="Center" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

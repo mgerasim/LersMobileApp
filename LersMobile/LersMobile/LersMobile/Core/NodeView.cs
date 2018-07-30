@@ -59,12 +59,12 @@ namespace LersMobile.Core
 			{
 				switch (this.Node.State)
 				{
-					case NodeState.Error: return LersMobile.Droid.Resources.Messages.NodeStateError;
-					case NodeState.None: return LersMobile.Droid.Resources.Messages.NodeStateNone;
-					case NodeState.Normal: return LersMobile.Droid.Resources.Messages.NodeStateNormal;
-					case NodeState.Warning: return LersMobile.Droid.Resources.Messages.NodeStateWarning;
+					case NodeState.Error: return Droid.Resources.Messages.NodeView_Sate_Error;
+					case NodeState.None: return Droid.Resources.Messages.NodeView_State_None;
+					case NodeState.Normal: return Droid.Resources.Messages.NodeView_State_Normal;
+					case NodeState.Warning: return Droid.Resources.Messages.NodeView_State_Warning;
 					default:
-						throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedException} {this.Node.State}");
+						throw new NotSupportedException($"{Droid.Resources.Messages.Text_State_Not_Supported} {this.Node.State}");
 				}
 			}
 		}
@@ -125,7 +125,7 @@ namespace LersMobile.Core
             {
                 this.DetailedState.Add(new NodeStateView(NodeState.Error, DetailedStateId.CriticalIncidents)
 				{
-					Text = $"{LersMobile.Droid.Resources.Messages.CriticalIncidentCount}: {state.CriticalIncidentCount}"
+					Text = String.Format(Droid.Resources.Messages.NodeView_CriticalIncident_Count, state.CriticalIncidentCount)
 				});
             }
 
@@ -133,25 +133,25 @@ namespace LersMobile.Core
             {
                 this.DetailedState.Add(new NodeStateView(NodeState.Warning, DetailedStateId.Incidents)
 				{
-					Text = $"{LersMobile.Droid.Resources.Messages.WarningIncidentCount}: {state.WarningIncidentCount}"
+					Text = String.Format(Droid.Resources.Messages.NodeView_Warning_Incident_Count, state.WarningIncidentCount)
 				});
             }
 
             if (state.LastDataOverdue > 0)
             {
-                this.DetailedState.Add(new NodeStateView(NodeState.Warning) { Text = $"{LersMobile.Droid.Resources.Messages.LastDataOverdue}: {state.LastDataOverdue} " });
+                this.DetailedState.Add(new NodeStateView(NodeState.Warning) { Text = String.Format(Droid.Resources.Messages.NodeView_Overdue_Data, state.LastDataOverdue) });
             }
 
             if (state.OverdueJobCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView(NodeState.Error) { Text = $"{LersMobile.Droid.Resources.Messages.OverdueJobCount}: {state.OverdueJobCount}" });
+                this.DetailedState.Add(new NodeStateView(NodeState.Error) { Text =  String.Format(Droid.Resources.Messages.NodeView_OverdueJobCount, state.OverdueJobCount) });
             }
 
             if (state.DaysToAdmissionDeadline.HasValue)
             {
 				this.DetailedState.Add(new NodeStateView(NodeState.Warning)
 				{
-					Text = $"{state.AdmissionMeasurePoint.Title} - {LersMobile.Droid.Resources.Messages.DaysToAdmissionDeadline}: {state.DaysToAdmissionDeadline} "
+					Text = String.Format(Droid.Resources.Messages.NodeView_Admission_Deadline, state.AdmissionMeasurePoint.Title, state.DaysToAdmissionDeadline)
                 });
             }
 
@@ -159,7 +159,7 @@ namespace LersMobile.Core
             {
                 this.DetailedState.Add(new NodeStateView(NodeState.Error)
                 {
-                    Text = $"{state.AdmissionMeasurePoint.Title}- {LersMobile.Droid.Resources.Messages.AdmissionDateOverdue}: {state.AdmissionDateOverdue} "
+					Text = String.Format(Droid.Resources.Messages.NodeView_Admission_Overdue, state.AdmissionMeasurePoint.Title, state.AdmissionDateOverdue)
                 });
             }
 
@@ -167,15 +167,15 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new NodeStateView(NodeState.Warning)
 				{
-					Text = $"{LersMobile.Droid.Resources.Messages.DueEquipmentCalibrationCount}: {state.DueEquipmentCalibrationCount} "
+					Text = String.Format(Droid.Resources.Messages.NodeView_DueEquipmentCalibrationCount, state.DueEquipmentCalibrationCount)
 				});
 			}
 
 			if (state.OverdueEquipmentCalibrationCount > 0)
 			{
 				this.DetailedState.Add(new NodeStateView(NodeState.Error)
-				{
-					Text = $"{LersMobile.Droid.Resources.Messages.OverdueEquipmentCalibrationCount}: {state.OverdueEquipmentCalibrationCount} "
+				{					
+					Text = String.Format(Droid.Resources.Messages.NodeView_OverdueEquipmentCalibrationCount, state.OverdueEquipmentCalibrationCount)
 				});
 			}
 		}

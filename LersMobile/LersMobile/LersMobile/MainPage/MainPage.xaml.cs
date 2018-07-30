@@ -29,7 +29,7 @@ namespace LersMobile
 		{
 			if (App.NotificationId > 0)
 			{
-				var item = new MainPageMenuItem() { Id = 2, Title = LersMobile.Droid.Resources.Messages.Notifications, TargetType = typeof(NotificationCenterPage) };
+				var item = new MainPageMenuItem() { Id = 2, Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList, TargetType = typeof(NotificationCenterPage) };
 				SwitchDetailToItem(item);
 			}
 		}

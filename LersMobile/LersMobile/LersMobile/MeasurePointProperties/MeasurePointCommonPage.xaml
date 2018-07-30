@@ -14,12 +14,12 @@
                 </StackLayout>
 
                 <!-- Связанное с точкой учёта устройства -->
-				<Label Text="{local:Translate Device}" FontAttributes="Bold" />
+				<Label Text="{local:Translate MeasurePointCommonPage_Device}" FontAttributes="Bold" />
 				<Label Text="{Binding MeasurePoint.Device}"/>
 
                 <!-- Подключение для автоопроса -->
                 <StackLayout IsVisible="{Binding MeasurePoint.AutoPollEnabled}">
-					<Label Text="{local:Translate AutoPoll}" FontAttributes="Bold" />
+					<Label Text="{local:Translate MeasurePointCommonPage_Label_AutoPoll}" FontAttributes="Bold" />
                     <StackLayout Orientation="Horizontal">
                         <Image Source="{Binding MeasurePoint.AutoPollConnection.TypeImage}"/>
                         <Label Text="{Binding MeasurePoint.AutoPollConnection.Title}"/>
@@ -28,7 +28,7 @@
 
                 <!-- Диагностическая карточка точки учёта -->
                 <StackLayout IsVisible="{Binding MeasurePoint.HasDetailedState}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
-					<Label Text="{local:Translate Summary}" FontAttributes="Bold" />
+					<Label Text="{local:Translate Text_Summary}" FontAttributes="Bold" />
                     <ListView x:Name="nodeStateListView" ItemsSource="{Binding MeasurePoint.DetailedState}" ItemSelected="OnDetailStateSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>

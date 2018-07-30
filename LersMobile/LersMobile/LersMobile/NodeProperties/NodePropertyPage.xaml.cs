@@ -19,7 +19,7 @@ namespace LersMobile.NodeProperties
             this.Children.Add(new NodeCommonPropertiesPage(nodeView));
             this.Children.Add(new NodeMeasurePointsPage(nodeView));
 
-			this.Title = "Объект учёта";
+			this.Title = Droid.Resources.Messages.NodePropertyPage_Title;
 		}
     }
 }

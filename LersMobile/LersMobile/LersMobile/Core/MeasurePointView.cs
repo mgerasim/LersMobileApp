@@ -57,7 +57,7 @@ namespace LersMobile.Core
                     case MeasurePointState.None: return "State_Unknown.png";
                     case MeasurePointState.Warning: return "State_Warning.png";
                     default:
-                        throw new NotSupportedException($"{LersMobile.Droid.Resources.Messages.NotSupportedException} {this.MeasurePoint.State}");
+                        throw new NotSupportedException($"{Droid.Resources.Messages.Text_State_Not_Supported} {this.MeasurePoint.State}");
                 }
             }
         }
@@ -131,7 +131,7 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error, DetailedStateId.CriticalIncidents)
 				{
-					Text = $"{LersMobile.Droid.Resources.Messages.CriticalIncidentCount}: {state.CriticalIncidentCount}"
+					Text = $"{Droid.Resources.Messages.MeasurePointView_CriticalIncident_Count}: {state.CriticalIncidentCount}"
 				});
 			}
 
@@ -139,20 +139,22 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning, DetailedStateId.Incidents)
 				{
-					Text = $"{LersMobile.Droid.Resources.Messages.WarningIncidentCount}: {state.WarningIncidentCount}"
+					Text = String.Format(Droid.Resources.Messages.MeasurePointView_Warning_Incident_Count,
+											state.WarningIncidentCount)
 				});
 			}
 
 			if (state.OverdueJobCount > 0)
 			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error) { Text = $"{LersMobile.Droid.Resources.Messages.OverdueJobCount}: {state.OverdueJobCount}" });
+				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error) { Text = String.Format(Droid.Resources.Messages.MeasurePointView_OverdueJobCount, state.OverdueJobCount)
+				});
 			}
 
 			if (state.DaysToAdmissionDeadline.HasValue)
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning)
 				{
-					Text = $"{LersMobile.Droid.Resources.Messages.DaysToAdmissionDeadline}: {state.DaysToAdmissionDeadline} "
+					Text = String.Format(Droid.Resources.Messages.MeasurePointView_Admission_Deadline, state.DaysToAdmissionDeadline)
 				});
 			}
 
@@ -160,7 +162,7 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error)
 				{
-					Text = $"{LersMobile.Droid.Resources.Messages.AdmissionDateOverdue}: {state.AdmissionDateOverdue} "
+					Text = String.Format(Droid.Resources.Messages.MeasurePointView_Admission_Overdue, state.AdmissionDateOverdue)
 				});
 			}
 
@@ -168,7 +170,7 @@ namespace LersMobile.Core
 			{
 				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning)
 				{
-					Text = $"{LersMobile.Droid.Resources.Messages.LastDataOverdue}: {state.LastDataOverdue} "
+					Text = String.Format(Droid.Resources.Messages.MeasurePointView_Overdue_Data, state.LastDataOverdue)
 				});
 			}
 		}

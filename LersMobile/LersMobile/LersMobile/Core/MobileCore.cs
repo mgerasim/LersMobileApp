@@ -213,7 +213,7 @@ namespace LersMobile.Core
 				if (string.IsNullOrEmpty(AppDataStorage.ServerAddress)
 				|| string.IsNullOrEmpty(AppDataStorage.Token))
 				{
-					throw new InvalidOperationException(LersMobile.Droid.Resources.Messages.ErrorEnsureConnected);
+					throw new InvalidOperationException(Droid.Resources.Messages.MobileCore_Connect_Failed);
 				}
 
 				await ConnectToken(AppDataStorage.ServerAddress, AppDataStorage.Token);

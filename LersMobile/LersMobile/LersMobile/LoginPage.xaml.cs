@@ -52,7 +52,7 @@ namespace LersMobile
 
 					ShowPasswordControls(true);
 
-					await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorConnect, exc.Message, "OK");
+					await DisplayAlert(Droid.Resources.Messages.LoginPage_Error_Connect, exc.Message, "OK");
 				}
 				finally
 				{
@@ -94,7 +94,7 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-                await DisplayAlert(LersMobile.Droid.Resources.Messages.ErrorConnectServer, exc.Message, "OK");
+                await DisplayAlert(Droid.Resources.Messages.LoginPage_Error_Connect_to_Server, exc.Message, "OK");
 			}
 			finally
 			{
@@ -107,7 +107,7 @@ namespace LersMobile
 
             if (string.IsNullOrEmpty(serverAddressInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, LersMobile.Droid.Resources.Messages.EmptyServer, ToastLength.Short)
+				Toast.MakeText(Android.App.Application.Context, Droid.Resources.Messages.LoginPage_Empty_Server, ToastLength.Short)
 					.Show();
 
 				return false;
@@ -115,14 +115,15 @@ namespace LersMobile
 
 			if (string.IsNullOrEmpty(this.loginInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, LersMobile.Droid.Resources.Messages.EmptyLogin, ToastLength.Short)
+				Toast.MakeText(Android.App.Application.Context, Droid.Resources.Messages.LoginPage_Empty_Login, ToastLength.Short)
 					.Show();
 				return false;
 			}
 
 			if (string.IsNullOrEmpty(this.passwordInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, LersMobile.Droid.Resources.Messages.EmptyPassword, ToastLength.Short)
+				Toast.MakeText(Android.App.Application.Context, Droid.Resources.Messages.LoginPage_Empty_Password, 
+					ToastLength.Short)
 					.Show();
 				return false;
 			}
