@@ -69,8 +69,24 @@ namespace LersMobile.Droid.Notifications
 			PendingIntent pendingIntent =
 			stackBuilder.GetPendingIntent(pendingIntentId, PendingIntentFlags.OneShot);
 
+			int iconImportance = 0;
+
+			switch (notification.Importance)
+			{
+				case Lers.Importance.Info:
+					iconImportance = Resource.Drawable.notify_info;
+					break;
+				case Lers.Importance.Warn:
+					iconImportance = Resource.Drawable.notify_warning;
+					break;
+				case Lers.Importance.Error:
+				default:
+					iconImportance = Resource.Drawable.notify_error;
+					break;
+			}
+
 			var notificationBuilder = new Notification.Builder(context)
-				.SetSmallIcon(Resource.Drawable.close_button)
+				.SetSmallIcon(iconImportance)
 				.SetContentTitle(notification.Type.GetDescription())
 				.SetContentText(notification.Message)
 				.SetStyle(new Notification.BigTextStyle())

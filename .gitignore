@@ -9,3 +9,4 @@
 /LersMobile/LersMobile.Core/bin/
 /LersMobile/LersMobile/LersMobile.Android/LersMobile.Android.csproj.user
 /LersMobile/LersMobile/LersMobile/LersMobile.shproj.user
+*.log

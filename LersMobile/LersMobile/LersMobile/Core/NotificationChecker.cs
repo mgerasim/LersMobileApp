@@ -49,7 +49,7 @@ namespace LersMobile.Core
 
 #if (DEBUG)
 				{
-					handler(newNotifications.Last());
+					handler(newNotifications.Last());					
 				}
 #endif
 				long lastNotifyId = AppDataStorage.LastNotifyId;

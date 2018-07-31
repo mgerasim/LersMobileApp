@@ -27,5 +27,6 @@ namespace LersMobile
 
 			this.Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList;
 		}
+
 	}
 }
