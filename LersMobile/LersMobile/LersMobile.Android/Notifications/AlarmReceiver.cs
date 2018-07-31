@@ -64,11 +64,11 @@ namespace LersMobile.Droid.Notifications
 			stackBuilder.AddParentStack(Java.Lang.Class.FromType(typeof(MainActivity)));
 			stackBuilder.AddNextIntent(resultIntent);
 
-			const int pendingIntentId = 0;
+			//const int pendingIntentId = 0;
 
 			PendingIntent pendingIntent =
-			stackBuilder.GetPendingIntent(pendingIntentId, PendingIntentFlags.OneShot);
-
+				PendingIntent.GetActivity(context, 0, resultIntent, PendingIntentFlags.UpdateCurrent);
+			
 			int iconImportance = 0;
 
 			switch (notification.Importance)
@@ -86,6 +86,7 @@ namespace LersMobile.Droid.Notifications
 			}
 
 			var notificationBuilder = new Notification.Builder(context)
+				.SetAutoCancel(true)
 				.SetSmallIcon(iconImportance)
 				.SetContentTitle(notification.Type.GetDescription())
 				.SetContentText(notification.Message)

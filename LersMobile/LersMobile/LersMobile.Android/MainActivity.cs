@@ -11,7 +11,7 @@ using LersMobile.Droid.Notifications;
 
 namespace LersMobile.Droid
 {
-    [Activity(Label = "LersMobile", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(LaunchMode=LaunchMode.SingleTop, Label = "LersMobile", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -24,11 +24,6 @@ namespace LersMobile.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App());
-		
-            if (Intent.HasExtra("NotificationId"))
-            {
-                App.NotificationId = Intent.Extras.GetInt("NotificationId", 0);
-            }
 
 			InitNotificationServices(this);
         }
@@ -36,6 +31,14 @@ namespace LersMobile.Droid
 		protected override void OnNewIntent(Intent intent)
 		{
 			base.OnNewIntent(intent);
+
+			if (intent.HasExtra("NotificationId"))
+			{
+				var NotificationId = intent.Extras.GetInt("NotificationId", 0);
+
+				Core.Helper.ShowNotificationInfoPage(NotificationId);
+			}
+			
 		}
 
 		public static void InitNotificationServices(Context context)

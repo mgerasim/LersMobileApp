@@ -23,18 +23,6 @@ namespace LersMobile
 		}
 
 		/// <summary>
-        /// Вызывается при отображении страницы на экране.
-        /// </summary>
-		protected override void OnAppearing()
-		{
-			if (App.NotificationId > 0)
-			{
-				var item = new MainPageMenuItem() { Id = 2, Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList, TargetType = typeof(NotificationCenterPage) };
-				SwitchDetailToItem(item);
-			}
-		}
-
-		/// <summary>
 		/// Пользователь выбрал пункт в навигационном меню.
 		/// </summary>
 		/// <param name="sender"></param>
@@ -58,7 +46,7 @@ namespace LersMobile
 			MasterPage.ListView.SelectedItem = null;
 		}
 
-		private void SwitchDetailToItem(MainPageMenuItem item)
+		public void SwitchDetailToItem(MainPageMenuItem item)
 		{
 			bool isDisplaying = false;
 
