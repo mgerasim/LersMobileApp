@@ -25,8 +25,14 @@ namespace LersMobile.Droid
 
             LoadApplication(new App());
 
+			if (Intent.HasExtra("NotificationId"))
+			{
+				App.NotificationId = Intent.Extras.GetInt("NotificationId", 0);
+			}
+
 			InitNotificationServices(this);
-        }
+
+		}
 
 		protected override void OnNewIntent(Intent intent)
 		{
