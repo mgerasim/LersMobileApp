@@ -68,22 +68,8 @@ namespace LersMobile.Droid.Notifications
 
 			PendingIntent pendingIntent =
 				PendingIntent.GetActivity(context, 0, resultIntent, PendingIntentFlags.UpdateCurrent);
-			
-			int iconImportance = 0;
 
-			switch (notification.Importance)
-			{
-				case Lers.Importance.Info:
-					iconImportance = Resource.Drawable.notify_info;
-					break;
-				case Lers.Importance.Warn:
-					iconImportance = Resource.Drawable.notify_warning;
-					break;
-				case Lers.Importance.Error:
-				default:
-					iconImportance = Resource.Drawable.notify_error;
-					break;
-			}
+			int iconImportance = ResourceUtils.GetImageByImportance(notification.Importance);
 
 			var notificationBuilder = new Notification.Builder(context)
 				.SetAutoCancel(true)
