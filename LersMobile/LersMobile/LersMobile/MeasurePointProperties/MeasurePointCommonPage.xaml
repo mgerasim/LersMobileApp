@@ -24,7 +24,10 @@
                         <Image Source="{Binding MeasurePoint.AutoPollConnection.TypeImage}"/>
                         <Label Text="{Binding MeasurePoint.AutoPollConnection.Title}"/>
                     </StackLayout>
-                </StackLayout>
+					<Button x:Name="buttonArchive"
+							Text="{local:Translate MeasurePointArchivePage_Title}"
+							Clicked="buttonArchive_Clicked" />
+				</StackLayout>
 
                 <!-- Диагностическая карточка точки учёта -->
                 <StackLayout IsVisible="{Binding MeasurePoint.HasDetailedState}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">

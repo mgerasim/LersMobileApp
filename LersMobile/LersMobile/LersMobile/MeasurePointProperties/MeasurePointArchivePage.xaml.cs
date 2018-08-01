@@ -95,6 +95,11 @@ namespace LersMobile.MeasurePointProperties
 			await LoadRecords();
 		}
 
+		private void Filter_ToolbarItem_Clicked()
+		{
+			this.dataTypePicker.Focus();
+		}
+
 		private async Task LoadRecords()
 		{
 			this.IsBusy = true;
@@ -116,8 +121,8 @@ namespace LersMobile.MeasurePointProperties
 
 				await this.core.EnsureConnected();
 
-				var records = await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDate, endDate, this.SelectedDataType);
-
+				var records = (await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDate, endDate, this.SelectedDataType)).OrderByDescending(x => x.DateTime);
+				
 				this.Data.Clear();
 				this.Data.AddRange(records);
 			}
@@ -127,12 +132,16 @@ namespace LersMobile.MeasurePointProperties
 			}
 		}
 
-		public void OnDataTypeSelected(object sender, EventArgs e)
+		public async void OnDataTypeSelected(object sender, EventArgs e)
 		{
 			if (!this.IsVisible)
 			{
 				return;
 			}
+
+			await LoadRecords();
 		}
+
+
 	}
 }

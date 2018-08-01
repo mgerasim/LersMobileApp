@@ -43,6 +43,11 @@ namespace LersMobile.MeasurePointProperties
 			await LoadMeasurePointData();
 		}
 
+		protected void buttonArchive_Clicked()
+		{
+			Navigation.PushAsync(new MeasurePointArchivePage(MeasurePoint));
+		}
+
 		private async Task LoadMeasurePointData()
 		{
 			this.IsBusy = true;
@@ -109,6 +114,11 @@ namespace LersMobile.MeasurePointProperties
 			};
 
 			return this.Navigation.PushAsync(incidentListPage);
+		}
+
+		private void buttonArchive_Clicked(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

@@ -4,10 +4,14 @@
              x:Class="LersMobile.MeasurePointProperties.MeasurePointArchivePage"      
 			 xmlns:local="clr-namespace:LersMobile"
              xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Filter"
+					 Icon="filter.png"
+					 Clicked="Filter_ToolbarItem_Clicked" />
+	</ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-			<Label Text="{local:Translate Text_Close}"/>
-            <Picker x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
+            <Picker IsVisible="False" x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
 <!--
             <dg:DataGrid
                          x:Name="dataGrid"
@@ -19,14 +23,46 @@
             -->
 
             <ListView ItemsSource="{Binding Data}">
-                <ListView.ItemTemplate>
+				<ListView.Header>
+					<Grid >
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Label Text="Дата" Grid.Column="0" Grid.Row="0" />
+						<Label Text="Quantity" Grid.Column="1" Grid.Row="0"/>
+					</Grid>
+				</ListView.Header>
+				
+				<ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"></ColumnDefinition>
+									<ColumnDefinition Width="Auto"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*"></RowDefinition>
+									<RowDefinition Height="*"></RowDefinition>
+								</Grid.RowDefinitions>
+								
+							</Grid>
+
+							<Label Text="{Binding DateTime}" />
+
+
+							<!--
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding DateTime}"/>
                                 <Label Text="{Binding M_in, StringFormat='{0:0.00}'}"/>
                                 <Label Text="{Binding M_out, StringFormat='{0:0.00}'}"/>
                             </StackLayout>
+							-->
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
