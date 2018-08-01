@@ -17,7 +17,7 @@
                 <Entry x:Name="passwordInput" IsPassword="True"></Entry>
 
                 <StackLayout Orientation="Horizontal" Spacing="0">
-                    <Label x:Name="sslLabel" Text="{local:Translate LoginPage_Ssl}" VerticalOptions="Center" HorizontalOptions="Start" />
+                    <Label x:Name="sslLabel" Text="{local:Translate LoginPage_UseSsl}" VerticalOptions="Center" HorizontalOptions="Start" />
                     <Switch x:Name="sslSwitch" HorizontalOptions="Start" VerticalOptions="Center" />
                 </StackLayout>
 
