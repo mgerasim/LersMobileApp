@@ -18,7 +18,7 @@ namespace LersMobile.Core
 		{
 			App.NotificationId = NotificationId;
 
-			var item = new MainPageMenuItem() { Id = 2, Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList, TargetType = typeof(NotificationCenterPage) };
+			var item = new MainPageMenuItem() { Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList, TargetType = typeof(NotificationCenterPage) };
 
 			((MainPage)Xamarin.Forms.Application.Current.MainPage).SwitchDetailToItem(item);
 		}
