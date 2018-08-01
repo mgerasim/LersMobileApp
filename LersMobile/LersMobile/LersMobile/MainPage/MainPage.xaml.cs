@@ -46,6 +46,19 @@ namespace LersMobile
 			MasterPage.ListView.SelectedItem = null;
 		}
 
+		/// <summary>
+		/// Вызывается при отображении страницы на экране.
+		/// </summary>
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			if (App.NotificationId > 0)
+			{
+				Core.NotificationUtils.ShowNotificationInfoPage(App.NotificationId);
+			}
+		}
+
 		public void SwitchDetailToItem(MainPageMenuItem item)
 		{
 			bool isDisplaying = false;
