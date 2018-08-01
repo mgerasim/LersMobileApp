@@ -20,6 +20,11 @@ namespace LersMobile.MeasurePointProperties
 			DeviceDataType.Day, DeviceDataType.Hour, DeviceDataType.Month
 		};
 
+		private static String[] dateStringFormat = new String[]
+		{
+			"{0:dd.MM.yyyy}", "{0:dd.MM.yyyy HH:mm}", "{0:MM.yyyy}"
+		};
+
 		/// <summary>
 		/// Выбранный для отображения тип данных.
 		/// </summary>
@@ -30,6 +35,8 @@ namespace LersMobile.MeasurePointProperties
 		private readonly Core.MobileCore core;
 
 		private bool isLoaded = false;
+
+		private String SelectedStringFormat => dateStringFormat[this.dataTypePicker.SelectedIndex];
 
 
 		public ObservableCollection<DataRecord> Data { get; private set; } = new ObservableCollection<DataRecord>();
@@ -44,11 +51,12 @@ namespace LersMobile.MeasurePointProperties
 				_currentDataRecord = value;
 				OnPropertyChanged(nameof(CurrentDataRecord));
 			}
-		}
-			
+		}		
 		
 		public MeasurePointArchivePage(Core.MeasurePointView measurePoint)
 		{
+			BindingContext = this;
+
 			InitializeComponent();
 
 			this.core = App.Core;
@@ -125,6 +133,7 @@ namespace LersMobile.MeasurePointProperties
 				
 				this.Data.Clear();
 				this.Data.AddRange(records);
+
 			}
 			finally
 			{
@@ -140,8 +149,7 @@ namespace LersMobile.MeasurePointProperties
 			}
 
 			await LoadRecords();
+
 		}
-
-
 	}
 }
