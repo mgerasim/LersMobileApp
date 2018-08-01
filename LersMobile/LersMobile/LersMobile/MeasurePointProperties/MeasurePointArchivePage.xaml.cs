@@ -70,7 +70,67 @@ namespace LersMobile.MeasurePointProperties
 			this.BindingContext = this;
 
 			this.Title = Droid.Resources.Messages.MeasurePointArchivePage_Title;
+
 		}
+
+		private void UpdateDataGrid()
+		{
+			if (containerStackLayout.Children.Count > 1)
+			{
+
+				containerStackLayout.Children.RemoveAt(1);
+			}
+
+
+			var dataTemplate = new DataTemplate(() =>
+			{
+				var grid = new Grid();
+				var dateTimeLabel = new Label();
+
+
+				
+				//dateTimeLabel.FormattedText
+
+				dateTimeLabel.SetBinding(Label.TextProperty, "DateTime", BindingMode.Default, null, this.SelectedStringFormat);
+
+				grid.Children.Add(dateTimeLabel);
+
+				return new ViewCell { View = grid };
+			});
+
+			ListView listView = new ListView { ItemsSource = Data, ItemTemplate = dataTemplate };
+
+			this.containerStackLayout.Children.Add(listView);
+
+			/*
+			while (dataGrid.Columns.Count > 0)
+			{
+				dataGrid.Columns.RemoveAt(0);
+			}
+
+			while (dataGrid.ColumnDefinitions.Count > 0)
+			{
+				dataGrid.ColumnDefinitions.RemoveAt(0);
+			}
+
+			Xamarin.Forms.DataGrid.ColumnCollection cols = new Xamarin.Forms.DataGrid.ColumnCollection();
+
+			Xamarin.Forms.DataGrid.DataGridColumn columnItem = new Xamarin.Forms.DataGrid.DataGridColumn();
+
+			columnItem.Title = "Дата";
+			columnItem.PropertyName = "DateTime";
+			columnItem.StringFormat = SelectedStringFormat;
+			
+			cols.Add(columnItem);
+
+			this.dataGrid.Columns = cols;
+
+			dataGrid.ItemsSource = null;
+
+			dataGrid.ItemsSource = Data;
+			*/
+		}
+
 
 		private void SetColumns()
 		{
@@ -148,8 +208,14 @@ namespace LersMobile.MeasurePointProperties
 				return;
 			}
 
-			await LoadRecords();
+			UpdateDataGrid();
 
+			await LoadRecords();
+		}
+
+		private void dataGrid_Refreshing(object sender, EventArgs e)
+		{
+			UpdateDataGrid();
 		}
 	}
 }

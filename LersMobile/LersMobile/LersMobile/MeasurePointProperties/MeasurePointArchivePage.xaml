@@ -10,20 +10,22 @@
 					 Clicked="Filter_ToolbarItem_Clicked" />
 	</ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Fill">
+        <StackLayout x:Name="containerStackLayout" HorizontalOptions="Fill">
+			
+			
             <Picker IsVisible="False" x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
 
+			<!--
 			<dg:DataGrid x:Name="dataGrid"
                          ItemsSource="{Binding Data}" 
                          RowHeight="70" HeaderHeight="50" BorderColor="#CCCCCC"
                          HeaderBackground="#E0E6F8"
+						 Refreshing="dataGrid_Refreshing"
                          IsRefreshing="{Binding IsBusy}">
 				
-				<dg:DataGrid.Columns>
-					<dg:DataGridColumn Title="DateTime" PropertyName="DateTime" StringFormat="{}{0:dd.MM.yyyy HH:mm}" ></dg:DataGridColumn>
-				</dg:DataGrid.Columns>
 				
             </dg:DataGrid>
+			-->
             
         </StackLayout>
     </ContentPage.Content>
