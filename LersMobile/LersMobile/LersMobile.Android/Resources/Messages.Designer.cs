@@ -198,9 +198,9 @@ namespace LersMobile.Droid.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Использовать SSL.
         /// </summary>
-        public static string LoginPage_Ssl {
+        public static string LoginPage_UseSsl {
             get {
-                return ResourceManager.GetString("LoginPage_Ssl", resourceCulture);
+                return ResourceManager.GetString("LoginPage_UseSsl", resourceCulture);
             }
         }
         

@@ -12,6 +12,13 @@ using Xamarin.Forms.Xaml;
 
 namespace LersMobile
 {
+	enum pageMenuItem
+	{
+		pageNodeList = 0,
+		pageIncidentList = 1,
+		pageNotificationCenter = 2,
+		actionExit = 3
+	}
 	/// <summary>
 	/// Главное меню приложения.
 	/// </summary>
@@ -36,10 +43,10 @@ namespace LersMobile
 			{
 				MenuItems = new ObservableCollection<MainPageMenuItem>(new[]
 				{
-					new MainPageMenuItem() { Id = 0, Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList, TargetType = typeof(NodeListPage)},
-                    new MainPageMenuItem() { Id = 1, Title = Droid.Resources.Messages.MainPage_MenuItem_IncidentList, TargetType = typeof(Incidents.IncidentListMainPage) },
-                    new MainPageMenuItem() { Id = 2, Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList, TargetType = typeof(NotificationCenterPage)},
-					new MainPageMenuItem() { Id = 3, Title = Droid.Resources.Messages.MainPage_MenuItem_Exit, TargetAction = App.Core.Logout, BeginGroup = true }
+					new MainPageMenuItem() { Id = (int)pageMenuItem.pageNodeList, Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList, TargetType = typeof(NodeListPage)},
+                    new MainPageMenuItem() { Id = (int)pageMenuItem.pageIncidentList, Title = Droid.Resources.Messages.MainPage_MenuItem_IncidentList, TargetType = typeof(Incidents.IncidentListMainPage) },
+                    new MainPageMenuItem() { Id = (int)pageMenuItem.pageNotificationCenter, Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList, TargetType = typeof(NotificationCenterPage)},
+					new MainPageMenuItem() { Id = (int)pageMenuItem.actionExit, Title = Droid.Resources.Messages.MainPage_MenuItem_Exit, TargetAction = App.Core.Logout, BeginGroup = true }
 				});
 			}
 

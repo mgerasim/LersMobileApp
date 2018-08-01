@@ -72,7 +72,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\ConnectionView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DayIncidentList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DetailedStateId.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\Helper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointPoller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointView.cs" />

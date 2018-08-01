@@ -78,6 +78,7 @@
     <Compile Include="Notifications\BootReceiver.cs" />
     <Compile Include="Notifications\Channels.cs" />
     <Compile Include="Notifications\AlarmReceiver.cs" />
+    <Compile Include="Notifications\ResourceUtils.cs" />
     <Compile Include="Resources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -234,11 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\notify_info.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\filter.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
   </ItemGroup>

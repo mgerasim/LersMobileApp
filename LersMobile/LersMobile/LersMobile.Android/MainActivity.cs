@@ -36,7 +36,7 @@ namespace LersMobile.Droid
 			{
 				var NotificationId = intent.Extras.GetInt("NotificationId", 0);
 
-				Core.Helper.ShowNotificationInfoPage(NotificationId);
+				Core.NotificationUtils.ShowNotificationInfoPage(NotificationId);
 			}
 			
 		}
