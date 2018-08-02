@@ -15,18 +15,21 @@
 			
             <Picker IsVisible="False" x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
 
-			<!--
+
 			<dg:DataGrid x:Name="dataGrid"
                          ItemsSource="{Binding Data}" 
-                         RowHeight="70" HeaderHeight="50" BorderColor="#CCCCCC"
+                         BorderColor="#CCCCCC"
                          HeaderBackground="#E0E6F8"
 						 Refreshing="dataGrid_Refreshing"
                          IsRefreshing="{Binding IsBusy}">
 				
+				<dg:DataGrid.Columns>
+					<dg:DataGridColumn Title="Дата" PropertyName="DateTime" Width="*"/>
+				</dg:DataGrid.Columns>
+				
 				
             </dg:DataGrid>
-			-->
-            
+			
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

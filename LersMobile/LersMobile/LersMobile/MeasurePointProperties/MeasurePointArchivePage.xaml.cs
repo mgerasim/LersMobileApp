@@ -71,17 +71,37 @@ namespace LersMobile.MeasurePointProperties
 
 			this.Title = Droid.Resources.Messages.MeasurePointArchivePage_Title;
 
+			BuilderTableHeader();
+
+
 		}
 
 		private void UpdateDataGrid()
 		{
+
+
+
+
+			/*
 			if (containerStackLayout.Children.Count > 1)
 			{
 
 				containerStackLayout.Children.RemoveAt(1);
 			}
 
+			var headTemplate = new DataTemplate(() =>
+			{
+				var grid = new Grid();
+				var dateTimeLabel = new Label();
 
+				dateTimeLabel.Text = "D";
+
+				grid.Children.Add(dateTimeLabel);
+
+				return new ViewCell { View = grid };
+				
+			});
+			
 			var dataTemplate = new DataTemplate(() =>
 			{
 				var grid = new Grid();
@@ -100,19 +120,34 @@ namespace LersMobile.MeasurePointProperties
 
 			ListView listView = new ListView { ItemsSource = Data, ItemTemplate = dataTemplate };
 
+			listView.HeaderTemplate = headTemplate;
+
+			
+
 			this.containerStackLayout.Children.Add(listView);
 
+			*/
+
 			/*
-			while (dataGrid.Columns.Count > 0)
-			{
-				dataGrid.Columns.RemoveAt(0);
-			}
+				while (dataGrid.Columns.Count > 0)
+				{
+					dataGrid.Columns.RemoveAt(0);
+				}
 
-			while (dataGrid.ColumnDefinitions.Count > 0)
+				while (dataGrid.ColumnDefinitions.Count > 0)
+				{
+					dataGrid.ColumnDefinitions.RemoveAt(0);
+				}
+				*/
+				
+			if (containerStackLayout.Children.Count > 1)
 			{
-				dataGrid.ColumnDefinitions.RemoveAt(0);
+				containerStackLayout.Children.RemoveAt(1);
 			}
+			
+			//Xamarin.Forms.DataGrid.DataGrid dataGrid = new Xamarin.Forms.DataGrid.DataGrid();
 
+			/*
 			Xamarin.Forms.DataGrid.ColumnCollection cols = new Xamarin.Forms.DataGrid.ColumnCollection();
 
 			Xamarin.Forms.DataGrid.DataGridColumn columnItem = new Xamarin.Forms.DataGrid.DataGridColumn();
@@ -120,15 +155,31 @@ namespace LersMobile.MeasurePointProperties
 			columnItem.Title = "Дата";
 			columnItem.PropertyName = "DateTime";
 			columnItem.StringFormat = SelectedStringFormat;
-			
+						
 			cols.Add(columnItem);
 
-			this.dataGrid.Columns = cols;
+			dataGrid.Columns = cols;
 
-			dataGrid.ItemsSource = null;
-
+			
 			dataGrid.ItemsSource = Data;
 			*/
+
+			dataGrid.Columns[0].StringFormat = SelectedStringFormat;
+
+
+
+			this.containerStackLayout.Children.Add(dataGrid);
+		}
+
+		private void BuilderTableHeader()
+		{
+			//var head = _measurePoint.MeasurePoint.DataParameters;
+
+			//foreach(var param in head)
+			//{
+			//	//var p = _measurePoint.MeasurePoint.Data.Da
+			//	var hd = Lers.Data.DataParameterDescriptor.Get(param);
+			//}
 		}
 
 
@@ -161,6 +212,9 @@ namespace LersMobile.MeasurePointProperties
 			this.isLoaded = true;
 
 			await LoadRecords();
+
+
+			UpdateDataGrid();
 		}
 
 		private void Filter_ToolbarItem_Clicked()
