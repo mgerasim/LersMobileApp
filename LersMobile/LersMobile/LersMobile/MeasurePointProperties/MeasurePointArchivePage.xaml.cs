@@ -3,6 +3,8 @@ using Lers.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,45 @@ using Xamarin.Forms.Xaml;
 
 namespace LersMobile.MeasurePointProperties
 {
+
+	public class DynData : DynamicObject
+	{
+		/// <summary>
+		/// Возвращает или задаёт дату и время записи с данными.
+		/// </summary>
+		public DateTime DateTime { get; protected set; }
+
+
+	}
+
+
+	public class DataConverter : IValueConverter
+	{
+		protected DataParameter Parameter;
+
+		public DataConverter(DataParameter parameter)
+		{
+			Parameter = parameter;
+		}
+
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			if (parameter == null)
+			{
+				return "-";
+			}
+			else
+			{
+				return (((DataRecord)value).GetValue((DataParameter)parameter)).ToString();
+			}
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MeasurePointArchivePage : ContentPage
 	{
@@ -71,7 +112,7 @@ namespace LersMobile.MeasurePointProperties
 
 			this.Title = Droid.Resources.Messages.MeasurePointArchivePage_Title;
 
-			BuilderTableHeader();
+			//BuilderTableHeader();
 
 
 		}
@@ -144,18 +185,28 @@ namespace LersMobile.MeasurePointProperties
 			{
 				containerStackLayout.Children.RemoveAt(1);
 			}
-			
+
 			//Xamarin.Forms.DataGrid.DataGrid dataGrid = new Xamarin.Forms.DataGrid.DataGrid();
 
-			/*
-			Xamarin.Forms.DataGrid.ColumnCollection cols = new Xamarin.Forms.DataGrid.ColumnCollection();
 
-			Xamarin.Forms.DataGrid.DataGridColumn columnItem = new Xamarin.Forms.DataGrid.DataGridColumn();
+			//	Xamarin.Forms.DataGrid.ColumnCollection cols = new Xamarin.Forms.DataGrid.ColumnCollection();
 
-			columnItem.Title = "Дата";
-			columnItem.PropertyName = "DateTime";
-			columnItem.StringFormat = SelectedStringFormat;
-						
+			//foreach (var param in _measurePoint.MeasurePoint.DataParameters)
+			//{
+
+			//	Xamarin.Forms.DataGrid.DataGridColumn columnItem = new Xamarin.Forms.DataGrid.DataGridColumn();
+
+			//	var desc = DataParameterDescriptor.Get(param);
+
+			//	columnItem.Title = desc.ShortTitle;
+			//	columnItem.PropertyName = "DateTime";
+			//	columnItem.StringFormat = SelectedStringFormat;
+
+			//	dataGrid.Columns.Add(columnItem);
+
+			//}
+
+				/*		
 			cols.Add(columnItem);
 
 			dataGrid.Columns = cols;
@@ -166,20 +217,39 @@ namespace LersMobile.MeasurePointProperties
 
 			dataGrid.Columns[0].StringFormat = SelectedStringFormat;
 
-
+			
 
 			this.containerStackLayout.Children.Add(dataGrid);
 		}
 
 		private void BuilderTableHeader()
 		{
-			//var head = _measurePoint.MeasurePoint.DataParameters;
+			var head = _measurePoint.MeasurePoint.DataParameters;
 
-			//foreach(var param in head)
-			//{
-			//	//var p = _measurePoint.MeasurePoint.Data.Da
-			//	var hd = Lers.Data.DataParameterDescriptor.Get(param);
-			//}
+
+			foreach (var param in _measurePoint.MeasurePoint.DataParameters)
+			{
+
+				Xamarin.Forms.DataGrid.DataGridColumn columnItem = new Xamarin.Forms.DataGrid.DataGridColumn();
+
+				var desc = DataParameterDescriptor.Get(param);
+
+				columnItem.Title = desc.ShortTitle;
+				columnItem.PropertyName = desc.Name;
+				columnItem.StringFormat = "{0:0.00}";
+
+				//columnItem.SetBinding(BindingContextProperty, ".", BindingMode.Default, new DataConverter(param), null);
+				//	columnItem.SetBinding(Xamarin.Forms.DataGrid.DataGridColumn.PropertyNameProperty, new Binding(  ));
+
+				
+
+				//columnItem.SetBinding<DataRecord>(Xamarin.Forms.DataGrid.DataGridColumn.PropertyNameProperty, x => x.GetValue(param), BindingMode.TwoWay);
+				//columnItem.SetBinding(Xamarin.Forms.DataGrid.DataGridColumn.PropertyNameProperty, new Binding("Runtime", BindingMode.Default, new DataConverter(param), null));
+
+
+				dataGrid.Columns.Add(columnItem);
+
+			}
 		}
 
 
@@ -213,8 +283,11 @@ namespace LersMobile.MeasurePointProperties
 
 			await LoadRecords();
 
+			BuilderTableHeader();
 
 			UpdateDataGrid();
+
+
 		}
 
 		private void Filter_ToolbarItem_Clicked()
