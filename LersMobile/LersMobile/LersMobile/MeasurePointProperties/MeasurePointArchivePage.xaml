@@ -10,26 +10,31 @@
 					 Clicked="Filter_ToolbarItem_Clicked" />
 	</ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout x:Name="containerStackLayout" HorizontalOptions="Fill">
-			
-			
-            <Picker IsVisible="False" x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
+		<StackLayout>
 
+		<StackLayout VerticalOptions="Start" HorizontalOptions="Fill">
+			<Picker IsVisible="False" x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
+		</StackLayout>
 
+		<StackLayout x:Name="containerStackLayout" HorizontalOptions="Fill" VerticalOptions="Fill">            
 			<dg:DataGrid x:Name="dataGrid"
                          ItemsSource="{Binding Data}" 
                          BorderColor="#CCCCCC"
-                         HeaderBackground="#E0E6F8"
-						 Refreshing="dataGrid_Refreshing"
+                         HeaderBackground="#E0E6F8"						 
                          IsRefreshing="{Binding IsBusy}">
 				
 				<dg:DataGrid.Columns>
 					<dg:DataGridColumn Title="Дата" PropertyName="DateTime" Width="*"/>
-				</dg:DataGrid.Columns>
-				
-				
+				</dg:DataGrid.Columns>				
             </dg:DataGrid>
-			
-        </StackLayout>
-    </ContentPage.Content>
+		</StackLayout>
+
+
+			<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+				<Picker x:Name="periodRelativePicker" SelectedIndexChanged="OnPeriodReleativeSelected"/>
+			</StackLayout>
+
+	
+		</StackLayout>
+	</ContentPage.Content>
 </ContentPage>

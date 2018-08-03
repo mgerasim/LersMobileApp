@@ -14,48 +14,21 @@ using Xamarin.Forms.Xaml;
 
 namespace LersMobile.MeasurePointProperties
 {
-
-	public class DynData : DynamicObject
+	enum PeriodTypeSelected
 	{
-		/// <summary>
-		/// Возвращает или задаёт дату и время записи с данными.
-		/// </summary>
-		public DateTime DateTime { get; protected set; }
-
-
-	}
-
-
-	public class DataConverter : IValueConverter
-	{
-		protected DataParameter Parameter;
-
-		public DataConverter(DataParameter parameter)
-		{
-			Parameter = parameter;
-		}
-
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			if (parameter == null)
-			{
-				return "-";
-			}
-			else
-			{
-				return (((DataRecord)value).GetValue((DataParameter)parameter)).ToString();
-			}
-		}
-
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			throw new NotImplementedException();
-		}
+		selectDay = 0,
+		selectWeek = 1,
+		selectWeekTwo = 2,
+		selectMonth = 3,
+		selectMonthBegin = 4
 	}
 
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MeasurePointArchivePage : ContentPage
 	{
+		private DateTime dateBgn;
+		private DateTime dateEnd;
+
 		private static DeviceDataType[] DataTypes = new DeviceDataType[]
 		{
 			DeviceDataType.Day, DeviceDataType.Hour, DeviceDataType.Month
@@ -66,6 +39,14 @@ namespace LersMobile.MeasurePointProperties
 			"{0:dd.MM.yyyy}", "{0:dd.MM.yyyy HH:mm}", "{0:MM.yyyy}"
 		};
 
+		private static String[] periodRelative = new String[]
+		{
+			"За сутки",
+			"За 7 дней",
+			"За 2 недели",
+			"За месяц",
+			"С начала месяца"
+		};
 		/// <summary>
 		/// Выбранный для отображения тип данных.
 		/// </summary>
@@ -79,6 +60,7 @@ namespace LersMobile.MeasurePointProperties
 
 		private String SelectedStringFormat => dateStringFormat[this.dataTypePicker.SelectedIndex];
 
+		private String SelectedPeriod => periodRelative[this.periodRelativePicker.SelectedIndex];
 
 		public ObservableCollection<DataRecord> Data { get; private set; } = new ObservableCollection<DataRecord>();
 
@@ -103,123 +85,23 @@ namespace LersMobile.MeasurePointProperties
 			this.core = App.Core;
 
 			_measurePoint = measurePoint;
-
-			SetColumns();
-
+			
 			FillDataTypes();
 
+			FillPeriodRelative();
+			
 			this.BindingContext = this;
 
 			this.Title = Droid.Resources.Messages.MeasurePointArchivePage_Title;
-
-			//BuilderTableHeader();
-
-
 		}
 
 		private void UpdateDataGrid()
 		{
-
-
-
-
-			/*
-			if (containerStackLayout.Children.Count > 1)
-			{
-
-				containerStackLayout.Children.RemoveAt(1);
-			}
-
-			var headTemplate = new DataTemplate(() =>
-			{
-				var grid = new Grid();
-				var dateTimeLabel = new Label();
-
-				dateTimeLabel.Text = "D";
-
-				grid.Children.Add(dateTimeLabel);
-
-				return new ViewCell { View = grid };
-				
-			});
-			
-			var dataTemplate = new DataTemplate(() =>
-			{
-				var grid = new Grid();
-				var dateTimeLabel = new Label();
-
-
-				
-				//dateTimeLabel.FormattedText
-
-				dateTimeLabel.SetBinding(Label.TextProperty, "DateTime", BindingMode.Default, null, this.SelectedStringFormat);
-
-				grid.Children.Add(dateTimeLabel);
-
-				return new ViewCell { View = grid };
-			});
-
-			ListView listView = new ListView { ItemsSource = Data, ItemTemplate = dataTemplate };
-
-			listView.HeaderTemplate = headTemplate;
-
-			
-
-			this.containerStackLayout.Children.Add(listView);
-
-			*/
-
-			/*
-				while (dataGrid.Columns.Count > 0)
-				{
-					dataGrid.Columns.RemoveAt(0);
-				}
-
-				while (dataGrid.ColumnDefinitions.Count > 0)
-				{
-					dataGrid.ColumnDefinitions.RemoveAt(0);
-				}
-				*/
-				
-			if (containerStackLayout.Children.Count > 1)
-			{
-				containerStackLayout.Children.RemoveAt(1);
-			}
-
-			//Xamarin.Forms.DataGrid.DataGrid dataGrid = new Xamarin.Forms.DataGrid.DataGrid();
-
-
-			//	Xamarin.Forms.DataGrid.ColumnCollection cols = new Xamarin.Forms.DataGrid.ColumnCollection();
-
-			//foreach (var param in _measurePoint.MeasurePoint.DataParameters)
-			//{
-
-			//	Xamarin.Forms.DataGrid.DataGridColumn columnItem = new Xamarin.Forms.DataGrid.DataGridColumn();
-
-			//	var desc = DataParameterDescriptor.Get(param);
-
-			//	columnItem.Title = desc.ShortTitle;
-			//	columnItem.PropertyName = "DateTime";
-			//	columnItem.StringFormat = SelectedStringFormat;
-
-			//	dataGrid.Columns.Add(columnItem);
-
-			//}
-
-				/*		
-			cols.Add(columnItem);
-
-			dataGrid.Columns = cols;
-
-			
-			dataGrid.ItemsSource = Data;
-			*/
+			containerStackLayout.Children.Clear();
 
 			dataGrid.Columns[0].StringFormat = SelectedStringFormat;
-
 			
-
-			this.containerStackLayout.Children.Add(dataGrid);
+			containerStackLayout.Children.Add(dataGrid);
 		}
 
 		private void BuilderTableHeader()
@@ -229,7 +111,6 @@ namespace LersMobile.MeasurePointProperties
 
 			foreach (var param in _measurePoint.MeasurePoint.DataParameters)
 			{
-
 				Xamarin.Forms.DataGrid.DataGridColumn columnItem = new Xamarin.Forms.DataGrid.DataGridColumn();
 
 				var desc = DataParameterDescriptor.Get(param);
@@ -237,24 +118,21 @@ namespace LersMobile.MeasurePointProperties
 				columnItem.Title = desc.ShortTitle;
 				columnItem.PropertyName = desc.Name;
 				columnItem.StringFormat = "{0:0.00}";
-
-				//columnItem.SetBinding(BindingContextProperty, ".", BindingMode.Default, new DataConverter(param), null);
-				//	columnItem.SetBinding(Xamarin.Forms.DataGrid.DataGridColumn.PropertyNameProperty, new Binding(  ));
-
 				
-
-				//columnItem.SetBinding<DataRecord>(Xamarin.Forms.DataGrid.DataGridColumn.PropertyNameProperty, x => x.GetValue(param), BindingMode.TwoWay);
-				//columnItem.SetBinding(Xamarin.Forms.DataGrid.DataGridColumn.PropertyNameProperty, new Binding("Runtime", BindingMode.Default, new DataConverter(param), null));
-
-
 				dataGrid.Columns.Add(columnItem);
-
 			}
 		}
-
-
-		private void SetColumns()
+		
+		private void FillPeriodRelative()
 		{
+			foreach (var period in periodRelative)
+			{
+				periodRelativePicker.Items.Add(period);
+			}
+
+			SetPeriodByType(PeriodTypeSelected.selectWeek);
+			
+			periodRelativePicker.SelectedIndex = (int)PeriodTypeSelected.selectWeek;
 		}
 
 		private void FillDataTypes()
@@ -280,19 +158,22 @@ namespace LersMobile.MeasurePointProperties
 			}
 			
 			this.isLoaded = true;
-
+			
 			await LoadRecords();
 
 			BuilderTableHeader();
 
 			UpdateDataGrid();
+		}
 
+		public void OnRefresh()
+		{
 
 		}
 
 		private void Filter_ToolbarItem_Clicked()
 		{
-			this.dataTypePicker.Focus();
+			dataTypePicker.Focus();
 		}
 
 		private async Task LoadRecords()
@@ -301,22 +182,11 @@ namespace LersMobile.MeasurePointProperties
 
 			try
 			{
-				DateTime endDate;
-
-				if (this.CurrentDataRecord == null)
-				{
-					endDate = DateTime.Today.AddDays(1);
-				}
-				else
-				{
-					endDate = this.CurrentDataRecord.DateTime.AddSeconds(-1);
-				}
-
-				DateTime startDate = DateTimeUtils.Increment(endDate, this.SelectedDataType, -48);
+				if (dateBgn.Year < 2000) return;
 
 				await this.core.EnsureConnected();
 
-				var records = (await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDate, endDate, this.SelectedDataType)).OrderByDescending(x => x.DateTime);
+				var records = (await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(dateBgn, dateEnd, this.SelectedDataType)).OrderByDescending(x => x.DateTime);
 				
 				this.Data.Clear();
 				this.Data.AddRange(records);
@@ -334,15 +204,47 @@ namespace LersMobile.MeasurePointProperties
 			{
 				return;
 			}
+			
+			await LoadRecords();
+
 
 			UpdateDataGrid();
+		}
+
+		private void SetPeriodByType(PeriodTypeSelected periodTypeSelected )
+		{
+			dateEnd = DateTime.Now;
+			dateBgn = dateEnd.AddDays(-1);
+
+			switch (periodTypeSelected)
+			{
+				case PeriodTypeSelected.selectDay:					
+					dateBgn = dateEnd.AddDays(-1);
+					break;
+				case PeriodTypeSelected.selectWeek:
+					dateBgn = dateEnd.AddDays(-7);
+					break;
+				case PeriodTypeSelected.selectWeekTwo:
+					dateBgn = dateEnd.AddDays(-14);
+					break;
+				case PeriodTypeSelected.selectMonth:
+					dateBgn = dateEnd.AddDays(-30);
+					break;
+				case PeriodTypeSelected.selectMonthBegin:
+					dateBgn = new DateTime(dateEnd.Year, dateEnd.Month, 1);
+					break;
+			}
+		}
+
+		public async void OnPeriodReleativeSelected(object sender, EventArgs e)
+		{
+
+			SetPeriodByType((PeriodTypeSelected)periodRelativePicker.SelectedIndex);
 
 			await LoadRecords();
-		}
 
-		private void dataGrid_Refreshing(object sender, EventArgs e)
-		{
 			UpdateDataGrid();
 		}
+
 	}
 }
