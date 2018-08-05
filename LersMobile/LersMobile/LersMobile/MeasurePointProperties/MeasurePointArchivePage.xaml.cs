@@ -26,8 +26,6 @@ namespace LersMobile.MeasurePointProperties
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MeasurePointArchivePage : ContentPage
 	{
-		public DateTime dateBgn { get; set; } 
-		public DateTime dateEnd { get; set; }
 
 		private static DeviceDataType[] DataTypes = new DeviceDataType[]
 		{
@@ -178,11 +176,11 @@ namespace LersMobile.MeasurePointProperties
 
 			try
 			{
-				if (dateBgn.Year < 2000) return;
+				if (startDatePicker.Date.Year < 2000) return;
 
 				await this.core.EnsureConnected();
 
-				var records = (await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(dateBgn, dateEnd, this.SelectedDataType)).OrderByDescending(x => x.DateTime);
+				var records = (await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDatePicker.Date, endDatePicker.Date, this.SelectedDataType)).OrderByDescending(x => x.DateTime);
 				
 				this.Data.Clear();
 				this.Data.AddRange(records);
@@ -218,25 +216,25 @@ namespace LersMobile.MeasurePointProperties
 
 		private void SetPeriodByType(PeriodTypeSelected periodTypeSelected )
 		{
-			dateEnd = DateTime.Now;
-			dateBgn = dateEnd.AddDays(-1);
+			endDatePicker.Date = DateTime.Now;
+			startDatePicker.Date = endDatePicker.Date.AddDays(-1);
 
 			switch (periodTypeSelected)
 			{
-				case PeriodTypeSelected.selectDay:					
-					dateBgn = dateEnd.AddDays(-1);
+				case PeriodTypeSelected.selectDay:
+                    startDatePicker.Date = endDatePicker.Date.AddDays(-1);
 					break;
 				case PeriodTypeSelected.selectWeek:
-					dateBgn = dateEnd.AddDays(-7);
+                    startDatePicker.Date = endDatePicker.Date.AddDays(-7);
 					break;
 				case PeriodTypeSelected.selectWeekTwo:
-					dateBgn = dateEnd.AddDays(-14);
+                    startDatePicker.Date = endDatePicker.Date.AddDays(-14);
 					break;
 				case PeriodTypeSelected.selectMonth:
-					dateBgn = dateEnd.AddDays(-30);
+					startDatePicker.Date = endDatePicker.Date.AddDays(-30);
 					break;
 				case PeriodTypeSelected.selectMonthBegin:
-					dateBgn = new DateTime(dateEnd.Year, dateEnd.Month, 1);
+					startDatePicker.Date = new DateTime(endDatePicker.Date.Year, endDatePicker.Date.Month, 1);
 					break;
 			}
 		}
