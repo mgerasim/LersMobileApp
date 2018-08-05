@@ -26,8 +26,8 @@ namespace LersMobile.MeasurePointProperties
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MeasurePointArchivePage : ContentPage
 	{
-		private DateTime dateBgn;
-		private DateTime dateEnd;
+		public DateTime dateBgn { get; set; } 
+		public DateTime dateEnd { get; set; }
 
 		private static DeviceDataType[] DataTypes = new DeviceDataType[]
 		{
@@ -93,6 +93,7 @@ namespace LersMobile.MeasurePointProperties
 			this.BindingContext = this;
 
 			this.Title = Droid.Resources.Messages.MeasurePointArchivePage_Title;
+
 		}
 
 		private void UpdateDataGrid()
@@ -165,12 +166,7 @@ namespace LersMobile.MeasurePointProperties
 
 			UpdateDataGrid();
 		}
-
-		public void OnRefresh()
-		{
-
-		}
-
+        
 		private void Filter_ToolbarItem_Clicked()
 		{
 			dataTypePicker.Focus();
@@ -204,8 +200,17 @@ namespace LersMobile.MeasurePointProperties
 			{
 				return;
 			}
-			
-			await LoadRecords();
+
+            if (this.IsBusy)
+            {
+                return;
+            }
+            if (!this.isLoaded)
+            {
+                return;
+            }
+
+            await LoadRecords();
 
 
 			UpdateDataGrid();
@@ -236,10 +241,45 @@ namespace LersMobile.MeasurePointProperties
 			}
 		}
 
+        protected async void OnRefresh()
+        {
+            if (!this.IsVisible)
+            {
+                return;
+            }
+
+            if (this.IsBusy)
+            {
+                return;
+            }
+            if (!this.isLoaded)
+            {
+                return;
+            }
+
+            await LoadRecords();
+
+
+            UpdateDataGrid();
+        }
+
 		public async void OnPeriodReleativeSelected(object sender, EventArgs e)
 		{
+            if (!this.IsVisible)
+            {
+                return;
+            }
 
-			SetPeriodByType((PeriodTypeSelected)periodRelativePicker.SelectedIndex);
+            if (this.IsBusy)
+            {
+                return;
+            }
+            if (!this.isLoaded)
+            {
+                return;
+            }
+
+            SetPeriodByType((PeriodTypeSelected)periodRelativePicker.SelectedIndex);
 
 			await LoadRecords();
 
