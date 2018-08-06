@@ -167,8 +167,9 @@ namespace LersMobile.MeasurePointProperties
         
 		private void Filter_ToolbarItem_Clicked()
 		{
-			dataTypePicker.Focus();
-		}
+            stackFilter01.IsVisible = !stackFilter01.IsVisible;
+            stackFilter02.IsVisible = !stackFilter02.IsVisible;
+        }
 
 		private async Task LoadRecords()
 		{

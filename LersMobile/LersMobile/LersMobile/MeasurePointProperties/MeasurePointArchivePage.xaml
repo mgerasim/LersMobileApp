@@ -30,18 +30,18 @@
 		</StackLayout>
 
 
-			<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
-				<Picker x:Name="periodRelativePicker" SelectedIndexChanged="OnPeriodReleativeSelected"/>
-			</StackLayout>
+                <StackLayout x:Name="stackFilter01" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                    <Picker x:Name="periodRelativePicker" SelectedIndexChanged="OnPeriodReleativeSelected"/>
+                </StackLayout>
 
-            <StackLayout Orientation="Horizontal"  VerticalOptions="Center">
-                <Label Text="C: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                <DatePicker x:Name="startDatePicker" PropertyChanged="OnRefresh" Format="dd.MM.yyyy"/>
-                <Label Text="по: " VerticalTextAlignment="Center"/>
-                <DatePicker x:Name="endDatePicker" PropertyChanged="OnRefresh" Format="dd.MM.yyyy"/>
-                <Button Image="Refresh.png" Clicked="OnRefresh"/>
-            </StackLayout>
-	
-		</StackLayout>
+                <StackLayout x:Name="stackFilter02" Orientation="Horizontal"  VerticalOptions="Center">
+                    <Label Text="C: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                    <DatePicker x:Name="startDatePicker" PropertyChanged="OnRefresh" Format="dd.MM.yyyy"/>
+                    <Label Text="по: " VerticalTextAlignment="Center"/>
+                    <DatePicker x:Name="endDatePicker" PropertyChanged="OnRefresh" Format="dd.MM.yyyy"/>
+                    <Button Image="Refresh.png" Clicked="OnRefresh"/>
+                </StackLayout>
+
+        </StackLayout>
 	</ContentPage.Content>
 </ContentPage>
