@@ -25,15 +25,15 @@
 
 
 
-            <StackLayout x:Name="stackFilter01" VerticalOptions="Start" HorizontalOptions="Fill">
+            <StackLayout x:Name="stackFilter01" VerticalOptions="End" HorizontalOptions="Fill">
                 <Picker x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
             </StackLayout>
             
-            <StackLayout x:Name="stackFilter02" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+            <StackLayout x:Name="stackFilter02" HorizontalOptions="FillAndExpand" VerticalOptions="End" >
                     <Picker x:Name="periodRelativePicker" SelectedIndexChanged="OnPeriodReleativeSelected"/>
                 </StackLayout>
 
-                <StackLayout x:Name="stackFilter03" Orientation="Horizontal"  VerticalOptions="Center">
+                <StackLayout x:Name="stackFilter03" Orientation="Horizontal"  VerticalOptions="End">
                     <Label Text="C: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
                     <DatePicker x:Name="startDatePicker" PropertyChanged="OnRefresh" Format="dd.MM.yyyy"/>
                     <Label Text="по: " VerticalTextAlignment="Center"/>
@@ -41,7 +41,7 @@
                     <Button Image="Refresh.png" Clicked="OnRefresh"/>
                 </StackLayout>
 
-            <StackLayout x:Name="stackFilter04" VerticalOptions="Start" HorizontalOptions="Fill">
+            <StackLayout x:Name="stackFilter04" VerticalOptions="End" HorizontalOptions="Fill">
                 <Picker x:Name="sourceTypePicker" SelectedIndexChanged="OnSourceTypeSelected"/>
             </StackLayout>
             
