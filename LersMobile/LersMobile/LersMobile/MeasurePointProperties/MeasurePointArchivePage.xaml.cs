@@ -23,6 +23,12 @@ namespace LersMobile.MeasurePointProperties
 		selectMonthBegin = 4
 	}
 
+    enum SourceTypeSelected
+    {
+        selectConsumption = 0,
+        selectTotals = 1
+    }
+
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MeasurePointArchivePage : ContentPage
 	{
@@ -112,7 +118,14 @@ namespace LersMobile.MeasurePointProperties
 
 			containerStackLayout.Children.Clear();
 
-			dataGrid.Columns[0].StringFormat = SelectedStringFormat;
+            if (sourceTypePicker.SelectedIndex == (int)SourceTypeSelected.selectTotals )
+            {
+                dataGrid.Columns[0].StringFormat = "{0:dd.MM.yyyy HH:mm}";
+            }
+            else
+            {
+                dataGrid.Columns[0].StringFormat = SelectedStringFormat;
+            }
 			
 			containerStackLayout.Children.Add(dataGrid);
 		}
@@ -130,7 +143,7 @@ namespace LersMobile.MeasurePointProperties
 
             foreach (var param in _measurePoint.MeasurePoint.DataParameters)
 			{
-                if (this.sourceTypePicker.SelectedIndex == 1 && !DataParameterDescriptor.Get(param).IsAdditive)
+                if (this.sourceTypePicker.SelectedIndex == (int)SourceTypeSelected.selectTotals && !DataParameterDescriptor.Get(param).IsAdditive)
                 {
                     continue;
                 }
@@ -166,7 +179,7 @@ namespace LersMobile.MeasurePointProperties
                 this.sourceTypePicker.Items.Add(sourceType);
             }
 
-            this.sourceTypePicker.SelectedIndex = 0;
+            this.sourceTypePicker.SelectedIndex = (int)SourceTypeSelected.selectConsumption;
         }
 
         private void FillDataTypes()
@@ -202,7 +215,7 @@ namespace LersMobile.MeasurePointProperties
         
 		private void Filter_ToolbarItem_Clicked()
 		{
-            if (this.sourceTypePicker.SelectedIndex == 1)
+            if (this.sourceTypePicker.SelectedIndex == (int)SourceTypeSelected.selectTotals)
             {
                 stackFilter01.IsVisible = false;
             }
@@ -230,10 +243,10 @@ namespace LersMobile.MeasurePointProperties
 
                 switch (sourceTypePicker.SelectedIndex)
                 {
-                    case 0:
+                    case (int)SourceTypeSelected.selectConsumption:
                         this.Data.AddRange((await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDatePicker.Date, endDatePicker.Date, this.SelectedDataType)).OrderByDescending(x => x.DateTime));
                         break;
-                    case 1:
+                    case (int)SourceTypeSelected.selectTotals:
                         this.Data.AddRange((await this._measurePoint.MeasurePoint.Data.GetTotalsAsync(startDatePicker.Date, endDatePicker.Date)).OrderByDescending(x => x.DateTime));
                         break;
 
@@ -282,15 +295,8 @@ namespace LersMobile.MeasurePointProperties
             {
                 return;
             }
-
-            if (this.sourceTypePicker.SelectedIndex == 1)
-            {
-                stackFilter01.IsVisible = false;
-            }
-            else
-            {
-                stackFilter01.IsVisible = true;
-            }
+            
+            stackFilter01.IsVisible = (this.sourceTypePicker.SelectedIndex != (int) SourceTypeSelected.selectTotals);
 
             await LoadRecords();
 
