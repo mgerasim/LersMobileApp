@@ -32,6 +32,11 @@ namespace LersMobile.MeasurePointProperties
 			DeviceDataType.Day, DeviceDataType.Hour, DeviceDataType.Month
 		};
 
+        private static String[] SourceTypes = new String[]
+        {
+            "Потребление", "Интеграторы"
+        };
+
 		private static String[] dateStringFormat = new String[]
 		{
 			"{0:dd.MM.yyyy}", "{0:dd.MM.yyyy HH:mm}", "{0:MM.yyyy}"
@@ -49,8 +54,13 @@ namespace LersMobile.MeasurePointProperties
 		/// Выбранный для отображения тип данных.
 		/// </summary>
 		private DeviceDataType SelectedDataType => DataTypes[this.dataTypePicker.SelectedIndex];
+        
+        /// <summary>
+        /// Выбранный для отображения тип источника (потребление/интеграторы).
+        /// </summary>
+        private String SelectedSourceType => SourceTypes[this.sourceTypePicker.SelectedIndex];
 
-		private readonly Core.MeasurePointView _measurePoint;
+        private readonly Core.MeasurePointView _measurePoint;
 
 		private readonly Core.MobileCore core;
 
@@ -86,6 +96,8 @@ namespace LersMobile.MeasurePointProperties
 			
 			FillDataTypes();
 
+            FillSourceTypes();
+
 			FillPeriodRelative();
 			
 			this.BindingContext = this;
@@ -96,6 +108,8 @@ namespace LersMobile.MeasurePointProperties
 
 		private void UpdateDataGrid()
 		{
+            BuilderTableHeader();
+
 			containerStackLayout.Children.Clear();
 
 			dataGrid.Columns[0].StringFormat = SelectedStringFormat;
@@ -105,16 +119,27 @@ namespace LersMobile.MeasurePointProperties
 
 		private void BuilderTableHeader()
 		{
-			var head = _measurePoint.MeasurePoint.DataParameters;
+            dataGrid.Columns.Clear();
 
+            Xamarin.Forms.DataGrid.DataGridColumn columnDateTime = new Xamarin.Forms.DataGrid.DataGridColumn();
 
-			foreach (var param in _measurePoint.MeasurePoint.DataParameters)
+            columnDateTime.Title = "Дата";
+            columnDateTime.PropertyName = "DateTime";
+
+            dataGrid.Columns.Add(columnDateTime);
+
+            foreach (var param in _measurePoint.MeasurePoint.DataParameters)
 			{
-				Xamarin.Forms.DataGrid.DataGridColumn columnItem = new Xamarin.Forms.DataGrid.DataGridColumn();
+                if (this.sourceTypePicker.SelectedIndex == 1 && !DataParameterDescriptor.Get(param).IsAdditive)
+                {
+                    continue;
+                }
+
+                Xamarin.Forms.DataGrid.DataGridColumn columnItem = new Xamarin.Forms.DataGrid.DataGridColumn();
 
 				var desc = DataParameterDescriptor.Get(param);
 
-				columnItem.Title = desc.ShortTitle;
+                columnItem.Title = desc.ShortTitle;
 				columnItem.PropertyName = desc.Name;
 				columnItem.StringFormat = "{0:0.00}";
 				
@@ -134,20 +159,30 @@ namespace LersMobile.MeasurePointProperties
 			periodRelativePicker.SelectedIndex = (int)PeriodTypeSelected.selectWeek;
 		}
 
-		private void FillDataTypes()
-		{
-			foreach (var dataType in DataTypes)
-			{
-				this.dataTypePicker.Items.Add(dataType.GetDescription());
-			}
+        private void FillSourceTypes()
+        {
+            foreach (var sourceType in SourceTypes)
+            {
+                this.sourceTypePicker.Items.Add(sourceType);
+            }
 
-			this.dataTypePicker.SelectedIndex = 0;
-		}
+            this.sourceTypePicker.SelectedIndex = 0;
+        }
 
-		/// <summary>
-		/// Вызывается при отображении на экране.
-		/// </summary>
-		protected override async void OnAppearing()
+        private void FillDataTypes()
+        {
+            foreach (var dataType in DataTypes)
+            {
+                this.dataTypePicker.Items.Add(dataType.GetDescription());
+            }
+
+            this.dataTypePicker.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Вызывается при отображении на экране.
+        /// </summary>
+        protected override async void OnAppearing()
 		{
 			base.OnAppearing();
 
@@ -167,9 +202,18 @@ namespace LersMobile.MeasurePointProperties
         
 		private void Filter_ToolbarItem_Clicked()
 		{
-            stackFilter01.IsVisible = !stackFilter01.IsVisible;
+            if (this.sourceTypePicker.SelectedIndex == 1)
+            {
+                stackFilter01.IsVisible = false;
+            }
+            else
+            {
+                stackFilter01.IsVisible = !stackFilter01.IsVisible;
+
+            }
             stackFilter02.IsVisible = !stackFilter02.IsVisible;
             stackFilter03.IsVisible = !stackFilter03.IsVisible;
+            stackFilter04.IsVisible = !stackFilter04.IsVisible;
         }
 
 		private async Task LoadRecords()
@@ -182,24 +226,31 @@ namespace LersMobile.MeasurePointProperties
 
 				await this.core.EnsureConnected();
 
-				var records = (await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDatePicker.Date, endDatePicker.Date, this.SelectedDataType)).OrderByDescending(x => x.DateTime);
-				
-				this.Data.Clear();
-				this.Data.AddRange(records);
+                this.Data.Clear();
 
+                switch (sourceTypePicker.SelectedIndex)
+                {
+                    case 0:
+                        this.Data.AddRange((await this._measurePoint.MeasurePoint.Data.GetConsumptionAsync(startDatePicker.Date, endDatePicker.Date, this.SelectedDataType)).OrderByDescending(x => x.DateTime));
+                        break;
+                    case 1:
+                        this.Data.AddRange((await this._measurePoint.MeasurePoint.Data.GetTotalsAsync(startDatePicker.Date, endDatePicker.Date)).OrderByDescending(x => x.DateTime));
+                        break;
+
+                }
 			}
 			finally
 			{
 				this.IsBusy = false;
 			}
-		}
+        }
 
-		public async void OnDataTypeSelected(object sender, EventArgs e)
-		{
-			if (!this.IsVisible)
-			{
-				return;
-			}
+        public async void OnDataTypeSelected(object sender, EventArgs e)
+        {
+            if (!this.IsVisible)
+            {
+                return;
+            }
 
             if (this.IsBusy)
             {
@@ -213,10 +264,41 @@ namespace LersMobile.MeasurePointProperties
             await LoadRecords();
 
 
-			UpdateDataGrid();
-		}
+            UpdateDataGrid();
+        }
 
-		private void SetPeriodByType(PeriodTypeSelected periodTypeSelected )
+        public async void OnSourceTypeSelected(object sender, EventArgs e)
+        {
+            if (!this.IsVisible)
+            {
+                return;
+            }
+
+            if (this.IsBusy)
+            {
+                return;
+            }
+            if (!this.isLoaded)
+            {
+                return;
+            }
+
+            if (this.sourceTypePicker.SelectedIndex == 1)
+            {
+                stackFilter01.IsVisible = false;
+            }
+            else
+            {
+                stackFilter01.IsVisible = true;
+            }
+
+            await LoadRecords();
+
+
+            UpdateDataGrid();
+        }
+
+        private void SetPeriodByType(PeriodTypeSelected periodTypeSelected )
 		{
 			endDatePicker.Date = DateTime.Now;
 			startDatePicker.Date = endDatePicker.Date.AddDays(-1);

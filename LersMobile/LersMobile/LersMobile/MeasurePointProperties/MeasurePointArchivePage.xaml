@@ -19,10 +19,7 @@
                          BorderColor="#CCCCCC"
                          HeaderBackground="#E0E6F8"						 
                          IsRefreshing="{Binding IsBusy}">
-				
-				<dg:DataGrid.Columns>
-					<dg:DataGridColumn Title="Дата" PropertyName="DateTime" Width="*"/>
-				</dg:DataGrid.Columns>				
+							
             </dg:DataGrid>
 		</StackLayout>
 
@@ -44,6 +41,10 @@
                     <Button Image="Refresh.png" Clicked="OnRefresh"/>
                 </StackLayout>
 
+            <StackLayout x:Name="stackFilter04" VerticalOptions="Start" HorizontalOptions="Fill">
+                <Picker x:Name="sourceTypePicker" SelectedIndexChanged="OnSourceTypeSelected"/>
+            </StackLayout>
+            
         </StackLayout>
 	</ContentPage.Content>
 </ContentPage>
