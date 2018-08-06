@@ -12,9 +12,6 @@
     <ContentPage.Content>
 		<StackLayout>
 
-		<StackLayout VerticalOptions="Start" HorizontalOptions="Fill">
-			<Picker IsVisible="False" x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
-		</StackLayout>
 
 		<StackLayout x:Name="containerStackLayout" HorizontalOptions="Fill" VerticalOptions="Fill">            
 			<dg:DataGrid x:Name="dataGrid"
@@ -30,11 +27,16 @@
 		</StackLayout>
 
 
-                <StackLayout x:Name="stackFilter01" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+
+            <StackLayout x:Name="stackFilter01" VerticalOptions="Start" HorizontalOptions="Fill">
+                <Picker x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
+            </StackLayout>
+            
+            <StackLayout x:Name="stackFilter02" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
                     <Picker x:Name="periodRelativePicker" SelectedIndexChanged="OnPeriodReleativeSelected"/>
                 </StackLayout>
 
-                <StackLayout x:Name="stackFilter02" Orientation="Horizontal"  VerticalOptions="Center">
+                <StackLayout x:Name="stackFilter03" Orientation="Horizontal"  VerticalOptions="Center">
                     <Label Text="C: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
                     <DatePicker x:Name="startDatePicker" PropertyChanged="OnRefresh" Format="dd.MM.yyyy"/>
                     <Label Text="по: " VerticalTextAlignment="Center"/>

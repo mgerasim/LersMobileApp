@@ -169,6 +169,7 @@ namespace LersMobile.MeasurePointProperties
 		{
             stackFilter01.IsVisible = !stackFilter01.IsVisible;
             stackFilter02.IsVisible = !stackFilter02.IsVisible;
+            stackFilter03.IsVisible = !stackFilter03.IsVisible;
         }
 
 		private async Task LoadRecords()
