@@ -241,6 +241,33 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Суточные.
+        /// </summary>
+        public static string MeasurePointArchivePage_DeviceDataType_Day {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_DeviceDataType_Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Часовые.
+        /// </summary>
+        public static string MeasurePointArchivePage_DeviceDataType_Hour {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_DeviceDataType_Hour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Месячные.
+        /// </summary>
+        public static string MeasurePointArchivePage_DeviceDataType_Month {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_DeviceDataType_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to За сутки.
         /// </summary>
         public static string MeasurePointArchivePage_Period_Day {

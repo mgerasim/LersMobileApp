@@ -103,9 +103,12 @@
       <DependentUpon>MainPageMaster.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPage\MainPageMenuItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\Commands\LoadCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\Commands\ShowCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointArchivePage.xaml.cs">
       <DependentUpon>MeasurePointArchivePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointArchivePage_ViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointCommonPage.xaml.cs">
       <DependentUpon>MeasurePointCommonPage.xaml</DependentUpon>
     </Compile>

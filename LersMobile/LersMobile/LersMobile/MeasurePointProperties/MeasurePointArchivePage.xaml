@@ -5,46 +5,64 @@
 			 xmlns:local="clr-namespace:LersMobile"
              xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Filter"
+		<ToolbarItem Text="Load"
+					 Icon="load.png"
+                     Command="{Binding LoadCommand}"/>
+
+        <ToolbarItem Text="Filter"
 					 Icon="filter.png"
-					 Clicked="Filter_ToolbarItem_Clicked" />
-	</ContentPage.ToolbarItems>
+                     Command="{Binding ShowCommand}"/>
+        
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
 		<StackLayout>
-
-
-		<StackLayout x:Name="containerStackLayout" HorizontalOptions="Fill" VerticalOptions="Fill">            
-			<dg:DataGrid x:Name="dataGrid"
+            <StackLayout x:Name="containerData" HorizontalOptions="Fill" VerticalOptions="Fill">
+                <dg:DataGrid x:Name="dataGrid"
                          ItemsSource="{Binding Data}" 
                          BorderColor="#CCCCCC"
-                         HeaderBackground="#E0E6F8"						 
-                         IsRefreshing="{Binding IsBusy}">
-							
-            </dg:DataGrid>
-		</StackLayout>
-
-
-
-            <StackLayout x:Name="stackFilter01" VerticalOptions="End" HorizontalOptions="Fill">
-                <Picker x:Name="dataTypePicker" SelectedIndexChanged="OnDataTypeSelected"/>
+                         HeaderBackground="#E0E6F8">
+                </dg:DataGrid>
             </StackLayout>
-            
-            <StackLayout x:Name="stackFilter02" HorizontalOptions="FillAndExpand" VerticalOptions="End" >
-                    <Picker x:Name="periodRelativePicker" SelectedIndexChanged="OnPeriodReleativeSelected"/>
-                </StackLayout>
 
-                <StackLayout x:Name="stackFilter03" Orientation="Horizontal"  VerticalOptions="End">
-                    <Label Text="C: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                    <DatePicker x:Name="startDatePicker" PropertyChanged="OnRefresh" Format="dd.MM.yyyy"/>
+            <StackLayout IsVisible="{Binding IsShowed}">
+                <Picker SelectedIndex="{Binding SelectedPeriodType, Mode=TwoWay}" IsVisible="{Binding IsSourceTypeEqConsumption, Mode=TwoWay}">
+                    <Picker.Items>
+                        <local:Translate>MeasurePointArchivePage_Period_Day</local:Translate>
+                        <local:Translate>MeasurePointArchivePage_Period_Week</local:Translate>
+                        <local:Translate>MeasurePointArchivePage_Period_WeekTwo</local:Translate>
+                        <local:Translate>MeasurePointArchivePage_Period_Month</local:Translate>
+                        <local:Translate>MeasurePointArchivePage_Period_MonthBegin</local:Translate>
+                    </Picker.Items>
+                </Picker>
+            
+                <StackLayout Orientation="Horizontal"  VerticalOptions="End">
+                    <Label Text="c: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                    <DatePicker Date="{Binding dateBgn, Mode=TwoWay}"  Format="dd.MM.yyyy"/>
                     <Label Text="по: " VerticalTextAlignment="Center"/>
-                    <DatePicker x:Name="endDatePicker" PropertyChanged="OnRefresh" Format="dd.MM.yyyy"/>
-                    <Button Image="Refresh.png" Clicked="OnRefresh"/>
+                    <DatePicker Date="{Binding dateEnd, Mode=TwoWay}"   Format="dd.MM.yyyy"/>
                 </StackLayout>
 
-            <StackLayout x:Name="stackFilter04" VerticalOptions="End" HorizontalOptions="Fill">
-                <Picker x:Name="sourceTypePicker" SelectedIndexChanged="OnSourceTypeSelected"/>
+                <Picker SelectedIndex="{Binding SelectedDataType, Mode=TwoWay}" >
+                    <Picker.Items>
+                        <local:Translate>MeasurePointArchivePage_DeviceDataType_Day</local:Translate>
+                        <local:Translate>MeasurePointArchivePage_DeviceDataType_Hour</local:Translate>
+                        <local:Translate>MeasurePointArchivePage_DeviceDataType_Month</local:Translate>
+                    </Picker.Items>
+                </Picker>
+
+                <Picker SelectedIndex="{Binding SelectedSourceType, Mode=TwoWay}" >
+                    <Picker.Items>
+                        <local:Translate>MeasurePointArchivePage_SourceType_Consumption</local:Translate>
+                        <local:Translate>MeasurePointArchivePage_SourceType_Totals</local:Translate>
+                    </Picker.Items>
+                </Picker>
+
+                <Button Image="Refresh.png" 
+                        HorizontalOptions="Center" VerticalOptions="End"
+                        Command="{Binding LoadCommand}"/>
+
             </StackLayout>
-            
+
         </StackLayout>
 	</ContentPage.Content>
 </ContentPage>

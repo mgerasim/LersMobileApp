@@ -441,6 +441,18 @@
     <value>Допуск '{0}' просрочен на {1} дн.</value>
     <comment>Допуск '{0}' просрочен на {1} дн.</comment>
   </data>
+  <data name="MeasurePointArchivePage_DeviceDataType_Day" xml:space="preserve">
+    <value>Суточные</value>
+    <comment>Суточные</comment>
+  </data>
+  <data name="MeasurePointArchivePage_DeviceDataType_Hour" xml:space="preserve">
+    <value>Часовые</value>
+    <comment>Часовые</comment>
+  </data>
+  <data name="MeasurePointArchivePage_DeviceDataType_Month" xml:space="preserve">
+    <value>Месячные</value>
+    <comment>Месячные</comment>
+  </data>
   <data name="MeasurePointArchivePage_Period_Day" xml:space="preserve">
     <value>За сутки</value>
     <comment>За сутки</comment>
