@@ -40,7 +40,8 @@ namespace LersMobile.MeasurePointProperties
 
         private static String[] SourceTypes = new String[]
         {
-            "Потребление", "Интеграторы"
+            Droid.Resources.Messages.MeasurePointArchivePage_SourceType_Consumption,
+            Droid.Resources.Messages.MeasurePointArchivePage_SourceType_Totals
         };
 
 		private static String[] dateStringFormat = new String[]
@@ -50,11 +51,11 @@ namespace LersMobile.MeasurePointProperties
 
 		private static String[] periodRelative = new String[]
 		{
-			"За сутки",
-			"За 7 дней",
-			"За 2 недели",
-			"За месяц",
-			"С начала месяца"
+			Droid.Resources.Messages.MeasurePointArchivePage_Period_Day,
+			Droid.Resources.Messages.MeasurePointArchivePage_Period_Week,
+            Droid.Resources.Messages.MeasurePointArchivePage_Period_WeekTwo,
+            Droid.Resources.Messages.MeasurePointArchivePage_Period_Month,
+            Droid.Resources.Messages.MeasurePointArchivePage_Period_MonthBegin
 		};
 		/// <summary>
 		/// Выбранный для отображения тип данных.
@@ -136,7 +137,7 @@ namespace LersMobile.MeasurePointProperties
 
             Xamarin.Forms.DataGrid.DataGridColumn columnDateTime = new Xamarin.Forms.DataGrid.DataGridColumn();
 
-            columnDateTime.Title = "Дата";
+            columnDateTime.Title = Droid.Resources.Messages.Text_Date;
             columnDateTime.PropertyName = "DateTime";
 
             dataGrid.Columns.Add(columnDateTime);

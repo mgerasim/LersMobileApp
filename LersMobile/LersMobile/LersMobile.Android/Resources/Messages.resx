@@ -345,7 +345,7 @@
     <value>Потребитель:</value>
     <comment>Потребитель:</comment>
   </data>
-  <data name="NotificationInfoPage_Date" xml:space="preserve">
+  <data name="Text_Date" xml:space="preserve">
     <value>Дата</value>
     <comment>Дата</comment>
   </data>
@@ -440,5 +440,33 @@
   <data name="NodeView_Admission_Overdue" xml:space="preserve">
     <value>Допуск '{0}' просрочен на {1} дн.</value>
     <comment>Допуск '{0}' просрочен на {1} дн.</comment>
+  </data>
+  <data name="MeasurePointArchivePage_Period_Day" xml:space="preserve">
+    <value>За сутки</value>
+    <comment>За сутки</comment>
+  </data>
+  <data name="MeasurePointArchivePage_Period_Month" xml:space="preserve">
+    <value>За месяц</value>
+    <comment>За месяц</comment>
+  </data>
+  <data name="MeasurePointArchivePage_Period_MonthBegin" xml:space="preserve">
+    <value>С начала месяца</value>
+    <comment>С начала месяца</comment>
+  </data>
+  <data name="MeasurePointArchivePage_Period_Week" xml:space="preserve">
+    <value>За 7 дней</value>
+    <comment>За 7 дней</comment>
+  </data>
+  <data name="MeasurePointArchivePage_Period_WeekTwo" xml:space="preserve">
+    <value>За 2 недели</value>
+    <comment>За 2 недели</comment>
+  </data>
+  <data name="MeasurePointArchivePage_SourceType_Consumption" xml:space="preserve">
+    <value>Потребление</value>
+    <comment>Потребление</comment>
+  </data>
+  <data name="MeasurePointArchivePage_SourceType_Totals" xml:space="preserve">
+    <value>Интеграторы</value>
+    <comment>Интеграторы</comment>
   </data>
 </root>

@@ -241,6 +241,69 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to За сутки.
+        /// </summary>
+        public static string MeasurePointArchivePage_Period_Day {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_Period_Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to За месяц.
+        /// </summary>
+        public static string MeasurePointArchivePage_Period_Month {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_Period_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to С начала месяца.
+        /// </summary>
+        public static string MeasurePointArchivePage_Period_MonthBegin {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_Period_MonthBegin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to За 7 дней.
+        /// </summary>
+        public static string MeasurePointArchivePage_Period_Week {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_Period_Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to За 2 недели.
+        /// </summary>
+        public static string MeasurePointArchivePage_Period_WeekTwo {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_Period_WeekTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Потребление.
+        /// </summary>
+        public static string MeasurePointArchivePage_SourceType_Consumption {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_SourceType_Consumption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Интеграторы.
+        /// </summary>
+        public static string MeasurePointArchivePage_SourceType_Totals {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_SourceType_Totals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Архив.
         /// </summary>
         public static string MeasurePointArchivePage_Title {
@@ -628,15 +691,6 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дата.
-        /// </summary>
-        public static string NotificationInfoPage_Date {
-            get {
-                return ResourceManager.GetString("NotificationInfoPage_Date", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Сообщение.
         /// </summary>
         public static string NotificationInfoPage_Message {
@@ -723,6 +777,15 @@ namespace LersMobile.Droid.Resources {
         public static string Text_Connecting {
             get {
                 return ResourceManager.GetString("Text_Connecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дата.
+        /// </summary>
+        public static string Text_Date {
+            get {
+                return ResourceManager.GetString("Text_Date", resourceCulture);
             }
         }
         

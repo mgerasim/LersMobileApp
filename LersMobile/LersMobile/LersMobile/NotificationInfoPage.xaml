@@ -5,7 +5,7 @@
              x:Class="LersMobile.NotificationInfoPage">
 	<ContentPage.Content>
         <StackLayout>
-			<Label Text="{local:Translate NotificationInfoPage_Date}" FontAttributes="Bold" />
+			<Label Text="{local:Translate Text_Date}" FontAttributes="Bold" />
             <Label Text="{Binding DateTime}" />
 
 			<Label Text="{local:Translate NotificationInfoPage_Message}" FontAttributes="Bold" />
