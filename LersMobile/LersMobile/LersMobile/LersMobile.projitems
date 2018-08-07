@@ -143,6 +143,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodeReportsPage.xaml.cs">
       <DependentUpon>NodeReportsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Commands\ReportCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Converters\ReportTitleConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportViewModel.cs">

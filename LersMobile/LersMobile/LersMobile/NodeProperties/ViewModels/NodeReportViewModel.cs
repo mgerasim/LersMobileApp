@@ -1,4 +1,5 @@
 ﻿using Lers.Core;
+using LersMobile.NodeProperties.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,10 @@ namespace LersMobile.NodeProperties.ViewModels
 		public NodeReportViewModel(NodeReport nodeReport)
 		{
             NodeReport = nodeReport;
-
+            ReportCommand = new ReportCommand(this);
 		}
+
+        public ReportCommand ReportCommand { get; set; }
 
         private NodeReport NodeReport { get; set; }
 
@@ -27,5 +30,11 @@ namespace LersMobile.NodeProperties.ViewModels
                 return NodeReport.Report.Title;
             }
         }
-	}
+        
+        public void GenerateReport()
+        {
+            return;
+        }
+
+    }
 }
