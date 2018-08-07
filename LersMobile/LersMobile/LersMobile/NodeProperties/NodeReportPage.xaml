@@ -12,8 +12,14 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="{Binding Title}"
-                VerticalOptions="CenterAndExpand" 
+                VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="c: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
+            <DatePicker Date="{Binding dateBgn, Mode=TwoWay}"  Format="dd.MM.yyyy"/>
+            <Label Text="по: " VerticalTextAlignment="Center"/>
+            <DatePicker Date="{Binding dateEnd, Mode=TwoWay}"   Format="dd.MM.yyyy"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
