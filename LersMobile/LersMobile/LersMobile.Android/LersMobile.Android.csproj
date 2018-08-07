@@ -118,6 +118,10 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\LersUchet\Framework\Lers.Reports\Lers.Reports.ns.csproj">
+      <Project>{5d0956d6-4721-4200-ac8c-e40d7b2d0755}</Project>
+      <Name>Lers.Reports.ns</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\LersUchet\Framework\Lers.System\Lers.System.ns.csproj">
       <Project>{f98b46dc-ffe8-4893-8df5-648685ad7c50}</Project>
       <Name>Lers.System.ns</Name>

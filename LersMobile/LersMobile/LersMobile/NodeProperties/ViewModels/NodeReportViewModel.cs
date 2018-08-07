@@ -92,8 +92,8 @@ namespace LersMobile.NodeProperties.ViewModels
 
         public void GenerateReport()
         {
-
-
+            //Lers.Reports.
+            
 
             return;
         }
