@@ -16,7 +16,6 @@ namespace LersMobile.NodeProperties.ViewModels
 		{
             NodeReport = nodeReport;
 
-            Title = Droid.Resources.Messages.Text_Report;
 		}
 
         private NodeReport NodeReport { get; set; }

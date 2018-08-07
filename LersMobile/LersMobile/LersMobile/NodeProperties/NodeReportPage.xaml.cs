@@ -23,6 +23,8 @@ namespace LersMobile.NodeProperties
 			InitializeComponent();
 
             NodeReport = nodeReport;
+            
+            Title = Droid.Resources.Messages.Text_Report;
 
             ViewModel = new NodeReportViewModel(NodeReport);
             BindingContext = ViewModel;
