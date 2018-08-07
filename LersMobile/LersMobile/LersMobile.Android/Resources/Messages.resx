@@ -485,4 +485,8 @@
     <value>Отчёты</value>
     <comment>Отчёты</comment>
   </data>
+  <data name="Text_Report" xml:space="preserve">
+    <value>Отчёт</value>
+    <comment>Отчёт</comment>
+  </data>
 </root>

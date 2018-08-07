@@ -844,6 +844,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отчёт.
+        /// </summary>
+        public static string Text_Report {
+            get {
+                return ResourceManager.GetString("Text_Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отчёты.
         /// </summary>
         public static string Text_Reports {

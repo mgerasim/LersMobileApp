@@ -25,7 +25,7 @@ namespace LersMobile.NodeProperties
 
             this.NodeView = nodeView;
 
-            ViewModel = new NodeReportsViewModel(this.NodeView.Node);
+            ViewModel = new NodeReportsViewModel(this, this.NodeView.Node);
             this.BindingContext = ViewModel;
         }
 

@@ -19,12 +19,15 @@ namespace LersMobile.NodeProperties.ViewModels
             }
         }
 
-        public NodeReportsViewModel(Lers.Core.Node node)
+        public NodeReportsViewModel(NodeReportsPage page, Node node)
         {
             Node = node;
+            Page = page;
         }
 
-        private Lers.Core.Node Node = null;
+        private Node Node = null;
+
+        private NodeReportsPage Page = null;
 
         public bool IsBusy { get; set; }
                 
@@ -47,7 +50,11 @@ namespace LersMobile.NodeProperties.ViewModels
             set
             {
                 _selectedReport = value;
-                OnPropertyChanged("SelectedReport");
+                if (value != null)
+                {
+                    OnPropertyChanged("SelectedReport");
+                    Navigate();
+                }
             }
         }
 
@@ -81,6 +88,11 @@ namespace LersMobile.NodeProperties.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        public async void Navigate()
+        {
+            await Page.Navigation.PushAsync(new NodeReportPage(SelectedReport));
         }
 
     }

@@ -54,6 +54,9 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeReportsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeReportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodePropertyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -134,11 +137,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodePropertyPage.xaml.cs">
       <DependentUpon>NodePropertyPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodeReportPage.xaml.cs">
+      <DependentUpon>NodeReportPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodeReportsPage.xaml.cs">
       <DependentUpon>NodeReportsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Converters\ReportTitleConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)NotificationCenterPage.xaml.cs">
       <DependentUpon>NotificationCenterPage.xaml</DependentUpon>
     </Compile>
@@ -149,5 +158,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)MainPage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
