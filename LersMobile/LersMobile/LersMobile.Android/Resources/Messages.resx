@@ -481,4 +481,8 @@
     <value>Интеграторы</value>
     <comment>Интеграторы</comment>
   </data>
+  <data name="Text_Reports" xml:space="preserve">
+    <value>Отчёты</value>
+    <comment>Отчёты</comment>
+  </data>
 </root>
