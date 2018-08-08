@@ -489,4 +489,8 @@
     <value>Отчёт</value>
     <comment>Отчёт</comment>
   </data>
+  <data name="Text_Error_Could_not_determine_file_format" xml:space="preserve">
+    <value>Не удалось определить формат файла</value>
+    <comment>Не удалось определить формат файла</comment>
+  </data>
 </root>

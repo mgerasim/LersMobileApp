@@ -16,17 +16,21 @@ namespace LersMobile.NodeProperties
 	{
         public NodeReport NodeReport;
 
+        public Node Node;
+
         public NodeReportViewModel ViewModel;
 
-		public NodeReportPage(NodeReport nodeReport)
+		public NodeReportPage(Node node, NodeReport nodeReport)
 		{
 			InitializeComponent();
+
+            Node = node;
 
             NodeReport = nodeReport;
             
             Title = Droid.Resources.Messages.Text_Report;
 
-            ViewModel = new NodeReportViewModel(NodeReport);
+            ViewModel = new NodeReportViewModel(Node, NodeReport);
             BindingContext = ViewModel;
 		}
 

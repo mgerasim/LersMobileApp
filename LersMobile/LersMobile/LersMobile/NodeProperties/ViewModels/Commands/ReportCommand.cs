@@ -21,9 +21,19 @@ namespace LersMobile.NodeProperties.ViewModels.Commands
             return true;
         }
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
-            ViewModel.GenerateReport();
+            try
+            {
+                await ViewModel.GenerateReport();
+            }
+            catch
+            {
+                // no connection
+                // networking disconnect
+                return;
+            }
+            
         }
     }
 }

@@ -16,11 +16,11 @@ namespace LersMobile.NodeProperties
         NodeReportsViewModel ViewModel = null;
 
         Core.NodeView NodeView = null;
-
+        
         public NodeReportsPage(Core.NodeView nodeView)
         {
             InitializeComponent();
-
+            
             this.Title = Droid.Resources.Messages.Text_Reports;
 
             this.NodeView = nodeView;

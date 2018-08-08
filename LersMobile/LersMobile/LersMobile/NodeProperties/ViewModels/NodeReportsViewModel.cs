@@ -92,7 +92,7 @@ namespace LersMobile.NodeProperties.ViewModels
 
         public async void Navigate()
         {
-            await Page.Navigation.PushAsync(new NodeReportPage(SelectedReport));
+            await Page.Navigation.PushAsync(new NodeReportPage(Node, SelectedReport));
         }
 
     }

@@ -43,17 +43,18 @@ namespace LersMobile.Core
 					GetSessionRestoreToken = true
 				};
 
-                string schemeName = Lers.LersScheme.Plain;
+                string schemeName = LersScheme.Plain;
 
                 if (acceptSsl == true)
                 {
-                    schemeName = Lers.LersScheme.Secure;
+                    schemeName = LersScheme.Secure;
                 }
 
+                serverAddress = schemeName + "://" + serverAddress;
 
-                var uriBuilder = new UriBuilder(schemeName, serverAddress);
-                
-				var token = await this.Server.ConnectAsync(uriBuilder.Uri, null, loginInfo, CancellationToken.None);
+                var uri = new Uri(serverAddress);
+                                
+				var token = await this.Server.ConnectAsync(uri, null, loginInfo, CancellationToken.None);
                 
 				AppDataStorage.Token = token.Token;
 				AppDataStorage.ServerAddress = serverAddress;
