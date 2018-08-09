@@ -1,4 +1,5 @@
 ﻿using Lers.Core;
+using LersMobile.NodeProperties.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,13 +24,29 @@ namespace LersMobile.NodeProperties.ViewModels
         {
             Node = node;
             Page = page;
+            RefreshCommand = new RefreshCommand(this);
         }
+
+        public RefreshCommand RefreshCommand { get; set; }
 
         private Node Node = null;
 
         private NodeReportsPage Page = null;
 
-        public bool IsBusy { get; set; }
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get
+            {
+                return isBusy;
+            }
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged("IsBusy");
+            }
+        }
                 
         public NodeReportCollection Reports
         {
@@ -58,7 +75,7 @@ namespace LersMobile.NodeProperties.ViewModels
             }
         }
 
-        public async Task Load()
+        public async Task Load(bool isForce = false)
         {
             try
             {
@@ -73,16 +90,16 @@ namespace LersMobile.NodeProperties.ViewModels
 
                 var requiredFlags = NodeInfoFlags.Reports;
 
-                if (!Node.AvailableInfo.HasFlag(requiredFlags))
+                if (!Node.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
                 {
                     await Node.RefreshAsync(requiredFlags);
                     OnPropertyChanged("Reports");
-
                 }
             }
-            catch
+            catch(Exception ex)
             {
-
+                IsBusy = false;
+                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");
             }
             finally
             {
@@ -95,5 +112,9 @@ namespace LersMobile.NodeProperties.ViewModels
             await Page.Navigation.PushAsync(new NodeReportPage(Node, SelectedReport));
         }
 
+        public async Task Refresh()
+        {
+            await Load(true);
+        }
     }
 }

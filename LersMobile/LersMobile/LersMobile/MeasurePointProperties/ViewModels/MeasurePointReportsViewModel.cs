@@ -1,4 +1,5 @@
 ﻿using Lers.Core;
+using LersMobile.MeasurePointProperties.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,13 +25,30 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             Page = page;
 
             MeasurePoint = measurePoint;
+
+            RefreshCommand = new RefreshCommand(this);
         }
+
+        public RefreshCommand RefreshCommand { get; set; }
 
         MeasurePointReportsPage Page;
 
         MeasurePoint MeasurePoint;
 
-        public bool IsBusy { get; set; }
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get
+            {
+                return isBusy;
+            }
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged("IsBusy");
+            }
+        }
 
         public MeasurePointReportCollection Reports
         {
@@ -59,7 +77,7 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             }
         }
 
-        public async Task Load()
+        public async Task Load(bool isForce = false)
         {
             try
             {
@@ -74,15 +92,16 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 
                 MeasurePointInfoFlags requiredFlags = MeasurePointInfoFlags.Reports;
 
-                if (!MeasurePoint.AvailableInfo.HasFlag(requiredFlags))
+                if (!MeasurePoint.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
                 {
                     await MeasurePoint.RefreshAsync(requiredFlags);
                     OnPropertyChanged("Reports");
                 }
             }
-            catch
+            catch(Exception ex)
             {
-
+                IsBusy = false;
+                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");
             }
             finally
             {
@@ -93,6 +112,11 @@ namespace LersMobile.MeasurePointProperties.ViewModels
         public async void Navigate()
         {
             await Page.Navigation.PushAsync(new MeasurePointReportPage(MeasurePoint, SelectedReport));
+        }
+
+        public async Task Refresh()
+        {
+            await Load(true);
         }
     }
 }

@@ -5,14 +5,14 @@ using System.Windows.Input;
 
 namespace LersMobile.NodeProperties.ViewModels.Commands
 {
-    public class ReportCommand : ICommand
+    public class RefreshCommand : ICommand
     {
-        public ReportCommand(NodeReportViewModel viewModel)
+        public RefreshCommand(NodeReportsViewModel viewModel)
         {
             ViewModel = viewModel;
         }
 
-        NodeReportViewModel ViewModel;
+        NodeReportsViewModel ViewModel;
 
         public event EventHandler CanExecuteChanged;
 
@@ -25,13 +25,13 @@ namespace LersMobile.NodeProperties.ViewModels.Commands
         {
             try
             {
-                await ViewModel.GenerateReport();
+                await ViewModel.Refresh();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");                
+                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");
             }
-            
+
         }
     }
 }

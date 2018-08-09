@@ -129,6 +129,11 @@ namespace LersMobile.NodeProperties.ViewModels
         {
             try
             {
+                if (isBusy)
+                {
+                    return;
+                }
+
                 isBusy = true;
 
                 var reportExportOptions = new ReportExportOptions();

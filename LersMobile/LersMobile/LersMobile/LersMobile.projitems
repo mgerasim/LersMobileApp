@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPage\MainPageMenuItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\LoadCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\ReportCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\ShowCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointArchivePage.xaml.cs">
@@ -161,6 +162,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodeReportsPage.xaml.cs">
       <DependentUpon>NodeReportsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Commands\ReportCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Converters\ReportTitleConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportsViewModel.cs" />

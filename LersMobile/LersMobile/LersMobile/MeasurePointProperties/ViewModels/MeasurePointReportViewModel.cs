@@ -128,6 +128,11 @@ namespace LersMobile.MeasurePointProperties.ViewModels
         {
             try
             {
+                if (isBusy)
+                {
+                    return;
+                }
+
                 isBusy = true;
 
                 var reportExportOptions = new ReportExportOptions();

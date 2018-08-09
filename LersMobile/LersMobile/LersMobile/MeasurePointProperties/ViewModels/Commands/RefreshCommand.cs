@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace LersMobile.MeasurePointProperties.ViewModels.Commands
 {
-    public class ReportCommand : ICommand
+    class RefreshCommand : ICommand
     {
-        public ReportCommand(MeasurePointReportViewModel viewModel)
+        public RefreshCommand(MeasurePointReportsViewModel viewModel)
         {
             ViewModel = viewModel;
         }
 
-        MeasurePointReportViewModel ViewModel;
+        MeasurePointReportsViewModel ViewModel;
 
         public event EventHandler CanExecuteChanged;
 
@@ -25,7 +23,7 @@ namespace LersMobile.MeasurePointProperties.ViewModels.Commands
         {
             try
             {
-                await ViewModel.GenerateReport();
+                await ViewModel.Refresh();
             }
             catch (Exception ex)
             {
