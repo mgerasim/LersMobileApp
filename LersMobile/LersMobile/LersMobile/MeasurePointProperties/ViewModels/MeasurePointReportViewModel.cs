@@ -38,6 +38,8 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             _dateEnd = DateTime.Now;
 
             ReportCommand = new ReportCommand(this);
+
+            _isBusy = false;
         }
 
         public string Title
@@ -124,19 +126,35 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 
         public async Task GenerateReport()
         {
-            var reportExportOptions = new ReportExportOptions();
-            reportExportOptions.Format = (ReportExportFormat)SelectedFileFormat;
-            var reportManager = new ReportManager(App.Core.Server);
+            try
+            {
+                isBusy = true;
 
-            var response = await reportManager.GenerateParametersSheetExportedAsync(
-                reportExportOptions,
-                MeasurePoint.Id,
-                ReportEntity.MeasurePoint,
-                MeasurePointReport.Report.Id,
-                ReportUtils.DataTypes[SelectedDataType],
-                dateBgn, dateEnd);
+                var reportExportOptions = new ReportExportOptions();
+                reportExportOptions.Format = (ReportExportFormat)SelectedFileFormat;
+                var reportManager = new ReportManager(App.Core.Server);
 
-            ReportUtils.SaveResponse(response, reportExportOptions.Format);
+                var response = await reportManager.GenerateParametersSheetExportedAsync(
+                    reportExportOptions,
+                    MeasurePoint.Id,
+                    ReportEntity.MeasurePoint,
+                    MeasurePointReport.Report.Id,
+                    ReportUtils.DataTypes[SelectedDataType],
+                    dateBgn, dateEnd);
+
+                isBusy = false;
+
+                ReportUtils.SaveResponse(response, reportExportOptions.Format);
+            }
+            catch (Exception ex)
+            {
+                isBusy = false;
+                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");
+            }
+            finally
+            {
+                isBusy = false;
+            }
         }
 
     }

@@ -817,6 +817,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выполено.
+        /// </summary>
+        public static string Text_Done {
+            get {
+                return ResourceManager.GetString("Text_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ошибка.
         /// </summary>
         public static string Text_Error {
@@ -907,11 +916,29 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отчёт успешно создан.
+        /// </summary>
+        public static string Text_Report_successfully_created {
+            get {
+                return ResourceManager.GetString("Text_Report_successfully_created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отчёты.
         /// </summary>
         public static string Text_Reports {
             get {
                 return ResourceManager.GetString("Text_Reports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Запрос выполняется....
+        /// </summary>
+        public static string Text_Request_is_running {
+            get {
+                return ResourceManager.GetString("Text_Request_is_running", resourceCulture);
             }
         }
         

@@ -513,4 +513,16 @@
     <value>XLSX - Формат Microsoft Excel</value>
     <comment>Формат Microsoft Excel</comment>
   </data>
+  <data name="Text_Done" xml:space="preserve">
+    <value>Выполено</value>
+    <comment>Выполнено</comment>
+  </data>
+  <data name="Text_Report_successfully_created" xml:space="preserve">
+    <value>Отчёт успешно создан</value>
+    <comment>Отчёт успешно создан</comment>
+  </data>
+  <data name="Text_Request_is_running" xml:space="preserve">
+    <value>Запрос выполняется...</value>
+    <comment>Запрос выполняется</comment>
+  </data>
 </root>

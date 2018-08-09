@@ -27,11 +27,11 @@ namespace LersMobile.NodeProperties.ViewModels.Commands
             {
                 await ViewModel.GenerateReport();
             }
-            catch
+            catch(Exception ex)
             {
                 // no connection
                 // networking disconnect
-                return;
+                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");                
             }
             
         }
