@@ -844,6 +844,51 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CSV - Файл данных, разделенных запятыми.
+        /// </summary>
+        public static string Text_FileFormat_Csv {
+            get {
+                return ResourceManager.GetString("Text_FileFormat_Csv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF - Формат электронных документов.
+        /// </summary>
+        public static string Text_FileFormat_Pdf {
+            get {
+                return ResourceManager.GetString("Text_FileFormat_Pdf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RTF - Расширенный текстовый формат.
+        /// </summary>
+        public static string Text_FileFormat_Rtf {
+            get {
+                return ResourceManager.GetString("Text_FileFormat_Rtf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XLS - Формат Microsoft Excel 97-2003.
+        /// </summary>
+        public static string Text_FileFormat_Xls {
+            get {
+                return ResourceManager.GetString("Text_FileFormat_Xls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XLSX - Формат Microsoft Excel.
+        /// </summary>
+        public static string Text_FileFormat_Xlsx {
+            get {
+                return ResourceManager.GetString("Text_FileFormat_Xlsx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Нет.
         /// </summary>
         public static string Text_No {

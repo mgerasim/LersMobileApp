@@ -28,7 +28,17 @@
                     <local:Translate>MeasurePointArchivePage_DeviceDataType_Month</local:Translate>
                 </Picker.Items>
             </Picker>
-            
+
+            <Picker SelectedIndex="{Binding SelectedFileFormat, Mode=TwoWay}" >
+                <Picker.Items>
+                    <local:Translate>Text_FileFormat_Pdf</local:Translate>
+                    <local:Translate>Text_FileFormat_Xls</local:Translate>
+                    <local:Translate>Text_FileFormat_Xlsx</local:Translate>
+                    <local:Translate>Text_FileFormat_Csv</local:Translate>
+                    <local:Translate>Text_FileFormat_Rtf</local:Translate>
+                </Picker.Items>
+            </Picker>
+
         </StackLayout>
         
     </ContentPage.Content>

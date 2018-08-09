@@ -116,6 +116,20 @@ namespace LersMobile.NodeProperties.ViewModels
                 OnPropertyChanged("SelectedDataType");
             }
         }
+        private int _selectedFileFormat;
+
+        public int SelectedFileFormat
+        {
+            get
+            {
+                return _selectedFileFormat;
+            }
+            set
+            {
+                _selectedFileFormat = value;
+                OnPropertyChanged("SelectedFileFormat");
+            }
+        }
 
         private string GetExtensionByFormat(ReportExportFormat format)
         {
@@ -150,7 +164,7 @@ namespace LersMobile.NodeProperties.ViewModels
         public async Task GenerateReport()
         {
             var reportExportOptions = new ReportExportOptions();
-            reportExportOptions.Format = ReportExportFormat.Pdf;
+            reportExportOptions.Format = (ReportExportFormat)SelectedFileFormat;
             var reportManager = new ReportManager(App.Core.Server);
 
             var response = await reportManager.GenerateParametersSheetExportedAsync(

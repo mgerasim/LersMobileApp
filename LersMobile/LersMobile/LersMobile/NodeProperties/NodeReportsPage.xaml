@@ -17,8 +17,10 @@
                             <Label Text="{Binding Path=. , Converter={StaticResource converter}}"/>
                         </ViewCell>
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </ListView.ItemTemplate>                
             </ListView>
+            <Picker ItemsSource="{Binding Reports}"
+                    ItemDisplayBinding="{Binding Path=Report , Converter={StaticResource converter}}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -493,4 +493,24 @@
     <value>Не удалось определить формат файла</value>
     <comment>Не удалось определить формат файла</comment>
   </data>
+  <data name="Text_FileFormat_Csv" xml:space="preserve">
+    <value>CSV - Файл данных, разделенных запятыми</value>
+    <comment>Файл данных, разделенных запятыми</comment>
+  </data>
+  <data name="Text_FileFormat_Pdf" xml:space="preserve">
+    <value>PDF - Формат электронных документов</value>
+    <comment>Формат электронных документов</comment>
+  </data>
+  <data name="Text_FileFormat_Rtf" xml:space="preserve">
+    <value>RTF - Расширенный текстовый формат</value>
+    <comment>Расширенный текстовый формат</comment>
+  </data>
+  <data name="Text_FileFormat_Xls" xml:space="preserve">
+    <value>XLS - Формат Microsoft Excel 97-2003</value>
+    <comment>Формат Microsoft Excel 97-2003</comment>
+  </data>
+  <data name="Text_FileFormat_Xlsx" xml:space="preserve">
+    <value>XLSX - Формат Microsoft Excel</value>
+    <comment>Формат Microsoft Excel</comment>
+  </data>
 </root>
