@@ -44,6 +44,12 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointDataPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointReportsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointReportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeListPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeCommonPropertiesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -88,6 +94,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationChecker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\PollLogEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ReportUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ResourceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Incidents\IncidentDetailPage.xaml.cs">
       <DependentUpon>IncidentDetailPage.xaml</DependentUpon>
@@ -109,12 +116,14 @@
       <DependentUpon>MainPageMaster.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPage\MainPageMenuItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\Commands\LoadCommand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\Commands\ShowCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\LoadCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\ReportCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\ShowCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointArchivePage.xaml.cs">
       <DependentUpon>MeasurePointArchivePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointArchivePage_ViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Converters\ReportTitleConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\MeasurePointArchiveViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointCommonPage.xaml.cs">
       <DependentUpon>MeasurePointCommonPage.xaml</DependentUpon>
     </Compile>
@@ -124,6 +133,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointDataPage.xaml.cs">
       <DependentUpon>MeasurePointDataPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointReportsPage.xaml.cs">
+      <DependentUpon>MeasurePointReportsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointReportPage.xaml.cs">
+      <DependentUpon>MeasurePointReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\MeasurePointReportsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\MeasurePointReportViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeListPage.xaml.cs">
       <DependentUpon>NodeListPage.xaml</DependentUpon>
     </Compile>

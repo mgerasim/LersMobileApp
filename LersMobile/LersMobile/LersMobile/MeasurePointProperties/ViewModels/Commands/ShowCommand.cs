@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 
-namespace LersMobile.MeasurePointProperties.Commands
+namespace LersMobile.MeasurePointProperties.ViewModels.Commands
 {
     public class ShowCommand : ICommand
     {
-        public ShowCommand(MeasurePointArchivePage_ViewModel viewModel)
+        public ShowCommand(MeasurePointArchiveViewModel viewModel)
         {
             ViewModel = viewModel;
         }
 
-        public MeasurePointArchivePage_ViewModel ViewModel { get; set; }
+        public MeasurePointArchiveViewModel ViewModel { get; set; }
 
         public event EventHandler CanExecuteChanged;
 

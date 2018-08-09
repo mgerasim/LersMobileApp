@@ -5,9 +5,9 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LersMobile.NodeProperties.ViewModels
+namespace LersMobile.MeasurePointProperties.ViewModels
 {
-    public class NodeReportsViewModel : INotifyPropertyChanged
+    class MeasurePointReportsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -19,29 +19,30 @@ namespace LersMobile.NodeProperties.ViewModels
             }
         }
 
-        public NodeReportsViewModel(NodeReportsPage page, Node node)
+        public MeasurePointReportsViewModel(MeasurePointReportsPage page, MeasurePoint measurePoint)
         {
-            Node = node;
             Page = page;
+
+            MeasurePoint = measurePoint;
         }
 
-        private Node Node = null;
+        MeasurePointReportsPage Page;
 
-        private NodeReportsPage Page = null;
+        MeasurePoint MeasurePoint;
 
         public bool IsBusy { get; set; }
-                
-        public NodeReportCollection Reports
+
+        public MeasurePointReportCollection Reports
         {
             get
             {
-                return Node.Reports;
+                return MeasurePoint.Reports;
             }
         }
 
-        private NodeReport _selectedReport;
+        private MeasurePointReport _selectedReport;
 
-        public NodeReport SelectedReport
+        public MeasurePointReport SelectedReport
         {
             get
             {
@@ -71,13 +72,12 @@ namespace LersMobile.NodeProperties.ViewModels
 
                 await App.Core.EnsureConnected();
 
-                var requiredFlags = NodeInfoFlags.Reports;
+                MeasurePointInfoFlags requiredFlags = MeasurePointInfoFlags.Reports;
 
-                if (!Node.AvailableInfo.HasFlag(requiredFlags))
+                if (!MeasurePoint.AvailableInfo.HasFlag(requiredFlags))
                 {
-                    await Node.RefreshAsync(requiredFlags);
+                    await MeasurePoint.RefreshAsync(requiredFlags);
                     OnPropertyChanged("Reports");
-
                 }
             }
             catch
@@ -92,8 +92,7 @@ namespace LersMobile.NodeProperties.ViewModels
 
         public async void Navigate()
         {
-            await Page.Navigation.PushAsync(new NodeReportPage(Node, SelectedReport));
+            await Page.Navigation.PushAsync(new MeasurePointReportPage(MeasurePoint, SelectedReport));
         }
-
     }
 }

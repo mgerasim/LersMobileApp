@@ -1,4 +1,5 @@
 ﻿using LersMobile.Core;
+using LersMobile.MeasurePointProperties.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,29 +16,40 @@ namespace LersMobile.MeasurePointProperties
 	/// Содержит вкладки с детальными парметрами.
 	/// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MeasurePointPropertiesPage : TabbedPage
+    public partial class MeasurePointReportsPage : ContentPage
     {
 		/// <summary>
 		/// Точка учёта, данные которой отображаются.
 		/// </summary>
 		public MeasurePointView MeasurePoint { get; private set; }
 
+        private MeasurePointReportsViewModel ViewModel;
+
 		/// <summary>
 		/// Конструктор.
 		/// </summary>
 		/// <param name="measurePoint"></param>
-        public MeasurePointPropertiesPage(MeasurePointView measurePoint)
+        public MeasurePointReportsPage(MeasurePointView measurePoint)
         {
 			this.MeasurePoint = measurePoint ?? throw new ArgumentNullException(nameof(measurePoint));
 
             InitializeComponent();
 
-			this.Children.Add(new MeasurePointCommonPage(measurePoint));
-			this.Children.Add(new MeasurePointDataPage(measurePoint));
-			this.Children.Add(new MeasurePointArchivePage(measurePoint));
-            this.Children.Add(new MeasurePointReportsPage(measurePoint));
+            this.Title = Droid.Resources.Messages.Text_Reports;
 
-			this.BindingContext = this;
+            ViewModel = new MeasurePointReportsViewModel(this, MeasurePoint.MeasurePoint);
+
+            this.BindingContext = ViewModel;
+        }
+
+        /// <summary>
+        /// Вызывается при отображении страницы на экране.
+        /// </summary>
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await ViewModel.Load();
         }
     }
 }

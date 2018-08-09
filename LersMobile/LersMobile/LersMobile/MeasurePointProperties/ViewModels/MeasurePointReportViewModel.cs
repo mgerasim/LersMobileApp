@@ -1,52 +1,50 @@
-﻿using Android.Content;
-using Lers.Administration;
-using Lers.Core;
-using Lers.Data;
+﻿using Lers.Core;
 using Lers.Reports;
 using LersMobile.Core;
-using LersMobile.NodeProperties.ViewModels.Commands;
+using LersMobile.MeasurePointProperties.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace LersMobile.NodeProperties.ViewModels
+namespace LersMobile.MeasurePointProperties.ViewModels
 {
-	public class NodeReportViewModel : INotifyPropertyChanged
+    public class MeasurePointReportViewModel : INotifyPropertyChanged
     {
-        public NodeReportViewModel(Node node, NodeReport nodeReport)
-		{
-            NodeReport = nodeReport;
-            ReportCommand = new ReportCommand(this);
-            _dateBgn = DateTime.Now.AddDays(-7);
-            _dateEnd = DateTime.Now;
-            Node = node;
-		}
-
-        public ReportCommand ReportCommand { get; set; }
-
-        private NodeReport NodeReport { get; set; }
-
-        private Node Node;
-
-        public string Title
-        {
-            get
-            {
-                return NodeReport.Report.Title;
-            }
-        }
-        
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         private void OnPropertyChanged(string propertyName)
         {
             if (propertyName != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private MeasurePoint MeasurePoint;
+
+        private MeasurePointReport MeasurePointReport;
+
+        public ReportCommand ReportCommand { get; set; }
+
+        public MeasurePointReportViewModel(MeasurePoint measurePoint, MeasurePointReport measurePointReport)
+        {
+            MeasurePoint = measurePoint;
+
+            MeasurePointReport = measurePointReport;
+
+            _dateBgn = DateTime.Now.AddDays(-7);
+            _dateEnd = DateTime.Now;
+
+            ReportCommand = new ReportCommand(this);
+        }
+
+        public string Title
+        {
+            get
+            {
+                return MeasurePointReport.Report.Title;
             }
         }
 
@@ -122,7 +120,7 @@ namespace LersMobile.NodeProperties.ViewModels
                 _selectedFileFormat = value;
                 OnPropertyChanged("SelectedFileFormat");
             }
-        }        
+        }
 
         public async Task GenerateReport()
         {
@@ -131,10 +129,10 @@ namespace LersMobile.NodeProperties.ViewModels
             var reportManager = new ReportManager(App.Core.Server);
 
             var response = await reportManager.GenerateParametersSheetExportedAsync(
-                reportExportOptions, 
-                Node.Id,
-                ReportEntity.Node, 
-                NodeReport.Report.Id, 
+                reportExportOptions,
+                MeasurePoint.Id,
+                ReportEntity.MeasurePoint,
+                MeasurePointReport.Report.Id,
                 ReportUtils.DataTypes[SelectedDataType],
                 dateBgn, dateEnd);
 

@@ -1,5 +1,6 @@
 ﻿using Lers.Data;
 using Lers.Utils;
+using LersMobile.MeasurePointProperties.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,13 +19,13 @@ namespace LersMobile.MeasurePointProperties
 	public partial class MeasurePointArchivePage : ContentPage
 	{
 
-        private MeasurePointArchivePage_ViewModel ViewModel;
+        private MeasurePointArchiveViewModel ViewModel;
 
 		public MeasurePointArchivePage(Core.MeasurePointView measurePoint)
 		{
 			InitializeComponent();
 
-            ViewModel = new MeasurePointArchivePage_ViewModel(containerData, dataGrid, measurePoint.MeasurePoint);
+            ViewModel = new MeasurePointArchiveViewModel(containerData, dataGrid, measurePoint.MeasurePoint);
             this.BindingContext = ViewModel;
 
             this.Title = Droid.Resources.Messages.MeasurePointArchivePage_Title;

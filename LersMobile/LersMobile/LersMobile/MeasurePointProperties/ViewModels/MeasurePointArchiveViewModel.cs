@@ -1,6 +1,6 @@
 ﻿using Lers.Data;
 using Lers.Utils;
-using LersMobile.MeasurePointProperties.Commands;
+using LersMobile.MeasurePointProperties.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
-namespace LersMobile.MeasurePointProperties
+namespace LersMobile.MeasurePointProperties.ViewModels
 {
     enum PeriodType
     {
@@ -26,7 +26,7 @@ namespace LersMobile.MeasurePointProperties
         Totals = 1          // Интеграторы
     }
 
-    public class MeasurePointArchivePage_ViewModel : INotifyPropertyChanged
+    public class MeasurePointArchiveViewModel : INotifyPropertyChanged
     {
         private static String[] DaviceDataTypeDateStringFormat = new String[]
         {
@@ -48,7 +48,7 @@ namespace LersMobile.MeasurePointProperties
             }
         }
 
-        public MeasurePointArchivePage_ViewModel(StackLayout stackLayoutData, Xamarin.Forms.DataGrid.DataGrid dataGrid, Lers.Core.MeasurePoint measurePoint)
+        public MeasurePointArchiveViewModel(StackLayout stackLayoutData, Xamarin.Forms.DataGrid.DataGrid dataGrid, Lers.Core.MeasurePoint measurePoint)
         {
             _dateBgn = DateTime.Now;
             _dateEnd = DateTime.Now;

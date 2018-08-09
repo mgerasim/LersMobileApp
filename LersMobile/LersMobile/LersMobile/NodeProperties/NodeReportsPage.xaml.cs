@@ -29,7 +29,6 @@ namespace LersMobile.NodeProperties
             this.BindingContext = ViewModel;
         }
 
-
         /// <summary>
         /// Вызывается при отображении страницы на экране.
         /// </summary>
