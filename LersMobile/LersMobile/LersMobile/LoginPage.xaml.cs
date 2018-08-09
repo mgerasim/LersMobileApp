@@ -1,4 +1,5 @@
 ﻿using Android.Widget;
+using LersMobile.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,21 @@ namespace LersMobile
 
 			this.BindingContext = this;
 
-			this.serverAddressInput.Text = AppDataStorage.ServerAddress;
+			this.serverAddressInput.Text = AppDataStorage.Host;
+
+            if (AppDataStorage.Host != string.Empty && AppDataStorage.Port != LoginUtils.DefaultPort)
+            {
+                this.serverAddressInput.Text += $":{AppDataStorage.Port.ToString()}";
+            }
+
+            this.sslSwitch.IsToggled = AppDataStorage.AcceptSsl;
+
+            this.loginInput.Text = AppDataStorage.Login;
 		}
 
 		protected override async void OnAppearing()
 		{
-			if (!string.IsNullOrEmpty(AppDataStorage.ServerAddress) && !string.IsNullOrEmpty(AppDataStorage.Token))
+			if (!string.IsNullOrEmpty(AppDataStorage.Host) && !string.IsNullOrEmpty(AppDataStorage.Token))
 			{
 				this.IsBusy = true;
 				this.onLoginButton.IsEnabled = false;
@@ -42,7 +52,7 @@ namespace LersMobile
 					// Скрываем логин и пароль, так как мы входим по токену.
 					ShowPasswordControls(false);
 
-					await this.coreService.ConnectToken(AppDataStorage.ServerAddress, AppDataStorage.Token);
+					await this.coreService.ConnectToken(AppDataStorage.Host, AppDataStorage.Port, AppDataStorage.Token, AppDataStorage.AcceptSsl);
 
 					SuccessLogin?.Invoke(this, EventArgs.Empty);
 				}

@@ -16,7 +16,7 @@ namespace LersMobile.Core
 		public static async Task CheckNewNotifications(Action<Lers.Notification> handler)
 		{
 			if (string.IsNullOrEmpty(AppDataStorage.Token)
-				|| string.IsNullOrEmpty(AppDataStorage.ServerAddress))
+				|| string.IsNullOrEmpty(AppDataStorage.Host))
 			{
 				return;
 			}
@@ -24,7 +24,7 @@ namespace LersMobile.Core
 			var appService = new MobileCore();
 
 			// Подключаемся к серверу.
-			await appService.ConnectToken(AppDataStorage.ServerAddress, AppDataStorage.Token);
+			await appService.ConnectToken(AppDataStorage.Host, AppDataStorage.Port, AppDataStorage.Token, AppDataStorage.AcceptSsl);
 
 			Lers.Notification[] newNotifications = null;
 

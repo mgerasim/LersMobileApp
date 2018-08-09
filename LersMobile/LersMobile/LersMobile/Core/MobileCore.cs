@@ -27,12 +27,12 @@ namespace LersMobile.Core
         /// <summary>
         /// Подключается к серверу с использованием логина и пароля.
         /// </summary>
-        /// <param name="serverAddress"></param>
+        /// <param name="connectionUrl"></param>
         /// <param name="login"></param>
         /// <param name="password"></param>
         /// <param name="acceptSsl"></param>
         /// <returns></returns>
-        public async Task Connect(string serverAddress, string login, string password, bool acceptSsl = false)
+        public async Task Connect(string connectionUrl, string login, string password, bool acceptSsl = false)
 		{
 			try
 			{
@@ -42,22 +42,16 @@ namespace LersMobile.Core
 				{
 					GetSessionRestoreToken = true
 				};
-
-                string schemeName = LersScheme.Plain;
-
-                if (acceptSsl == true)
-                {
-                    schemeName = LersScheme.Secure;
-                }
-
-                serverAddress = schemeName + "://" + serverAddress;
-
-                var uri = new Uri(serverAddress);
-                                
+                
+                var uri = LoginUtils.BuildConnectionUri(connectionUrl, acceptSsl);
+                                                
 				var token = await this.Server.ConnectAsync(uri, null, loginInfo, CancellationToken.None);
                 
 				AppDataStorage.Token = token.Token;
-				AppDataStorage.ServerAddress = serverAddress;
+				AppDataStorage.Host = uri.Host;
+                AppDataStorage.Port = uri.Port;
+                AppDataStorage.AcceptSsl = acceptSsl;
+                AppDataStorage.Login = login;
 			}
 			catch (Lers.Networking.AuthorizationFailedException)
 			{
@@ -69,19 +63,22 @@ namespace LersMobile.Core
 			}
 		}
 
-		/// <summary>
-		/// Подключается к серверу с использованием токена аутентификации.
-		/// </summary>
-		/// <param name="serverAddress"></param>
-		/// <param name="token"></param>
-		/// <returns></returns>
-		public async Task ConnectToken(string serverAddress, string token)
+        /// <summary>
+        /// Подключается к серверу с использованием токена аутентификации.
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="port"></param>
+        /// <param name="token"></param>
+        /// <param name="acceptSsl"></param>
+        /// <returns></returns>
+        public async Task ConnectToken(string host, int port, string token, bool acceptSsl)
 		{
 			var loginInfo = new Lers.Networking.TokenAuthenticationInfo(token);
-
+            
 			try
 			{
-				await this.Server.ConnectAsync(serverAddress, 10000, loginInfo, CancellationToken.None);
+                var uri = LoginUtils.BuildConnectionUri(host, port, acceptSsl);
+				await this.Server.ConnectAsync(uri, null, loginInfo, CancellationToken.None);
 			}
 			catch (Lers.Networking.AuthorizationFailedException)
 			{
@@ -211,13 +208,13 @@ namespace LersMobile.Core
 		{
 			if (!this.Server.IsConnected)
 			{
-				if (string.IsNullOrEmpty(AppDataStorage.ServerAddress)
+				if (string.IsNullOrEmpty(AppDataStorage.Host)
 				|| string.IsNullOrEmpty(AppDataStorage.Token))
 				{
 					throw new InvalidOperationException(Droid.Resources.Messages.MobileCore_Connect_Failed);
 				}
 
-				await ConnectToken(AppDataStorage.ServerAddress, AppDataStorage.Token);
+				await ConnectToken(AppDataStorage.Host, AppDataStorage.Port, AppDataStorage.Token, AppDataStorage.AcceptSsl);
 			}
 		}
 	}
