@@ -1,4 +1,6 @@
 ﻿using Lers.Core;
+using Lers.Reports;
+using LersMobile.Entities;
 using LersMobile.NodeProperties.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,7 @@ namespace LersMobile.NodeProperties.ViewModels
             Node = node;
             Page = page;
             RefreshCommand = new RefreshCommand(this);
+            reports = new ReportEntityCollection();
         }
 
         public RefreshCommand RefreshCommand { get; set; }
@@ -47,18 +50,20 @@ namespace LersMobile.NodeProperties.ViewModels
                 OnPropertyChanged("IsBusy");
             }
         }
-                
-        public NodeReportCollection Reports
+
+        private ReportEntityCollection reports;
+
+        public Entities.ReportEntity[] Reports
         {
             get
             {
-                return Node.Reports;
+                return reports.ToArray();
             }
         }
+        
+        private Entities.ReportEntity _selectedReport;
 
-        private NodeReport _selectedReport;
-
-        public NodeReport SelectedReport
+        public Entities.ReportEntity SelectedReport
         {
             get
             {
@@ -79,11 +84,6 @@ namespace LersMobile.NodeProperties.ViewModels
         {
             try
             {
-                if (IsBusy)
-                {
-                    return;
-                }
-
                 IsBusy = true;
 
                 await App.Core.EnsureConnected();
@@ -93,6 +93,7 @@ namespace LersMobile.NodeProperties.ViewModels
                 if (!Node.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
                 {
                     await Node.RefreshAsync(requiredFlags);
+                    reports.Reload(Node.Reports);
                     OnPropertyChanged("Reports");
                 }
             }
@@ -109,7 +110,7 @@ namespace LersMobile.NodeProperties.ViewModels
 
         public async void Navigate()
         {
-            await Page.Navigation.PushAsync(new NodeReportPage(Node, SelectedReport));
+        //    await Page.Navigation.PushAsync(new NodeReportPage(Node, SelectedReport));
         }
 
         public async Task Refresh()

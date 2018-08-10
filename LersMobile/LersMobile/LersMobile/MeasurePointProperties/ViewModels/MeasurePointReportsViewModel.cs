@@ -1,4 +1,5 @@
 ﻿using Lers.Core;
+using LersMobile.Entities;
 using LersMobile.MeasurePointProperties.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             MeasurePoint = measurePoint;
 
             RefreshCommand = new RefreshCommand(this);
+
+            reports = new ReportEntityCollection();
         }
 
         public RefreshCommand RefreshCommand { get; set; }
@@ -50,17 +53,19 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             }
         }
 
-        public MeasurePointReportCollection Reports
+        private ReportEntityCollection reports;
+
+        public ReportEntity[] Reports
         {
             get
             {
-                return MeasurePoint.Reports;
+                return reports.ToArray();
             }
         }
 
-        private MeasurePointReport _selectedReport;
+        private ReportEntity _selectedReport;
 
-        public MeasurePointReport SelectedReport
+        public ReportEntity SelectedReport
         {
             get
             {
@@ -95,6 +100,7 @@ namespace LersMobile.MeasurePointProperties.ViewModels
                 if (!MeasurePoint.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
                 {
                     await MeasurePoint.RefreshAsync(requiredFlags);
+                    reports.Reload(MeasurePoint.Reports);
                     OnPropertyChanged("Reports");
                 }
             }
@@ -111,7 +117,7 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 
         public async void Navigate()
         {
-            await Page.Navigation.PushAsync(new MeasurePointReportPage(MeasurePoint, SelectedReport));
+            //await Page.Navigation.PushAsync(new MeasurePointReportPage(MeasurePoint, SelectedReport));
         }
 
         public async Task Refresh()

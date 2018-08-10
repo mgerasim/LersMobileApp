@@ -97,6 +97,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\PollLogEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ResourceHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\ReportEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\ReportEntityCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Incidents\IncidentDetailPage.xaml.cs">
       <DependentUpon>IncidentDetailPage.xaml</DependentUpon>
     </Compile>
@@ -124,7 +126,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointArchivePage.xaml.cs">
       <DependentUpon>MeasurePointArchivePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Converters\ReportTitleConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\MeasurePointArchiveViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointCommonPage.xaml.cs">
       <DependentUpon>MeasurePointCommonPage.xaml</DependentUpon>
@@ -164,7 +165,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Commands\ReportCommand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Converters\ReportTitleConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportViewModel.cs">
       <SubType>Code</SubType>
