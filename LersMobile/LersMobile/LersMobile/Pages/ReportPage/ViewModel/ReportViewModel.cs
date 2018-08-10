@@ -147,10 +147,12 @@ namespace LersMobile.Pages.ReportPage.ViewModel
                 reportExportOptions.Format = (ReportExportFormat)SelectedFileFormat;
                 var reportManager = new ReportManager(App.Core.Server);
 
-                var response = await reportManager.GenerateParametersSheetExportedAsync(
+                var response = await reportManager.GenerateExported(
                     reportExportOptions,
-                    EntityId,
+                    new int[] { EntityId },
+                    null,
                     Entity,
+                    Report.Type,
                     Report.Id,
                     ReportUtils.DataTypes[SelectedDataType],
                     DateBgn, DateEnd);
