@@ -1,4 +1,5 @@
 ﻿using Lers.Core;
+using LersMobile.Core;
 using LersMobile.Entities;
 using LersMobile.MeasurePointProperties.ViewModels.Commands;
 using System;
@@ -29,7 +30,7 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 
             RefreshCommand = new RefreshCommand(this);
 
-            reports = new ReportEntityCollection();
+            reports = new List<ReportEntityCollectionGrouping>();
         }
 
         public RefreshCommand RefreshCommand { get; set; }
@@ -53,9 +54,9 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             }
         }
 
-        private ReportEntityCollection reports;
+        private List<ReportEntityCollectionGrouping> reports;
 
-        public ReportEntity[] Reports
+        public ReportEntityCollectionGrouping[] Reports
         {
             get
             {
@@ -86,11 +87,6 @@ namespace LersMobile.MeasurePointProperties.ViewModels
         {
             try
             {
-                if (IsBusy)
-                {
-                    return;
-                }
-
                 IsBusy = true;
 
                 await App.Core.EnsureConnected();
@@ -100,7 +96,11 @@ namespace LersMobile.MeasurePointProperties.ViewModels
                 if (!MeasurePoint.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
                 {
                     await MeasurePoint.RefreshAsync(requiredFlags);
-                    reports.Reload(MeasurePoint.Reports);
+                    
+                    ReportEntityCollection reportEntities = new ReportEntityCollection();
+                    reportEntities.Reload(MeasurePoint.Reports);
+                    reports = ReportUtils.BuildReportEntityCollectionGrouping(reportEntities);
+
                     OnPropertyChanged("Reports");
                 }
             }
