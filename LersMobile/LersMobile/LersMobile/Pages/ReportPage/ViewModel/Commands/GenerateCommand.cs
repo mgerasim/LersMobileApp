@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 
-namespace LersMobile.NodeProperties.ViewModels.Commands
+namespace LersMobile.Pages.ReportPage.ViewModel.Commands
 {
-    public class ReportCommand : ICommand
+    public class GenerateCommand : ICommand
     {
-        public ReportCommand(NodeReportViewModel viewModel)
+        public GenerateCommand(ReportViewModel viewModel)
         {
             ViewModel = viewModel;
         }
 
-        NodeReportViewModel ViewModel;
+        ReportViewModel ViewModel;
 
         public event EventHandler CanExecuteChanged;
 
@@ -25,13 +25,13 @@ namespace LersMobile.NodeProperties.ViewModels.Commands
         {
             try
             {
-                await ViewModel.GenerateReport();
+                await ViewModel.Generate();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");                
+                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");
             }
-            
+
         }
     }
 }

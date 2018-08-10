@@ -117,7 +117,7 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 
         public async void Navigate()
         {
-            //await Page.Navigation.PushAsync(new MeasurePointReportPage(MeasurePoint, SelectedReport));
+            await Page.Navigation.PushAsync(new Pages.ReportPage.ReportPage(MeasurePoint.Id, Lers.Reports.ReportEntity.MeasurePoint, SelectedReport));
         }
 
         public async Task Refresh()

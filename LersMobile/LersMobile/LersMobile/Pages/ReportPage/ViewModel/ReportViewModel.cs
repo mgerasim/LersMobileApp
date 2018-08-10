@@ -1,48 +1,41 @@
-﻿using Android.Content;
-using Lers.Administration;
-using Lers.Core;
-using Lers.Data;
-using Lers.Reports;
+﻿using Lers.Reports;
 using LersMobile.Core;
-using LersMobile.NodeProperties.ViewModels.Commands;
+using LersMobile.Pages.ReportPage.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace LersMobile.NodeProperties.ViewModels
+namespace LersMobile.Pages.ReportPage.ViewModel
 {
-	public class NodeReportViewModel : INotifyPropertyChanged
+    public class ReportViewModel : INotifyPropertyChanged
     {
-        public NodeReportViewModel(Node node, NodeReport nodeReport)
-		{
-            NodeReport = nodeReport;
-            ReportCommand = new ReportCommand(this);
+        public ReportViewModel(int entityId, ReportEntity entity, Entities.ReportEntity report)
+        {
+            Entity = entity;
+            Report = report;
             _dateBgn = DateTime.Now.AddDays(-7);
             _dateEnd = DateTime.Now;
-            Node = node;
             _isBusy = false;
-		}
-
-        public ReportCommand ReportCommand { get; set; }
-
-        private NodeReport NodeReport { get; set; }
-
-        private Node Node;
-
-        public string Title
-        {
-            get
-            {
-                return NodeReport.Report.Title;
-            }
+            EntityId = entityId;
+            GenerateCommand = new GenerateCommand(this);
         }
-        
+
+        #region Закрытые свойства
+
+        private Lers.Reports.ReportEntity Entity;
+
+        private Entities.ReportEntity Report;
+
+        private int EntityId;
+
+        # endregion
+
+        #region INotifyPropertyChanged implement interface
+
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         private void OnPropertyChanged(string propertyName)
         {
             if (propertyName != null)
@@ -51,9 +44,19 @@ namespace LersMobile.NodeProperties.ViewModels
             }
         }
 
+        #endregion
+
+        #region Команды
+
+        public GenerateCommand GenerateCommand { get; protected set; }
+
+        #endregion
+
+        #region Binding свойства
+
         private bool _isBusy;
 
-        public bool isBusy
+        public bool IsBusy
         {
             get
             {
@@ -62,13 +65,13 @@ namespace LersMobile.NodeProperties.ViewModels
             set
             {
                 _isBusy = value;
-                OnPropertyChanged("isBusy");
+                OnPropertyChanged("IsBusy");
             }
         }
 
         private DateTime _dateBgn;
 
-        public DateTime dateBgn
+        public DateTime DateBgn
         {
             get
             {
@@ -77,13 +80,13 @@ namespace LersMobile.NodeProperties.ViewModels
             set
             {
                 _dateBgn = value;
-                OnPropertyChanged("dateBgn");
+                OnPropertyChanged("DateBgn");
             }
         }
 
         private DateTime _dateEnd;
 
-        public DateTime dateEnd
+        public DateTime DateEnd
         {
             get
             {
@@ -92,7 +95,7 @@ namespace LersMobile.NodeProperties.ViewModels
             set
             {
                 _dateEnd = value;
-                OnPropertyChanged("dateEnd");
+                OnPropertyChanged("DateEnd");
             }
         }
 
@@ -123,18 +126,22 @@ namespace LersMobile.NodeProperties.ViewModels
                 _selectedFileFormat = value;
                 OnPropertyChanged("SelectedFileFormat");
             }
-        }        
+        }
 
-        public async Task GenerateReport()
+        #endregion
+
+        #region Методы комманд
+
+        public async Task Generate()
         {
             try
             {
-                if (isBusy)
+                if (IsBusy)
                 {
                     return;
                 }
 
-                isBusy = true;
+                IsBusy = true;
 
                 var reportExportOptions = new ReportExportOptions();
                 reportExportOptions.Format = (ReportExportFormat)SelectedFileFormat;
@@ -142,26 +149,30 @@ namespace LersMobile.NodeProperties.ViewModels
 
                 var response = await reportManager.GenerateParametersSheetExportedAsync(
                     reportExportOptions,
-                    Node.Id,
-                    ReportEntity.Node,
-                    NodeReport.Report.Id,
+                    EntityId,
+                    Entity,
+                    Report.Id,
                     ReportUtils.DataTypes[SelectedDataType],
-                    dateBgn, dateEnd);
+                    DateBgn, DateEnd);
 
-                isBusy = false;
+                IsBusy = false;
 
                 ReportUtils.SaveResponse(response, reportExportOptions.Format);
             }
             catch (Exception ex)
             {
-                isBusy = false;
+                IsBusy = false;
                 await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");
             }
             finally
             {
-                isBusy = false;
+                IsBusy = false;
             }
         }
+
+        #endregion
+
+
 
     }
 }
