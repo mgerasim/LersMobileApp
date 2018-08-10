@@ -1,5 +1,6 @@
 ﻿using Lers.Core;
 using Lers.Reports;
+using LersMobile.Core;
 using LersMobile.Entities;
 using LersMobile.NodeProperties.ViewModels.Commands;
 using System;
@@ -27,7 +28,7 @@ namespace LersMobile.NodeProperties.ViewModels
             Node = node;
             Page = page;
             RefreshCommand = new RefreshCommand(this);
-            reports = new ReportEntityCollection();
+            reports = new List<ReportEntityCollectionGrouping>();
         }
 
         public RefreshCommand RefreshCommand { get; set; }
@@ -51,9 +52,9 @@ namespace LersMobile.NodeProperties.ViewModels
             }
         }
 
-        private ReportEntityCollection reports;
+        private List<ReportEntityCollectionGrouping> reports;
 
-        public Entities.ReportEntity[] Reports
+        public ReportEntityCollectionGrouping[] Reports
         {
             get
             {
@@ -93,7 +94,9 @@ namespace LersMobile.NodeProperties.ViewModels
                 if (!Node.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
                 {
                     await Node.RefreshAsync(requiredFlags);
-                    reports.Reload(Node.Reports);
+                    ReportEntityCollection reportEntities = new ReportEntityCollection();
+                    reportEntities.Reload(Node.Reports);
+                    reports = ReportUtils.BuildReportEntityCollectionGrouping(reportEntities);
                     OnPropertyChanged("Reports");
                 }
             }

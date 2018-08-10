@@ -525,4 +525,16 @@
     <value>Запрос выполняется...</value>
     <comment>Запрос выполняется</comment>
   </data>
+  <data name="Text_Act" xml:space="preserve">
+    <value>Акт</value>
+    <comment>Акт</comment>
+  </data>
+  <data name="Text_Others" xml:space="preserve">
+    <value>Другие</value>
+    <comment>Другие</comment>
+  </data>
+  <data name="Text_ParametersSheet" xml:space="preserve">
+    <value>Ведомость параметров</value>
+    <comment>Параметр ведомость</comment>
+  </data>
 </root>

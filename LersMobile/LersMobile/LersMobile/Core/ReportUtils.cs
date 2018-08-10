@@ -3,9 +3,11 @@ using Lers.Data;
 using Lers.Reports;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Text;
 using Xamarin.Forms;
+using LersMobile.Entities;
 
 namespace LersMobile.Core
 {
@@ -64,7 +66,28 @@ namespace LersMobile.Core
                 ToastLength.Long).Show();
 
             Device.OpenUri(new Uri(fullName));
+        }
 
+        public static List<ReportEntityCollectionGrouping> BuildReportEntityCollectionGrouping(ReportEntityCollection reportEntities)
+        {
+            List<ReportEntityCollectionGrouping> reportsGrouping = new List<ReportEntityCollectionGrouping>();
+
+            foreach (ReportGroupType type in (ReportType[])Enum.GetValues(typeof(ReportGroupType)))
+            {
+                var list = reportEntities.Where(x => x.GroupType == type);
+
+                if (list.Count() > 0)
+                {
+                    ReportEntityCollectionGrouping item = new ReportEntityCollectionGrouping(list.First());
+                    foreach(var element in list)
+                    {
+                        item.Add(element);
+                    }
+                    reportsGrouping.Add(item);
+                }
+            }
+
+            return reportsGrouping;
         }
     }
 }

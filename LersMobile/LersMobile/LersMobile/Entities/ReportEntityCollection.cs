@@ -37,4 +37,21 @@ namespace LersMobile.Entities
             }
         }
     }
+
+    /// <summary>
+    /// Коллекция отчётов сгрупированные по типу
+    /// </summary>
+    public class ReportEntityCollectionGrouping : ObservableCollection<ReportEntity>
+    {
+        public string GroupTypeDescription { get; protected set; }
+
+        public ReportGroupType GroupType { get; protected set; }
+
+        public ReportEntityCollectionGrouping(ReportEntity reportEntity)
+        {
+            GroupType = reportEntity.GroupType;
+            GroupTypeDescription = reportEntity.GroupTypeDescription;
+        }
+        
+    }
 }

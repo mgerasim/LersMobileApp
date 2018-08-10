@@ -8,8 +8,16 @@
             <ListView ItemsSource="{Binding Reports}" 
                       SelectedItem="{Binding SelectedReport}" 
                       IsPullToRefreshEnabled="True" 
+                      IsGroupingEnabled="True"
                       RefreshCommand="{Binding RefreshCommand}"
                       IsRefreshing="{Binding IsBusy}">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding GroupTypeDescription}" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
