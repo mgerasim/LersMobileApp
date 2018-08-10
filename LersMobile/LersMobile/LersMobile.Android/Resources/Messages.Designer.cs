@@ -763,11 +763,11 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Акт.
+        ///   Looks up a localized string similar to Акты.
         /// </summary>
-        public static string Text_Act {
+        public static string Text_Acts {
             get {
-                return ResourceManager.GetString("Text_Act", resourceCulture);
+                return ResourceManager.GetString("Text_Acts", resourceCulture);
             }
         }
         
@@ -930,6 +930,15 @@ namespace LersMobile.Droid.Resources {
         public static string Text_ParametersSheet {
             get {
                 return ResourceManager.GetString("Text_ParametersSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Паспорта.
+        /// </summary>
+        public static string Text_Passports {
+            get {
+                return ResourceManager.GetString("Text_Passports", resourceCulture);
             }
         }
         

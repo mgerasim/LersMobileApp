@@ -8,9 +8,10 @@ namespace LersMobile.Entities
 {
     public enum ReportGroupType
     {
-        Act = 0,
-        ParametersSheet = 1,
-        Others = 2
+        ParametersSheets = 0,
+        Acts = 1,
+        Passports = 2,
+        Others = 3
     }
     /// <summary>
     /// Сущность Отчёт для вывода на экран
@@ -49,12 +50,14 @@ namespace LersMobile.Entities
             {
                 if (this.Report.IsAct)
                 {
-                    return ReportGroupType.Act;
+                    return ReportGroupType.Acts;
                 }
                 switch (this.Report.Type)
                 {
                     case Lers.Reports.ReportType.ParametersSheet:
-                        return ReportGroupType.ParametersSheet;
+                        return ReportGroupType.ParametersSheets;
+                    case ReportType.NodePassport:
+                        return ReportGroupType.Passports;
                 }
 
                 return ReportGroupType.Others;
@@ -67,11 +70,14 @@ namespace LersMobile.Entities
             {
                 switch (GroupType)
                 {
-                    case ReportGroupType.Act:
-                        return Droid.Resources.Messages.Text_Act;
-                    case ReportGroupType.ParametersSheet:
+                    case ReportGroupType.Acts:
+                        return Droid.Resources.Messages.Text_Acts;
+                    case ReportGroupType.ParametersSheets:
                         return Droid.Resources.Messages.Text_ParametersSheet;
+                    case ReportGroupType.Passports:
+                        return Droid.Resources.Messages.Text_Passports;
                 }
+
                 return Droid.Resources.Messages.Text_Others;
             }
         }

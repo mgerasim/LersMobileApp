@@ -525,8 +525,8 @@
     <value>Запрос выполняется...</value>
     <comment>Запрос выполняется</comment>
   </data>
-  <data name="Text_Act" xml:space="preserve">
-    <value>Акт</value>
+  <data name="Text_Acts" xml:space="preserve">
+    <value>Акты</value>
     <comment>Акт</comment>
   </data>
   <data name="Text_Others" xml:space="preserve">
@@ -536,5 +536,9 @@
   <data name="Text_ParametersSheet" xml:space="preserve">
     <value>Ведомость параметров</value>
     <comment>Параметр ведомость</comment>
+  </data>
+  <data name="Text_Passports" xml:space="preserve">
+    <value>Паспорта</value>
+    <comment>Паспорта</comment>
   </data>
 </root>
