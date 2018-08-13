@@ -1,6 +1,7 @@
 ﻿using Lers.Reports;
 using LersMobile.Core;
 using LersMobile.Pages.ReportPage.ViewModel.Commands;
+using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ namespace LersMobile.Pages.ReportPage.ViewModel
 {
     public class ReportViewModel : INotifyPropertyChanged
     {
-        public ReportViewModel(int entityId, ReportEntity entity, Entities.ReportEntity report)
+        public ReportViewModel(int entityId, ReportEntity entity, ReportView report)
         {
             Entity = entity;
             Report = report;
@@ -24,9 +25,9 @@ namespace LersMobile.Pages.ReportPage.ViewModel
 
         #region Закрытые свойства
 
-        private Lers.Reports.ReportEntity Entity;
+        private ReportEntity Entity;
 
-        private Entities.ReportEntity Report;
+        private ReportView Report;
 
         private int EntityId;
 

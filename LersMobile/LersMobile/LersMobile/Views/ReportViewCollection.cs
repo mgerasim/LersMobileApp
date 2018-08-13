@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace LersMobile.Entities
+namespace LersMobile.Views
 {
     /// <summary>
     /// Коллекция отчётов для вывода на экран
     /// </summary>
-    public class ReportEntityCollection : List<ReportEntity>
+    public class ReportViewCollection : List<ReportView>
     {
-        public ReportEntityCollection()
+        public ReportViewCollection()
         {
 
         }
@@ -22,7 +22,7 @@ namespace LersMobile.Entities
             Clear();
             foreach (var report in nodeReports)
             {
-                ReportEntity item = new ReportEntity(report);
+                ReportView item = new ReportView(report.Report);
                 Add(item);
             }
         }
@@ -32,7 +32,7 @@ namespace LersMobile.Entities
             Clear();
             foreach(var report in measurePointReports)
             {
-                ReportEntity item = new ReportEntity(report);
+                ReportView item = new ReportView(report.Report);
                 Add(item);
             }
         }
@@ -41,13 +41,13 @@ namespace LersMobile.Entities
     /// <summary>
     /// Коллекция отчётов сгрупированные по типу
     /// </summary>
-    public class ReportEntityCollectionGrouping : ObservableCollection<ReportEntity>
+    public class ReportViewCollectionGrouping : ObservableCollection<ReportView>
     {
         public string GroupTypeDescription { get; protected set; }
 
         public ReportGroupType GroupType { get; protected set; }
 
-        public ReportEntityCollectionGrouping(ReportEntity reportEntity)
+        public ReportViewCollectionGrouping(ReportView reportEntity)
         {
             GroupType = reportEntity.GroupType;
             GroupTypeDescription = reportEntity.GroupTypeDescription;

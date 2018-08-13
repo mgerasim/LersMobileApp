@@ -241,6 +241,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Системные отчёты.
+        /// </summary>
+        public static string MainPage_MenuItem_SystemReports {
+            get {
+                return ResourceManager.GetString("MainPage_MenuItem_SystemReports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Суточные.
         /// </summary>
         public static string MeasurePointArchivePage_DeviceDataType_Day {

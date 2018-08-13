@@ -7,7 +7,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using Xamarin.Forms;
-using LersMobile.Entities;
+using LersMobile.Views;
 
 namespace LersMobile.Core
 {
@@ -68,9 +68,9 @@ namespace LersMobile.Core
             Device.OpenUri(new Uri(fullName));
         }
 
-        public static List<ReportEntityCollectionGrouping> BuildReportEntityCollectionGrouping(ReportEntityCollection reportEntities)
+        public static List<ReportViewCollectionGrouping> BuildReportEntityCollectionGrouping(ReportViewCollection reportEntities)
         {
-            List<ReportEntityCollectionGrouping> reportsGrouping = new List<ReportEntityCollectionGrouping>();
+            List<ReportViewCollectionGrouping> reportsGrouping = new List<ReportViewCollectionGrouping>();
 
             foreach (ReportGroupType type in (ReportType[])Enum.GetValues(typeof(ReportGroupType)))
             {
@@ -78,7 +78,7 @@ namespace LersMobile.Core
 
                 if (list.Count() > 0)
                 {
-                    ReportEntityCollectionGrouping item = new ReportEntityCollectionGrouping(list.First());
+                    ReportViewCollectionGrouping item = new ReportViewCollectionGrouping(list.First());
                     foreach(var element in list)
                     {
                         item.Add(element);

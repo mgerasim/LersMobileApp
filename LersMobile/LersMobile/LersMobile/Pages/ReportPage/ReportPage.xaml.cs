@@ -1,5 +1,6 @@
 ﻿using Lers.Reports;
 using LersMobile.Pages.ReportPage.ViewModel;
+using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace LersMobile.Pages.ReportPage
 	{
         ReportViewModel ViewModel;
 
-		public ReportPage (int entityId, ReportEntity entity, Entities.ReportEntity report)
+		public ReportPage (int entityId, ReportEntity entity, ReportView report)
 		{
 			InitializeComponent ();
 

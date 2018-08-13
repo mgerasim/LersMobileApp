@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LersMobile.Entities
+namespace LersMobile.Views
 {
     public enum ReportGroupType
     {
@@ -16,19 +16,35 @@ namespace LersMobile.Entities
     /// <summary>
     /// Сущность Отчёт для вывода на экран
     /// </summary>
-    public class ReportEntity
+    public class ReportView
     {
-        public ReportEntity(NodeReport report)
+        public ReportView(int id, ReportType type, string title)
         {
-            Report = report.Report;
+            this.id = id;
+            this.type = type;
+            this.title = title;
+            this.isAct = false;
         }
 
-        public ReportEntity(MeasurePointReport report)
+        public ReportView(Report report)
         {
-            Report = report.Report;
+            title = report.Title;
+            id = report.Id;
+            type = report.Type;
+            isAct = report.IsAct;
         }
 
-        private Report Report { get; set; }
+        #region Закрытые свойства
+
+        private string title;
+
+        private int id;
+
+        private ReportType type;
+
+        bool isAct;
+
+        #endregion
 
         #region Свойства отчёта
 
@@ -36,25 +52,38 @@ namespace LersMobile.Entities
         {
             get
             {
-                return Report.Title;
+                return title;
             }
         }
 
-        public Lers.Reports.ReportType Type => this.Report.Type;
+        public ReportType Type
+        {
+            get
+            {
+                return type;
+            }
+        }
 
-        public int Id => this.Report.Id;
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+        }
 
         public ReportGroupType GroupType
         {
             get
             {
-                if (this.Report.IsAct)
+                if (this.isAct)
                 {
                     return ReportGroupType.Acts;
                 }
-                switch (this.Report.Type)
+                switch (this.Type)
                 {
-                    case Lers.Reports.ReportType.ParametersSheet:
+                    case ReportType.ParametersSheet:
                         return ReportGroupType.ParametersSheets;
                     case ReportType.NodePassport:
                         return ReportGroupType.Passports;

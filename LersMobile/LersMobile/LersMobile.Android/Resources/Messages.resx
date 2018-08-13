@@ -541,4 +541,8 @@
     <value>Паспорта</value>
     <comment>Паспорта</comment>
   </data>
+  <data name="MainPage_MenuItem_SystemReports" xml:space="preserve">
+    <value>Системные отчёты</value>
+    <comment>Системные отчёты</comment>
+  </data>
 </root>

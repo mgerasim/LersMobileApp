@@ -1,7 +1,7 @@
 ﻿using Lers.Core;
 using LersMobile.Core;
-using LersMobile.Entities;
 using LersMobile.MeasurePointProperties.ViewModels.Commands;
+using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +30,7 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 
             RefreshCommand = new RefreshCommand(this);
 
-            reports = new List<ReportEntityCollectionGrouping>();
+            reports = new List<ReportViewCollectionGrouping>();
         }
 
         public RefreshCommand RefreshCommand { get; set; }
@@ -54,9 +54,9 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             }
         }
 
-        private List<ReportEntityCollectionGrouping> reports;
+        private List<ReportViewCollectionGrouping> reports;
 
-        public ReportEntityCollectionGrouping[] Reports
+        public ReportViewCollectionGrouping[] Reports
         {
             get
             {
@@ -64,9 +64,9 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             }
         }
 
-        private ReportEntity _selectedReport;
+        private ReportView _selectedReport;
 
-        public ReportEntity SelectedReport
+        public ReportView SelectedReport
         {
             get
             {
@@ -97,7 +97,7 @@ namespace LersMobile.MeasurePointProperties.ViewModels
                 {
                     await MeasurePoint.RefreshAsync(requiredFlags);
                     
-                    ReportEntityCollection reportEntities = new ReportEntityCollection();
+                    ReportViewCollection reportEntities = new ReportViewCollection();
                     reportEntities.Reload(MeasurePoint.Reports);
                     reports = ReportUtils.BuildReportEntityCollectionGrouping(reportEntities);
 
