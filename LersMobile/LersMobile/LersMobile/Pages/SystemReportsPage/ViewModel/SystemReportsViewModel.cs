@@ -44,27 +44,33 @@ namespace LersMobile.Pages.SystemReportsPage.ViewModel
 
         #region Закрытые методы
 
-        private void Load()
+        private async void Load()
         {
-            reports.Clear();
-            foreach (var itemEnum in Enum.GetValues(typeof(SystemReport)))
+            try
             {
-                int[] array = new int[] { (int)SystemReport.SystemState };
+                var reportManager = new ReportManager(App.Core.Server);
 
-                SortedSet<int> setIds = new SortedSet<int>();
-                setIds.Add((int)SystemReport.SystemState);
+                var reportList = await reportManager.GetReportListAsync();
 
-                int id = (int)itemEnum;
+                foreach (var report in reportList)
+                {
+                    if (report.Type == ReportType.SystemState ||
+                        report.Type == ReportType.NodeJob ||
+                        report.Type == ReportType.Calibration)
+                    {
+                        ReportView item = new ReportView(report);
 
-                if (!setIds.Contains(id)) continue;
+                        this.reports.Add(item);
+                    }
+                }
 
-                ReportType type = ReportType.SystemState;
-                string title = GetEnumDescription((Enum)itemEnum);
-
-                ReportView report = new ReportView(id, type, title);
-
-                this.reports.Add(report);
+                OnPropertyChanged("Reports");
             }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error_Load, ex.Message, "Ok");
+            }
+            
         }
 
         #endregion
