@@ -6,7 +6,13 @@
     <ContentPage.Content>
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" VerticalOptions="Center" Margin="20">
+                <Image x:Name="iconImage"
+                       Source="logo.png"
+                       Aspect="AspectFit"
+                       HorizontalOptions="FillAndExpand"
+                       Margin="0, 0, 0, 50"/>
+                
                 <Label Text="{local:Translate LoginPage_Server}" />
                 <Entry x:Name="serverAddressInput" />
 
