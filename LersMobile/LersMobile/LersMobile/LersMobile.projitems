@@ -87,9 +87,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointPoller.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\SelectedMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\SelectableData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\RefreshCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\ReportCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\SearchCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\SelectingCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\NodesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\DetailedState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MeasurePointView.cs" />

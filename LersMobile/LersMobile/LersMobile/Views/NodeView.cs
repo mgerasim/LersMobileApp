@@ -34,35 +34,6 @@ namespace LersMobile.Views
             }
         }
 
-        public SelectedMode SelectedMode = SelectedMode.None;
-
-        public bool IsSelecting
-        {
-            get
-            {
-                return (SelectedMode != SelectedMode.None);
-            }
-            set
-            {
-                if (value == true)
-                {
-                    SelectedMode = SelectedMode.Selecting;                    
-                }
-                else
-                {
-                    SelectedMode = SelectedMode.None;
-                }
-            }
-        }
-
-        public string SelectedImageSource
-        {
-            get
-            {
-                return SelectedModeUtils.GetSourceImage(this.SelectedMode);
-            }
-        }
-
 		public string ServicemanName => this.Node.Serviceman?.Name;
 
 		public string CustomerTitle => this.Node.Customer?.Title;

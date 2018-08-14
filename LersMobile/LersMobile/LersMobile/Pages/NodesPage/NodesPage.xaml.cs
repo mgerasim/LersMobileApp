@@ -23,7 +23,6 @@ namespace LersMobile.Pages.NodesPage
             this.BindingContext = this.ViewModel;
 
 			this.Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList;
-
 		}
         
 		/// <summary>
@@ -42,12 +41,5 @@ namespace LersMobile.Pages.NodesPage
             }
         }
 
-        public void OnSearchBarTextChanged(object sender, TextChangedEventArgs args)
-        {
-            if (string.IsNullOrEmpty(args.NewTextValue))
-            {
-                ViewModel.Search();
-            }
-        }
     }
 }

@@ -7,7 +7,10 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Report"
                      Icon="report.png"
-                     Command="{Binding ModeSelectingCommmand}"/>
+                     Command="{Binding SelectingCommand}" />
+        <ToolbarItem Text="Report"
+                     Icon="ok.png"                     
+                     Command="{Binding ReportCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
@@ -20,6 +23,7 @@
             <ListView x:Name="nodeListView" 
                       ItemsSource="{Binding Nodes}" 
                       IsPullToRefreshEnabled="True"
+                      SelectedItem="{Binding SelectedNode}"
                       RefreshCommand="{Binding RefreshCommand}"
                       IsRefreshing="{Binding IsRefreshing}">
 
@@ -31,10 +35,10 @@
                                     <Image Source="{Binding SelectedImageSource}"/>
                                 </StackLayout>
 
-                                <Image Source="{Binding ImageSource}"/>
+                                <Image Source="{Binding Data.ImageSource}"/>
                                 <StackLayout Orientation="Vertical" Spacing="-3">
-                                    <Label Text="{Binding Title}" TextColor="Accent" LineBreakMode="NoWrap" />
-                                    <Label Text="{Binding Address}"/>
+                                    <Label Text="{Binding Data.Title}" TextColor="Accent" LineBreakMode="NoWrap" />
+                                    <Label Text="{Binding Data.Address}"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

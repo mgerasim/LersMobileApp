@@ -6,6 +6,7 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using LersMobile.Pages.NodesPage.ViewModel.Commands;
+using LersMobile.Core;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
@@ -16,19 +17,27 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             nodeGroups = new List<NodeGroupView>();
             RefreshCommand = new RefreshCommand(this);
             SearchCommand = new SearchCommand(this);
+            SelectingCommand = new SelectingCommand(this);
+            ReportCommand = new ReportCommand(this);
+
+            _nodes = new List<SelectableData<NodeView>>();
         }
 
         #region Закрытые свойства
 
         private List<NodeGroupView> nodeGroups;
 
-        private NodeView[] _nodes;
+        private List<SelectableData<NodeView>> _nodes;
         
         private bool _isRefreshing = false;
 
         private string _searchText;
 
         private NodeGroupView selectedGroup;
+
+        private bool isSelecting = false;
+
+        private SelectableData<NodeView> selectedNode;
         
         #endregion
 
@@ -52,6 +61,10 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 
         public RefreshCommand RefreshCommand { get; set; }
 
+        public SelectingCommand SelectingCommand { get; set; }
+
+        public ReportCommand ReportCommand { get; set; }
+
         #endregion
 
         #region Binding свойства
@@ -59,31 +72,25 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         /// <summary>
 		/// Список отображаемых объектов учёта.
 		/// </summary>
-		public NodeView[] Nodes
+		public SelectableData<NodeView>[] Nodes
         {
             get
             {
                 if (string.IsNullOrEmpty(this.SearchText))
                 {
-                    return _nodes;
+                    return _nodes.ToArray();
                 }
                 else
                 {
                     var searchText = this.SearchText.ToLower();
 
                     return _nodes
-                        .Where(x => x.Title.ToLower().Contains(searchText)
-                            || x.Address.ToLower().Contains(searchText))
+                        .Where(x => x.Data.Title.ToLower().Contains(searchText)
+                            || x.Data.Address.ToLower().Contains(searchText))
                         .ToArray();
                 }
             }
-            set
-            {
-                _nodes = value;
-                OnPropertyChanged(nameof(Nodes));
-            }
         }
-
 
         /// <summary>
 		/// Флаг указывает что идёт обновление данных.
@@ -95,6 +102,35 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             {
                 _isRefreshing = value;
                 OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+
+        /// <summary>
+		/// Флаг указывает что идёт множественный выбор.
+		/// </summary>
+        public bool IsSelecting
+        {
+            get
+            {
+                return isSelecting;
+            }
+            set
+            {
+                isSelecting = value;
+                OnPropertyChanged(nameof(IsSelecting));
+                OnPropertyChanged(nameof(IsUnselecting));
+            }
+        }
+
+
+        /// <summary>
+        /// Флаг указывает что идёт множественный выбор завершен.
+        /// </summary>
+        public bool IsUnselecting
+        {
+            get
+            {
+                return !isSelecting;
             }
         }
 
@@ -123,8 +159,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                 return nodeGroups.ToArray();
             }
         }
-
-
+        
         /// <summary>
         /// Возвращает выбранную для отображеня группу объектов или 0Se если
         /// выбрано отображение объектов изо всех групп.
@@ -141,7 +176,26 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                 OnPropertyChanged(nameof(SelectedGroup));
             }
         }
-
+        
+        /// <summary>
+        /// Выбранный объект учёта
+        /// </summary>
+        public SelectableData<NodeView> SelectedNode
+        {
+            get
+            {
+                return selectedNode;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    selectedNode = value;
+                    SelectedNode.Selected = !SelectedNode.Selected;
+                    OnPropertyChanged(nameof(SelectedNode));
+                }
+            }
+        }
         #endregion
 
         #region Методы комманд
@@ -163,7 +217,15 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                     nodeGroupId = SelectedGroup.Id;
                 }
 
-                this.Nodes = await App.Core.GetNodeDetail(nodeGroupId);
+                var nodes = await App.Core.GetNodeDetail(nodeGroupId);
+
+                foreach(var node in nodes)
+                {
+                    SelectableData<NodeView> selectableData = new SelectableData<NodeView>();
+                    selectableData.Data = node;
+                    this._nodes.Add(selectableData);
+                }
+                OnPropertyChanged(nameof(Nodes));
             }
             catch (Exception exc)
             {
@@ -174,6 +236,22 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             {
                 this.IsRefreshing = false;
             }
+        }
+
+        public void Selecting()
+        {
+            IsSelecting = !IsSelecting;
+
+            foreach(var node in _nodes)
+            {
+                node.IsSelecting = IsSelecting;
+            }
+            OnPropertyChanged(nameof(Nodes));
+        }
+
+        public void Report()
+        {
+            IsSelecting = false;
         }
 
         #endregion
