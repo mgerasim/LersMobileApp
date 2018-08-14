@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Lers.Data;
+using LersMobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,9 +16,9 @@ namespace LersMobile.MeasurePointProperties
     {
 		private bool isLoaded = false;
 
-        private Core.MeasurePointView _measurePoint;
+        private MeasurePointView _measurePoint;
 
-        public Core.MeasurePointView MeasurePoint
+        public MeasurePointView MeasurePoint
         {
             get { return _measurePoint; }
             private set
@@ -60,7 +61,7 @@ namespace LersMobile.MeasurePointProperties
 		/// Конструктор.
 		/// </summary>
 		/// <param name="measurePoint"></param>
-		public MeasurePointDataPage(Core.MeasurePointView measurePoint)
+		public MeasurePointDataPage(MeasurePointView measurePoint)
         {
             InitializeComponent();
 

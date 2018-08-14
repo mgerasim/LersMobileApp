@@ -1,18 +1,20 @@
-﻿namespace LersMobile.Core
+﻿using LersMobile.Core;
+
+namespace LersMobile.Views
 {
-	/// <summary>
-	/// Состояние объекта учёта, пригодное для вывода на экран.
-	/// </summary>
-	public class NodeStateView
+    /// <summary>
+    /// Состояние объекта учёта, пригодное для вывода на экран.
+    /// </summary>
+    public class NodeStateView
 	{
         private readonly Lers.Core.NodeState state;
 
 		/// <summary>
 		/// Идентификатор состояния.
 		/// </summary>
-		public DetailedStateId Id { get; private set; }
+		public DetailedState Id { get; private set; }
 
-        public NodeStateView(Lers.Core.NodeState state, DetailedStateId id = DetailedStateId.None)
+        public NodeStateView(Lers.Core.NodeState state, DetailedState id = DetailedState.None)
         {
             this.state = state;
 			this.Id = id;

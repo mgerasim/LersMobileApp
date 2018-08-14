@@ -1,4 +1,5 @@
 ﻿using Android.Widget;
+using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,12 +44,12 @@ namespace LersMobile
 			}
 		}
 
-		private Core.NodeView[] _nodes;
+		private NodeView[] _nodes;
 
 		/// <summary>
 		/// Список отображаемых объектов учёта.
 		/// </summary>
-		public Core.NodeView[] Nodes
+		public NodeView[] Nodes
 		{
 			get
 			{
@@ -135,7 +136,7 @@ namespace LersMobile
 		/// <param name="e"></param>
 		private void NodeListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
-			var nodeDetail = (Core.NodeView)e.SelectedItem;
+			var nodeDetail = (NodeView)e.SelectedItem;
 
 			this.nodeListView.SelectedItem = null;
 
