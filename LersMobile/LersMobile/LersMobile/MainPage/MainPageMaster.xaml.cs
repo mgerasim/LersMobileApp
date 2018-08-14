@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LersMobile.Pages.NodesPage;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -44,7 +45,7 @@ namespace LersMobile
 			{
 				MenuItems = new ObservableCollection<MainPageMenuItem>(new[]
 				{
-					new MainPageMenuItem() { Id = (int)pageMenuItem.pageNodeList, Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList, TargetType = typeof(NodeListPage)},
+					new MainPageMenuItem() { Id = (int)pageMenuItem.pageNodeList, Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList, TargetType = typeof(NodesPage)},
                     new MainPageMenuItem() { Id = (int)pageMenuItem.pageIncidentList, Title = Droid.Resources.Messages.MainPage_MenuItem_IncidentList, TargetType = typeof(Incidents.IncidentListMainPage) },
                     new MainPageMenuItem() { Id = (int)pageMenuItem.pageNotificationCenter, Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList, TargetType = typeof(NotificationCenterPage)},
                     new MainPageMenuItem() { Id = (int)pageMenuItem.pageReportsysList, Title = Droid.Resources.Messages.MainPage_MenuItem_SystemReports, TargetType = typeof(Pages.SystemReportsPage.SystemReportsPage)},

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace LersMobile
+namespace LersMobile.Pages.NodesPage
 {
 	/// <summary>
 	/// Список объектов учёта.
 	/// </summary>
-	public partial class NodeListPage : ContentPage
+	public partial class NodesPage : ContentPage
 	{
 		private readonly Core.MobileCore lersService;
 
@@ -129,7 +129,7 @@ namespace LersMobile
 		/// <summary>
 		/// Конструктор.
 		/// </summary>
-		public NodeListPage()
+		public NodesPage()
 		{
 			lersService = App.Core;
 
