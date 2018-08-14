@@ -7,7 +7,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Report"
                      Icon="report.png"
-                     Command="{Binding GenerateCommand}"/>
+                     Command="{Binding ModeSelectingCommmand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
@@ -26,9 +26,10 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
-                                    <Image Source="select.png"/>
+                                <StackLayout IsVisible="{Binding IsSelecting}">
+                                    <Image Source="{Binding SelectedImageSource}"/>
                                 </StackLayout>
+
                                 <Image Source="{Binding ImageSource}"/>
                                 <StackLayout Orientation="Vertical" Spacing="-3">
                                     <Label Text="{Binding Title}" TextColor="Accent" LineBreakMode="NoWrap" />

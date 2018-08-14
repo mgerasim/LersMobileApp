@@ -105,11 +105,26 @@ namespace LersMobile
 			}
 		}
 
+        private bool isModeSelecting;
+
+        public bool IsModeSelecting
+        {
+            get
+            {
+                return isModeSelecting;
+            }
+            set
+            {
+                isModeSelecting = value;
+                OnPropertyChanged(nameof(IsModeSelecting));
+            }
+        }
 
 		public ICommand RefreshCommand => new Command(async () => await RefreshData());
 
 		public ICommand SearchCommand => new Command(() => OnPropertyChanged(nameof(Nodes)));
 
+        public ICommand ModeSelectingCommmand => new Command(() => ModeSelectingChanged());
 
 		/// <summary>
 		/// Конструктор.
@@ -127,6 +142,8 @@ namespace LersMobile
 			this.BindingContext = this;
 
 			this.Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList;
+
+            this.isModeSelecting = false;
 		}
 
 		/// <summary>
@@ -138,10 +155,33 @@ namespace LersMobile
 		{
 			var nodeDetail = (NodeView)e.SelectedItem;
 
+
 			this.nodeListView.SelectedItem = null;
 
 			if (nodeDetail != null)
 			{
+            
+                switch (nodeDetail.SelectedMode)
+                {
+                    case Core.SelectedMode.Selecting:
+                        nodeDetail.SelectedMode = Core.SelectedMode.Select;
+                        OnPropertyChanged(nameof(Nodes));
+                        nodeListView.ItemsSource = null;
+                        nodeListView.ItemsSource = this.Nodes;
+                        return;
+                    case Core.SelectedMode.Select:
+                        nodeDetail.SelectedMode = Core.SelectedMode.UnSelect;
+                        OnPropertyChanged(nameof(Nodes));
+                        nodeListView.ItemsSource = null;
+                        nodeListView.ItemsSource = this.Nodes;
+                        return;
+                    case Core.SelectedMode.UnSelect:
+                        nodeDetail.SelectedMode = Core.SelectedMode.Select;
+                        OnPropertyChanged(nameof(Nodes));
+                        nodeListView.ItemsSource = null;
+                        nodeListView.ItemsSource = this.Nodes;
+                        return;
+                }
 				this.Navigation.PushAsync(new NodeProperties.NodePropertyPage(nodeDetail));
 			}
 		}
@@ -215,11 +255,34 @@ namespace LersMobile
 			return selectedIndex;
 		}
 
-		/// <summary>
-		/// Загружает список объектов для выбранной группы.
-		/// </summary>
-		/// <returns></returns>
-		private async Task RefreshData()
+
+        /// <summary>
+        /// Режим множественого выбора объектов учёта
+        /// </summary>
+        /// <returns></returns>
+        private void ModeSelectingChanged()
+        {
+            
+            this.IsRefreshing = true;
+            foreach (var node in this.Nodes)
+            {
+                node.IsSelecting = !node.IsSelecting;                
+            }
+
+            this.Nodes = this._nodes;
+
+            this.IsRefreshing = false;
+
+            OnPropertyChanged(nameof(Nodes));
+            nodeListView.ItemsSource = null;
+            nodeListView.ItemsSource = this.Nodes;
+        }
+
+        /// <summary>
+        /// Загружает список объектов для выбранной группы.
+        /// </summary>
+        /// <returns></returns>
+        private async Task RefreshData()
 		{
 			this.IsRefreshing = true;
 

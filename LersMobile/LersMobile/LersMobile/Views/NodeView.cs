@@ -1,37 +1,67 @@
 ﻿using Lers.Core;
+using LersMobile.Core;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace LersMobile.Views
 {
-	/// <summary>
-	/// Используется для отображения на экране параметров объекта учёта.
-	/// </summary>
-	public class NodeView
+    /// <summary>
+    /// Используется для отображения на экране параметров объекта учёта.
+    /// </summary>
+    public class NodeView
     {
-		public Node Node { get; private set; }		
+        public Node Node { get; private set; }
 
-		public string Address => this.Node.Address;
+        public string Address => this.Node.Address;
 
-		public string Title => this.Node.Title;
+        public string Title => this.Node.Title;
 
-		public string ImageSource
-		{
-			get
-			{
-				switch (this.Node.State)
-				{
-					case NodeState.Error: return "node_red.png";
-					case NodeState.Normal: return "node_green.png";
-					case NodeState.Warning: return "node_orange.png";
-					case NodeState.None: return "node_gray.png";
+        public string ImageSource
+        {
+            get
+            {
+                switch (this.Node.State)
+                {
+                    case NodeState.Error: return "node_red.png";
+                    case NodeState.Normal: return "node_green.png";
+                    case NodeState.Warning: return "node_orange.png";
+                    case NodeState.None: return "node_gray.png";
 
-					default:
-						throw new NotSupportedException(this.Node.State.ToString());
-				}
-			}
-		}
+                    default:
+                        throw new NotSupportedException(this.Node.State.ToString());
+                }
+            }
+        }
+
+        public SelectedMode SelectedMode = SelectedMode.None;
+
+        public bool IsSelecting
+        {
+            get
+            {
+                return (SelectedMode != SelectedMode.None);
+            }
+            set
+            {
+                if (value == true)
+                {
+                    SelectedMode = SelectedMode.Selecting;                    
+                }
+                else
+                {
+                    SelectedMode = SelectedMode.None;
+                }
+            }
+        }
+
+        public string SelectedImageSource
+        {
+            get
+            {
+                return SelectedModeUtils.GetSourceImage(this.SelectedMode);
+            }
+        }
 
 		public string ServicemanName => this.Node.Serviceman?.Name;
 
