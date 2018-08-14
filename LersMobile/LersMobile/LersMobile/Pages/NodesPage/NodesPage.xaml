@@ -13,8 +13,9 @@
         <StackLayout>
             <!-- Фильтрация по группе объектов -->
 		    <Label Text="{local:Translate NodeListPage_NodeGroup}" />
-            <Picker x:Name="nodeGroupPicker" />
-        
+            <Picker ItemsSource="{Binding NodeGroups}" 
+                    ItemDisplayBinding="{Binding Name}" 
+                    SelectedItem="{Binding SelectedGroup}"/>
 
             <ListView x:Name="nodeListView" 
                       ItemsSource="{Binding Nodes}" 
@@ -42,11 +43,9 @@
             </ListView>
 
             <!-- Блок, отвечающей за поиск -->
-            <SearchBar x:Name="searchBar" 
-                       Text="{Binding SearchText}"
+            <SearchBar Text="{Binding SearchText}"
                        Placeholder="{local:Translate NodeListPage_NodeGroup_Search}"
                        SearchCommand="{Binding SearchCommand}"
-                       TextChanged="OnSearchBarTextChanged"
                        HeightRequest="30" />
         </StackLayout>
     </ContentPage.Content>

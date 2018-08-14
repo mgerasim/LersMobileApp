@@ -781,6 +781,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Все.
+        /// </summary>
+        public static string Text_All {
+            get {
+                return ResourceManager.GetString("Text_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ЛЭРС УЧЁТ.
         /// </summary>
         public static string Text_Application {

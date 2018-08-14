@@ -545,4 +545,8 @@
     <value>Системные отчёты</value>
     <comment>Системные отчёты</comment>
   </data>
+  <data name="Text_All" xml:space="preserve">
+    <value>Все</value>
+    <comment>Все</comment>
+  </data>
 </root>
