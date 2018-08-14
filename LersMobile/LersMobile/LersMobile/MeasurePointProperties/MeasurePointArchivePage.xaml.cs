@@ -1,6 +1,7 @@
 ﻿using Lers.Data;
 using Lers.Utils;
 using LersMobile.MeasurePointProperties.ViewModels;
+using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,7 +22,7 @@ namespace LersMobile.MeasurePointProperties
 
         private MeasurePointArchiveViewModel ViewModel;
 
-		public MeasurePointArchivePage(Core.MeasurePointView measurePoint)
+		public MeasurePointArchivePage(MeasurePointView measurePoint)
 		{
 			InitializeComponent();
 

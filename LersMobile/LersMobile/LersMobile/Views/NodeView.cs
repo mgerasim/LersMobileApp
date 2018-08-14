@@ -3,7 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace LersMobile.Core
+namespace LersMobile.Views
 {
 	/// <summary>
 	/// Используется для отображения на экране параметров объекта учёта.
@@ -123,7 +123,7 @@ namespace LersMobile.Core
 
             if (state.CriticalIncidentCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView(NodeState.Error, DetailedStateId.CriticalIncidents)
+                this.DetailedState.Add(new NodeStateView(NodeState.Error, Views.DetailedState.CriticalIncidents)
 				{
 					Text = String.Format(Droid.Resources.Messages.NodeView_CriticalIncident_Count, state.CriticalIncidentCount)
 				});
@@ -131,7 +131,7 @@ namespace LersMobile.Core
 
             if (state.WarningIncidentCount > 0)
             {
-                this.DetailedState.Add(new NodeStateView(NodeState.Warning, DetailedStateId.Incidents)
+                this.DetailedState.Add(new NodeStateView(NodeState.Warning, Views.DetailedState.Incidents)
 				{
 					Text = String.Format(Droid.Resources.Messages.NodeView_Warning_Incident_Count, state.WarningIncidentCount)
 				});

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LersMobile.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,9 @@ namespace LersMobile.NodeProperties
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NodeMeasurePointsPage : ContentPage
     {
-        private Core.NodeView _node;
+        private NodeView _node;
 
-        public Core.NodeView Node
+        public NodeView Node
         {
             get { return _node; }
             private set
@@ -27,7 +28,7 @@ namespace LersMobile.NodeProperties
             }
         }
 
-        public NodeMeasurePointsPage(Core.NodeView nodeView)
+        public NodeMeasurePointsPage(NodeView nodeView)
         {
             InitializeComponent();
 
@@ -46,7 +47,7 @@ namespace LersMobile.NodeProperties
 		/// <param name="e"></param>
 		public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
-			var measurePoint = (Core.MeasurePointView)e.SelectedItem;
+			var measurePoint = (MeasurePointView)e.SelectedItem;
 
 			var listView = (ListView)sender;
 

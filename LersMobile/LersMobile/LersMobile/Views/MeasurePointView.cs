@@ -1,10 +1,11 @@
 ﻿using Lers.Core;
+using LersMobile.Core;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LersMobile.Core
+namespace LersMobile.Views
 {
 	/// <summary>
 	/// Параметры точки учёта, используемые для вывода на экран.
@@ -129,7 +130,7 @@ namespace LersMobile.Core
 
 			if (state.CriticalIncidentCount > 0)
 			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error, DetailedStateId.CriticalIncidents)
+				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error, Views.DetailedState.CriticalIncidents)
 				{
 					Text = $"{Droid.Resources.Messages.MeasurePointView_CriticalIncident_Count}: {state.CriticalIncidentCount}"
 				});
@@ -137,7 +138,7 @@ namespace LersMobile.Core
 
 			if (state.WarningIncidentCount > 0)
 			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning, DetailedStateId.Incidents)
+				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning, Views.DetailedState.Incidents)
 				{
 					Text = String.Format(Droid.Resources.Messages.MeasurePointView_Warning_Incident_Count,
 											state.WarningIncidentCount)

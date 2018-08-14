@@ -1,4 +1,5 @@
 ﻿using LersMobile.Core;
+using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,8 +99,8 @@ namespace LersMobile.MeasurePointProperties
 
 			switch (detailState.Id)
 			{
-				case DetailedStateId.CriticalIncidents:
-				case DetailedStateId.Incidents:
+				case DetailedState.CriticalIncidents:
+				case DetailedState.Incidents:
 					// При щелчке на НС откроем отфильтрованную страницу.
 					await ShowIncidentsForMeasurePoint();
 					break;

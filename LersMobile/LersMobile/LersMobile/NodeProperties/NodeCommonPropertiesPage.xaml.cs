@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LersMobile.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,9 @@ namespace LersMobile.NodeProperties
     {
         private bool isLoaded = false;
 
-        private Core.NodeView _node;
+        private NodeView _node;
 
-        public Core.NodeView Node
+        public NodeView Node
         {
             get { return _node; }
             private set
@@ -35,7 +36,7 @@ namespace LersMobile.NodeProperties
         public bool HasDetailedState => this.Node?.HasDetailedState == true;
 
 
-        public NodeCommonPropertiesPage(Core.NodeView node)
+        public NodeCommonPropertiesPage(NodeView node)
         {
             InitializeComponent();
 
@@ -56,7 +57,7 @@ namespace LersMobile.NodeProperties
 			var listView = (ListView)sender;
 
 			// Получаем детальную информацию
-			var detailState = (Core.NodeStateView)e.SelectedItem;
+			var detailState = (NodeStateView)e.SelectedItem;
 
 			if (listView != null)
 			{
@@ -72,8 +73,8 @@ namespace LersMobile.NodeProperties
 
 			switch (detailState.Id)
 			{
-				case Core.DetailedStateId.CriticalIncidents:
-				case Core.DetailedStateId.Incidents:
+				case DetailedState.CriticalIncidents:
+				case DetailedState.Incidents:
 					// При щелчке на НС откроем отфильтрованную страницу.
 					await ShowIncidentsForNode();
 					break;

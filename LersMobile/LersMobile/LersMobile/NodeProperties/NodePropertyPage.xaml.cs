@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using LersMobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,7 +7,7 @@ namespace LersMobile.NodeProperties
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NodePropertyPage : TabbedPage
     {
-        public NodePropertyPage(Core.NodeView nodeView)
+        public NodePropertyPage(NodeView nodeView)
         {
             InitializeComponent();
 

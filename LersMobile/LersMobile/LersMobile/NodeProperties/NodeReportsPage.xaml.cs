@@ -1,4 +1,5 @@
 ﻿using LersMobile.NodeProperties.ViewModels;
+using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace LersMobile.NodeProperties
     {
         NodeReportsViewModel ViewModel = null;
 
-        Core.NodeView NodeView = null;
+        NodeView NodeView = null;
         
-        public NodeReportsPage(Core.NodeView nodeView)
+        public NodeReportsPage(NodeView nodeView)
         {
             InitializeComponent();
             

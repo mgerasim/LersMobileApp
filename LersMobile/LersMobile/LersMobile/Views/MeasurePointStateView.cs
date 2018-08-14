@@ -1,4 +1,6 @@
-﻿namespace LersMobile.Core
+﻿using LersMobile.Core;
+
+namespace LersMobile.Views
 {
 	/// <summary>
 	/// Параметры вывода на экран состояния точки учёта.
@@ -10,10 +12,10 @@
 		/// <summary>
 		/// Идентификатор состояния.
 		/// </summary>
-		public DetailedStateId Id { get; private set; }
+		public DetailedState Id { get; private set; }
 
 
-        public MeasurePointStateView(Lers.Core.MeasurePointState state, DetailedStateId stateId = DetailedStateId.None)
+        public MeasurePointStateView(Lers.Core.MeasurePointState state, DetailedState stateId = DetailedState.None)
         {
 			this.Id = stateId;
 			this.state = state;			
