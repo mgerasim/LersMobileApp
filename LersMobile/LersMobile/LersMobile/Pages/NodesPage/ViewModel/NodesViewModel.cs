@@ -10,13 +10,18 @@ using LersMobile.Core;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Android.Widget;
+using LersMobile.NodeProperties;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
     public class NodesViewModel : INotifyPropertyChanged
     {
-        public NodesViewModel()
+        NodesPage Page;
+
+        public NodesViewModel(NodesPage page)
         {
+            Page = page;
+
             nodeGroups = new List<NodeGroupView>();
             RefreshCommand = new RefreshCommand(this);
             SearchCommand = new SearchCommand(this);
@@ -29,7 +34,15 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 
                 if (model != null && model is ItemTappedEventArgs)
                 {
-                    ((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item).IsSelected = !((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item).IsSelected;
+                    selectedNode = ((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item);
+                    if (IsSelecting)
+                    {
+                        selectedNode.IsSelected = !selectedNode.IsSelected;
+                    }
+                    else
+                    {
+                        Navigate();
+                    }                    
                 }
             });
         }
@@ -186,13 +199,6 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             {
                 return selectedNode;
             }
-            set
-            {
-                if (value != null)
-                {
-                    selectedNode = value;
-                }
-            }
         }
         #endregion
 
@@ -285,6 +291,11 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             OnPropertyChanged(nameof(NodeGroups));
 
             SelectedGroup = NodeGroups.First(); // Все
+        }
+
+        public async void Navigate()
+        {
+            await Page.Navigation.PushAsync(new NodePropertyPage(SelectedNode.Data));
         }
 
         #endregion

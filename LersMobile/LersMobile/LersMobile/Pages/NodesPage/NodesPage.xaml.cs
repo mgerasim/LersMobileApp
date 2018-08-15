@@ -19,7 +19,7 @@ namespace LersMobile.Pages.NodesPage
 		{
 			InitializeComponent();
             
-            this.ViewModel = new NodesViewModel();
+            this.ViewModel = new NodesViewModel(this);
             this.BindingContext = this.ViewModel;
 
 			this.Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList;
