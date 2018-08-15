@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using LersMobile.Pages.NodesPage.ViewModel.Commands;
 using LersMobile.Core;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
@@ -21,6 +23,14 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             ReportCommand = new ReportCommand(this);
 
             _nodes = new List<SelectableData<NodeView>>();
+
+            ItemTappedCommand = new Command((object model) => {
+
+                if (model != null && model is ItemTappedEventArgs)
+                {
+                    ((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item).IsSelected = !((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item).IsSelected;
+                }
+            });
         }
 
         #region Закрытые свойства
@@ -38,7 +48,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         private bool isSelecting = false;
 
         private SelectableData<NodeView> selectedNode;
-        
+
         #endregion
 
         #region INotifyPropertyChanged implement interface
@@ -56,6 +66,8 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         #endregion
 
         #region Команды
+
+        public ICommand ItemTappedCommand { get; protected set; }
 
         public SearchCommand SearchCommand { get; set; }
 
@@ -117,23 +129,9 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             set
             {
                 isSelecting = value;
-                OnPropertyChanged(nameof(IsSelecting));
-                OnPropertyChanged(nameof(IsUnselecting));
             }
         }
-
-
-        /// <summary>
-        /// Флаг указывает что идёт множественный выбор завершен.
-        /// </summary>
-        public bool IsUnselecting
-        {
-            get
-            {
-                return !isSelecting;
-            }
-        }
-
+        
         /// <summary>
 		/// Текст для поиска.
 		/// </summary>
@@ -191,8 +189,8 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                 if (value != null)
                 {
                     selectedNode = value;
-                    SelectedNode.Selected = !SelectedNode.Selected;
-                    OnPropertyChanged(nameof(SelectedNode));
+                    //SelectedNode.IsSelected = !SelectedNode.IsSelected;
+                    //OnPropertyChanged(nameof(SelectedNode));
                 }
             }
         }
@@ -211,6 +209,8 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 
             try
             {
+                _nodes.Clear();
+
                 int? nodeGroupId = null;
                 if (SelectedGroup.Id > 0)
                 {

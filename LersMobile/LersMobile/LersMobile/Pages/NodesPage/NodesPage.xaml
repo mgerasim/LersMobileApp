@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:LersMobile"
+             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
              x:Class="LersMobile.Pages.NodesPage.NodesPage">
-
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Report"
                      Icon="report.png"
@@ -20,21 +20,23 @@
                     ItemDisplayBinding="{Binding Name}" 
                     SelectedItem="{Binding SelectedGroup}"/>
 
-            <ListView x:Name="nodeListView" 
-                      ItemsSource="{Binding Nodes}" 
+            <ListView ItemsSource="{Binding Nodes}" 
                       IsPullToRefreshEnabled="True"
-                      SelectedItem="{Binding SelectedNode}"
                       RefreshCommand="{Binding RefreshCommand}"
                       IsRefreshing="{Binding IsRefreshing}">
-
+                <ListView.Behaviors>
+                    <behaviors:EventHandlerBehavior EventName="ItemTapped">
+                        <behaviors:InvokeCommandAction Command="{Binding ItemTappedCommand}"/>
+                    </behaviors:EventHandlerBehavior>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-                                <StackLayout IsVisible="{Binding IsSelecting}">
-                                    <Image Source="{Binding SelectedImageSource}"/>
-                                </StackLayout>
-
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">  
+                                
+                                <Image Source="unselect.png" IsVisible="{Binding IsUnselected}"/>
+                                <Image Source="select.png" IsVisible="{Binding IsSelected}"/>
+                                
                                 <Image Source="{Binding Data.ImageSource}"/>
                                 <StackLayout Orientation="Vertical" Spacing="-3">
                                     <Label Text="{Binding Data.Title}" TextColor="Accent" LineBreakMode="NoWrap" />

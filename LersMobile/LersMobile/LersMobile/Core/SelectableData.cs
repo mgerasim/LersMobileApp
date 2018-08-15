@@ -1,30 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace LersMobile.Core
 {
-    public class SelectableData<T>
+    public class SelectableData<T> : INotifyPropertyChanged
     {
         public T Data { get; set; }
 
-        public bool Selected { get; set; }
+        private bool selected = false;
 
-        public bool IsSelecting { get; set; }
-
-        public string SelectedImageSource
+        public bool IsSelected
         {
             get
             {
-                if (Selected)
-                {
-                    return "select.png";
-                }
-                else
-                {
-                    return "unselect.png";
-                }
+                return IsSelecting && selected;
+            }
+            set
+            {
+                selected = value;
+                OnPropertyChanged(nameof(IsSelected));
+                OnPropertyChanged(nameof(IsUnselected));
             }
         }
+
+        private bool isSelecting;        
+
+        public bool IsSelecting
+        {
+            get
+            {
+                return isSelecting;
+            }
+            set
+            {
+                isSelecting = value;
+                OnPropertyChanged(nameof(IsSelecting));
+                OnPropertyChanged(nameof(IsSelected));
+                OnPropertyChanged(nameof(IsUnselected));
+            }
+        }
+
+        public bool IsUnselected
+        {
+            get
+            {
+                return !IsSelected && IsSelecting;
+            }
+        }
+
+        #region INotifyPropertyChanged implement interface
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (propertyName != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+
     }
 }
