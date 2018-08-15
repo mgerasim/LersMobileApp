@@ -11,6 +11,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Android.Widget;
 using LersMobile.NodeProperties;
+using LersMobile.Core.ReportLoader;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
@@ -262,9 +263,14 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             OnPropertyChanged(nameof(Nodes));
         }
 
-        public void Report()
+        public async void Report()
         {
-            IsSelecting = false;
+            List<NodeView> nodeViews = new List<NodeView>();
+            nodeViews.AddRange(Nodes.Where(x => x.IsSelected == true).Select(x => x.Data));
+
+            ReportLoaderNodes reportLoader = new ReportLoaderNodes(nodeViews);
+
+            await Page.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
         }
 
         #endregion

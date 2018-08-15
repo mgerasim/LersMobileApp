@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using Xamarin.Forms;
 using LersMobile.Views;
+using Lers.Core;
 
 namespace LersMobile.Core
 {
@@ -67,6 +68,24 @@ namespace LersMobile.Core
 
             Device.OpenUri(new Uri(fullName));
         }
+
+        public static ReportGroupType GetReportGroupType(bool isAct, ReportType reportType)
+        {
+            if (isAct)
+            {
+                return ReportGroupType.Acts;
+            }
+            switch (reportType)
+            {
+                case ReportType.ParametersSheet:
+                    return ReportGroupType.ParametersSheets;
+                case ReportType.NodePassport:
+                    return ReportGroupType.Passports;
+            }
+
+            return ReportGroupType.Others;
+        }
+
 
         public static List<ReportViewCollectionGrouping> BuildReportEntityCollectionGrouping(ReportViewCollection reportEntities)
         {

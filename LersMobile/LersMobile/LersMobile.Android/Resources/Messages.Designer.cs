@@ -844,6 +844,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to По умолчанию.
+        /// </summary>
+        public static string Text_Default {
+            get {
+                return ResourceManager.GetString("Text_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выполено.
         /// </summary>
         public static string Text_Done {

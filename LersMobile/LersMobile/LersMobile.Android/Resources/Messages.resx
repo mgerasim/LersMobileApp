@@ -561,4 +561,8 @@
     <value>Отчёт по объектам</value>
     <comment>Отчёт по объектам</comment>
   </data>
+  <data name="Text_Default" xml:space="preserve">
+    <value>По умолчанию</value>
+    <comment>По умолчанию</comment>
+  </data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using Lers.Core;
 using Lers.Reports;
+using LersMobile.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -77,19 +78,7 @@ namespace LersMobile.Views
         {
             get
             {
-                if (this.isAct)
-                {
-                    return ReportGroupType.Acts;
-                }
-                switch (this.Type)
-                {
-                    case ReportType.ParametersSheet:
-                        return ReportGroupType.ParametersSheets;
-                    case ReportType.NodePassport:
-                        return ReportGroupType.Passports;
-                }
-
-                return ReportGroupType.Others;
+                return ReportUtils.GetReportGroupType(isAct, Type);
             }
         }
 
