@@ -925,6 +925,24 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отчёт по всем точкам учёта.
+        /// </summary>
+        public static string Text_Generate_Report_by_All_MeasurePoint {
+            get {
+                return ResourceManager.GetString("Text_Generate_Report_by_All_MeasurePoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отчёт по объектам.
+        /// </summary>
+        public static string Text_Generate_Report_by_Nodes {
+            get {
+                return ResourceManager.GetString("Text_Generate_Report_by_Nodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Нет.
         /// </summary>
         public static string Text_No {

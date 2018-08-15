@@ -191,8 +191,6 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                 if (value != null)
                 {
                     selectedNode = value;
-                    //SelectedNode.IsSelected = !SelectedNode.IsSelected;
-                    //OnPropertyChanged(nameof(SelectedNode));
                 }
             }
         }
