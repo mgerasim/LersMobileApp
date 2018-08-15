@@ -9,6 +9,7 @@ using LersMobile.Pages.NodesPage.ViewModel.Commands;
 using LersMobile.Core;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Android.Widget;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
@@ -129,6 +130,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             set
             {
                 isSelecting = value;
+                OnPropertyChanged(nameof(IsSelecting));
             }
         }
         
@@ -241,6 +243,13 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         public void Selecting()
         {
             IsSelecting = !IsSelecting;
+
+            if (isSelecting)
+            {
+                Toast.MakeText(Android.App.Application.Context,
+                Droid.Resources.Messages.Text_Select_accounting_objects_and_click_generate_report,
+                ToastLength.Long).Show();
+            }
 
             foreach(var node in _nodes)
             {

@@ -8,7 +8,7 @@
         <ToolbarItem Text="Report"
                      Icon="report.png"
                      Command="{Binding SelectingCommand}" />
-        <ToolbarItem Text="Report"
+        <ToolbarItem IsDestructive="{Binding IsSelecting}" Text="Report"
                      Icon="ok.png"                     
                      Command="{Binding ReportCommand}" />
     </ContentPage.ToolbarItems>
@@ -53,6 +53,8 @@
                        Placeholder="{local:Translate NodeListPage_NodeGroup_Search}"
                        SearchCommand="{Binding SearchCommand}"
                        HeightRequest="30" />
+            <Button Text="Сформировать отчет по объекту" IsVisible="{Binding IsSelecting}"></Button>
+            <Button Text="Сформировать отчет сводный по всем точкам учёта" IsVisible="{Binding IsSelecting}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

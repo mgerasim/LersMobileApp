@@ -997,6 +997,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите объекты учёта и нажмите сформировать отчет.
+        /// </summary>
+        public static string Text_Select_accounting_objects_and_click_generate_report {
+            get {
+                return ResourceManager.GetString("Text_Select_accounting_objects_and_click_generate_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Неизвестное состояние.
         /// </summary>
         public static string Text_State_Not_Supported {

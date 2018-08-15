@@ -549,4 +549,8 @@
     <value>Все</value>
     <comment>Все</comment>
   </data>
+  <data name="Text_Select_accounting_objects_and_click_generate_report" xml:space="preserve">
+    <value>Выберите объекты учёта и нажмите сформировать отчет</value>
+    <comment>Выберите объекты учёта и нажмите сформировать отчет</comment>
+  </data>
 </root>
