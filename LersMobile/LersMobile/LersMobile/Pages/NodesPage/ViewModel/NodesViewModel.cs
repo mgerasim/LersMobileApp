@@ -246,6 +246,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             finally
             {
                 this.IsRefreshing = false;
+                this.IsSelecting = false;
             }
         }
 
