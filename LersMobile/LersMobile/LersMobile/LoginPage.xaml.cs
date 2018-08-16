@@ -1,5 +1,4 @@
-﻿using Android.Widget;
-using LersMobile.Core;
+﻿using LersMobile.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.Xaml;
 
 namespace LersMobile
 {
@@ -123,24 +120,20 @@ namespace LersMobile
 
             if (string.IsNullOrEmpty(serverAddressInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, Droid.Resources.Messages.LoginPage_Empty_Server, ToastLength.Short)
-					.Show();
+                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.LoginPage_Empty_Server);
 
 				return false;
 			}
 
 			if (string.IsNullOrEmpty(this.loginInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, Droid.Resources.Messages.LoginPage_Empty_Login, ToastLength.Short)
-					.Show();
+                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.LoginPage_Empty_Login);
 				return false;
 			}
 
 			if (string.IsNullOrEmpty(this.passwordInput.Text))
 			{
-				Toast.MakeText(Android.App.Application.Context, Droid.Resources.Messages.LoginPage_Empty_Password, 
-					ToastLength.Short)
-					.Show();
+                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.LoginPage_Empty_Password);
 				return false;
 			}
 

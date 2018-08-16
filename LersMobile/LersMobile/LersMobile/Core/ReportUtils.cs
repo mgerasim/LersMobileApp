@@ -1,5 +1,4 @@
-﻿using Android.Widget;
-using Lers.Data;
+﻿using Lers.Data;
 using Lers.Reports;
 using System;
 using System.Collections.Generic;
@@ -64,9 +63,7 @@ namespace LersMobile.Core
 
             File.WriteAllBytes(fullName, response.Content);
 
-            Toast.MakeText(Android.App.Application.Context, 
-                Droid.Resources.Messages.Text_Report_successfully_created,
-                ToastLength.Long).Show();
+            DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.Text_Report_successfully_created,true);
 
             Device.OpenUri(new Uri(fullName));
         }

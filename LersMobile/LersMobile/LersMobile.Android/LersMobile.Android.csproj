@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MessageAndroid.cs" />
     <Compile Include="Notifications\BootReceiver.cs" />
     <Compile Include="Notifications\Channels.cs" />
     <Compile Include="Notifications\AlarmReceiver.cs" />

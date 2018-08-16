@@ -100,14 +100,7 @@ namespace LersMobile.Incidents
             {
                 await this.Incident.Close();
 
-                // TODO: для отображение сообщений нужно использовать DependancyService, т.к. Toast.MakeText специфичен для android.
-                // https://stackoverflow.com/questions/35279403/toast-equivalent-on-xamarin-forms
-                // https://xamarinhelp.com/toast-notifications-xamarin-forms/
-                Android.Widget.Toast.MakeText(
-                    Android.App.Application.Context,
-                    Droid.Resources.Messages.IncidentDetailPage_IncidentCloseSuccessed,
-                    Android.Widget.ToastLength.Short)
-                    .Show();
+                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.IncidentDetailPage_IncidentCloseSuccessed);
             }
             catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
             {
