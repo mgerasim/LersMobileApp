@@ -54,9 +54,6 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeMeasurePointsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeReportsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodePropertyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -88,6 +85,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointPoller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\IReportLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderNode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderNodes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderNodesMeasurePoints.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderSystem.cs" />
@@ -167,11 +165,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodePropertyPage.xaml.cs">
       <DependentUpon>NodePropertyPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\NodeReportsPage.xaml.cs">
-      <DependentUpon>NodeReportsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\Commands\RefreshCommand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotificationCenterPage.xaml.cs">
       <DependentUpon>NotificationCenterPage.xaml</DependentUpon>
     </Compile>
@@ -190,10 +183,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)MainPage\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)NodeProperties\ViewModels\NodeReportViewModel.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 </Project>
