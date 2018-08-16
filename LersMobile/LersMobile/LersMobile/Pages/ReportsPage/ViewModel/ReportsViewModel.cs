@@ -11,7 +11,7 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
 {
     public class ReportsViewModel : INotifyPropertyChanged
     {
-        public ReportsViewModel(IReportLoader reportLoader)
+        public ReportsViewModel(ReportsPage page, IReportLoader reportLoader)
         {
             if (reportLoader == null)
             {
@@ -21,10 +21,14 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
             ReportLoader = reportLoader;
 
             RefreshCommand = new RefreshCommand(this);
+
+            Page = page;
         }
 
         #region Закрытые свойства
-        
+
+        private ReportsPage Page;
+
         private bool isBusy;
 
         private IReportLoader ReportLoader;
@@ -74,6 +78,25 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
             }
         }
 
+        private ReportView selectedReport;
+
+        public ReportView SelectedReport
+        {
+            get
+            {
+                return selectedReport;
+            }
+            set
+            {
+                selectedReport = value;
+                if (value != null)
+                {
+                    OnPropertyChanged("SelectedReport");
+                    Navigate();
+                }
+            }
+        }
+
         #endregion
 
         #region Методы комманд
@@ -97,6 +120,12 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
 
         #region Открытые методы
 
+        public async void Navigate()
+        {
+            await Page.Navigation.PushAsync(new ReportPage.ReportPage( ReportLoader.GetEntitiesIds(), 
+                ReportLoader.GetReportEntity(), 
+                SelectedReport));
+        }
 
         #endregion
     }

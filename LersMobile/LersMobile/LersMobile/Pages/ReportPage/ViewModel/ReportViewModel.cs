@@ -12,14 +12,14 @@ namespace LersMobile.Pages.ReportPage.ViewModel
 {
     public class ReportViewModel : INotifyPropertyChanged
     {
-        public ReportViewModel(int entityId, ReportEntity entity, ReportView report)
+        public ReportViewModel(int[] entityIds, ReportEntity entity, ReportView report)
         {
             Entity = entity;
             Report = report;
             _dateBgn = DateTime.Now.AddDays(-7);
             _dateEnd = DateTime.Now;
             _isBusy = false;
-            EntityId = entityId;
+            EntityIds = entityIds;
             GenerateCommand = new GenerateCommand(this);
         }
 
@@ -29,7 +29,7 @@ namespace LersMobile.Pages.ReportPage.ViewModel
 
         private ReportView Report;
 
-        private int EntityId;
+        private int[] EntityIds;
 
         # endregion
 
@@ -150,7 +150,7 @@ namespace LersMobile.Pages.ReportPage.ViewModel
 
                 var response = await reportManager.GenerateExported(
                     reportExportOptions,
-                    new int[] { EntityId },
+                    EntityIds,
                     null,
                     Entity,
                     Report.Type,
@@ -174,8 +174,5 @@ namespace LersMobile.Pages.ReportPage.ViewModel
         }
 
         #endregion
-
-
-
     }
 }

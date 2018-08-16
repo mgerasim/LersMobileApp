@@ -17,11 +17,11 @@ namespace LersMobile.Pages.ReportPage
 	{
         ReportViewModel ViewModel;
 
-		public ReportPage (int entityId, ReportEntity entity, ReportView report)
+		public ReportPage (int[] entityIds, ReportEntity entity, ReportView report)
 		{
 			InitializeComponent ();
 
-            ViewModel = new ReportViewModel(entityId, entity, report);
+            ViewModel = new ReportViewModel(entityIds, entity, report);
             this.BindingContext = ViewModel;
 
             Title = Droid.Resources.Messages.Text_Report;

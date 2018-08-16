@@ -1,4 +1,5 @@
-﻿using LersMobile.Views;
+﻿using Lers.Reports;
+using LersMobile.Views;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,5 +9,7 @@ namespace LersMobile.Core.ReportLoader
     {
         Task Reload(bool isForce = false);
         List<ReportViewCollectionGrouping> GetReports();
+        int[] GetEntitiesIds();
+        ReportEntity GetReportEntity();
     }
 }

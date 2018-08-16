@@ -77,5 +77,15 @@ namespace LersMobile.Core.ReportLoader
         {
             return Reports;
         }
+
+        public int[] GetEntitiesIds()
+        {
+            return Nodes.Select(x => x.Node.Id).ToArray();
+        }
+
+        public ReportEntity GetReportEntity()
+        {
+            return ReportEntity.Node;
+        }
     }
 }

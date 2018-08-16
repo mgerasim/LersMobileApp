@@ -147,7 +147,7 @@ namespace LersMobile.Pages.SystemReportsPage.ViewModel
 
         public async void Navigate()
         {
-            await Page.Navigation.PushAsync(new ReportPage.ReportPage(-1, ReportEntity.System, SelectedReport));
+            await Page.Navigation.PushAsync(new ReportPage.ReportPage(new int[] { -1 }, ReportEntity.System, SelectedReport));
         }
 
         public void Refresh()
