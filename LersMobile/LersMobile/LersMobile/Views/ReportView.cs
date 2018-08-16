@@ -12,7 +12,10 @@ namespace LersMobile.Views
         ParametersSheets = 0,
         Acts = 1,
         Passports = 2,
-        Others = 3
+        SystemState = 3,
+        NodeJob = 4,
+        Calibration = 5,
+        Others = 6
     }
     /// <summary>
     /// Сущность Отчёт для вывода на экран
@@ -74,31 +77,9 @@ namespace LersMobile.Views
             }
         }
 
-        public ReportGroupType GroupType
-        {
-            get
-            {
-                return ReportUtils.GetReportGroupType(isAct, Type);
-            }
-        }
+        public ReportGroupType GroupType => ReportUtils.GetReportGroupType(isAct, Type);
 
-        public string GroupTypeDescription
-        {
-            get
-            {
-                switch (GroupType)
-                {
-                    case ReportGroupType.Acts:
-                        return Droid.Resources.Messages.Text_Acts;
-                    case ReportGroupType.ParametersSheets:
-                        return Droid.Resources.Messages.Text_ParametersSheet;
-                    case ReportGroupType.Passports:
-                        return Droid.Resources.Messages.Text_Passports;
-                }
-
-                return Droid.Resources.Messages.Text_Others;
-            }
-        }
+        public string GroupTypeDescription => ReportUtils.GetReportGroupDescription(GroupType);
 
         #endregion
     }

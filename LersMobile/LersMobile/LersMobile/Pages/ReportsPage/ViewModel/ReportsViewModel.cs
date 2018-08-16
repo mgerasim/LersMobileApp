@@ -13,16 +13,11 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
     {
         public ReportsViewModel(ReportsPage page, IReportLoader reportLoader)
         {
-            if (reportLoader == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            ReportLoader = reportLoader;
+            ReportLoader = reportLoader ?? throw new ArgumentNullException();
 
             RefreshCommand = new RefreshCommand(this);
 
-            Page = page;
+            Page = page;            
         }
 
         #region Закрытые свойства

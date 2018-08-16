@@ -525,7 +525,7 @@
     <value>Запрос выполняется...</value>
     <comment>Запрос выполняется</comment>
   </data>
-  <data name="Text_Acts" xml:space="preserve">
+  <data name="Text_ReportGroupType_Acts" xml:space="preserve">
     <value>Акты</value>
     <comment>Акт</comment>
   </data>
@@ -533,11 +533,11 @@
     <value>Другие</value>
     <comment>Другие</comment>
   </data>
-  <data name="Text_ParametersSheet" xml:space="preserve">
+  <data name="Text_ReportGroupType_ParametersSheet" xml:space="preserve">
     <value>Ведомость параметров</value>
     <comment>Параметр ведомость</comment>
   </data>
-  <data name="Text_Passports" xml:space="preserve">
+  <data name="Text_ReportGroupType_Passports" xml:space="preserve">
     <value>Паспорта</value>
     <comment>Паспорта</comment>
   </data>
@@ -564,5 +564,17 @@
   <data name="Text_Default" xml:space="preserve">
     <value>По умолчанию</value>
     <comment>По умолчанию</comment>
+  </data>
+  <data name="Text_ReportGroupType_Calibration" xml:space="preserve">
+    <value>Поверка средств измерения</value>
+    <comment>Поверка средств измерения</comment>
+  </data>
+  <data name="Text_ReportGroupType_NodeJob" xml:space="preserve">
+    <value>Работы на объекте учета</value>
+    <comment>Наряд на работу</comment>
+  </data>
+  <data name="Text_ReportGroupType_SystemState" xml:space="preserve">
+    <value>Состояние системы</value>
+    <comment>Состояние системы</comment>
   </data>
 </root>

@@ -9,6 +9,8 @@ using System.Text;
 using Xamarin.Forms;
 using LersMobile.Views;
 using Lers.Core;
+using LersMobile.Core.ReportLoader;
+using LersMobile.Pages.ReportsPage;
 
 namespace LersMobile.Core
 {
@@ -69,7 +71,28 @@ namespace LersMobile.Core
             Device.OpenUri(new Uri(fullName));
         }
 
-        public static ReportGroupType GetReportGroupType(bool isAct, ReportType reportType)
+        internal static string GetReportGroupDescription(ReportGroupType groupType)
+        {
+            switch (groupType)
+            {
+                case ReportGroupType.Acts:
+                    return Droid.Resources.Messages.Text_ReportGroupType_Acts;
+                case ReportGroupType.ParametersSheets:
+                    return Droid.Resources.Messages.Text_ReportGroupType_ParametersSheet;
+                case ReportGroupType.Passports:
+                    return Droid.Resources.Messages.Text_ReportGroupType_Passports;
+                case ReportGroupType.Calibration:
+                    return Droid.Resources.Messages.Text_ReportGroupType_Calibration;
+                case ReportGroupType.NodeJob:
+                    return Droid.Resources.Messages.Text_ReportGroupType_NodeJob;
+                case ReportGroupType.SystemState:
+                    return Droid.Resources.Messages.Text_ReportGroupType_SystemState;
+            }
+
+            return Droid.Resources.Messages.Text_Others;
+        }
+
+        internal static ReportGroupType GetReportGroupType(bool isAct, ReportType reportType)
         {
             if (isAct)
             {
@@ -81,6 +104,12 @@ namespace LersMobile.Core
                     return ReportGroupType.ParametersSheets;
                 case ReportType.NodePassport:
                     return ReportGroupType.Passports;
+                case ReportType.Calibration:
+                    return ReportGroupType.Calibration;
+                case ReportType.NodeJob:
+                    return ReportGroupType.NodeJob;
+                case ReportType.SystemState:
+                    return ReportGroupType.SystemState;
             }
 
             return ReportGroupType.Others;
@@ -107,6 +136,15 @@ namespace LersMobile.Core
             }
 
             return reportsGrouping;
+        }
+
+        public static async void MainMenuSelectedSystemReports()
+        {
+            var reportLoader = new ReportLoaderSystem();
+
+            await reportLoader.Reload(false);
+
+            ((MainPage)App.Current.MainPage).Detail = new NavigationPage(new ReportsPage(reportLoader));
         }
     }
 }

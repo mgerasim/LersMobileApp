@@ -93,6 +93,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\IReportLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderNodes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderNodesMeasurePoints.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\SelectableData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\ReportCommand.cs" />

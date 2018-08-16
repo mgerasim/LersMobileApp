@@ -772,15 +772,6 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Акты.
-        /// </summary>
-        public static string Text_Acts {
-            get {
-                return ResourceManager.GetString("Text_Acts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Все.
         /// </summary>
         public static string Text_All {
@@ -970,24 +961,6 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ведомость параметров.
-        /// </summary>
-        public static string Text_ParametersSheet {
-            get {
-                return ResourceManager.GetString("Text_ParametersSheet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Паспорта.
-        /// </summary>
-        public static string Text_Passports {
-            get {
-                return ResourceManager.GetString("Text_Passports", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Отчёт.
         /// </summary>
         public static string Text_Report {
@@ -1002,6 +975,60 @@ namespace LersMobile.Droid.Resources {
         public static string Text_Report_successfully_created {
             get {
                 return ResourceManager.GetString("Text_Report_successfully_created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Акты.
+        /// </summary>
+        public static string Text_ReportGroupType_Acts {
+            get {
+                return ResourceManager.GetString("Text_ReportGroupType_Acts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поверка средств измерения.
+        /// </summary>
+        public static string Text_ReportGroupType_Calibration {
+            get {
+                return ResourceManager.GetString("Text_ReportGroupType_Calibration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Работы на объекте учета.
+        /// </summary>
+        public static string Text_ReportGroupType_NodeJob {
+            get {
+                return ResourceManager.GetString("Text_ReportGroupType_NodeJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ведомость параметров.
+        /// </summary>
+        public static string Text_ReportGroupType_ParametersSheet {
+            get {
+                return ResourceManager.GetString("Text_ReportGroupType_ParametersSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Паспорта.
+        /// </summary>
+        public static string Text_ReportGroupType_Passports {
+            get {
+                return ResourceManager.GetString("Text_ReportGroupType_Passports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Состояние системы.
+        /// </summary>
+        public static string Text_ReportGroupType_SystemState {
+            get {
+                return ResourceManager.GetString("Text_ReportGroupType_SystemState", resourceCulture);
             }
         }
         
