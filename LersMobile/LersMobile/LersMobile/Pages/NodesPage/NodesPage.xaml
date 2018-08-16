@@ -49,12 +49,14 @@
                        Placeholder="{local:Translate NodeListPage_NodeGroup_Search}"
                        SearchCommand="{Binding SearchCommand}"
                        HeightRequest="30" />
-            <Button 
-                Text="{local:Translate Text_Generate_Report_by_Nodes}" 
-                IsVisible="{Binding IsSelecting}"
-                Command="{Binding ReportCommand}">
+            <Button Text="{local:Translate Text_Generate_Report_by_Nodes}"
+                    IsVisible="{Binding IsSelecting}"
+                    Command="{Binding ReportCommand}">
             </Button>
-            <Button Text="{local:Translate Text_Generate_Report_by_All_MeasurePoint}" IsVisible="{Binding IsSelecting}"></Button>
+            <Button Text="{local:Translate Text_Generate_Report_by_All_MeasurePoint}" 
+                    IsVisible="{Binding IsSelecting}"
+                    Command="{Binding ReportMeasurePointsCommand}">
+            </Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using Android.Widget;
 using LersMobile.NodeProperties;
 using LersMobile.Core.ReportLoader;
+using Lers.Core;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
@@ -28,6 +29,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             SearchCommand = new SearchCommand(this);
             SelectingCommand = new SelectingCommand(this);
             ReportCommand = new ReportCommand(this);
+            ReportMeasurePointsCommand = new ReportMeasurePointsCommand(this);
 
             _nodes = new List<SelectableData<NodeView>>();
 
@@ -91,6 +93,8 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         public SelectingCommand SelectingCommand { get; set; }
 
         public ReportCommand ReportCommand { get; set; }
+
+        public ReportMeasurePointsCommand ReportMeasurePointsCommand { get; set; }
 
         #endregion
 
@@ -265,10 +269,35 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 
         public async void Report()
         {
-            List<NodeView> nodeViews = new List<NodeView>();
+            var nodeViews = new List<NodeView>();
             nodeViews.AddRange(Nodes.Where(x => x.IsSelected == true).Select(x => x.Data));
 
-            ReportLoaderNodes reportLoader = new ReportLoaderNodes(nodeViews);
+            var reportLoader = new ReportLoaderNodes(nodeViews);
+
+            await Page.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
+        }
+
+        public async void ReportMeasurePoints()
+        {
+            var measurePointViews = new List<MeasurePointView>();
+
+            foreach(var nodeView in Nodes.Where(x => x.IsSelected == true).Select(x => x.Data))
+            {
+                var requiredFlags = NodeInfoFlags.Systems;
+
+                if (!nodeView.Node.AvailableInfo.HasFlag(requiredFlags))
+                {
+                    // Нужные данные ещё не загружены
+                    await nodeView.Node.RefreshAsync(requiredFlags);
+                }
+
+                foreach (var measurePoint in nodeView.Node.Systems.GetAllMeasurePoints())
+                {
+                    measurePointViews.Add(new MeasurePointView(measurePoint));
+                }
+            }
+
+            var reportLoader = new ReportLoaderNodesMeasurePoints(measurePointViews);
 
             await Page.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
         }
