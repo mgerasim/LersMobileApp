@@ -44,9 +44,6 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointDataPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointReportsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\NodesPage\NodesPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NodeProperties\NodeCommonPropertiesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -85,6 +82,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointPoller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\IReportLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderMeasurePoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderNode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderNodes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderNodesMeasurePoints.cs" />
@@ -133,7 +131,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPage\MainPageMenuItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\LoadCommand.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\Commands\ShowCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointArchivePage.xaml.cs">
       <DependentUpon>MeasurePointArchivePage.xaml</DependentUpon>
@@ -148,10 +145,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointDataPage.xaml.cs">
       <DependentUpon>MeasurePointDataPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\MeasurePointReportsPage.xaml.cs">
-      <DependentUpon>MeasurePointReportsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MeasurePointProperties\ViewModels\MeasurePointReportsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\NodesPage.xaml.cs">
       <DependentUpon>NodesPage.xaml</DependentUpon>
     </Compile>

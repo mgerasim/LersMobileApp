@@ -105,6 +105,12 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
                 await ReportLoader.Reload(isForce);
                 OnPropertyChanged(nameof(Reports));
             }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error_Load,
+                    $"{Droid.Resources.Messages.IncidentDetailPage_Error_Load_Description}. {ex.Message}", "OK");
+            }
             finally
             {
                 IsBusy = false;

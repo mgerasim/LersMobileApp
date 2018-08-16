@@ -1,4 +1,6 @@
 ﻿using LersMobile.Core;
+using LersMobile.Core.ReportLoader;
+using LersMobile.Pages.ReportsPage;
 using LersMobile.Views;
 using System;
 using System.Collections.Generic;
@@ -36,7 +38,8 @@ namespace LersMobile.MeasurePointProperties
 			this.Children.Add(new MeasurePointCommonPage(measurePoint));
 			this.Children.Add(new MeasurePointDataPage(measurePoint));
 			this.Children.Add(new MeasurePointArchivePage(measurePoint));
-            this.Children.Add(new MeasurePointReportsPage(measurePoint));
+            IReportLoader reportLoader = new ReportLoaderMeasurePoint(measurePoint);
+            this.Children.Add(new ReportsPage(reportLoader));
 
 			this.BindingContext = this;
         }
