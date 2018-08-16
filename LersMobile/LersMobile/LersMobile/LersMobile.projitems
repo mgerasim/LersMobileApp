@@ -72,9 +72,6 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NotificationInfoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\SystemReportsPage\SystemReportsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -114,7 +111,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\PollLogEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ResourceHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\SystemReportsPage\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ReportView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ReportViewCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Incidents\IncidentDetailPage.xaml.cs">
@@ -189,10 +185,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ReportPage\ViewModel\Commands\GenerateCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ReportPage\ViewModel\ReportViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\SystemReportsPage\SystemReportsPage.xaml.cs">
-      <DependentUpon>SystemReportsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\SystemReportsPage\ViewModel\SystemReportsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TranslateExtension.cs" />
   </ItemGroup>
   <ItemGroup>
