@@ -41,24 +41,24 @@ namespace LersMobile.Views
     /// <summary>
     /// Коллекция отчётов сгрупированные по типу
     /// </summary>
-    public class ReportViewCollectionGrouping : ObservableCollection<ReportView>
+    public class ReportsView : ObservableCollection<ReportView>
     {
         public string GroupTypeDescription { get; protected set; } = string.Empty;
 
         public ReportGroupType GroupType { get; protected set; } = 0;
 
-        public ReportViewCollectionGrouping(ReportView reportEntity)
+        public ReportsView(ReportView reportEntity)
         {
             GroupType = reportEntity.GroupType;
             GroupTypeDescription = reportEntity.GroupTypeDescription;
         }
         
-        public ReportViewCollectionGrouping()
+        public ReportsView()
         {
             GroupTypeDescription = Droid.Resources.Messages.Text_Default;
         }
 
-        public ReportViewCollectionGrouping(ReportGroupType type, string desc)
+        public ReportsView(ReportGroupType type, string desc)
         {
             GroupType = type;
             GroupTypeDescription = desc;

@@ -49,7 +49,7 @@ namespace LersMobile
 					new MainPageMenuItem() { Id = (int)pageMenuItem.pageNodeList, Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList, TargetType = typeof(NodesPage)},
                     new MainPageMenuItem() { Id = (int)pageMenuItem.pageIncidentList, Title = Droid.Resources.Messages.MainPage_MenuItem_IncidentList, TargetType = typeof(Incidents.IncidentListMainPage) },
                     new MainPageMenuItem() { Id = (int)pageMenuItem.pageNotificationCenter, Title = Droid.Resources.Messages.MainPage_MenuItem_NotificationList, TargetType = typeof(NotificationCenterPage)},
-                    new MainPageMenuItem() { Id = (int)pageMenuItem.pageReportsysList, Title = Droid.Resources.Messages.MainPage_MenuItem_SystemReports, TargetAction = ReportUtils.MainMenuSelectedSystemReports },
+                    new MainPageMenuItem() { Id = (int)pageMenuItem.pageReportsysList, Title = Droid.Resources.Messages.Text_Reports, TargetAction = ReportUtils.MainMenuSelectedSystemReports },
 					new MainPageMenuItem() { Id = (int)pageMenuItem.actionExit, Title = Droid.Resources.Messages.MainPage_MenuItem_Exit, TargetAction = App.Core.Logout, BeginGroup = true }
 				});
 			}

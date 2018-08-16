@@ -29,7 +29,7 @@ namespace LersMobile.Core.ReportLoader
             return ReportLoaderNodesMeasurePoints.GetReportEntity();
         }
 
-        public List<ReportViewCollectionGrouping> GetReports()
+        public List<ReportsView> GetReports()
         {
             return ReportLoaderNodesMeasurePoints.GetReports();
         }

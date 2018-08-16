@@ -12,12 +12,12 @@ namespace LersMobile.Core.ReportLoader
     {
         public ReportLoaderSystem()
         {
-            Reports = new List<ReportViewCollectionGrouping>();
+            Reports = new List<ReportsView>();
         }
 
         private static ReportType[] ReportTypeFilter = new ReportType[] { ReportType.SystemState, ReportType.NodeJob, ReportType.Calibration };
 
-        protected List<ReportViewCollectionGrouping> Reports { get; set; }
+        protected List<ReportsView> Reports { get; set; }
 
         public int[] GetEntitiesIds()
         {
@@ -29,7 +29,7 @@ namespace LersMobile.Core.ReportLoader
             return ReportEntity.System;
         }
 
-        public List<ReportViewCollectionGrouping> GetReports()
+        public List<ReportsView> GetReports()
         {
             return Reports;
         }
@@ -58,7 +58,7 @@ namespace LersMobile.Core.ReportLoader
 
                     if (list.Count() > 0)
                     {
-                        ReportViewCollectionGrouping item = new ReportViewCollectionGrouping(list.First().GroupType,
+						ReportsView item = new ReportsView(list.First().GroupType,
                             list.First().GroupTypeDescription);
 
                         foreach (var element in list)

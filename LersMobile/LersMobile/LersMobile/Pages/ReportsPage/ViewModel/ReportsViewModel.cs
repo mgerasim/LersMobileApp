@@ -52,7 +52,7 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
 
         #region Binding свойства
 
-        public ReportViewCollectionGrouping[] Reports
+        public ReportsView[] Reports
         {
             get
             {

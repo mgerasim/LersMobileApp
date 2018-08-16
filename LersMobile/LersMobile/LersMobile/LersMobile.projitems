@@ -108,8 +108,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\PollLogEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ResourceHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ReportsView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ReportView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\ReportViewCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Incidents\IncidentDetailPage.xaml.cs">
       <DependentUpon>IncidentDetailPage.xaml</DependentUpon>
     </Compile>

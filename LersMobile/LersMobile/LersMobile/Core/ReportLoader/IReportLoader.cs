@@ -8,7 +8,7 @@ namespace LersMobile.Core.ReportLoader
     public interface IReportLoader
     {
         Task Reload(bool isForce = false);
-        List<ReportViewCollectionGrouping> GetReports();
+        List<ReportsView> GetReports();
         int[] GetEntitiesIds();
         ReportEntity GetReportEntity();
     }

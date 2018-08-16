@@ -113,9 +113,9 @@ namespace LersMobile.Core
         }
 
 
-        public static List<ReportViewCollectionGrouping> BuildReportEntityCollectionGrouping(ReportViewCollection reportEntities)
+        public static List<ReportsView> BuildReportEntityCollectionGrouping(ReportViewCollection reportEntities)
         {
-            List<ReportViewCollectionGrouping> reportsGrouping = new List<ReportViewCollectionGrouping>();
+            var reportsGrouping = new List<ReportsView>();
 
             foreach (ReportGroupType type in (ReportType[])Enum.GetValues(typeof(ReportGroupType)))
             {
@@ -123,7 +123,7 @@ namespace LersMobile.Core
 
                 if (list.Count() > 0)
                 {
-                    ReportViewCollectionGrouping item = new ReportViewCollectionGrouping(list.First());
+					ReportsView item = new ReportsView(list.First());
                     foreach(var element in list)
                     {
                         item.Add(element);

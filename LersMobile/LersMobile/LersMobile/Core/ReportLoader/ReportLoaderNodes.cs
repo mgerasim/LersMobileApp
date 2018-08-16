@@ -13,13 +13,13 @@ namespace LersMobile.Core.ReportLoader
     {
         protected List<NodeView> Nodes;
 
-        protected List<ReportViewCollectionGrouping> Reports { get; set; }
+        protected List<ReportsView> Reports { get; set; }
 
         public ReportLoaderNodes(List<NodeView> nodes)
         {
             Nodes = nodes ?? throw new ArgumentNullException();
 
-            Reports = new List<ReportViewCollectionGrouping>();
+            Reports = new List<ReportsView>();
         }
 
         public async Task Reload(bool isForce = false)
@@ -50,7 +50,7 @@ namespace LersMobile.Core.ReportLoader
 
                 if (list.Count() > 0)
                 {
-                    ReportViewCollectionGrouping item = new ReportViewCollectionGrouping(list.First().GroupType,
+					ReportsView item = new ReportsView(list.First().GroupType,
                         list.First().GroupTypeDescription);
 
                     foreach (var element in list)
@@ -66,7 +66,7 @@ namespace LersMobile.Core.ReportLoader
             }
         }
         
-        public List<ReportViewCollectionGrouping> GetReports()
+        public List<ReportsView> GetReports()
         {
             return Reports;
         }
