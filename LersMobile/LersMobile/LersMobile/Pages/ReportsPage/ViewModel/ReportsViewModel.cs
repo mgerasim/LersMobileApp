@@ -9,27 +9,90 @@ using System.Threading.Tasks;
 
 namespace LersMobile.Pages.ReportsPage.ViewModel
 {
+	/// <summary>
+	/// Класс модели представления для взаимодействия с пользователем на странице отображения отчетов ReportsPage
+	/// </summary>
     public class ReportsViewModel : INotifyPropertyChanged
     {
-        public ReportsViewModel(ReportsPage page, IReportLoader reportLoader)
-        {
-            ReportLoader = reportLoader ?? throw new ArgumentNullException();
 
-            RefreshCommand = new RefreshCommand(this);
+		#region Закрытые свойства
+				
+		/// <summary>
+		/// Реализация интерфейса по загрузке отчетов
+		/// </summary>
+		private IReportLoader _reportLoader;
 
-            Page = page;            
-        }
+		#endregion
 
-        #region Закрытые свойства
+        #region Команды
 
-        private ReportsPage Page;
-
-        private bool isBusy;
-
-        private IReportLoader ReportLoader;
+		/// <summary>
+		/// Команда обновления списка отчетов
+		/// </summary>
+        public RefreshCommand _refreshCommand { get; set; }
 
         #endregion
 
+        #region Binding свойства
+
+		/// <summary>
+		/// Источник данных отчетов для отображения
+		/// </summary>
+        public ReportsView[] Reports => _reportLoader.GetReports().ToArray();
+
+		/// <summary>
+		/// Признак загрузки данных
+		/// </summary>
+		private bool _isBusy;
+
+		public bool IsBusy
+        {
+			get => _isBusy;
+            set
+            {
+                _isBusy = value;
+                OnPropertyChanged("IsBusy");
+            }
+        }
+
+		/// <summary>
+		/// Выбранный отчет
+		/// </summary>		
+		private ReportView _selectedReport;
+
+		public ReportView SelectedReport
+        {
+            get
+            {
+                return _selectedReport;
+            }
+            set
+            {
+                _selectedReport = value;
+                if (value != null)
+                {
+                    OnPropertyChanged("SelectedReport");
+                    Navigate();
+                }
+            }
+        }
+
+        #endregion
+
+		/// <summary>
+		/// Конструктор
+		/// </summary>
+		/// <param name="page"></param>
+		/// <param name="reportLoader"></param>
+		public ReportsViewModel(ReportsPage page, IReportLoader reportLoader)
+        {
+            _reportLoader = reportLoader ?? throw new ArgumentNullException(nameof(reportLoader), Droid.Resources.Messages.Text_Exception_Empty_param);
+
+            _refreshCommand = new RefreshCommand(this);
+
+            _page = page;            
+        }
+		
         #region INotifyPropertyChanged implement interface
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -44,65 +107,21 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
 
         #endregion
 
-        #region Команды
-
-        public RefreshCommand RefreshCommand { get; set; }
-
-        #endregion
-
-        #region Binding свойства
-
-        public ReportsView[] Reports
-        {
-            get
-            {
-                return ReportLoader.GetReports().ToArray();
-            }
-        }
-        
-        public bool IsBusy
-        {
-            get
-            {
-                return isBusy;
-            }
-            set
-            {
-                isBusy = value;
-                OnPropertyChanged("IsBusy");
-            }
-        }
-
-        private ReportView selectedReport;
-
-        public ReportView SelectedReport
-        {
-            get
-            {
-                return selectedReport;
-            }
-            set
-            {
-                selectedReport = value;
-                if (value != null)
-                {
-                    OnPropertyChanged("SelectedReport");
-                    Navigate();
-                }
-            }
-        }
-
-        #endregion
 
         #region Методы комманд
 
+		/// <summary>
+		/// Обновдение списка отчетов
+		/// </summary>
+		/// <param name="isForce"></param>
+		/// <returns></returns>
         public async Task Refresh(bool isForce = false)
         {
             try
             {
                 IsBusy = true;
 
-                await ReportLoader.Reload(isForce);
+                await _reportLoader.Reload(isForce);
                 OnPropertyChanged(nameof(Reports));
             }
             catch (Exception ex)
@@ -123,8 +142,8 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
 
         public async void Navigate()
         {
-            await Page.Navigation.PushAsync(new ReportPage.ReportPage( ReportLoader.GetEntitiesIds(), 
-                ReportLoader.GetReportEntity(), 
+			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ReportPage.ReportPage( _reportLoader.GetEntitiesIds(), 
+                _reportLoader.GetReportEntity(), 
                 SelectedReport));
         }
 

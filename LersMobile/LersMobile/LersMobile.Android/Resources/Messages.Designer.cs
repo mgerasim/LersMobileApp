@@ -880,6 +880,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не указан параметр.
+        /// </summary>
+        public static string Text_Exception_Empty_param {
+            get {
+                return ResourceManager.GetString("Text_Exception_Empty_param", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CSV - Файл данных, разделенных запятыми.
         /// </summary>
         public static string Text_FileFormat_Csv {

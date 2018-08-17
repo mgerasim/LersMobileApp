@@ -577,4 +577,7 @@
     <value>Не удалось найти всплывающее сообщение в центре уведомлений</value>
     <comment>Не удалось найти всплывающее сообщение в центре уведомлений</comment>
   </data>
+  <data name="Text_Exception_Empty_param" xml:space="preserve">
+    <value>Не указан параметр</value>
+  </data>
 </root>
