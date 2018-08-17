@@ -64,9 +64,9 @@ namespace LersMobile.Views
             }
         }
 
-        public ReportGroupType GroupType => ReportUtils.GetReportGroupType(isAct, Type);
+        public ReportGroupType GroupType => ReportService.GetReportGroupType(isAct, Type);
 
-        public string GroupTypeDescription => ReportUtils.GetReportGroupDescription(GroupType);
+        public string GroupTypeDescription => ReportService.GetReportGroupDescription(GroupType);
 
         #endregion
     }

@@ -1,12 +1,15 @@
 ﻿using Lers.Reports;
 using LersMobile.Core;
 using LersMobile.Pages.ReportPage.ViewModel.Commands;
+using LersMobile.Services.PopupMessage;
+using LersMobile.Services.Report;
 using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace LersMobile.Pages.ReportPage.ViewModel
 {
@@ -155,13 +158,16 @@ namespace LersMobile.Pages.ReportPage.ViewModel
                     Entity,
                     Report.Type,
                     Report.Id,
-                    ReportUtils.DataTypes[SelectedDataType],
+                    ReportService.DataTypes[SelectedDataType],
                     DateBgn, DateEnd);
 
                 IsBusy = false;
 
-                ReportUtils.SaveResponse(response, reportExportOptions.Format);
-            }
+                var fullName = ReportService.SaveResponse(response, reportExportOptions.Format);
+				Device.OpenUri(new Uri(fullName));
+				
+				PopupMessageService.ShowLong(Droid.Resources.Messages.Text_Report_successfully_created);
+			}
             catch (Exception ex)
             {
                 IsBusy = false;
