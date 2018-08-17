@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using LersMobile.Services.Report;
 
 namespace LersMobile.Views
 {    

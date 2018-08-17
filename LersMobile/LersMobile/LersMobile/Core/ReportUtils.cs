@@ -4,13 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using System.Text;
 using Xamarin.Forms;
 using LersMobile.Views;
-using Lers.Core;
 using LersMobile.Core.ReportLoader;
 using LersMobile.Pages.ReportsPage;
 using LersMobile.Services.PopupMessage;
+using LersMobile.Services.Report;
 
 namespace LersMobile.Core
 {

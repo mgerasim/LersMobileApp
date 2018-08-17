@@ -1,22 +1,9 @@
-﻿using Lers.Core;
-using Lers.Reports;
+﻿using Lers.Reports;
 using LersMobile.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using LersMobile.Services.Report;
 
 namespace LersMobile.Views
 {
-    public enum ReportGroupType
-    {
-        ParametersSheets = 0,
-        Acts = 1,
-        Passports = 2,
-        SystemState = 3,
-        NodeJob = 4,
-        Calibration = 5,
-        Others = 6
-    }
     /// <summary>
     /// Сущность Отчёт для вывода на экран
     /// </summary>
