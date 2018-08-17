@@ -94,7 +94,6 @@ namespace LersMobile
 					{
 						// TODO: всплывающие уведомления нужно показывать через DependencyService,
 						// так как они специфичины для Андроида.
-
 						Android.Widget.Toast.MakeText(Android.App.Application.Context,
 							exc.Message,
 							Android.Widget.ToastLength.Short).Show();

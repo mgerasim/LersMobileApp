@@ -111,7 +111,6 @@ namespace LersMobile.NodeProperties
                 await this.Node.LoadDetail();
 
                 // Обновляем свойства объекта.
-
                 OnPropertyChanged(nameof(Node));
 
                 this.isLoaded = true;

@@ -22,9 +22,9 @@ namespace LersMobile.Core
         /// <returns>Uri</returns>
         public static Uri BuildConnectionUri(string host, int port, bool acceptSsl)
         {
-            string connectionUrl = string.Empty;
+            var connectionUrl = string.Empty;
 
-            string schemaName = string.Empty;
+            var schemaName = string.Empty;
 
             if (acceptSsl == true)
             {
@@ -58,7 +58,7 @@ namespace LersMobile.Core
             var uri = uriBuilder.Uri;
 
 
-            int Port = uri.Port;
+            var Port = uri.Port;
 
             if (uri.IsDefaultPort)
             {
@@ -70,7 +70,7 @@ namespace LersMobile.Core
 
         private static string GetSchema(bool acceptSsl)
         {
-            string schema = string.Empty;
+            var schema = string.Empty;
             if (acceptSsl)
             {
                 schema = LersScheme.Secure;

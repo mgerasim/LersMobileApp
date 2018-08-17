@@ -51,10 +51,10 @@ namespace LersMobile.Droid.Notifications
 			// По взаимодействию с формами.
 			// https://stackoverflow.com/questions/34754149/android-xamarin-make-push-notification-not-create-a-new-activity-but-use-the-cur
 
-			Bundle valuesForActivity = new Bundle();
+			var valuesForActivity = new Bundle();
 			valuesForActivity.PutInt("NotificationId", notification.Id);
 
-			Intent resultIntent = new Intent(context, typeof(MainActivity));
+			var resultIntent = new Intent(context, typeof(MainActivity));
 			// Устанавливаем параметр "Идентификатор" для уведомление
 			resultIntent.PutExtras(valuesForActivity);
 
@@ -64,9 +64,7 @@ namespace LersMobile.Droid.Notifications
 			stackBuilder.AddParentStack(Java.Lang.Class.FromType(typeof(MainActivity)));
 			stackBuilder.AddNextIntent(resultIntent);
 
-			//const int pendingIntentId = 0;
-
-			PendingIntent pendingIntent =
+			var pendingIntent =
 				PendingIntent.GetActivity(context, 0, resultIntent, PendingIntentFlags.UpdateCurrent);
 
 			int iconImportance = ResourceUtils.GetImageByImportance(notification.Importance);

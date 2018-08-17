@@ -31,7 +31,6 @@ namespace LersMobile.Core
 			try
 			{
 				// Получаем дату последнего уведомления.
-
 				DateTime lastNotifyDate = AppDataStorage.LastNotifyDate;
 
 				// Получаем список новых уведомлений.
