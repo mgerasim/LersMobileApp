@@ -142,6 +142,10 @@
       <Project>{bf54064f-f775-4ca2-8d8d-1806d3b8eafb}</Project>
       <Name>Lers.Utils.ns</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\LersUchet\TelemetryClient\TelemetryClient\TelemetryClient.ns.csproj">
+      <Project>{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}</Project>
+      <Name>TelemetryClient.ns</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\node_gray.png" />

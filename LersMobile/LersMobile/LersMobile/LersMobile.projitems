@@ -60,6 +60,9 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\ReportPage\ReportPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\BugPage\BugPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)NotificationCenterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -77,6 +80,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Core\ConnectionView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DayIncidentList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ExceptionUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\LoginUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
@@ -89,6 +93,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\SelectableData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\TelemetryUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\ViewModel\BugViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\ViewModel\Commands\SaveCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\ViewModel\Commands\SendCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\ReportCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\ReportMeasurePointsCommand.cs" />
@@ -169,6 +177,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ReportsPage\ReportsPage.xaml.cs">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\BugPage.xaml.cs">
+      <DependentUpon>BugPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ReportPage\ViewModel\Commands\GenerateCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ReportPage\ViewModel\ReportViewModel.cs" />

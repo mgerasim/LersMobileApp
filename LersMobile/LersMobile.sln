@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Utils.ns", "..\..\Lers
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lers.Reports.ns", "..\..\LersUchet\Framework\Lers.Reports\Lers.Reports.ns.csproj", "{5D0956D6-4721-4200-AC8C-E40D7B2D0755}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TelemetryClient", "TelemetryClient", "{AE3E7605-2825-4C94-AF48-21ADC438057C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelemetryClient.ns", "..\..\LersUchet\TelemetryClient\TelemetryClient\TelemetryClient.ns.csproj", "{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		LersMobile\LersMobile\LersMobile.projitems*{62d5c7d1-cdc9-4ac6-9836-d7c9073ac6fd}*SharedItemsImports = 13
@@ -177,6 +181,24 @@ Global
 		{5D0956D6-4721-4200-AC8C-E40D7B2D0755}.Release|x64.Build.0 = Release|Any CPU
 		{5D0956D6-4721-4200-AC8C-E40D7B2D0755}.Release|x86.ActiveCfg = Release|Any CPU
 		{5D0956D6-4721-4200-AC8C-E40D7B2D0755}.Release|x86.Build.0 = Release|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Debug|x64.Build.0 = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Debug|x86.Build.0 = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Deploy|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Deploy|Any CPU.Build.0 = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Deploy|x64.ActiveCfg = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Deploy|x64.Build.0 = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Deploy|x86.ActiveCfg = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Deploy|x86.Build.0 = Debug|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Release|x64.ActiveCfg = Release|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Release|x64.Build.0 = Release|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Release|x86.ActiveCfg = Release|Any CPU
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +212,8 @@ Global
 		{A66F7B2E-149C-400D-9B64-0EEBBAD9E22E} = {CE47920E-69A6-4817-BA91-E5026E86E6D6}
 		{BF54064F-F775-4CA2-8D8D-1806D3B8EAFB} = {CE47920E-69A6-4817-BA91-E5026E86E6D6}
 		{5D0956D6-4721-4200-AC8C-E40D7B2D0755} = {482A6F21-58D4-407C-8F80-5EA3A766F388}
+		{AE3E7605-2825-4C94-AF48-21ADC438057C} = {763B3EF6-0D06-42D3-A09E-5FF5767408BF}
+		{1D8C98FD-DAE0-48F5-B380-C8D623A2A2B4} = {AE3E7605-2825-4C94-AF48-21ADC438057C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EEE88FA-D225-446B-AC5E-C8A07024397B}

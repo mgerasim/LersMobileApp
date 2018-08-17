@@ -61,6 +61,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отчёт об ошибке.
+        /// </summary>
+        public static string BugPage_Title {
+            get {
+                return ResourceManager.GetString("BugPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось загрузить информацию о точке учёта.
         /// </summary>
         public static string IncidentDetailPage_Error_Load_Description {
@@ -781,6 +790,51 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Произошла непредвиденная ошибка.
+        /// </summary>
+        public static string Text_Bug_an_unexpected_error_occurred {
+            get {
+                return ResourceManager.GetString("Text_Bug_an_unexpected_error_occurred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Возможно, службе поддержки понадобятся дополнительные сведения. Укажите свой контактный e-mail для связи..
+        /// </summary>
+        public static string Text_Bug_need_more_information_and_specify_a_contact {
+            get {
+                return ResourceManager.GetString("Text_Bug_need_more_information_and_specify_a_contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Передайте сведения об ошибке разработчикам, чтобы ускорить решение проблемы.
+        /// </summary>
+        public static string Text_Bug_pass_the_error_information_to_the_developers {
+            get {
+                return ResourceManager.GetString("Text_Bug_pass_the_error_information_to_the_developers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если по какой-либо причине в данный момент отправить отчет не удается, его можно сохранить в файл и передать по электронной почте на support@lers.ru..
+        /// </summary>
+        public static string Text_Bug_save_it_to_a_file_and_send_it_by_email {
+            get {
+                return ResourceManager.GetString("Text_Bug_save_it_to_a_file_and_send_it_by_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Укажите действия, которые привели к ошибке и нажмите кнопку &quot;Отправить&quot;.
+        /// </summary>
+        public static string Text_Bug_specify_the_actions_that_led_to_the_error {
+            get {
+                return ResourceManager.GetString("Text_Bug_specify_the_actions_that_led_to_the_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Закрыть.
         /// </summary>
         public static string Text_Close {
@@ -840,6 +894,15 @@ namespace LersMobile.Droid.Resources {
         public static string Text_Done {
             get {
                 return ResourceManager.GetString("Text_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Контактный e-mail.
+        /// </summary>
+        public static string Text_Email {
+            get {
+                return ResourceManager.GetString("Text_Email", resourceCulture);
             }
         }
         
@@ -1042,11 +1105,29 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string Text_Save {
+            get {
+                return ResourceManager.GetString("Text_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите объекты учёта и нажмите сформировать отчет.
         /// </summary>
         public static string Text_Select_accounting_objects_and_click_generate_report {
             get {
                 return ResourceManager.GetString("Text_Select_accounting_objects_and_click_generate_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отправить.
+        /// </summary>
+        public static string Text_Send {
+            get {
+                return ResourceManager.GetString("Text_Send", resourceCulture);
             }
         }
         

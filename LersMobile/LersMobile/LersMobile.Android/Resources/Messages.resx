@@ -573,4 +573,39 @@
     <value>Состояние системы</value>
     <comment>Состояние системы</comment>
   </data>
+  <data name="Text_Bug_an_unexpected_error_occurred" xml:space="preserve">
+    <value>Произошла непредвиденная ошибка</value>
+    <comment>Произошла непредвиденная ошибка</comment>
+  </data>
+  <data name="Text_Bug_pass_the_error_information_to_the_developers" xml:space="preserve">
+    <value>Передайте сведения об ошибке разработчикам, чтобы ускорить решение проблемы</value>
+    <comment>Передайте сведения об ошибке разработчикам, чтобы ускорить решение проблемы</comment>
+  </data>
+  <data name="Text_Bug_specify_the_actions_that_led_to_the_error" xml:space="preserve">
+    <value>Укажите действия, которые привели к ошибке и нажмите кнопку "Отправить"</value>
+    <comment>Укажите действия, которые привели к ошибке и нажмите кнопку "Отправить"</comment>
+  </data>
+  <data name="BugPage_Title" xml:space="preserve">
+    <value>Отчёт об ошибке</value>
+    <comment>Отчёт об ошибке</comment>
+  </data>
+  <data name="Text_Bug_need_more_information_and_specify_a_contact" xml:space="preserve">
+    <value>Возможно, службе поддержки понадобятся дополнительные сведения. Укажите свой контактный e-mail для связи.</value>
+    <comment>Возможно, службе поддержки понадобятся дополнительные сведения. Укажите свой контактный e-mail для связи.</comment>
+  </data>
+  <data name="Text_Bug_save_it_to_a_file_and_send_it_by_email" xml:space="preserve">
+    <value>Если по какой-либо причине в данный момент отправить отчет не удается, его можно сохранить в файл и передать по электронной почте на support@lers.ru.</value>
+    <comment>Если по какой-либо причине в данный момент отправить отчет не удается, его можно сохранить в файл и передать по электронной почте на support@lers.ru.</comment>
+  </data>
+  <data name="Text_Email" xml:space="preserve">
+    <value>Контактный e-mail</value>
+  </data>
+  <data name="Text_Save" xml:space="preserve">
+    <value>Сохранить</value>
+    <comment>Сохранить</comment>
+  </data>
+  <data name="Text_Send" xml:space="preserve">
+    <value>Отправить</value>
+    <comment>Отправить</comment>
+  </data>
 </root>

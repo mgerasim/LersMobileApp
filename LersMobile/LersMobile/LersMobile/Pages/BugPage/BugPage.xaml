@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LersMobile"
+             x:Class="LersMobile.Pages.BugPage.BugPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label Text="{local:Translate Text_Bug_an_unexpected_error_occurred}"
+                       Font="20"
+                       VerticalOptions="Start"
+                       HorizontalOptions="CenterAndExpand" />
+                <Label Text="{local:Translate Text_Bug_pass_the_error_information_to_the_developers}"
+                       Font="14"
+                       Margin="20, 0, 20, 0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="CenterAndExpand" />
+                <Label Text="{Binding Description}"
+                       Font="16"
+                       TextColor="Red"
+                       Margin="20, 0, 20, 5"
+                       BackgroundColor="LightGray"
+                       VerticalOptions="Start"
+                       HorizontalOptions="CenterAndExpand" />
+                <Label Text="{local:Translate Text_Bug_specify_the_actions_that_led_to_the_error}"
+                       Font="14"
+                       Margin="20, 0, 20, 0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="CenterAndExpand" />
+                <Editor HeightRequest="100"                    
+                        Margin="20, 0, 20, 5"
+                        Text="{Binding Message}"
+                        BackgroundColor="LightGray">
+                </Editor>
+                <Label Text="{local:Translate Text_Bug_need_more_information_and_specify_a_contact}"
+                       Font="14"
+                       Margin="20, 0, 20, 0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="CenterAndExpand" />
+                <Entry Text="{Binding Email}"
+                       Margin="20, 0, 20, 0"
+                       Placeholder="{local:Translate Text_Email}"
+                       Keyboard="Email">
+                </Entry>
+                <Button Text="{local:Translate Text_Send}"
+                        Command="{Binding SendCommand}"
+                        Margin="20, 0, 20, 0">
+                </Button>
+                <Label Text="{local:Translate Text_Bug_save_it_to_a_file_and_send_it_by_email}"
+                       Font="14"
+                       Margin="20, 0, 20, 0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="CenterAndExpand" />
+                <Button Text="{local:Translate Text_Save}"
+                        Command="{Binding SaveCommand}"
+                        Margin="20, 0, 20, 0">
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

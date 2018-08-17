@@ -61,8 +61,14 @@ namespace LersMobile.MeasurePointProperties
 			}
 			catch (Exception exc)
 			{
+				ExceptionUtils.HandleException(
+					Droid.Resources.Messages.Text_Error_Load,
+					$"{Droid.Resources.Messages.IncidentDetailPage_Error_Load_Description}. {exc.Message}",
+					exc);
+				/*
 				await DisplayAlert(Droid.Resources.Messages.Text_Error_Load, 
 					$"{Droid.Resources.Messages.IncidentDetailPage_Error_Load_Description}. {exc.Message}", "OK");
+					*/
 			}
 			finally
 			{
