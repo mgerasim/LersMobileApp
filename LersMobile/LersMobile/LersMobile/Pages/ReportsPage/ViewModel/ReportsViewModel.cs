@@ -1,9 +1,7 @@
 ﻿using LersMobile.Core.ReportLoader;
 using LersMobile.Views;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using LersMobile.Pages.ReportsPage.ViewModel.Commands;
 using System.Threading.Tasks;
 
@@ -84,13 +82,11 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
 		/// </summary>
 		/// <param name="page"></param>
 		/// <param name="reportLoader"></param>
-		public ReportsViewModel(ReportsPage page, IReportLoader reportLoader)
+		public ReportsViewModel(IReportLoader reportLoader)
         {
             _reportLoader = reportLoader ?? throw new ArgumentNullException(nameof(reportLoader), Droid.Resources.Messages.Text_Exception_Empty_param);
 
-            _refreshCommand = new RefreshCommand(this);
-
-            _page = page;            
+            _refreshCommand = new RefreshCommand(this);          
         }
 		
         #region INotifyPropertyChanged implement interface
@@ -106,8 +102,7 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
         }
 
         #endregion
-
-
+		
         #region Методы комманд
 
 		/// <summary>

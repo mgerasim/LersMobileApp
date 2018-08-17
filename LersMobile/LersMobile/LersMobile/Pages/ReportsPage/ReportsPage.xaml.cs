@@ -37,7 +37,7 @@ namespace LersMobile.Pages.ReportsPage
 
             Title = Droid.Resources.Messages.Text_Reports;
 
-            _viewModel = new ReportsViewModel(this, reportLoader);
+            _viewModel = new ReportsViewModel(reportLoader);
             this.BindingContext = _viewModel;
 		}
 
