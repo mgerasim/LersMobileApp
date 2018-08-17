@@ -94,6 +94,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\SelectableData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\TelemetryUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDevice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\ViewModel\BugViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\ViewModel\Commands\SaveCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\ViewModel\Commands\SendCommand.cs" />
