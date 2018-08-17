@@ -88,7 +88,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderNodesMeasurePoints.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ReportLoader\ReportLoaderSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\SelectableData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\IMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\ReportCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\ReportMeasurePointsCommand.cs" />
@@ -97,6 +96,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\NodesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ReportsPage\ViewModel\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ReportsPage\ViewModel\ReportsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\PopupMessage\IPopupMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\PopupMessage\PopupMessageService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\DetailedState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MeasurePointView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MeasurePointStateView.cs" />

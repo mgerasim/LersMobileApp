@@ -10,6 +10,7 @@ using LersMobile.Views;
 using Lers.Core;
 using LersMobile.Core.ReportLoader;
 using LersMobile.Pages.ReportsPage;
+using LersMobile.Services.PopupMessage;
 
 namespace LersMobile.Core
 {
@@ -63,7 +64,7 @@ namespace LersMobile.Core
 
             File.WriteAllBytes(fullName, response.Content);
 
-            DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.Text_Report_successfully_created,true);
+			PopupMessageService.ShowLong(Droid.Resources.Messages.Text_Report_successfully_created);
 
             Device.OpenUri(new Uri(fullName));
         }

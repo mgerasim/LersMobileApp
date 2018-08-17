@@ -1,4 +1,5 @@
 ﻿using LersMobile.Core;
+using LersMobile.Services.PopupMessage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -120,20 +121,20 @@ namespace LersMobile
 
             if (string.IsNullOrEmpty(serverAddressInput.Text))
 			{
-                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.LoginPage_Empty_Server);
+				PopupMessageService.ShowShort(Droid.Resources.Messages.LoginPage_Empty_Server);
 
 				return false;
 			}
 
 			if (string.IsNullOrEmpty(this.loginInput.Text))
 			{
-                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.LoginPage_Empty_Login);
+				PopupMessageService.ShowShort(Droid.Resources.Messages.LoginPage_Empty_Login);
 				return false;
 			}
 
 			if (string.IsNullOrEmpty(this.passwordInput.Text))
 			{
-                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.LoginPage_Empty_Password);
+				PopupMessageService.ShowShort(Droid.Resources.Messages.LoginPage_Empty_Password);
 				return false;
 			}
 

@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using LersMobile.NodeProperties;
 using LersMobile.Core.ReportLoader;
 using Lers.Core;
+using LersMobile.Services.PopupMessage;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
@@ -255,7 +256,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 
             if (isSelecting)
             {
-                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.Text_Select_accounting_objects_and_click_generate_report, true);
+				PopupMessageService.ShowLong(Droid.Resources.Messages.Text_Select_accounting_objects_and_click_generate_report);
             }
 
             foreach(var node in _nodes)
