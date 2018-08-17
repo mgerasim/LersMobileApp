@@ -573,4 +573,8 @@
     <value>Состояние системы</value>
     <comment>Состояние системы</comment>
   </data>
+  <data name="NotificationCenter_Failed_find_popup_message" xml:space="preserve">
+    <value>Не удалось найти всплывающее сообщение в центре уведомлений</value>
+    <comment>Не удалось найти всплывающее сообщение в центре уведомлений</comment>
+  </data>
 </root>
