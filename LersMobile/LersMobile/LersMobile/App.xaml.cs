@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
@@ -12,7 +12,7 @@ namespace LersMobile
 	{
         public static Core.MobileCore Core { get; private set; }
 
-		// Параметр идентификатора из push-уведомления
+		// РџР°СЂР°РјРµС‚СЂ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂР° РёР· push-СѓРІРµРґРѕРјР»РµРЅРёСЏ
 		public static int NotificationId { get; set; }
 
 		public App ()
@@ -30,13 +30,13 @@ namespace LersMobile
 		{
 			if (MainPage.GetType() != typeof (LoginPage))
 			{
-				// Возвращаем пользователя на экран входа.
+				// Р’РѕР·РІСЂР°С‰Р°РµРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅР° СЌРєСЂР°РЅ РІС…РѕРґР°.
 				ShowLoginPage();
 			};
 		}
 
 		/// <summary>
-		/// Отображает страницу подключения к серверу.
+		/// РћС‚РѕР±СЂР°Р¶Р°РµС‚ СЃС‚СЂР°РЅРёС†Сѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє СЃРµСЂРІРµСЂСѓ.
 		/// </summary>
 		public void ShowLoginPage()
 		{
@@ -44,16 +44,11 @@ namespace LersMobile
 
 			loginPage.SuccessLogin += (sender, e) =>
 			{
-				// Перенаправляем на главную страницу приложения.
+				// РџРµСЂРµРЅР°РїСЂР°РІР»СЏРµРј РЅР° РіР»Р°РІРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ РїСЂРёР»РѕР¶РµРЅРёСЏ.
 				MainPage = new MainPage();
 			};
 
 			MainPage = loginPage;
-		}
-
-		public void ShowNotification(int notificationId)
-		{
-
 		}
 
 		protected override void OnStart ()

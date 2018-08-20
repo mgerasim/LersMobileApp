@@ -7,16 +7,19 @@ using LersMobile.Views;
 
 namespace LersMobile.Core.ReportLoader
 {
-    public class ReportLoaderMeasurePoint : IReportLoader
+	/// <summary>
+	/// Реализация загрузки отчетов для точки учета
+	/// </summary>
+    public class MeasurePointReportLoader : IReportLoader
     {
-        private ReportLoaderNodesMeasurePoints ReportLoaderNodesMeasurePoints;
+        private NodesMeasurePointsReportLoader ReportLoaderNodesMeasurePoints;
 
-        public ReportLoaderMeasurePoint(MeasurePointView measurePointView)
+        public MeasurePointReportLoader(MeasurePointView measurePointView)
         {
             var measurePointViews = new List<MeasurePointView>();
             measurePointViews.Add(measurePointView);
 
-            ReportLoaderNodesMeasurePoints = new ReportLoaderNodesMeasurePoints(measurePointViews);
+            ReportLoaderNodesMeasurePoints = new NodesMeasurePointsReportLoader(measurePointViews);
         }
 
         public int[] GetEntitiesIds()

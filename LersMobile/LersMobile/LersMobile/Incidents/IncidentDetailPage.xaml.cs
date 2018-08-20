@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LersMobile.Services.PopupMessage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -100,7 +101,7 @@ namespace LersMobile.Incidents
             {
                 await this.Incident.Close();
 
-                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.IncidentDetailPage_IncidentCloseSuccessed);
+				PopupMessageService.ShowShort(Droid.Resources.Messages.IncidentDetailPage_IncidentCloseSuccessed);
             }
             catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
             {

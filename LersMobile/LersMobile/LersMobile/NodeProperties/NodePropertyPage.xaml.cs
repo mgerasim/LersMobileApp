@@ -15,7 +15,7 @@ namespace LersMobile.NodeProperties
 
             this.Children.Add(new NodeCommonPropertiesPage(nodeView));
             this.Children.Add(new NodeMeasurePointsPage(nodeView));
-            IReportLoader reportLoader = new ReportLoaderNode(nodeView);
+            IReportLoader reportLoader = new NodeReportLoader(nodeView);
             this.Children.Add(new ReportsPage(reportLoader));
             this.Title = Droid.Resources.Messages.NodePropertyPage_Title;
 		}

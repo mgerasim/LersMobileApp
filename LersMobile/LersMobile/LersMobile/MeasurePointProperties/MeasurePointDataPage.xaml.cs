@@ -20,7 +20,7 @@ namespace LersMobile.MeasurePointProperties
 
         public MeasurePointView MeasurePoint
         {
-            get { return _measurePoint; }
+            get => _measurePoint; 
             private set
             {
                 _measurePoint = value;
@@ -45,9 +45,9 @@ namespace LersMobile.MeasurePointProperties
 		}
 
 
-		private Lers.Data.DataRecord _lastDataRecord;
+		private DataRecord _lastDataRecord;
 
-		public Lers.Data.DataRecord LastDataRecord
+		public DataRecord LastDataRecord
 		{
 			get => _lastDataRecord;
 			set

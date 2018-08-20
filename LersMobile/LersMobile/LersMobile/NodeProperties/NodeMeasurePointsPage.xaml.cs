@@ -16,11 +16,14 @@ namespace LersMobile.NodeProperties
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NodeMeasurePointsPage : ContentPage
     {
+		/// <summary>
+		/// Объект учёта, к которой принадлежат точки учёта
+		/// </summary>
         private NodeView _node;
 
         public NodeView Node
         {
-            get { return _node; }
+            get => _node;
             private set
             {
                 _node = value;
@@ -28,6 +31,10 @@ namespace LersMobile.NodeProperties
             }
         }
 
+		/// <summary>
+		/// Конструктор
+		/// </summary>
+		/// <param name="nodeView"></param>
         public NodeMeasurePointsPage(NodeView nodeView)
         {
             InitializeComponent();

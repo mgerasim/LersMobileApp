@@ -718,6 +718,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не удалось найти всплывающее сообщение в центре уведомлений.
+        /// </summary>
+        public static string NotificationCenter_Failed_find_popup_message {
+            get {
+                return ResourceManager.GetString("NotificationCenter_Failed_find_popup_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось загрузить уведомления.
         /// </summary>
         public static string NotificationCenterPage_Error_Loaded_Notifications {
@@ -930,6 +939,15 @@ namespace LersMobile.Droid.Resources {
         public static string Text_Error_Load {
             get {
                 return ResourceManager.GetString("Text_Error_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не указан параметр.
+        /// </summary>
+        public static string Text_Exception_Empty_param {
+            get {
+                return ResourceManager.GetString("Text_Exception_Empty_param", resourceCulture);
             }
         }
         

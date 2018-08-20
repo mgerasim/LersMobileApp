@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace LersMobile.Core
 {
+	/// <summary>
+	/// Класс-контейнер множественного выбора в списке данных
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
     public class SelectableData<T> : INotifyPropertyChanged
     {
+		/// <summary>
+		/// Элемент данных
+		/// </summary>
         public T Data { get; set; }
 
+		/// <summary>
+		/// Признак того, что элемент данных выбран
+		/// </summary>
         private bool selected = false;
 
         public bool IsSelected
         {
-            get
-            {
-                return IsSelecting && selected;
-            }
+            get => IsSelecting && selected;
             set
             {
                 selected = value;
@@ -25,14 +29,14 @@ namespace LersMobile.Core
             }
         }
 
+		/// <summary>
+		/// Признак того, что список элементов данных в режиме множественного выбора
+		/// </summary>
         private bool isSelecting;        
 
         public bool IsSelecting
         {
-            get
-            {
-                return isSelecting;
-            }
+            get => isSelecting;
             set
             {
                 isSelecting = value;
@@ -41,18 +45,14 @@ namespace LersMobile.Core
                 OnPropertyChanged(nameof(IsUnselected));
             }
         }
+		/// <summary>
+		/// Признак того, что элемент данных не выбран
+		/// </summary>
+        public bool IsUnselected => !IsSelected && IsSelecting;
 
-        public bool IsUnselected
-        {
-            get
-            {
-                return !IsSelected && IsSelecting;
-            }
-        }
+		#region INotifyPropertyChanged implement interface
 
-        #region INotifyPropertyChanged implement interface
-
-        public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {

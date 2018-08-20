@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LersMobile.Core;
+using LersMobile.Services.PopupMessage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,7 +44,7 @@ namespace LersMobile
 		/// </summary>
 		public bool IsRefreshing
 		{
-			get { return _isRefreshing; }
+			get => _isRefreshing; 
 			set
 			{
 				_isRefreshing = value;
@@ -70,36 +72,40 @@ namespace LersMobile
 		}
 
 		/// <summary>
+		/// Реулизует функциональность перехода на просмотр уведомления при выборе в списке Центра уведомлений
+		/// </summary>
+		/// <param name="notificationView"></param>
+		private async void HandleNotificationSelected(NotificationView notificationView)
+		{
+			// Откроем свойства уведомления
+			await this.Navigation.PushAsync(new NotificationInfoPage(notificationView));
+
+			if (!notificationView.Notification.IsRead)
+			{
+				try
+				{
+					// Маркируем уведомление как прочитанное.
+					await notificationView.MarkAsReadAsync();
+				}
+				catch (Exception exc)
+				{
+					PopupMessageService.ShowShort(exc.Message);
+				}
+			}
+		}
+
+		/// <summary>
 		/// Обрабатывает выбор уведомления в списке.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void NotificationCenterListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+		private void NotificationCenterListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
-			var item = (Core.NotificationView)e.SelectedItem;
+			var item = (NotificationView)e.SelectedItem;
 
 			if (item != null)
 			{
-				// Откроем свойства уведомления
-				await this.Navigation.PushAsync(new NotificationInfoPage(item));
-
-				if (!item.Notification.IsRead)
-				{
-					try
-					{
-						// Маркируем уведомление как прочитанное.
-						await item.MarkAsReadAsync();
-					}
-					catch (Exception exc)
-					{
-						// TODO: всплывающие уведомления нужно показывать через DependencyService,
-						// так как они специфичины для Андроида.
-
-						Android.Widget.Toast.MakeText(Android.App.Application.Context,
-							exc.Message,
-							Android.Widget.ToastLength.Short).Show();
-					}
-				}
+				HandleNotificationSelected(item);
 			}
 
 			this.notificationCenterListView.SelectedItem = null;
@@ -121,13 +127,13 @@ namespace LersMobile
 
 			if (App.NotificationId > 0)
 			{
-				var selectedItem = Notifications.Where(x => x.Notification.Id == App.NotificationId).Single();
-				var e = new SelectedItemChangedEventArgs(selectedItem);
-				NotificationCenterListView_ItemSelected(null, e);
+				NotificationView popupNotificationView = 
+					Notifications.Where(x => x.Notification.Id == App.NotificationId).FirstOrDefault() ?? throw new ArgumentNullException(nameof(popupNotificationView), Droid.Resources.Messages.NotificationCenter_Failed_find_popup_message);
+				// Показать уведомление из popup-сообщения
+				HandleNotificationSelected(popupNotificationView);
 				App.NotificationId = 0;
 			}
 		}
-
 
 		/// <summary>
 		/// Обновляет список уведомлений.

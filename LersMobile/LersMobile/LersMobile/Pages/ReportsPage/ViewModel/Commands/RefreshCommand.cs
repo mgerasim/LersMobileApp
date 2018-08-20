@@ -5,25 +5,42 @@ using System.Windows.Input;
 
 namespace LersMobile.Pages.ReportsPage.ViewModel.Commands
 {
+	/// <summary>
+	/// Класс реализует функционаьность обработчика обновления отчетов на странице отчетов
+	/// </summary>
     public class RefreshCommand : ICommand
     {
-        ReportsViewModel ViewModel;
+		/// <summary>
+		/// Модель предстваления
+		/// </summary>
+        private readonly ReportsViewModel _viewModel;
 
+		/// <summary>
+		/// Конструктор
+		/// </summary>
+		/// <param name="viewModel"></param>
         public RefreshCommand(ReportsViewModel viewModel)
         {
-            ViewModel = viewModel;
+            _viewModel = viewModel;
         }
 
         public event EventHandler CanExecuteChanged;
-
+		/// <summary>
+		/// Признак доступности обработчика
+		/// </summary>
+		/// <param name="parameter"></param>
+		/// <returns></returns>
         public bool CanExecute(object parameter)
         {
             return true;
         }
-
-        public void Execute(object parameter)
+		/// <summary>
+		/// Выполнение обработчика
+		/// </summary>
+		/// <param name="parameter"></param>
+        public async void Execute(object parameter)
         {
-            ViewModel.Refresh(true);
+            await _viewModel.Refresh(true);
         }
     }
 }

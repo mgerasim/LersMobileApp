@@ -1,160 +1,186 @@
 ﻿using Lers.Data;
 using Lers.Utils;
 using LersMobile.MeasurePointProperties.ViewModels.Commands;
+using LersMobile.Services.Report;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LersMobile.MeasurePointProperties.ViewModels
 {
-    enum PeriodType
-    {
-        Day = 0,
-        Week = 1,
-        WeekTwo = 2,
-        Month = 3,
-        MonthBegin = 4
-    }
-
-    enum SourceType
-    {
-        Consumption = 0,    // Потребление
-        Totals = 1          // Интеграторы
-    }
-
+	/// <summary>
+	/// Класс модели представления
+	/// </summary>
     public class MeasurePointArchiveViewModel : INotifyPropertyChanged
     {
+		/// <summary>
+		/// Формат отображения даты в зависимости от типа данных
+		/// </summary>
         private static String[] DaviceDataTypeDateStringFormat = new String[]
         {
             "{0:dd.MM.yyyy}", "{0:dd.MM.yyyy HH:mm}", "{0:MM.yyyy}"
         };
-
+		/// <summary>
+		/// Типы данных: суточные, часовые, месячные
+		/// </summary>
         private static DeviceDataType[] DataTypes = new DeviceDataType[]
-        {
-            DeviceDataType.Day, DeviceDataType.Hour, DeviceDataType.Month
+        {			
+            DeviceDataType.Day,	DeviceDataType.Hour,DeviceDataType.Month
         };
 
+		/// <summary>
+		/// Выбранный тип данных
+		/// </summary>
         private String CurrentDaviceDataTypeDateStringFormat => DaviceDataTypeDateStringFormat[_selectedDataType];
 
+		/// <summary>
+		/// Признак того, что источником данных является Потребление - используется для скрытия некоторых полей
+		/// </summary>
         public bool IsSourceTypeEqConsumption
         {
-            get
-            {
-                return (SelectedSourceType == (int)SourceType.Consumption);
-            }
+            get => (SelectedSourceType == (int)ReportSourceType.Consumption);
         }
 
-        public MeasurePointArchiveViewModel(StackLayout stackLayoutData, Xamarin.Forms.DataGrid.DataGrid dataGrid, Lers.Core.MeasurePoint measurePoint)
-        {
-            _dateBgn = DateTime.Now;
-            _dateEnd = DateTime.Now;
-            _selectedDataType = 0;
-            this.stackLayoutData = stackLayoutData;
-            this.dataGrid = dataGrid;
-            MeasurePoint = measurePoint;
-            LoadCommand = new LoadCommand(this);
-            ShowCommand = new ShowCommand(this);
-            IsShowed = true;
-        }
-
+		/// <summary>
+		/// Признак того, что идет обновление данных
+		/// </summary>
         public bool IsBusy { get; set; }
         
-        private Lers.Core.MeasurePoint MeasurePoint;
+		/// <summary>
+		/// Точка учёта для которой, генерируется отчёт
+		/// </summary>
+        private Lers.Core.MeasurePoint _measurePoint;
 
-        private StackLayout stackLayoutData;
+		/// <summary>
+		/// Контейнер таблицы данных
+		/// </summary>
+        private StackLayout _stackLayoutData;
 
-        private Xamarin.Forms.DataGrid.DataGrid dataGrid;
+		/// <summary>
+		/// Элемент управления таблицы данных
+		/// </summary>
+        private Xamarin.Forms.DataGrid.DataGrid _dataGrid;
 
+		/// <summary>
+		/// Команда загрузки данных
+		/// </summary>
         public LoadCommand LoadCommand { get; set; }
 
+		/// <summary>
+		/// Команда отображения панели фильтрации
+		/// </summary>
         public ShowCommand ShowCommand { get; set; }
 
+		/// <summary>
+		/// Признак того, что панель фильтрации отображается
+		/// </summary>
         public bool IsShowed { get; set; }
 
+		/// <summary>
+		/// Выбранный преопределённый период 
+		/// </summary>
         private int _selectedPeriodType;
 
         public int SelectedPeriodType
         {
-            get
-            {
-                return _selectedPeriodType;
-            }
+            get => _selectedPeriodType;
             set
             {
                 _selectedPeriodType = value;
-                _updatePeriod();
-                OnPropertyChanged("SelectedPeriodType");
+                UpdatePeriod();
+                OnPropertyChanged(nameof(SelectedPeriodType));
             }
         }
 
+		/// <summary>
+		/// Выбранный тип данных
+		/// </summary>
         private int _selectedDataType;
 
         public int SelectedDataType
         {
-            get
-            {
-                return _selectedDataType;
-            }
+            get => _selectedDataType;
             set
             {
                 _selectedDataType = value;
-                OnPropertyChanged("SelectedDataType");
+                OnPropertyChanged(nameof(SelectedDataType));
             }
         }
         
+		/// <summary>
+		/// Выбранный источник данных
+		/// </summary>
         private int _selectedSourceType;
 
         public int SelectedSourceType
         {
-            get
-            {
-                return _selectedSourceType;
-            }
+            get => _selectedSourceType;
             set
             {
                 _selectedSourceType = value;
-                OnPropertyChanged("SelectedSourceType");
-                OnPropertyChanged("IsSourceTypeEqConsumption");
+                OnPropertyChanged(nameof(SelectedSourceType));
+                OnPropertyChanged(nameof(IsSourceTypeEqConsumption));
             }
         }
 
-        public ObservableCollection<DataRecord> Data { get; private set; } = new ObservableCollection<DataRecord>();
+		/// <summary>
+		/// Дата начало периода выборки архивных данных
+		/// </summary>
+        private DateTime _dateStart;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private DateTime _dateBgn;
-
-        public DateTime dateBgn
+        public DateTime DateStart
         {
-            get
-            {
-                return _dateBgn;
-            }
+            get => _dateStart;
             set
             {
-                _dateBgn = value;
-                OnPropertyChanged("dateBgn");
+                _dateStart = value;
+                OnPropertyChanged(nameof(DateStart));
             }
         }
 
+		/// <summary>
+		/// Дата окончания периода выборки архивных данных
+		/// </summary>
         private DateTime _dateEnd;
 
-        public DateTime dateEnd
+        public DateTime DateEnd
         {
-            get
-            {
-                return _dateEnd;
-            }
+            get =>_dateEnd;
             set
             {
                 _dateEnd = value;
-                OnPropertyChanged("dateEnd");
+                OnPropertyChanged(nameof(DateEnd));
             }
         }
+
+		/// <summary>
+		/// Источник данных
+		/// </summary>
+		public ObservableCollection<DataRecord> Data { get; private set; } = new ObservableCollection<DataRecord>();
+
+		/// <summary>
+		/// Конструктор
+		/// </summary>
+		/// <param name="stackLayoutData"></param>
+		/// <param name="dataGrid"></param>
+		/// <param name="measurePoint"></param>
+		public MeasurePointArchiveViewModel(StackLayout stackLayoutData, Xamarin.Forms.DataGrid.DataGrid dataGrid, Lers.Core.MeasurePoint measurePoint)
+        {
+            _dateStart = DateTime.Now;
+            _dateEnd = DateTime.Now;
+            _selectedDataType = 0;
+            this._stackLayoutData = stackLayoutData;
+            this._dataGrid = dataGrid;
+            _measurePoint = measurePoint;
+            LoadCommand = new LoadCommand(this);
+            ShowCommand = new ShowCommand(this);
+            IsShowed = true;
+        }
+		        
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -164,13 +190,20 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             }
         }
 
+		/// <summary>
+		/// Обработчик отображения панели фильтрации
+		/// </summary>
         public void ShowFilter()
         {
             IsShowed = !IsShowed;
-            OnPropertyChanged("IsShowed");
+            OnPropertyChanged(nameof(IsShowed));
         }
 
-        public async void LoadData()
+		/// <summary>
+		/// Обработчик загрузки данных
+		/// </summary>
+		/// <returns></returns>
+        public async Task LoadData()
         {            
             try
             {
@@ -182,17 +215,16 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 
                 switch (SelectedSourceType)
                 {
-                    case (int)SourceType.Consumption:
-                        this.Data.AddRange((await this.MeasurePoint.Data.GetConsumptionAsync(dateBgn, dateEnd, DataTypes[SelectedDataType])).OrderByDescending(x => x.DateTime));
+                    case (int)ReportSourceType.Consumption:
+                        this.Data.AddRange((await this._measurePoint.Data.GetConsumptionAsync(DateStart, DateEnd, DataTypes[SelectedDataType])).OrderByDescending(x => x.DateTime));
                         break;
-                    case (int)SourceType.Totals:
-                        this.Data.AddRange((await this.MeasurePoint.Data.GetTotalsAsync(dateBgn, dateEnd)).OrderByDescending(x => x.DateTime));
+                    case (int)ReportSourceType.Totals:
+                        this.Data.AddRange((await this._measurePoint.Data.GetTotalsAsync(DateStart, DateEnd)).OrderByDescending(x => x.DateTime));
                         break;
-
                 }
 
-                _dataGridRefreshHead();
-                _dataGridRefreshBody();
+                DataGridRefreshHead();
+                DataGridRefreshBody();
             }
             finally
             {
@@ -200,36 +232,41 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             }
         }
 
-        private void _dataGridRefreshBody()
+		/// <summary>
+		/// Заполняет таблицу строками с данными
+		/// </summary>
+        private void DataGridRefreshBody()
         {
-            stackLayoutData.Children.Clear();
+            _stackLayoutData.Children.Clear();
 
-            if (SelectedSourceType == (int)SourceType.Totals)
+            if (SelectedSourceType == (int)ReportSourceType.Totals)
             {
-                dataGrid.Columns[0].StringFormat = "{0:dd.MM.yyyy HH:mm}";
+                _dataGrid.Columns[0].StringFormat = "{0:dd.MM.yyyy HH:mm}";
             }
             else
             {
-                dataGrid.Columns[0].StringFormat = CurrentDaviceDataTypeDateStringFormat;
+                _dataGrid.Columns[0].StringFormat = CurrentDaviceDataTypeDateStringFormat;
             }
 
-            stackLayoutData.Children.Add(dataGrid);
+            _stackLayoutData.Children.Add(_dataGrid);
         }
-
-        private void _dataGridRefreshHead()
+		/// <summary>
+		/// Формирует колонки для таблицы с данными
+		/// </summary>
+        private void DataGridRefreshHead()
         {
-            dataGrid.Columns.Clear();
+            _dataGrid.Columns.Clear();
 
             Xamarin.Forms.DataGrid.DataGridColumn columnDateTime = new Xamarin.Forms.DataGrid.DataGridColumn();
 
             columnDateTime.Title = Droid.Resources.Messages.Text_Date;
             columnDateTime.PropertyName = "DateTime";
 
-            dataGrid.Columns.Add(columnDateTime);
+            _dataGrid.Columns.Add(columnDateTime);
 
-            foreach (var param in MeasurePoint.DataParameters)
+            foreach (var param in _measurePoint.DataParameters)
             {
-                if (SelectedSourceType == (int)SourceType.Totals && !DataParameterDescriptor.Get(param).IsAdditive)
+                if (SelectedSourceType == (int)ReportSourceType.Totals && !DataParameterDescriptor.Get(param).IsAdditive)
                 {
                     continue;
                 }
@@ -242,30 +279,33 @@ namespace LersMobile.MeasurePointProperties.ViewModels
                 columnItem.PropertyName = desc.Name;
                 columnItem.StringFormat = "{0:0.00}";
 
-                dataGrid.Columns.Add(columnItem);
+                _dataGrid.Columns.Add(columnItem);
             }
         }
 
-        private void _updatePeriod()
+		/// <summary>
+		/// Обновляет даты абсолютного периода в зависимости изменения преодпределенного периода
+		/// </summary>
+        private void UpdatePeriod()
         {
-            dateEnd = DateTime.Now;
+            DateEnd = DateTime.Now;
 
             switch (SelectedPeriodType)
             {
-                case (int)PeriodType.Day:
-                    dateBgn = dateEnd.AddDays(-1);
+                case (int)ReportPeriodType.Day:
+                    DateStart = DateEnd.AddDays(-1);
                     break;
-                case (int)PeriodType.Week:
-                    dateBgn = dateEnd.AddDays(-7);
+                case (int)ReportPeriodType.Week:
+                    DateStart = DateEnd.AddDays(-7);
                     break;
-                case (int)PeriodType.WeekTwo:
-                    dateBgn = dateEnd.AddDays(-14);
+                case (int)ReportPeriodType.WeekTwo:
+                    DateStart = DateEnd.AddDays(-14);
                     break;
-                case (int)PeriodType.Month:
-                    dateBgn = dateEnd.AddDays(-30);
+                case (int)ReportPeriodType.Month:
+                    DateStart = DateEnd.AddDays(-30);
                     break;
-                case (int)PeriodType.MonthBegin:
-                    dateBgn = new DateTime(dateEnd.Date.Year, dateEnd.Month, 1);
+                case (int)ReportPeriodType.MonthBegin:
+                    DateStart = new DateTime(DateEnd.Date.Year, DateEnd.Month, 1);
                     break;
             }
         }

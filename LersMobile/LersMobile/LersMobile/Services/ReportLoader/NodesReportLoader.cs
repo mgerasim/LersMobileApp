@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Lers.Core;
 using Lers.Reports;
+using LersMobile.Services.Report;
 using LersMobile.Views;
 
 namespace LersMobile.Core.ReportLoader
 {
-    public class ReportLoaderNodes : IReportLoader
+	/// <summary>
+	/// Реализация загрузки отчетов для нескольких объектов учета
+	/// </summary>
+    public class NodesReportLoader : IReportLoader
     {
         protected List<NodeView> Nodes;
 
         protected List<ReportsView> Reports { get; set; }
 
-        public ReportLoaderNodes(List<NodeView> nodes)
+        public NodesReportLoader(List<NodeView> nodes)
         {
             Nodes = nodes ?? throw new ArgumentNullException();
 

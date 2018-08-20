@@ -12,46 +12,18 @@ using Xamarin.Forms;
 using LersMobile.NodeProperties;
 using LersMobile.Core.ReportLoader;
 using Lers.Core;
+using LersMobile.Services.PopupMessage;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
+	/// <summary>
+	/// Класс модели представления 
+	/// </summary>
     public class NodesViewModel : INotifyPropertyChanged
     {
-        NodesPage Page;
-
-        public NodesViewModel(NodesPage page)
-        {
-            Page = page;
-
-            nodeGroups = new List<NodeGroupView>();
-            RefreshCommand = new RefreshCommand(this);
-            SearchCommand = new SearchCommand(this);
-            SelectingCommand = new SelectingCommand(this);
-            ReportCommand = new ReportCommand(this);
-            ReportMeasurePointsCommand = new ReportMeasurePointsCommand(this);
-
-            _nodes = new List<SelectableData<NodeView>>();
-
-            ItemTappedCommand = new Command((object model) => {
-
-                if (model != null && model is ItemTappedEventArgs)
-                {
-                    selectedNode = ((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item);
-                    if (IsSelecting)
-                    {
-                        selectedNode.IsSelected = !selectedNode.IsSelected;
-                    }
-                    else
-                    {
-                        Navigate();
-                    }                    
-                }
-            });
-        }
-
         #region Закрытые свойства
 
-        private List<NodeGroupView> nodeGroups;
+        private List<NodeGroupView> _nodeGroups;
 
         private List<SelectableData<NodeView>> _nodes;
         
@@ -59,41 +31,27 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 
         private string _searchText;
 
-        private NodeGroupView selectedGroup;
+        private NodeGroupView _selectedGroup;
 
-        private bool isSelecting = false;
+        private bool _isSelecting = false;
 
-        private SelectableData<NodeView> selectedNode;
-
-        #endregion
-
-        #region INotifyPropertyChanged implement interface
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (propertyName != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        private SelectableData<NodeView> _selectedNode;
 
         #endregion
+		
+		#region Команды
 
-        #region Команды
+		public readonly ICommand ItemTappedCommand;
 
-        public ICommand ItemTappedCommand { get; protected set; }
+		public readonly SearchCommand SearchCommand;
 
-        public SearchCommand SearchCommand { get; set; }
+		public readonly RefreshCommand RefreshCommand;
 
-        public RefreshCommand RefreshCommand { get; set; }
+		public readonly SelectingCommand SelectingCommand;
 
-        public SelectingCommand SelectingCommand { get; set; }
+		public readonly ReportCommand ReportCommand;
 
-        public ReportCommand ReportCommand { get; set; }
-
-        public ReportMeasurePointsCommand ReportMeasurePointsCommand { get; set; }
+		public readonly ReportMeasurePointsCommand ReportMeasurePointsCommand;
 
         #endregion
 
@@ -127,7 +85,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// </summary>
 		public bool IsRefreshing
         {
-            get { return _isRefreshing; }
+            get => _isRefreshing;
             set
             {
                 _isRefreshing = value;
@@ -140,13 +98,10 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// </summary>
         public bool IsSelecting
         {
-            get
-            {
-                return isSelecting;
-            }
+            get => _isSelecting;
             set
             {
-                isSelecting = value;
+                _isSelecting = value;
                 OnPropertyChanged(nameof(IsSelecting));
             }
         }
@@ -169,13 +124,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         /// <summary>
         /// Текст для поиска.
         /// </summary>
-        public NodeGroupView[] NodeGroups
-        {
-            get
-            {
-                return nodeGroups.ToArray();
-            }
-        }
+        public NodeGroupView[] NodeGroups => _nodeGroups.ToArray();
         
         /// <summary>
         /// Возвращает выбранную для отображеня группу объектов или 0Se если
@@ -183,36 +132,84 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         /// </summary>
         public NodeGroupView SelectedGroup
         {
-            get
-            {
-                return selectedGroup;
-            }
+            get => _selectedGroup;
             set
             {
-                selectedGroup = value;
-                OnPropertyChanged(nameof(SelectedGroup));
+				if (value != null)
+				{
+					_selectedGroup = value;
+					AppDataStorage.SelectedGroupId = value.Id;
+					OnPropertyChanged(nameof(SelectedGroup));
+				}
+                
             }
         }
         
         /// <summary>
         /// Выбранный объект учёта
         /// </summary>
-        public SelectableData<NodeView> SelectedNode
-        {
-            get
-            {
-                return selectedNode;
-            }
-        }
+        public SelectableData<NodeView> SelectedNode => _selectedNode;
+		
         #endregion
 
-        #region Методы комманд
+		/// <summary>
+		/// Конструктор
+		/// </summary>
+        public NodesViewModel()
+        {
+            _nodeGroups = new List<NodeGroupView>();
+            RefreshCommand = new RefreshCommand(this);
+            SearchCommand = new SearchCommand(this);
+            SelectingCommand = new SelectingCommand(this);
+            ReportCommand = new ReportCommand(this);
+            ReportMeasurePointsCommand = new ReportMeasurePointsCommand(this);			
+            _nodes = new List<SelectableData<NodeView>>();
+			
+            ItemTappedCommand = new Command((object model) => {
 
-        public void Search()
+                if (model != null && model is ItemTappedEventArgs)
+                {
+                    _selectedNode = ((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item);
+                    if (IsSelecting)
+                    {
+                        _selectedNode.IsSelected = !_selectedNode.IsSelected;
+                    }
+                    else
+                    {
+                        Navigate();
+                    }                    
+                }
+            });
+        }
+		
+		#region INotifyPropertyChanged implement interface
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		private void OnPropertyChanged(string propertyName)
+		{
+			if (propertyName != null)
+			{
+				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		#endregion
+
+		#region Методы комманд
+
+		/// <summary>
+		/// Поиск по наименованию объекта учета 
+		/// </summary>
+		public void Search()
         {
             OnPropertyChanged(nameof(Nodes));
         }
 
+		/// <summary>
+		/// Обновление данных
+		/// </summary>
+		/// <returns></returns>
         public async Task Refresh()
         {
             this.IsRefreshing = true;
@@ -235,6 +232,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                     selectableData.Data = node;
                     this._nodes.Add(selectableData);
                 }
+				
                 OnPropertyChanged(nameof(Nodes));
             }
             catch (Exception exc)
@@ -249,13 +247,16 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             }
         }
 
+		/// <summary>
+		/// Переход в режим множественного выбора
+		/// </summary>
         public void Selecting()
         {
             IsSelecting = !IsSelecting;
 
-            if (isSelecting)
+            if (_isSelecting)
             {
-                DependencyService.Get<IMessage>().Show(Droid.Resources.Messages.Text_Select_accounting_objects_and_click_generate_report, true);
+				PopupMessageService.ShowLong(Droid.Resources.Messages.Text_Select_accounting_objects_and_click_generate_report);
             }
 
             foreach(var node in _nodes)
@@ -265,17 +266,24 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             OnPropertyChanged(nameof(Nodes));
         }
 
+		/// <summary>
+		/// Переход в список отчётов
+		/// </summary>
         public async void Report()
         {
             var nodeViews = new List<NodeView>();
             nodeViews.AddRange(Nodes.Where(x => x.IsSelected == true).Select(x => x.Data));
 
-            var reportLoader = new ReportLoaderNodes(nodeViews);
+            var reportLoader = new NodesReportLoader(nodeViews);
 
-            await Page.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
+			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
         }
 
-        public async void ReportMeasurePoints()
+		/// <summary>
+		/// Переход в список точек учёта
+		/// </summary>
+		/// <returns></returns>
+        public async Task ReportMeasurePoints()
         {
             var measurePointViews = new List<MeasurePointView>();
 
@@ -295,40 +303,52 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                 }
             }
 
-            var reportLoader = new ReportLoaderNodesMeasurePoints(measurePointViews);
+            var reportLoader = new NodesMeasurePointsReportLoader(measurePointViews);
 
-            await Page.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
+			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
         }
 
         #endregion
 
         #region Открытые методы
 
+		/// <summary>
+		/// Загрузить список групп
+		/// </summary>
+		/// <returns></returns>
         public async Task ReloadNodeGroups()
         {
-            if (this.nodeGroups.Count > 0)
+            if (this._nodeGroups.Count > 0)
             {
                 return;
             }            
 
-            this.nodeGroups.Add(new NodeGroupView(0, Droid.Resources.Messages.Text_All));
+            this._nodeGroups.Add(new NodeGroupView(0, Droid.Resources.Messages.Text_All));
+			
+			_selectedGroup = NodeGroups.First(); // Все
 
-            var list = await App.Core.Server.NodeGroups.GetListAsync();
+			var list = await App.Core.Server.NodeGroups.GetListAsync();
 
             foreach(var item in list)
             {
                 NodeGroupView nodeGroupView = new NodeGroupView(item.Id, item.Title);
-                nodeGroups.Add(nodeGroupView);
+                _nodeGroups.Add(nodeGroupView);
+				if (item.Id == AppDataStorage.SelectedGroupId)
+				{
+					_selectedGroup = nodeGroupView;
+				}
             }
 
+			OnPropertyChanged(nameof(SelectedGroup));
             OnPropertyChanged(nameof(NodeGroups));
-
-            SelectedGroup = NodeGroups.First(); // Все
         }
 
+		/// <summary>
+		/// Переход на страницу просмотра параметров объекта учета
+		/// </summary>
         public async void Navigate()
         {
-            await Page.Navigation.PushAsync(new NodePropertyPage(SelectedNode.Data));
+			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new NodePropertyPage(SelectedNode.Data));
         }
 
         #endregion

@@ -8,9 +8,12 @@ using LersMobile.Views;
 
 namespace LersMobile.Core.ReportLoader
 {
-    public class ReportLoaderSystem : IReportLoader
+	/// <summary>
+	/// Реализация загрузки системных отчетов
+	/// </summary>
+    public class SystemReportLoader : IReportLoader
     {
-        public ReportLoaderSystem()
+        public SystemReportLoader()
         {
             Reports = new List<ReportsView>();
         }
@@ -44,11 +47,11 @@ namespace LersMobile.Core.ReportLoader
 
                 var reportList = await reportManager.GetReportListAsync();
                 
-                List<ReportView> reportsAll = new List<ReportView>();
+                var reportsAll = new List<ReportView>();
 
                 foreach (var report in reportList)
                 {
-                    ReportView reportView = new ReportView(report);
+                    var reportView = new ReportView(report);
                     reportsAll.Add(reportView);
                 }                
 
@@ -58,7 +61,7 @@ namespace LersMobile.Core.ReportLoader
 
                     if (list.Count() > 0)
                     {
-						ReportsView item = new ReportsView(list.First().GroupType,
+						var item = new ReportsView(list.First().GroupType,
                             list.First().GroupTypeDescription);
 
                         foreach (var element in list)

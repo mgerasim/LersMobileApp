@@ -19,15 +19,21 @@ namespace LersMobile.MeasurePointProperties
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MeasurePointArchivePage : ContentPage
 	{
+		/// <summary>
+		/// Экземпляр класса модель представления
+		/// </summary>
+        private MeasurePointArchiveViewModel _viewModel;
 
-        private MeasurePointArchiveViewModel ViewModel;
-
+		/// <summary>
+		/// Конструктор
+		/// </summary>
+		/// <param name="measurePoint"></param>
 		public MeasurePointArchivePage(MeasurePointView measurePoint)
 		{
 			InitializeComponent();
 
-            ViewModel = new MeasurePointArchiveViewModel(containerData, dataGrid, measurePoint.MeasurePoint);
-            this.BindingContext = ViewModel;
+            _viewModel = new MeasurePointArchiveViewModel(_containerData, _dataGrid, measurePoint.MeasurePoint);
+            this.BindingContext = _viewModel;
 
             this.Title = Droid.Resources.Messages.MeasurePointArchivePage_Title;
 		}		
@@ -39,13 +45,8 @@ namespace LersMobile.MeasurePointProperties
 		{
 			base.OnAppearing();
 
-            ViewModel.LoadData();
+            await _viewModel.LoadData();
 
 		}
-        
-		private void Filter_ToolbarItem_Clicked()
-		{
-           
-        }
 	}
 }

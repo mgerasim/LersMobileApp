@@ -7,16 +7,19 @@ using LersMobile.Views;
 
 namespace LersMobile.Core.ReportLoader
 {
-    public class ReportLoaderNode : IReportLoader
+	/// <summary>
+	/// Реализация загрузки отчетов для объекта учета
+	/// </summary>
+    public class NodeReportLoader : IReportLoader
     {
-        ReportLoaderNodes ReportLoaderNodes;
+        NodesReportLoader ReportLoaderNodes;
         
-        public ReportLoaderNode(NodeView nodeView)
+        public NodeReportLoader(NodeView nodeView)
         {
             var nodes = new List<NodeView>();
             nodes.Add(nodeView ?? throw new ArgumentNullException());
 
-            ReportLoaderNodes = new ReportLoaderNodes(nodes);
+            ReportLoaderNodes = new NodesReportLoader(nodes);
         }
 
         public int[] GetEntitiesIds()

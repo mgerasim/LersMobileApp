@@ -1,21 +1,24 @@
 ﻿using Lers.Core;
 using Lers.Reports;
+using LersMobile.Services.Report;
 using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LersMobile.Core.ReportLoader
 {
-    public class ReportLoaderNodesMeasurePoints : IReportLoader
+	/// <summary>
+	/// Реализация загрузки отчетов для нескольких точек учета
+	/// </summary>
+    public class NodesMeasurePointsReportLoader : IReportLoader
     {
         protected List<MeasurePointView> MeasurePointViews;
 
         protected List<ReportsView> Reports { get; set; }
 
-        public ReportLoaderNodesMeasurePoints(List<MeasurePointView> measurePointViews) 
+        public NodesMeasurePointsReportLoader(List<MeasurePointView> measurePointViews) 
         {
             MeasurePointViews = measurePointViews ?? throw new ArgumentNullException();
 

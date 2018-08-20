@@ -1,5 +1,6 @@
 ﻿using Lers.Core;
 using LersMobile.Core;
+using LersMobile.Services.Resource;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -17,22 +18,7 @@ namespace LersMobile.Views
 
         public string Title => this.Node.Title;
 
-        public string ImageSource
-        {
-            get
-            {
-                switch (this.Node.State)
-                {
-                    case NodeState.Error: return "node_red.png";
-                    case NodeState.Normal: return "node_green.png";
-                    case NodeState.Warning: return "node_orange.png";
-                    case NodeState.None: return "node_gray.png";
-
-                    default:
-                        throw new NotSupportedException(this.Node.State.ToString());
-                }
-            }
-        }
+		public string ImageSource => ResourceService.NodeImageSource(Node);
 
 		public string ServicemanName => this.Node.Serviceman?.Name;
 

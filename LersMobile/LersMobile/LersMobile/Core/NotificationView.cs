@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Lers;
+using LersMobile.Services.Resource;
 using Xamarin.Forms;
 
 namespace LersMobile.Core
@@ -12,31 +13,15 @@ namespace LersMobile.Core
 
 		public Notification Notification { get; private set; }
 
-		public Color BackgroundColor
-		{
-			get
-			{
-				return this.Notification.IsRead
-					? Color.Default
-					: Color.LightSteelBlue;
-			}
-		}
+		public Color BackgroundColor => this.Notification.IsRead ? Color.Default	: Color.LightSteelBlue;
 
-		public FontAttributes FontAttribute
-		{
-			get
-			{
-				return this.Notification.IsRead
-					? FontAttributes.None
-					: FontAttributes.Bold;
-			}
-		}
+		public FontAttributes FontAttribute => this.Notification.IsRead ? FontAttributes.None : FontAttributes.Bold;
 
 		public string Message => this.Notification.Message;
 
 		public string DateTime => this.Notification.DateTime.ToString("dd.MM.yyyy HH:mm:ss");
 
-        public string ImportanceImageSource => ResourceHelper.GetImportanceImage(this.Notification.Importance);
+        public string ImportanceImageSource => ResourceService.ImportanceImage(this.Notification.Importance);
 
 		internal NotificationView(Notification notification)
 		{

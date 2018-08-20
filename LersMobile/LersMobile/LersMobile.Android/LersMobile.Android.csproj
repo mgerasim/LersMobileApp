@@ -79,7 +79,7 @@
   <ItemGroup>
     <Compile Include="DeviceAndroid.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="MessageAndroid.cs" />
+    <Compile Include="PopupMessageAndroidService.cs" />
     <Compile Include="Notifications\BootReceiver.cs" />
     <Compile Include="Notifications\Channels.cs" />
     <Compile Include="Notifications\AlarmReceiver.cs" />
@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StorageDirectoryAndroidService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

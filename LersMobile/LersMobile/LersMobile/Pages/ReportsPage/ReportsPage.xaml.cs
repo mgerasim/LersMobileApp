@@ -11,26 +11,34 @@ using Xamarin.Forms.Xaml;
 
 namespace LersMobile.Pages.ReportsPage
 {
+	/// <summary>
+	/// Класс страницы для отображение отчетов
+	/// </summary>
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ReportsPage : ContentPage
 	{
-        ReportsViewModel ViewModel;
+		/// <summary>
+		/// Модель представления для взаимодействия с пользователем на странице отображения отчетов
+		/// </summary>
+        ReportsViewModel _viewModel;
 
+		/// <summary>
+		/// Признак того, что отчеты загружены 
+		/// </summary>
         bool isLoaded = false;
 
+		/// <summary>
+		/// Конструктор, принимающие интерфейс загрузки отчетов
+		/// </summary>
+		/// <param name="reportLoader"></param>
 		public ReportsPage (IReportLoader reportLoader)
 		{
-            if (reportLoader == null)
-            {
-                throw new ArgumentNullException();
-            }
-
 			InitializeComponent ();
 
             Title = Droid.Resources.Messages.Text_Reports;
 
-            ViewModel = new ReportsViewModel(this, reportLoader);
-            this.BindingContext = ViewModel;
+            _viewModel = new ReportsViewModel(reportLoader);
+            this.BindingContext = _viewModel;
 		}
 
         /// <summary>
@@ -42,7 +50,7 @@ namespace LersMobile.Pages.ReportsPage
 
             if (!isLoaded)
             {
-                await ViewModel.Refresh();
+                await _viewModel.Refresh();
 
                 isLoaded = true;
             }

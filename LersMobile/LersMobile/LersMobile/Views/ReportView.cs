@@ -1,86 +1,55 @@
-﻿using Lers.Core;
-using Lers.Reports;
+﻿using Lers.Reports;
 using LersMobile.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using LersMobile.Services.Report;
 
 namespace LersMobile.Views
 {
-    public enum ReportGroupType
-    {
-        ParametersSheets = 0,
-        Acts = 1,
-        Passports = 2,
-        SystemState = 3,
-        NodeJob = 4,
-        Calibration = 5,
-        Others = 6
-    }
     /// <summary>
     /// Сущность Отчёт для вывода на экран
     /// </summary>
     public class ReportView
-    {
-        public ReportView(int id, ReportType type, string title)
+	{
+
+		#region Закрытые свойства
+
+		private string _title;
+
+		private int _id;
+
+		private ReportType _type;
+
+		bool _isAct;
+
+		#endregion
+
+		#region Свойства отчёта
+
+		public string Title => _title;
+
+		public ReportType Type => _type;
+
+		public int Id => _id;
+		
+		public ReportGroupType GroupType => ReportService.GetReportGroupType(_isAct, Type);
+
+		public string GroupTypeDescription => ReportService.GetReportGroupDescription(GroupType);
+		
+		#endregion
+
+		public ReportView(int id, ReportType type, string title)
         {
-            this.id = id;
-            this.type = type;
-            this.title = title;
-            this.isAct = false;
+            this._id = id;
+            this._type = type;
+            this._title = title;
+            this._isAct = false;
         }
 
         public ReportView(Report report)
         {
-            title = report.Title;
-            id = report.Id;
-            type = report.Type;
-            isAct = report.IsAct;
+            _title = report.Title;
+            _id = report.Id;
+            _type = report.Type;
+            _isAct = report.IsAct;
         }
-
-        #region Закрытые свойства
-
-        private string title;
-
-        private int id;
-
-        private ReportType type;
-
-        bool isAct;
-
-        #endregion
-
-        #region Свойства отчёта
-
-        public string Title
-        {
-            get
-            {
-                return title;
-            }
-        }
-
-        public ReportType Type
-        {
-            get
-            {
-                return type;
-            }
-        }
-
-
-        public int Id
-        {
-            get
-            {
-                return id;
-            }
-        }
-
-        public ReportGroupType GroupType => ReportUtils.GetReportGroupType(isAct, Type);
-
-        public string GroupTypeDescription => ReportUtils.GetReportGroupDescription(GroupType);
-
-        #endregion
     }
 }

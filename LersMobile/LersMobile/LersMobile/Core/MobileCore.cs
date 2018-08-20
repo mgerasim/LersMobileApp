@@ -43,15 +43,22 @@ namespace LersMobile.Core
 				{
 					GetSessionRestoreToken = true
 				};
-                
-                var uri = LoginUtils.BuildConnectionUri(connectionUrl, acceptSsl);
+
+				string schema = LersScheme.Plain;
+
+				if (acceptSsl)
+				{
+					schema = LersScheme.Secure;
+				}
+
+				connectionUrl = schema + "://" + connectionUrl;
+
+                var uri = (new UriBuilder(connectionUrl)).Uri;
                                                 
 				var token = await this.Server.ConnectAsync(uri, null, loginInfo, CancellationToken.None);
                 
 				AppDataStorage.Token = token.Token;
-				AppDataStorage.Host = uri.Host;
-                AppDataStorage.Port = uri.Port;
-                AppDataStorage.AcceptSsl = acceptSsl;
+				AppDataStorage.Uri = uri.ToString();
                 AppDataStorage.Login = login;
 			}
 			catch (Lers.Networking.AuthorizationFailedException)
@@ -72,13 +79,13 @@ namespace LersMobile.Core
         /// <param name="token"></param>
         /// <param name="acceptSsl"></param>
         /// <returns></returns>
-        public async Task ConnectToken(string host, int port, string token, bool acceptSsl)
+        public async Task ConnectToken(string connectionUri, string token)
 		{
 			var loginInfo = new Lers.Networking.TokenAuthenticationInfo(token);
             
 			try
 			{
-                var uri = LoginUtils.BuildConnectionUri(host, port, acceptSsl);
+				var uri = new Uri(connectionUri);
 				await this.Server.ConnectAsync(uri, null, loginInfo, CancellationToken.None);
 			}
 			catch (Lers.Networking.AuthorizationFailedException)
@@ -209,13 +216,13 @@ namespace LersMobile.Core
 		{
 			if (!this.Server.IsConnected)
 			{
-				if (string.IsNullOrEmpty(AppDataStorage.Host)
+				if (string.IsNullOrEmpty(AppDataStorage.Uri)
 				|| string.IsNullOrEmpty(AppDataStorage.Token))
 				{
 					throw new InvalidOperationException(Droid.Resources.Messages.MobileCore_Connect_Failed);
 				}
 
-				await ConnectToken(AppDataStorage.Host, AppDataStorage.Port, AppDataStorage.Token, AppDataStorage.AcceptSsl);
+				await ConnectToken(AppDataStorage.Uri, AppDataStorage.Token);
 			}
 		}
 	}

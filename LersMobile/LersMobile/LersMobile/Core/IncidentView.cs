@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LersMobile.Services.Resource;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LersMobile.Core
@@ -32,7 +31,7 @@ namespace LersMobile.Core
         /// </summary>
         public string StartDate => this.incident.StartDateTime.ToString("dd.MM.yyyy");
 
-        public string ImportanceImageSource => ResourceHelper.GetIncidentImportanceImage(this.incident.Importance);
+        public string ImportanceImageSource => ResourceService.IncidentImportanceImage(this.incident.Importance);
 
         public string StateImageSource => this.incident.IsClosed ? "Check_16.png" : string.Empty;
 

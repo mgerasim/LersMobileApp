@@ -1,5 +1,6 @@
 ﻿using Lers.Core;
 using LersMobile.Core;
+using LersMobile.Services.Resource;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -44,29 +45,15 @@ namespace LersMobile.Views
 		/// </summary>
 		public Lers.Data.DataParameter[] DisplayParameters => this.MeasurePoint.DataParameters;
 
-        /// <summary>
-        /// Источник изображения с состоянием точки учёта.
-        /// </summary>
-        public string StateImageSource
-        {
-            get
-            {
-                switch (this.MeasurePoint.State)
-                {
-                    case MeasurePointState.Normal: return "State_Normal.png";
-                    case MeasurePointState.Error: return "State_Error.png";
-                    case MeasurePointState.None: return "State_Unknown.png";
-                    case MeasurePointState.Warning: return "State_Warning.png";
-                    default:
-                        throw new NotSupportedException($"{Droid.Resources.Messages.Text_State_Not_Supported} {this.MeasurePoint.State}");
-                }
-            }
-        }
+		/// <summary>
+		/// Источник изображения с состоянием точки учёта.
+		/// </summary>
+		public string StateImageSource => ResourceService.StateImageSource(this.MeasurePoint);
 
         /// <summary>
         /// Изображение типа системы.
         /// </summary>
-        public string SystemTypeImageSource => ResourceHelper.GetSystemTypeImage(this.MeasurePoint.SystemType);
+        public string SystemTypeImageSource => ResourceService.SystemTypeImage(this.MeasurePoint.SystemType);
 
 
 		/// <summary>
