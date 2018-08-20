@@ -16,6 +16,9 @@ using LersMobile.Services.PopupMessage;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
+	/// <summary>
+	/// Класс модели представления 
+	/// </summary>
     public class NodesViewModel : INotifyPropertyChanged
     {
         #region Закрытые свойства
@@ -35,34 +38,20 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         private SelectableData<NodeView> selectedNode;
 
         #endregion
+		
+		#region Команды
 
-        #region INotifyPropertyChanged implement interface
+		public readonly ICommand ItemTappedCommand;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public readonly SearchCommand SearchCommand;
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (propertyName != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+		public readonly RefreshCommand RefreshCommand;
 
-        #endregion
+		public readonly SelectingCommand SelectingCommand;
 
-        #region Команды
+		public readonly ReportCommand ReportCommand;
 
-        public ICommand ItemTappedCommand { get; protected set; }
-
-        public SearchCommand SearchCommand { get; set; }
-
-        public RefreshCommand RefreshCommand { get; set; }
-
-        public SelectingCommand SelectingCommand { get; set; }
-
-        public ReportCommand ReportCommand { get; set; }
-
-        public ReportMeasurePointsCommand ReportMeasurePointsCommand { get; set; }
+		public readonly ReportMeasurePointsCommand ReportMeasurePointsCommand;
 
         #endregion
 
@@ -96,7 +85,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// </summary>
 		public bool IsRefreshing
         {
-            get { return _isRefreshing; }
+            get => _isRefreshing;
             set
             {
                 _isRefreshing = value;
@@ -109,10 +98,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// </summary>
         public bool IsSelecting
         {
-            get
-            {
-                return isSelecting;
-            }
+            get => isSelecting;
             set
             {
                 isSelecting = value;
@@ -138,13 +124,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         /// <summary>
         /// Текст для поиска.
         /// </summary>
-        public NodeGroupView[] NodeGroups
-        {
-            get
-            {
-                return nodeGroups.ToArray();
-            }
-        }
+        public NodeGroupView[] NodeGroups => nodeGroups.ToArray();
         
         /// <summary>
         /// Возвращает выбранную для отображеня группу объектов или 0Se если
@@ -152,10 +132,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         /// </summary>
         public NodeGroupView SelectedGroup
         {
-            get
-            {
-                return selectedGroup;
-            }
+            get => selectedGroup;
             set
             {
                 selectedGroup = value;
@@ -166,19 +143,13 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         /// <summary>
         /// Выбранный объект учёта
         /// </summary>
-        public SelectableData<NodeView> SelectedNode
-        {
-            get
-            {
-                return selectedNode;
-            }
-        }
+        public SelectableData<NodeView> SelectedNode => selectedNode;
+		
         #endregion
 
 		/// <summary>
 		/// Конструктор
 		/// </summary>
-		/// <param name="page"></param>
         public NodesViewModel()
         {
             nodeGroups = new List<NodeGroupView>();
@@ -206,13 +177,27 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                 }
             });
         }
+		
+		#region INotifyPropertyChanged implement interface
 
-        #region Методы комманд
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		private void OnPropertyChanged(string propertyName)
+		{
+			if (propertyName != null)
+			{
+				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		#endregion
+
+		#region Методы комманд
 
 		/// <summary>
 		/// Поиск по наименованию объекта учета 
 		/// </summary>
-        public void Search()
+		public void Search()
         {
             OnPropertyChanged(nameof(Nodes));
         }

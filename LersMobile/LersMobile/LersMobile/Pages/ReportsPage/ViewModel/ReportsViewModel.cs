@@ -49,7 +49,7 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
             set
             {
                 _isBusy = value;
-                OnPropertyChanged("IsBusy");
+                OnPropertyChanged(nameof(IsBusy));
             }
         }
 
@@ -69,7 +69,7 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
                 _selectedReport = value;
                 if (value != null)
                 {
-                    OnPropertyChanged("SelectedReport");
+                    OnPropertyChanged(nameof(SelectedReport));
                     Navigate();
                 }
             }

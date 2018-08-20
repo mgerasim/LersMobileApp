@@ -102,6 +102,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Report\ReportPeriodType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Report\ReportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Report\ReportSourceType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Resource\ResourceService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\DetailedState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MeasurePointView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MeasurePointStateView.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationChecker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\PollLogEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\ResourceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ReportsView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ReportView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Incidents\IncidentDetailPage.xaml.cs">

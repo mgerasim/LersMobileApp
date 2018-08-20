@@ -44,7 +44,7 @@ namespace LersMobile
 		/// </summary>
 		public bool IsRefreshing
 		{
-			get { return _isRefreshing; }
+			get => _isRefreshing; 
 			set
 			{
 				_isRefreshing = value;

@@ -1,4 +1,4 @@
-﻿using LersMobile.Core;
+﻿using LersMobile.Services.Resource;
 
 namespace LersMobile.Views
 {
@@ -26,6 +26,6 @@ namespace LersMobile.Views
 		/// <summary>
 		/// Изображение, описывающее состояние объекта.
 		/// </summary>
-		public string StateImageSource => ResourceHelper.GetMeasurePointStateImage(this.state);
+		public string StateImageSource => ResourceService.MeasurePointStateImage(this.state);
     }
 }

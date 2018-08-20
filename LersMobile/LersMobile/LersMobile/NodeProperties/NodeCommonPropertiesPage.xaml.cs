@@ -16,13 +16,19 @@ namespace LersMobile.NodeProperties
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NodeCommonPropertiesPage : ContentPage
     {
+		/// <summary>
+		/// Признак того, что данные загружены
+		/// </summary>
         private bool isLoaded = false;
 
+		/// <summary>
+		/// Объект учета, для которой отображается информация
+		/// </summary>
         private NodeView _node;
 
         public NodeView Node
         {
-            get { return _node; }
+            get => _node;
             private set
             {
                 _node = value;
@@ -35,7 +41,10 @@ namespace LersMobile.NodeProperties
         /// </summary>
         public bool HasDetailedState => this.Node?.HasDetailedState == true;
 
-
+		/// <summary>
+		/// Конструктор
+		/// </summary>
+		/// <param name="node"></param>
         public NodeCommonPropertiesPage(NodeView node)
         {
             InitializeComponent();
@@ -81,6 +90,10 @@ namespace LersMobile.NodeProperties
 			}
 		}
 
+		/// <summary>
+		/// Перейти на страницу с инцидентами 
+		/// </summary>
+		/// <returns></returns>
 		private Task ShowIncidentsForNode()
 		{
 			var incidentListPage = new Incidents.IncidentListPage(Incidents.PageMode.ObjectActive)

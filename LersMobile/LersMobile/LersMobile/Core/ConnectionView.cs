@@ -1,4 +1,5 @@
 ﻿using Lers.Poll;
+using LersMobile.Services.Resource;
 using System;
 
 namespace LersMobile.Core
@@ -18,7 +19,7 @@ namespace LersMobile.Core
 		/// <summary>
 		/// Изображение с типом канала.
 		/// </summary>
-		public string TypeImage => ResourceHelper.GetConnectionTypeImage(this.Connection.CommLinkType);
+		public string TypeImage => ResourceService.ConnectionTypeImage(this.Connection.CommLinkType);
 
 		public ConnectionView(PollConnection pollConnection)
 		{
