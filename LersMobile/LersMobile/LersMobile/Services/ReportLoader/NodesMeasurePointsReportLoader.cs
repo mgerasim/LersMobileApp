@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Lers.Core;
+﻿using Lers.Core;
 using Lers.Reports;
 using LersMobile.Services.Report;
 using LersMobile.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LersMobile.Core.ReportLoader
 {
-    public class ReportLoaderNodes : IReportLoader
+	/// <summary>
+	/// Реализация загрузки отчетов для нескольких точек учета
+	/// </summary>
+    public class NodesMeasurePointsReportLoader : IReportLoader
     {
-        protected List<NodeView> Nodes;
+        protected List<MeasurePointView> MeasurePointViews;
 
         protected List<ReportsView> Reports { get; set; }
 
-        public ReportLoaderNodes(List<NodeView> nodes)
+        public NodesMeasurePointsReportLoader(List<MeasurePointView> measurePointViews) 
         {
-            Nodes = nodes ?? throw new ArgumentNullException();
+            MeasurePointViews = measurePointViews ?? throw new ArgumentNullException();
 
             Reports = new List<ReportsView>();
         }
@@ -28,20 +31,20 @@ namespace LersMobile.Core.ReportLoader
 
             List<ReportView> reportsAll = new List<ReportView>();
 
-            foreach (var Node in Nodes)
+            foreach (var measurePointView in MeasurePointViews)
             {
-                var requiredFlags = NodeInfoFlags.Reports;
+                var requiredFlags = MeasurePointInfoFlags.Reports;
 
-                if (!Node.Node.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
+                if (!measurePointView.MeasurePoint.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
                 {
-                    await Node.Node.RefreshAsync(requiredFlags);
+                    await measurePointView.MeasurePoint.RefreshAsync(requiredFlags);
                 }
 
-                foreach (var report in Node.Node.Reports)
+                foreach (var report in measurePointView.MeasurePoint.Reports)
                 {
                     ReportView reportView = new ReportView(report.Report);
                     reportsAll.Add(reportView);
-                }                
+                }
             }
 
             foreach (ReportGroupType type in (ReportType[])Enum.GetValues(typeof(ReportGroupType)))
@@ -55,17 +58,17 @@ namespace LersMobile.Core.ReportLoader
 
                     foreach (var element in list)
                     {
-                        if (item.Where(x => x.Id == element.Id).Count() == 0 )
+                        if (item.Where(x => x.Id == element.Id).Count() == 0)
                         {
                             item.Add(element);
                         }
                     }
 
                     Reports.Add(item);
-                }                
+                }
             }
         }
-        
+
         public List<ReportsView> GetReports()
         {
             return Reports;
@@ -73,12 +76,12 @@ namespace LersMobile.Core.ReportLoader
 
         public int[] GetEntitiesIds()
         {
-            return Nodes.Select(x => x.Node.Id).ToArray();
+            return MeasurePointViews.Select(x => x.MeasurePoint.Id).ToArray();
         }
 
         public ReportEntity GetReportEntity()
         {
-            return ReportEntity.Node;
+            return ReportEntity.MeasurePoint;
         }
     }
 }

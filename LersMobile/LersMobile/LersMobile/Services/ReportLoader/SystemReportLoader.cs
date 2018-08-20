@@ -8,9 +8,12 @@ using LersMobile.Views;
 
 namespace LersMobile.Core.ReportLoader
 {
-    public class ReportLoaderSystem : IReportLoader
+	/// <summary>
+	/// Реализация загрузки системных отчетов
+	/// </summary>
+    public class SystemReportLoader : IReportLoader
     {
-        public ReportLoaderSystem()
+        public SystemReportLoader()
         {
             Reports = new List<ReportsView>();
         }

@@ -81,11 +81,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointPoller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\IReportLoader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\ReportLoaderMeasurePoint.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\ReportLoaderNode.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\ReportLoaderNodes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\ReportLoaderNodesMeasurePoints.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\ReportLoaderSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\MeasurePointReportLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\NodeReportLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\NodesReportLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\NodesMeasurePointsReportLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ReportLoader\SystemReportLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SelectableData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\RefreshCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NodesPage\ViewModel\Commands\ReportCommand.cs" />

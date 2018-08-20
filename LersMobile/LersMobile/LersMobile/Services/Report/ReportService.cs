@@ -138,7 +138,7 @@ namespace LersMobile.Services.Report
 		/// </summary>
 		public static async void MainMenuSelectedSystemReports()
 		{
-			var reportLoader = new ReportLoaderSystem();
+			var reportLoader = new SystemReportLoader();
 
 			await reportLoader.Reload(false);
 

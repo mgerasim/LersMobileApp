@@ -269,7 +269,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             var nodeViews = new List<NodeView>();
             nodeViews.AddRange(Nodes.Where(x => x.IsSelected == true).Select(x => x.Data));
 
-            var reportLoader = new ReportLoaderNodes(nodeViews);
+            var reportLoader = new NodesReportLoader(nodeViews);
 
 			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
         }
@@ -298,7 +298,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                 }
             }
 
-            var reportLoader = new ReportLoaderNodesMeasurePoints(measurePointViews);
+            var reportLoader = new NodesMeasurePointsReportLoader(measurePointViews);
 
 			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
         }
