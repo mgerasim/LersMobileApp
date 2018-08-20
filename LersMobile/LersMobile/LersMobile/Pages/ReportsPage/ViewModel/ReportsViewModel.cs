@@ -27,7 +27,7 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
 		/// <summary>
 		/// Команда обновления списка отчетов
 		/// </summary>
-        public RefreshCommand _refreshCommand { get; set; }
+        public RefreshCommand RefreshCommand { get; set; }
 
         #endregion
 
@@ -86,7 +86,7 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
         {
             _reportLoader = reportLoader ?? throw new ArgumentNullException(nameof(reportLoader), Droid.Resources.Messages.Text_Exception_Empty_param);
 
-            _refreshCommand = new RefreshCommand(this);          
+            RefreshCommand = new RefreshCommand(this);          
         }
 		
         #region INotifyPropertyChanged implement interface

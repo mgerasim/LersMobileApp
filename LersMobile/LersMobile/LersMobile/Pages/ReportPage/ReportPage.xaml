@@ -23,7 +23,7 @@
                 HorizontalOptions="CenterAndExpand" />
 
             <Label Text="c: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
-            <DatePicker Date="{Binding DateBgn, Mode=TwoWay}"  Format="dd.MM.yyyy"/>
+            <DatePicker Date="{Binding DateBegin, Mode=TwoWay}"  Format="dd.MM.yyyy"/>
             <Label Text="по: " VerticalTextAlignment="Center"/>
             <DatePicker Date="{Binding DateEnd, Mode=TwoWay}"   Format="dd.MM.yyyy"/>
 

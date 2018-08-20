@@ -99,7 +99,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\PopupMessage\IPopupMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\PopupMessage\PopupMessageService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Report\ReportGroupType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Report\ReportPeriodType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Report\ReportService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Report\ReportSourceType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\DetailedState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MeasurePointView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MeasurePointStateView.cs" />

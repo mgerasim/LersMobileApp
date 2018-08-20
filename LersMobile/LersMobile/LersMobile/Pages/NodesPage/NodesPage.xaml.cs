@@ -8,8 +8,14 @@ namespace LersMobile.Pages.NodesPage
 	/// </summary>
 	public partial class NodesPage : ContentPage
 	{
-        private NodesViewModel ViewModel;
+		/// <summary>
+		/// Экземпляр класса модели представления
+		/// </summary>
+        private readonly NodesViewModel _viewModel;
 
+		/// <summary>
+		/// Признак того, что данные загруженны
+		/// </summary>
         private bool isLoaded = false;
 
 		/// <summary>
@@ -19,8 +25,8 @@ namespace LersMobile.Pages.NodesPage
 		{
 			InitializeComponent();
             
-            this.ViewModel = new NodesViewModel(this);
-            this.BindingContext = this.ViewModel;
+            this._viewModel = new NodesViewModel();
+            this.BindingContext = this._viewModel;
 
 			this.Title = Droid.Resources.Messages.MainPage_MenuItem_NodeList;
 		}
@@ -34,8 +40,8 @@ namespace LersMobile.Pages.NodesPage
 
             if (!isLoaded)
             {
-                await ViewModel.ReloadNodeGroups();
-                await ViewModel.Refresh();
+                await _viewModel.ReloadNodeGroups();
+                await _viewModel.Refresh();
 
                 isLoaded = true;
             }

@@ -42,7 +42,7 @@ namespace LersMobile.Pages.ReportPage.ViewModel
 		/// <summary>
 		/// Обработчик по нажатию генерации отчета
 		/// </summary>
-        public GenerateCommand _generateCommand { get; protected set; }
+        public GenerateCommand GenerateCommand { get; protected set; }
 
         #endregion
 
@@ -139,7 +139,7 @@ namespace LersMobile.Pages.ReportPage.ViewModel
             _dateEnd = DateTime.Now;
             _isBusy = false;
             EntityIds = entityIds;
-            _generateCommand = new GenerateCommand(this);
+            GenerateCommand = new GenerateCommand(this);
         }
 		
         #region INotifyPropertyChanged implement interface

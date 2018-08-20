@@ -16,8 +16,8 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
 		<StackLayout>
-            <StackLayout x:Name="containerData" HorizontalOptions="Fill" VerticalOptions="Fill">
-                <dg:DataGrid x:Name="dataGrid"
+            <StackLayout x:Name="_containerData" HorizontalOptions="Fill" VerticalOptions="Fill">
+                <dg:DataGrid x:Name="_dataGrid"
                          ItemsSource="{Binding Data}" 
                          BorderColor="#CCCCCC"
                          HeaderBackground="#E0E6F8">
@@ -37,9 +37,9 @@
             
                 <StackLayout Orientation="Horizontal"  VerticalOptions="End">
                     <Label Text="c: " VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                    <DatePicker Date="{Binding dateBgn, Mode=TwoWay}"  Format="dd.MM.yyyy"/>
+                    <DatePicker Date="{Binding DateBegin, Mode=TwoWay}"  Format="dd.MM.yyyy"/>
                     <Label Text="по: " VerticalTextAlignment="Center"/>
-                    <DatePicker Date="{Binding dateEnd, Mode=TwoWay}"   Format="dd.MM.yyyy"/>
+                    <DatePicker Date="{Binding DateEnd, Mode=TwoWay}"   Format="dd.MM.yyyy"/>
                 </StackLayout>
 
                 <Picker SelectedIndex="{Binding SelectedDataType, Mode=TwoWay}" >

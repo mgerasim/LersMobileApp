@@ -13,7 +13,7 @@ namespace LersMobile.Pages.ReportsPage.ViewModel.Commands
 		/// <summary>
 		/// Модель предстваления
 		/// </summary>
-        ReportsViewModel _viewModel;
+        private readonly ReportsViewModel _viewModel;
 
 		/// <summary>
 		/// Конструктор

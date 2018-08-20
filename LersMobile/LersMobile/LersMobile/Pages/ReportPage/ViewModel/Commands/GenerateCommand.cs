@@ -11,9 +11,9 @@ namespace LersMobile.Pages.ReportPage.ViewModel.Commands
     public class GenerateCommand : ICommand
     {
 		/// <summary>
-		/// Экземпляр класса модель представления
+		/// Экземпляр класса модели представления
 		/// </summary>
-		ReportViewModel _viewModel;
+		private readonly ReportViewModel _viewModel;
 
 		/// <summary>
 		/// Конструктор

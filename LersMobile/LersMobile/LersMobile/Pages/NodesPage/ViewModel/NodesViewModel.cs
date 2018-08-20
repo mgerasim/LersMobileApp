@@ -18,38 +18,6 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 {
     public class NodesViewModel : INotifyPropertyChanged
     {
-        NodesPage Page;
-
-        public NodesViewModel(NodesPage page)
-        {
-            Page = page;
-
-            nodeGroups = new List<NodeGroupView>();
-            RefreshCommand = new RefreshCommand(this);
-            SearchCommand = new SearchCommand(this);
-            SelectingCommand = new SelectingCommand(this);
-            ReportCommand = new ReportCommand(this);
-            ReportMeasurePointsCommand = new ReportMeasurePointsCommand(this);
-
-            _nodes = new List<SelectableData<NodeView>>();
-
-            ItemTappedCommand = new Command((object model) => {
-
-                if (model != null && model is ItemTappedEventArgs)
-                {
-                    selectedNode = ((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item);
-                    if (IsSelecting)
-                    {
-                        selectedNode.IsSelected = !selectedNode.IsSelected;
-                    }
-                    else
-                    {
-                        Navigate();
-                    }                    
-                }
-            });
-        }
-
         #region Закрытые свойства
 
         private List<NodeGroupView> nodeGroups;
@@ -207,13 +175,52 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         }
         #endregion
 
+		/// <summary>
+		/// Конструктор
+		/// </summary>
+		/// <param name="page"></param>
+        public NodesViewModel()
+        {
+            nodeGroups = new List<NodeGroupView>();
+            RefreshCommand = new RefreshCommand(this);
+            SearchCommand = new SearchCommand(this);
+            SelectingCommand = new SelectingCommand(this);
+            ReportCommand = new ReportCommand(this);
+            ReportMeasurePointsCommand = new ReportMeasurePointsCommand(this);
+
+            _nodes = new List<SelectableData<NodeView>>();
+
+            ItemTappedCommand = new Command((object model) => {
+
+                if (model != null && model is ItemTappedEventArgs)
+                {
+                    selectedNode = ((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item);
+                    if (IsSelecting)
+                    {
+                        selectedNode.IsSelected = !selectedNode.IsSelected;
+                    }
+                    else
+                    {
+                        Navigate();
+                    }                    
+                }
+            });
+        }
+
         #region Методы комманд
 
+		/// <summary>
+		/// Поиск по наименованию объекта учета 
+		/// </summary>
         public void Search()
         {
             OnPropertyChanged(nameof(Nodes));
         }
 
+		/// <summary>
+		/// Обновление данных
+		/// </summary>
+		/// <returns></returns>
         public async Task Refresh()
         {
             this.IsRefreshing = true;
@@ -250,6 +257,9 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             }
         }
 
+		/// <summary>
+		/// Переход в режим множественного выбора
+		/// </summary>
         public void Selecting()
         {
             IsSelecting = !IsSelecting;
@@ -266,6 +276,9 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             OnPropertyChanged(nameof(Nodes));
         }
 
+		/// <summary>
+		/// Переход в список отчётов
+		/// </summary>
         public async void Report()
         {
             var nodeViews = new List<NodeView>();
@@ -273,10 +286,14 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 
             var reportLoader = new ReportLoaderNodes(nodeViews);
 
-            await Page.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
+			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
         }
 
-        public async void ReportMeasurePoints()
+		/// <summary>
+		/// Переход в список точек учёта
+		/// </summary>
+		/// <returns></returns>
+        public async Task ReportMeasurePoints()
         {
             var measurePointViews = new List<MeasurePointView>();
 
@@ -298,13 +315,17 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 
             var reportLoader = new ReportLoaderNodesMeasurePoints(measurePointViews);
 
-            await Page.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
+			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
         }
 
         #endregion
 
         #region Открытые методы
 
+		/// <summary>
+		/// Загрузить список групп
+		/// </summary>
+		/// <returns></returns>
         public async Task ReloadNodeGroups()
         {
             if (this.nodeGroups.Count > 0)
@@ -327,9 +348,12 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             SelectedGroup = NodeGroups.First(); // Все
         }
 
+		/// <summary>
+		/// Переход на страницу просмотра параметров объекта учета
+		/// </summary>
         public async void Navigate()
         {
-            await Page.Navigation.PushAsync(new NodePropertyPage(SelectedNode.Data));
+			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new NodePropertyPage(SelectedNode.Data));
         }
 
         #endregion
