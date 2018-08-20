@@ -16,8 +16,6 @@ namespace LersMobile
 
 		public event EventHandler SuccessLogin;
 
-
-
         public LoginPage()
 		{
 			this.coreService = App.Core;
