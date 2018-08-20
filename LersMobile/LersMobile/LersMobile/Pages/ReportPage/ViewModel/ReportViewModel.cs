@@ -1,6 +1,7 @@
 ﻿using Lers.Reports;
 using LersMobile.Core;
 using LersMobile.Pages.ReportPage.ViewModel.Commands;
+using LersMobile.Services.BugReport;
 using LersMobile.Services.PopupMessage;
 using LersMobile.Services.Report;
 using LersMobile.Views;
@@ -194,10 +195,10 @@ namespace LersMobile.Pages.ReportPage.ViewModel
 				
 				PopupMessageService.ShowLong(Droid.Resources.Messages.Text_Report_successfully_created);
 			}
-            catch (Exception ex)
+            catch (Exception exc)
             {
                 IsBusy = false;
-                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
             }
             finally
             {

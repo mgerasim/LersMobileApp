@@ -80,12 +80,13 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Core\ConnectionView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DayIncidentList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\ExceptionUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\BugReport\BugReportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointPoller.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\TelemetryUtils.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Telemetry\TelemetryService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Device\DeviceService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Device\IDeviceService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\ViewModel\BugViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\ViewModel\Commands\SaveCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\BugPage\ViewModel\Commands\SendCommand.cs" />
@@ -193,5 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)MainPage\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\BugReport\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\Telemetry\" />
   </ItemGroup>
 </Project>

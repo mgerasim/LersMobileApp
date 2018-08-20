@@ -1,4 +1,5 @@
 ﻿using LersMobile.Core;
+using LersMobile.Services.BugReport;
 using LersMobile.Services.PopupMessage;
 using System;
 using System.Collections.Generic;
@@ -103,7 +104,7 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-                await DisplayAlert(Droid.Resources.Messages.LoginPage_Error_Connect_to_Server, exc.Message, "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.LoginPage_Error_Connect_to_Server, exc.Message, exc);
 			}
 			finally
 			{

@@ -1,4 +1,5 @@
 ﻿using LersMobile.Core;
+using LersMobile.Services.BugReport;
 using LersMobile.Services.PopupMessage;
 using System;
 using System.Collections.Generic;
@@ -152,8 +153,8 @@ namespace LersMobile
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert(Droid.Resources.Messages.Text_Error,
-					$"{Droid.Resources.Messages.NotificationCenterPage_Error_Loaded_Notifications}. {exc.Message}", "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error,
+					$"{Droid.Resources.Messages.NotificationCenterPage_Error_Loaded_Notifications}. {exc.Message}", exc);
 			}
 			finally
 			{

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Lers.Reports;
+using LersMobile.Services.BugReport;
 using LersMobile.Views;
 
 namespace LersMobile.Core.ReportLoader
@@ -76,9 +76,9 @@ namespace LersMobile.Core.ReportLoader
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exc)
             {
-                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error_Load, ex.Message, "Ok");
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Load, exc.Message, exc);
             }
         }
     }

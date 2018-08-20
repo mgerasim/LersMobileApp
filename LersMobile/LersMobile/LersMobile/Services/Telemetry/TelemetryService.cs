@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LersMobile.Core
+namespace LersMobile.Services.Telemetry
 {
-    public class TelemetryUtils
+	/// <summary>
+	/// Реализация функций по работе с сервером телеметрии
+	/// </summary>
+    public class TelemetryServices
     {
 		/// <summary>
 		/// Адрес сервера телеметрии.

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using LersMobile.Pages.NodesPage.ViewModel.Commands;
@@ -13,6 +12,7 @@ using LersMobile.NodeProperties;
 using LersMobile.Core.ReportLoader;
 using Lers.Core;
 using LersMobile.Services.PopupMessage;
+using LersMobile.Services.BugReport;
 
 namespace LersMobile.Pages.NodesPage.ViewModel
 {
@@ -237,8 +237,8 @@ namespace LersMobile.Pages.NodesPage.ViewModel
             }
             catch (Exception exc)
             {
-                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error,
-                    Droid.Resources.Messages.NodeListPage_Error_Loaded + Environment.NewLine + exc.Message, "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error,
+                    Droid.Resources.Messages.NodeListPage_Error_Loaded + Environment.NewLine + exc.Message, exc);
             }
             finally
             {

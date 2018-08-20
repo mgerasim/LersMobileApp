@@ -8,26 +8,64 @@ using System.Text;
 
 namespace LersMobile.Pages.BugPage.ViewModel
 {
+	/// <summary>
+	/// Модель представления для обработки исключение в виде отчета по ошибке
+	/// </summary>
 	public class BugViewModel : INotifyPropertyChanged
 	{
+
+
+		#region Закрытые свойства
+		/// <summary>
+		/// Исключение для обработки
+		/// </summary>
+		readonly Exception _exception;
+		/// <summary>
+		/// Заголовок отчета по ошибке
+		/// </summary>
+		readonly string _title;
+		/// <summary>
+		/// Описание ошибки
+		/// </summary>
+		readonly string _description;
+		/// <summary>
+		/// Пользовательское сообщение
+		/// </summary>
+		string _message;
+		/// <summary>
+		/// Электронный адрес
+		/// </summary>
+		string _email;
+
+		#endregion
+
+		#region Команды
+
+		/// <summary>
+		/// Команда сохранения отчета по ошибке
+		/// </summary>
+		readonly public SaveCommand SaveCommand;
+
+		/// <summary>
+		/// Команда отправка отчета по ошибке
+		/// </summary>
+		readonly public SendCommand SendCommand;
+
+		#endregion
+		/// <summary>
+		/// Конструктор
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="description"></param>
+		/// <param name="exception"></param>
 		public BugViewModel(string title, string description, Exception exception)
 		{
-			Exception = exception;
-			this.title = title;
-			this.description = description;
+			_exception = exception;
+			this._title = title;
+			this._description = description;
 			SaveCommand = new SaveCommand(this);
 			SendCommand = new SendCommand(this);
 		}
-
-		#region Закрытые свойства
-
-		Exception Exception;
-		readonly string title;
-		readonly string description;
-		string message;
-		string email;
-
-		#endregion
 
 		#region INotifyPropertyChanged implement interface
 
@@ -43,45 +81,27 @@ namespace LersMobile.Pages.BugPage.ViewModel
 
 		#endregion
 
-		#region Команды
-
-		public SaveCommand SaveCommand { get; set; }
-		public SendCommand SendCommand { get; set; }
-
-		#endregion
 
 		#region Binding свойства
 
-		public string Description
-		{
-			get
-			{
-				return description;
-			}
-		}
+		public string Description => _description;
 
 		public string Message
 		{
-			get
-			{
-				return message;
-			}
+			get => _message;
 			set
 			{
-				message = value;
+				_message = value;
 				OnPropertyChanged(nameof(Message));
 			}
 		}
 
 		public string Email
 		{
-			get
-			{
-				return email;
-			}
+			get => _email;
 			set
 			{
-				email = value;
+				_email = value;
 				OnPropertyChanged(nameof(Email));
 			}
 		}
@@ -90,11 +110,17 @@ namespace LersMobile.Pages.BugPage.ViewModel
 
 		#region Методы комманд
 
+		/// <summary>
+		/// Отправка отчета на сервер телеметрии
+		/// </summary>
 		public async void Send()
 		{
 			await ((MainPage)App.Current.MainPage).Detail.Navigation.PopAsync();
 		}
 
+		/// <summary>
+		/// Сохранение отчета об ошибке на устройстве пользователя
+		/// </summary>
 		public async void Save()
 		{
 			await((MainPage)App.Current.MainPage).Detail.Navigation.PopAsync();

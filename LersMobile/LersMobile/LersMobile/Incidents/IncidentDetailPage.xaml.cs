@@ -1,9 +1,6 @@
-﻿using LersMobile.Services.PopupMessage;
+﻿using LersMobile.Services.BugReport;
+using LersMobile.Services.PopupMessage;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -66,7 +63,7 @@ namespace LersMobile.Incidents
             }
             catch (Exception exc) when (exc is TimeoutException || exc is Lers.LersException)
             {
-                await DisplayAlert(Droid.Resources.Messages.IncidentDetailPage_Error_Load_Incident, exc.Message, "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.IncidentDetailPage_Error_Load_Incident, exc.Message, exc);
             }
             catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
             {
@@ -108,7 +105,7 @@ namespace LersMobile.Incidents
             }
             catch (Exception exc)
             {
-                await DisplayAlert(Droid.Resources.Messages.IncidentDetailPage_Errot_Incident_Close, exc.Message, "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.IncidentDetailPage_Errot_Incident_Close, exc.Message, exc);
             }
         }
     }

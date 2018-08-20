@@ -10,17 +10,20 @@ using Xamarin.Forms.Xaml;
 
 namespace LersMobile.Pages.BugPage
 {
+	/// <summary>
+	/// Страница отчета по ошибке
+	/// </summary>
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BugPage : ContentPage
 	{
-		BugViewModel ViewModel;
+		private readonly BugViewModel _viewModel;
 
 		public BugPage (string title, string description, Exception exception)
 		{
 			InitializeComponent ();
 
-			ViewModel = new BugViewModel(title, description, exception);
-			this.BindingContext = ViewModel;
+			_viewModel = new BugViewModel(title, description, exception);
+			this.BindingContext = _viewModel;
 
 			Title = Droid.Resources.Messages.BugPage_Title;
 		}

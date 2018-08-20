@@ -925,6 +925,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ошибка аутентификации.
+        /// </summary>
+        public static string Text_Error_Auth {
+            get {
+                return ResourceManager.GetString("Text_Error_Auth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось определить формат файла.
         /// </summary>
         public static string Text_Error_Could_not_determine_file_format {

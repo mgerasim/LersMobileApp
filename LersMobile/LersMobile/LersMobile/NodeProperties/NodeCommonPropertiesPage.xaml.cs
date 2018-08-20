@@ -1,8 +1,6 @@
-﻿using LersMobile.Views;
+﻿using LersMobile.Services.BugReport;
+using LersMobile.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -130,9 +128,9 @@ namespace LersMobile.NodeProperties
             }
             catch (Exception exc) when (exc is TimeoutException || exc is Lers.LersException)
             {
-                await DisplayAlert(Droid.Resources.Messages.Text_Error, 
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, 
 					Droid.Resources.Messages.NodeCommonPropertiesPage_Error_Load_Detail + Environment.NewLine + exc.Message,
-                    "OK");
+                    exc);
             }
             catch (Exception exc) when (exc is Lers.NoConnectionException || exc is Lers.Networking.RequestDisconnectException)
             {

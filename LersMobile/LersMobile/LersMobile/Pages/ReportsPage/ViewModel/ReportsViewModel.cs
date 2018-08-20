@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using LersMobile.Pages.ReportsPage.ViewModel.Commands;
 using System.Threading.Tasks;
+using LersMobile.Services.BugReport;
 
 namespace LersMobile.Pages.ReportsPage.ViewModel
 {
@@ -119,11 +120,11 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
                 await _reportLoader.Reload(isForce);
                 OnPropertyChanged(nameof(Reports));
             }
-            catch (Exception ex)
+            catch (Exception exc)
             {
                 IsBusy = false;
-                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error_Load,
-                    $"{Droid.Resources.Messages.IncidentDetailPage_Error_Load_Description}. {ex.Message}", "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Load,
+                    $"{Droid.Resources.Messages.IncidentDetailPage_Error_Load_Description}. {exc.Message}", exc);
             }
             finally
             {

@@ -1,17 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace LersMobile.Pages.BugPage.ViewModel.Commands
 {
+	/// <summary>
+	/// Реализация обрботчика сохранения отчета по ошибке
+	/// </summary>
 	public class SaveCommand : ICommand
 	{
-		BugViewModel ViewModel;
+		private readonly BugViewModel _viewModel;
 
 		public SaveCommand(BugViewModel viewModel)
 		{
-			ViewModel = viewModel;
+			_viewModel = viewModel;
 		}
 
 		public event EventHandler CanExecuteChanged;
@@ -23,7 +24,7 @@ namespace LersMobile.Pages.BugPage.ViewModel.Commands
 
 		public void Execute(object parameter)
 		{
-			ViewModel.Save();
+			_viewModel.Save();
 		}
 	}
 }

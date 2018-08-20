@@ -1,9 +1,6 @@
-﻿using LersMobile.Core;
+﻿using LersMobile.Services.BugReport;
 using LersMobile.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -61,14 +58,10 @@ namespace LersMobile.MeasurePointProperties
 			}
 			catch (Exception exc)
 			{
-				ExceptionUtils.HandleException(
+				BugReportService.HandleException(
 					Droid.Resources.Messages.Text_Error_Load,
 					$"{Droid.Resources.Messages.IncidentDetailPage_Error_Load_Description}. {exc.Message}",
 					exc);
-				/*
-				await DisplayAlert(Droid.Resources.Messages.Text_Error_Load, 
-					$"{Droid.Resources.Messages.IncidentDetailPage_Error_Load_Description}. {exc.Message}", "OK");
-					*/
 			}
 			finally
 			{
@@ -121,11 +114,6 @@ namespace LersMobile.MeasurePointProperties
 			};
 
 			return this.Navigation.PushAsync(incidentListPage);
-		}
-
-		private void buttonArchive_Clicked(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

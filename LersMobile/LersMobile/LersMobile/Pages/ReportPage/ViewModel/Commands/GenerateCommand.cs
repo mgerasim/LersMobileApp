@@ -42,15 +42,7 @@ namespace LersMobile.Pages.ReportPage.ViewModel.Commands
 		/// <param name="parameter"></param>
         public async void Execute(object parameter)
         {
-            try
-            {
-                await _viewModel.Generate();
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert(Droid.Resources.Messages.Text_Error, ex.Message, "OK");
-            }
-
+             await _viewModel.Generate();
         }
     }
 }

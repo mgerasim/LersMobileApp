@@ -573,13 +573,14 @@
     <value>Состояние системы</value>
     <comment>Состояние системы</comment>
   </data>
-<data name="NotificationCenter_Failed_find_popup_message" xml:space="preserve">
+  <data name="NotificationCenter_Failed_find_popup_message" xml:space="preserve">
     <value>Не удалось найти всплывающее сообщение в центре уведомлений</value>
     <comment>Не удалось найти всплывающее сообщение в центре уведомлений</comment>
   </data>
   <data name="Text_Exception_Empty_param" xml:space="preserve">
     <value>Не указан параметр</value>
-  </data><data name="Text_Bug_an_unexpected_error_occurred" xml:space="preserve">
+  </data>
+  <data name="Text_Bug_an_unexpected_error_occurred" xml:space="preserve">
     <value>Произошла непредвиденная ошибка</value>
     <comment>Произошла непредвиденная ошибка</comment>
   </data>
@@ -613,4 +614,9 @@
   <data name="Text_Send" xml:space="preserve">
     <value>Отправить</value>
     <comment>Отправить</comment>
-  </data></root>
+  </data>
+  <data name="Text_Error_Auth" xml:space="preserve">
+    <value>Ошибка аутентификации</value>
+    <comment>Ошибка аутентификации</comment>
+  </data>
+</root>

@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Lers.Data;
+using LersMobile.Services.BugReport;
 using LersMobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -101,13 +102,13 @@ namespace LersMobile.MeasurePointProperties
 
 				await LoadLastData();
 			}
-			catch (OperationCanceledException)
+			catch (OperationCanceledException exc)
 			{
-				await DisplayAlert(Droid.Resources.Messages.MeasurePointDataPage_Poll_Current, String.Format(Droid.Resources.Messages.MeasurePointDataPage_PollCurrent_Timeout_Error, timeoutMinutes), "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.MeasurePointDataPage_Poll_Current, String.Format(Droid.Resources.Messages.MeasurePointDataPage_PollCurrent_Timeout_Error, timeoutMinutes), exc);
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert(Droid.Resources.Messages.MeasurePointDataPage_Error_Poll_Current, exc.Message, "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.MeasurePointDataPage_Error_Poll_Current, exc.Message, exc);
 			}
 			finally
 			{
@@ -164,7 +165,7 @@ namespace LersMobile.MeasurePointProperties
 			}
 			catch (Exception exc)
 			{
-				await DisplayAlert(Droid.Resources.Messages.MeasurePointDataPage_ErrorData_Loaded, exc.Message, "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.MeasurePointDataPage_ErrorData_Loaded, exc.Message, exc);
 			}
 			finally
 			{

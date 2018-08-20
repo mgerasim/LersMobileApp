@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 using Lers.Utils;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using LersMobile.Services.BugReport;
 
 namespace LersMobile.Incidents
 {
@@ -141,7 +142,7 @@ namespace LersMobile.Incidents
             }
             catch (Exception exc)
             {
-                await DisplayAlert(Droid.Resources.Messages.Text_Error_Load, exc.Message, "OK");
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Load, exc.Message, exc);
             }
             finally
             {

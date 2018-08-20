@@ -1,4 +1,5 @@
 ﻿using Lers;
+using LersMobile.Services.BugReport;
 using LersMobile.Views;
 using System;
 using System.Collections.Generic;
@@ -61,13 +62,13 @@ namespace LersMobile.Core
 				AppDataStorage.Uri = uri.ToString();
                 AppDataStorage.Login = login;
 			}
-			catch (Lers.Networking.AuthorizationFailedException)
+			catch (Lers.Networking.AuthorizationFailedException exc)
 			{
 				// Произошла ошибка аутентификации. Нужно очистить токен и выдать ошибку.
 
 				ClearStoredToken();
 
-				throw;
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Auth, exc.Message, exc);
 			}
 		}
 
