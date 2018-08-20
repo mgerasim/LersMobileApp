@@ -77,7 +77,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Core\ConnectionView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DayIncidentList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\LoginUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\NotificationUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\IncidentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MeasurePointPoller.cs" />
