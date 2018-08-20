@@ -23,7 +23,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
     {
         #region Закрытые свойства
 
-        private List<NodeGroupView> nodeGroups;
+        private List<NodeGroupView> _nodeGroups;
 
         private List<SelectableData<NodeView>> _nodes;
         
@@ -31,11 +31,11 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 
         private string _searchText;
 
-        private NodeGroupView selectedGroup;
+        private NodeGroupView _selectedGroup;
 
-        private bool isSelecting = false;
+        private bool _isSelecting = false;
 
-        private SelectableData<NodeView> selectedNode;
+        private SelectableData<NodeView> _selectedNode;
 
         #endregion
 		
@@ -98,10 +98,10 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// </summary>
         public bool IsSelecting
         {
-            get => isSelecting;
+            get => _isSelecting;
             set
             {
-                isSelecting = value;
+                _isSelecting = value;
                 OnPropertyChanged(nameof(IsSelecting));
             }
         }
@@ -124,7 +124,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         /// <summary>
         /// Текст для поиска.
         /// </summary>
-        public NodeGroupView[] NodeGroups => nodeGroups.ToArray();
+        public NodeGroupView[] NodeGroups => _nodeGroups.ToArray();
         
         /// <summary>
         /// Возвращает выбранную для отображеня группу объектов или 0Se если
@@ -132,18 +132,23 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         /// </summary>
         public NodeGroupView SelectedGroup
         {
-            get => selectedGroup;
+            get => _selectedGroup;
             set
             {
-                selectedGroup = value;
-                OnPropertyChanged(nameof(SelectedGroup));
+				if (value != null)
+				{
+					_selectedGroup = value;
+					AppDataStorage.SelectedGroupId = value.Id;
+					OnPropertyChanged(nameof(SelectedGroup));
+				}
+                
             }
         }
         
         /// <summary>
         /// Выбранный объект учёта
         /// </summary>
-        public SelectableData<NodeView> SelectedNode => selectedNode;
+        public SelectableData<NodeView> SelectedNode => _selectedNode;
 		
         #endregion
 
@@ -152,23 +157,22 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// </summary>
         public NodesViewModel()
         {
-            nodeGroups = new List<NodeGroupView>();
+            _nodeGroups = new List<NodeGroupView>();
             RefreshCommand = new RefreshCommand(this);
             SearchCommand = new SearchCommand(this);
             SelectingCommand = new SelectingCommand(this);
             ReportCommand = new ReportCommand(this);
-            ReportMeasurePointsCommand = new ReportMeasurePointsCommand(this);
-
+            ReportMeasurePointsCommand = new ReportMeasurePointsCommand(this);			
             _nodes = new List<SelectableData<NodeView>>();
-
+			
             ItemTappedCommand = new Command((object model) => {
 
                 if (model != null && model is ItemTappedEventArgs)
                 {
-                    selectedNode = ((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item);
+                    _selectedNode = ((SelectableData<NodeView>)((ItemTappedEventArgs)model).Item);
                     if (IsSelecting)
                     {
-                        selectedNode.IsSelected = !selectedNode.IsSelected;
+                        _selectedNode.IsSelected = !_selectedNode.IsSelected;
                     }
                     else
                     {
@@ -228,6 +232,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
                     selectableData.Data = node;
                     this._nodes.Add(selectableData);
                 }
+				
                 OnPropertyChanged(nameof(Nodes));
             }
             catch (Exception exc)
@@ -249,7 +254,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
         {
             IsSelecting = !IsSelecting;
 
-            if (isSelecting)
+            if (_isSelecting)
             {
 				PopupMessageService.ShowLong(Droid.Resources.Messages.Text_Select_accounting_objects_and_click_generate_report);
             }
@@ -313,24 +318,29 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// <returns></returns>
         public async Task ReloadNodeGroups()
         {
-            if (this.nodeGroups.Count > 0)
+            if (this._nodeGroups.Count > 0)
             {
                 return;
             }            
 
-            this.nodeGroups.Add(new NodeGroupView(0, Droid.Resources.Messages.Text_All));
+            this._nodeGroups.Add(new NodeGroupView(0, Droid.Resources.Messages.Text_All));
+			
+			_selectedGroup = NodeGroups.First(); // Все
 
-            var list = await App.Core.Server.NodeGroups.GetListAsync();
+			var list = await App.Core.Server.NodeGroups.GetListAsync();
 
             foreach(var item in list)
             {
                 NodeGroupView nodeGroupView = new NodeGroupView(item.Id, item.Title);
-                nodeGroups.Add(nodeGroupView);
+                _nodeGroups.Add(nodeGroupView);
+				if (item.Id == AppDataStorage.SelectedGroupId)
+				{
+					_selectedGroup = nodeGroupView;
+				}
             }
 
+			OnPropertyChanged(nameof(SelectedGroup));
             OnPropertyChanged(nameof(NodeGroups));
-
-            SelectedGroup = NodeGroups.First(); // Все
         }
 
 		/// <summary>
