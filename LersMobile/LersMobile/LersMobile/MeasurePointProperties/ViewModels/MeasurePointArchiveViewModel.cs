@@ -129,15 +129,15 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 		/// <summary>
 		/// Дата начало периода выборки архивных данных
 		/// </summary>
-        private DateTime _dateBegin;
+        private DateTime _dateStart;
 
-        public DateTime DateBegin
+        public DateTime DateStart
         {
-            get => _dateBegin;
+            get => _dateStart;
             set
             {
-                _dateBegin = value;
-                OnPropertyChanged(nameof(DateBegin));
+                _dateStart = value;
+                OnPropertyChanged(nameof(DateStart));
             }
         }
 
@@ -169,7 +169,7 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 		/// <param name="measurePoint"></param>
 		public MeasurePointArchiveViewModel(StackLayout stackLayoutData, Xamarin.Forms.DataGrid.DataGrid dataGrid, Lers.Core.MeasurePoint measurePoint)
         {
-            _dateBegin = DateTime.Now;
+            _dateStart = DateTime.Now;
             _dateEnd = DateTime.Now;
             _selectedDataType = 0;
             this._stackLayoutData = stackLayoutData;
@@ -216,10 +216,10 @@ namespace LersMobile.MeasurePointProperties.ViewModels
                 switch (SelectedSourceType)
                 {
                     case (int)ReportSourceType.Consumption:
-                        this.Data.AddRange((await this._measurePoint.Data.GetConsumptionAsync(DateBegin, DateEnd, DataTypes[SelectedDataType])).OrderByDescending(x => x.DateTime));
+                        this.Data.AddRange((await this._measurePoint.Data.GetConsumptionAsync(DateStart, DateEnd, DataTypes[SelectedDataType])).OrderByDescending(x => x.DateTime));
                         break;
                     case (int)ReportSourceType.Totals:
-                        this.Data.AddRange((await this._measurePoint.Data.GetTotalsAsync(DateBegin, DateEnd)).OrderByDescending(x => x.DateTime));
+                        this.Data.AddRange((await this._measurePoint.Data.GetTotalsAsync(DateStart, DateEnd)).OrderByDescending(x => x.DateTime));
                         break;
                 }
 
@@ -293,19 +293,19 @@ namespace LersMobile.MeasurePointProperties.ViewModels
             switch (SelectedPeriodType)
             {
                 case (int)ReportPeriodType.Day:
-                    DateBegin = DateEnd.AddDays(-1);
+                    DateStart = DateEnd.AddDays(-1);
                     break;
                 case (int)ReportPeriodType.Week:
-                    DateBegin = DateEnd.AddDays(-7);
+                    DateStart = DateEnd.AddDays(-7);
                     break;
                 case (int)ReportPeriodType.WeekTwo:
-                    DateBegin = DateEnd.AddDays(-14);
+                    DateStart = DateEnd.AddDays(-14);
                     break;
                 case (int)ReportPeriodType.Month:
-                    DateBegin = DateEnd.AddDays(-30);
+                    DateStart = DateEnd.AddDays(-30);
                     break;
                 case (int)ReportPeriodType.MonthBegin:
-                    DateBegin = new DateTime(DateEnd.Date.Year, DateEnd.Month, 1);
+                    DateStart = new DateTime(DateEnd.Date.Year, DateEnd.Month, 1);
                     break;
             }
         }

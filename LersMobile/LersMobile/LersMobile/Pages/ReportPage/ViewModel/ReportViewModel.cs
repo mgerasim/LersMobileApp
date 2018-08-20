@@ -66,15 +66,15 @@ namespace LersMobile.Pages.ReportPage.ViewModel
 		/// <summary>
 		/// Дата начало периода выборки архивных данных
 		/// </summary>
-        private DateTime _dateBegin;
+        private DateTime _dateStart;
 
-        public DateTime DateBegin
+        public DateTime DateStart
         {
-            get =>  _dateBegin;
+            get =>  _dateStart;
             set
             {
-                _dateBegin = value;
-                OnPropertyChanged(nameof(DateBegin));
+                _dateStart = value;
+                OnPropertyChanged(nameof(DateStart));
             }
         }
 
@@ -135,7 +135,7 @@ namespace LersMobile.Pages.ReportPage.ViewModel
         {
             _entity = entity;
             Report = report;
-            _dateBegin = DateTime.Now.AddDays(-7);
+            _dateStart = DateTime.Now.AddDays(-7);
             _dateEnd = DateTime.Now;
             _isBusy = false;
             EntityIds = entityIds;
@@ -185,7 +185,7 @@ namespace LersMobile.Pages.ReportPage.ViewModel
                     Report.Type,
                     Report.Id,
                     ReportService.DataTypes[SelectedDataType],
-                    DateBegin, DateEnd);
+                    DateStart, DateEnd);
 
                 IsBusy = false;
 
