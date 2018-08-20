@@ -13,7 +13,7 @@ namespace LersMobile.Services.PopupMessage
 		/// <param name="text"></param>
 		static public void ShowShort(string text)
 		{
-			DependencyService.Get<IPopupMessage>().Show(text, false);
+			DependencyService.Get<IPopupMessageService>().Show(text, false);
 		}
 
 		/// <summary>
@@ -22,7 +22,7 @@ namespace LersMobile.Services.PopupMessage
 		/// <param name="text"></param>
 		static public void ShowLong(string text)
 		{
-			DependencyService.Get<IPopupMessage>().Show(text, true);
+			DependencyService.Get<IPopupMessageService>().Show(text, true);
 		}
     }
 }

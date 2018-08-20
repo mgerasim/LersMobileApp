@@ -12,13 +12,13 @@ using Android.Widget;
 using LersMobile.Droid;
 using LersMobile.Services.PopupMessage;
 
-[assembly: Xamarin.Forms.Dependency(typeof(PopupMessageAndroid))]
+[assembly: Xamarin.Forms.Dependency(typeof(PopupMessageAndroidService))]
 namespace LersMobile.Droid
 {
 	/// <summary>
 	/// Реализация всплывающих уведомлений средствами платформы Android
 	/// </summary>
-    public class PopupMessageAndroid : IPopupMessage
+    public class PopupMessageAndroidService : IPopupMessageService
 	{
 		/// <summary>
 		/// Показать всплывающее уведомление с указанным текстом
