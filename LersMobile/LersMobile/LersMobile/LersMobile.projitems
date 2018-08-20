@@ -102,6 +102,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Report\ReportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Report\ReportSourceType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Resource\ResourceService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\StorageDirectory\IStorageDirectoryService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\StorageDirectory\StorageDirectoryService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\DetailedState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MeasurePointView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MeasurePointStateView.cs" />

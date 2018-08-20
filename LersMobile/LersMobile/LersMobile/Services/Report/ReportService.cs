@@ -2,12 +2,9 @@
 using Lers.Reports;
 using LersMobile.Core.ReportLoader;
 using LersMobile.Pages.ReportsPage;
-using LersMobile.Views;
+using LersMobile.Services.StorageDirectory;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LersMobile.Services.Report
@@ -69,7 +66,7 @@ namespace LersMobile.Services.Report
 			string fileName = response.FileName;
 			fileName = Lers.Utils.FileUtils.SanitizeFileName(fileName);
 
-			string directoryName = global::Android.OS.Environment.ExternalStorageDirectory.Path + "/" + global::Android.OS.Environment.DirectoryDownloads;
+			string directoryName = StorageDirectoryService.Get();
 
 			string fullName = Lers.Utils.FileUtils.CreateFullFileName(directoryName, fileName, extension);
 
