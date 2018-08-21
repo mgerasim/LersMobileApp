@@ -600,10 +600,6 @@
     <value>Возможно, службе поддержки понадобятся дополнительные сведения. Укажите свой контактный e-mail для связи.</value>
     <comment>Возможно, службе поддержки понадобятся дополнительные сведения. Укажите свой контактный e-mail для связи.</comment>
   </data>
-  <data name="Text_Bug_save_it_to_a_file_and_send_it_by_email" xml:space="preserve">
-    <value>Если по какой-либо причине в данный момент отправить отчет не удается, его можно сохранить в файл и передать по электронной почте на support@lers.ru.</value>
-    <comment>Если по какой-либо причине в данный момент отправить отчет не удается, его можно сохранить в файл и передать по электронной почте на support@lers.ru.</comment>
-  </data>
   <data name="Text_Email" xml:space="preserve">
     <value>Контактный e-mail</value>
   </data>
@@ -622,5 +618,9 @@
   <data name="Text_Report_successfully_sended" xml:space="preserve">
     <value>Отчёт успешно отправлен</value>
     <comment>Отчёт успешно отправлен</comment>
+  </data>
+  <data name="Text_Bug_save_it_to_a_file_and_send_it_by_email" xml:space="preserve">
+    <value>Если по какой-либо причине в данный момент отправить отчет не удается, его можно сохранить в файл и передать по электронной почте на support@lers.ru.</value>
+    <comment>Если по какой-либо причине в данный момент отправить отчет не удается, его можно сохранить в файл и передать по электронной почте на support@lers.ru.</comment>
   </data>
 </root>

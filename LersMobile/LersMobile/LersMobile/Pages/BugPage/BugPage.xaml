@@ -46,15 +46,6 @@
                         Command="{Binding SendCommand}"
                         Margin="20, 0, 20, 0">
                 </Button>
-                <Label Text="{local:Translate Text_Bug_save_it_to_a_file_and_send_it_by_email}"
-                       Font="14"
-                       Margin="20, 0, 20, 0"
-                       VerticalOptions="Start"
-                       HorizontalOptions="CenterAndExpand" />
-                <Button Text="{local:Translate Text_Save}"
-                        Command="{Binding SaveCommand}"
-                        Margin="20, 0, 20, 0">
-                </Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

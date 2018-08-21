@@ -133,7 +133,7 @@ namespace LersMobile.Pages.BugPage.ViewModel
 			telemetryClient.Context.Token = DeviceService.GetIdentifier();
 			telemetryClient.Context.Component.Name = "MobileApp";
 			telemetryClient.Context.Component.Id = DeviceService.GetIdentifier();
-			telemetryClient.Context.Component.Version = "R27.2";
+			telemetryClient.Context.Component.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString();
 
 			telemetryClient.Context.Device.OperatingSystem = Environment.OSVersion.VersionString;
 			telemetryClient.Context.Device.Language = System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
@@ -149,7 +149,6 @@ namespace LersMobile.Pages.BugPage.ViewModel
 
 			PopupMessageService.ShowShort(Droid.Resources.Messages.Text_Report_successfully_sended);
 
-			await ((MainPage)App.Current.MainPage).Detail.Navigation.PopAsync();
 		}
 
 		/// <summary>
