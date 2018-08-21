@@ -157,7 +157,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// </summary>
         public NodesViewModel()
         {
- //           _nodeGroups = new List<NodeGroupView>();
+            _nodeGroups = new List<NodeGroupView>();
             RefreshCommand = new RefreshCommand(this);
             SearchCommand = new SearchCommand(this);
             SelectingCommand = new SelectingCommand(this);
