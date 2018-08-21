@@ -6,6 +6,11 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand">
+                <Image x:Name="iconImage"
+                       Source="bug.png"
+                       Aspect="AspectFit"
+                       HorizontalOptions="FillAndExpand"
+                       Margin="0, 0, 0, 5"/>
                 <Label Text="{local:Translate Text_Bug_an_unexpected_error_occurred}"
                        Font="20"
                        VerticalOptions="Start"
