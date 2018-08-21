@@ -1,4 +1,5 @@
-﻿using LersMobile.Views;
+﻿using LersMobile.Services.BugReport;
+using LersMobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,18 +55,25 @@ namespace LersMobile.NodeProperties
 		/// <param name="e"></param>
 		public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
-			var measurePoint = (MeasurePointView)e.SelectedItem;
-
-			var listView = (ListView)sender;
-
-			listView.SelectedItem = null;
-
-			if (measurePoint == null)
+			try
 			{
-				return;
-			}
+				var measurePoint = (MeasurePointView)e.SelectedItem;
 
-			await this.Navigation.PushAsync(new MeasurePointProperties.MeasurePointPropertiesPage(measurePoint));
+				var listView = (ListView)sender;
+
+				listView.SelectedItem = null;
+
+				if (measurePoint == null)
+				{
+					return;
+				}
+
+				await this.Navigation.PushAsync(new MeasurePointProperties.MeasurePointPropertiesPage(measurePoint));
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Load, exc.Message, exc);
+			}
 		}
 	}
 }

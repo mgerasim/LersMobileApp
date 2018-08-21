@@ -285,27 +285,34 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// <returns></returns>
         public async Task ReportMeasurePoints()
         {
-            var measurePointViews = new List<MeasurePointView>();
+			try
+			{
+				var measurePointViews = new List<MeasurePointView>();
 
-            foreach(var nodeView in Nodes.Where(x => x.IsSelected == true).Select(x => x.Data))
-            {
-                var requiredFlags = NodeInfoFlags.Systems;
+				foreach (var nodeView in Nodes.Where(x => x.IsSelected == true).Select(x => x.Data))
+				{
+					var requiredFlags = NodeInfoFlags.Systems;
 
-                if (!nodeView.Node.AvailableInfo.HasFlag(requiredFlags))
-                {
-                    // Нужные данные ещё не загружены
-                    await nodeView.Node.RefreshAsync(requiredFlags);
-                }
+					if (!nodeView.Node.AvailableInfo.HasFlag(requiredFlags))
+					{
+						// Нужные данные ещё не загружены
+						await nodeView.Node.RefreshAsync(requiredFlags);
+					}
 
-                foreach (var measurePoint in nodeView.Node.Systems.GetAllMeasurePoints())
-                {
-                    measurePointViews.Add(new MeasurePointView(measurePoint));
-                }
-            }
+					foreach (var measurePoint in nodeView.Node.Systems.GetAllMeasurePoints())
+					{
+						measurePointViews.Add(new MeasurePointView(measurePoint));
+					}
+				}
 
-            var reportLoader = new NodesMeasurePointsReportLoader(measurePointViews);
+				var reportLoader = new NodesMeasurePointsReportLoader(measurePointViews);
 
-			await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
+				await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ReportsPage.ReportsPage(reportLoader));
+			}
+			catch(Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
         }
 
         #endregion

@@ -61,30 +61,38 @@ namespace LersMobile.NodeProperties
 		/// <param name="e"></param>
 		public async void OnDetailStateSelected(object sender, SelectedItemChangedEventArgs e)
 		{
-			var listView = (ListView)sender;
-
-			// Получаем детальную информацию
-			var detailState = (NodeStateView)e.SelectedItem;
-
-			if (listView != null)
+			try
 			{
-				listView.SelectedItem = null;
+
+				var listView = (ListView)sender;
+
+				// Получаем детальную информацию
+				var detailState = (NodeStateView)e.SelectedItem;
+
+				if (listView != null)
+				{
+					listView.SelectedItem = null;
+				}
+
+				if (detailState == null)
+				{
+					return;
+				}
+
+				// Проверим идентификатор детальной информации.
+
+				switch (detailState.Id)
+				{
+					case DetailedState.CriticalIncidents:
+					case DetailedState.Incidents:
+						// При щелчке на НС откроем отфильтрованную страницу.
+						await ShowIncidentsForNode();
+						break;
+				}
 			}
-
-			if (detailState == null)
+			catch (Exception exc)
 			{
-				return;
-			}
-
-			// Проверим идентификатор детальной информации.
-
-			switch (detailState.Id)
-			{
-				case DetailedState.CriticalIncidents:
-				case DetailedState.Incidents:
-					// При щелчке на НС откроем отфильтрованную страницу.
-					await ShowIncidentsForNode();
-					break;
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Load, exc.Message, exc);
 			}
 		}
 

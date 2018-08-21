@@ -1,6 +1,7 @@
 ﻿using Lers.Data;
 using Lers.Utils;
 using LersMobile.MeasurePointProperties.ViewModels.Commands;
+using LersMobile.Services.BugReport;
 using LersMobile.Services.Report;
 using System;
 using System.Collections.ObjectModel;
@@ -226,6 +227,10 @@ namespace LersMobile.MeasurePointProperties.ViewModels
                 DataGridRefreshHead();
                 DataGridRefreshBody();
             }
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Load, exc.Message, exc);
+			}
             finally
             {
                 IsBusy = false;

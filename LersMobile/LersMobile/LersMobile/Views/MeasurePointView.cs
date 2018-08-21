@@ -1,5 +1,6 @@
 ﻿using Lers.Core;
 using LersMobile.Core;
+using LersMobile.Services.BugReport;
 using LersMobile.Services.Resource;
 using System;
 using System.Collections.ObjectModel;
@@ -78,27 +79,34 @@ namespace LersMobile.Views
 		/// <returns></returns>
 		public async Task LoadData()
 		{
-			await App.Core.EnsureConnected();
-
-			var requiredFlags = MeasurePointInfoFlags.Equipment | MeasurePointInfoFlags.AutoPoll;
-
-			if (!this.MeasurePoint.AvailableInfo.HasFlag(requiredFlags))
+			try
 			{
-				await this.MeasurePoint.RefreshAsync(requiredFlags);
+				await App.Core.EnsureConnected();
+
+				var requiredFlags = MeasurePointInfoFlags.Equipment | MeasurePointInfoFlags.AutoPoll;
+
+				if (!this.MeasurePoint.AvailableInfo.HasFlag(requiredFlags))
+				{
+					await this.MeasurePoint.RefreshAsync(requiredFlags);
+				}
+
+				// Загружаем диагностическую карточку точки учёта.
+
+				if (this.MeasurePoint.State != MeasurePointState.Normal && this.DetailedState.Count == 0)
+				{
+					await LoadDiagnostics();
+				}
+
+				if (this.MeasurePoint.AutoPoll.Enabled && this.AutoPollConnection == null)
+				{
+					var connection = this.MeasurePoint.Device.PollSettings.Connections.First(c => c.Id == this.MeasurePoint.AutoPoll.PollConnectionId);
+
+					this.AutoPollConnection = new ConnectionView(connection);
+				}
 			}
-
-			// Загружаем диагностическую карточку точки учёта.
-
-			if (this.MeasurePoint.State != MeasurePointState.Normal && this.DetailedState.Count == 0)
+			catch (Exception exc)
 			{
-				await LoadDiagnostics();
-			}
-			
-			if (this.MeasurePoint.AutoPoll.Enabled && this.AutoPollConnection == null)
-			{
-				var connection = this.MeasurePoint.Device.PollSettings.Connections.First(c => c.Id == this.MeasurePoint.AutoPoll.PollConnectionId);
-
-				this.AutoPollConnection = new ConnectionView(connection);
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
 			}
 		}
 
@@ -109,57 +117,67 @@ namespace LersMobile.Views
 		/// <returns></returns>
 		private async Task LoadDiagnostics()
 		{
-			var measurePoint = this.MeasurePoint;
-
-			var state = await measurePoint.GetDetailedState();
-
-			this.DetailedState.Clear();
-
-			if (state.CriticalIncidentCount > 0)
+			try
 			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error, Views.DetailedState.CriticalIncidents)
+
+				var measurePoint = this.MeasurePoint;
+
+				var state = await measurePoint.GetDetailedState();
+
+				this.DetailedState.Clear();
+
+				if (state.CriticalIncidentCount > 0)
 				{
-					Text = $"{Droid.Resources.Messages.MeasurePointView_CriticalIncident_Count}: {state.CriticalIncidentCount}"
-				});
-			}
+					this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error, Views.DetailedState.CriticalIncidents)
+					{
+						Text = $"{Droid.Resources.Messages.MeasurePointView_CriticalIncident_Count}: {state.CriticalIncidentCount}"
+					});
+				}
 
-			if (state.WarningIncidentCount > 0)
-			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning, Views.DetailedState.Incidents)
+				if (state.WarningIncidentCount > 0)
 				{
-					Text = String.Format(Droid.Resources.Messages.MeasurePointView_Warning_Incident_Count,
-											state.WarningIncidentCount)
-				});
-			}
+					this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning, Views.DetailedState.Incidents)
+					{
+						Text = String.Format(Droid.Resources.Messages.MeasurePointView_Warning_Incident_Count,
+												state.WarningIncidentCount)
+					});
+				}
 
-			if (state.OverdueJobCount > 0)
-			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error) { Text = String.Format(Droid.Resources.Messages.MeasurePointView_OverdueJobCount, state.OverdueJobCount)
-				});
-			}
-
-			if (state.DaysToAdmissionDeadline.HasValue)
-			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning)
+				if (state.OverdueJobCount > 0)
 				{
-					Text = String.Format(Droid.Resources.Messages.MeasurePointView_Admission_Deadline, state.DaysToAdmissionDeadline)
-				});
-			}
+					this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error)
+					{
+						Text = String.Format(Droid.Resources.Messages.MeasurePointView_OverdueJobCount, state.OverdueJobCount)
+					});
+				}
 
-			if (state.AdmissionDateOverdue.HasValue)
-			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error)
+				if (state.DaysToAdmissionDeadline.HasValue)
 				{
-					Text = String.Format(Droid.Resources.Messages.MeasurePointView_Admission_Overdue, state.AdmissionDateOverdue)
-				});
-			}
+					this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning)
+					{
+						Text = String.Format(Droid.Resources.Messages.MeasurePointView_Admission_Deadline, state.DaysToAdmissionDeadline)
+					});
+				}
 
-			if (state.LastDataOverdue > 0)
-			{
-				this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning)
+				if (state.AdmissionDateOverdue.HasValue)
 				{
-					Text = String.Format(Droid.Resources.Messages.MeasurePointView_Overdue_Data, state.LastDataOverdue)
-				});
+					this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Error)
+					{
+						Text = String.Format(Droid.Resources.Messages.MeasurePointView_Admission_Overdue, state.AdmissionDateOverdue)
+					});
+				}
+
+				if (state.LastDataOverdue > 0)
+				{
+					this.DetailedState.Add(new MeasurePointStateView(MeasurePointState.Warning)
+					{
+						Text = String.Format(Droid.Resources.Messages.MeasurePointView_Overdue_Data, state.LastDataOverdue)
+					});
+				}
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
 			}
 		}
 	}

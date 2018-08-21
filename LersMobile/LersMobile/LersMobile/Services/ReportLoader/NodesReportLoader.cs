@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lers.Core;
 using Lers.Reports;
+using LersMobile.Services.BugReport;
 using LersMobile.Services.Report;
 using LersMobile.Views;
 
@@ -27,46 +28,53 @@ namespace LersMobile.Core.ReportLoader
 
         public async Task Reload(bool isForce = false)
         {
-            Reports.Clear();
+			try
+			{
+				Reports.Clear();
 
-            List<ReportView> reportsAll = new List<ReportView>();
+				List<ReportView> reportsAll = new List<ReportView>();
 
-            foreach (var Node in Nodes)
-            {
-                var requiredFlags = NodeInfoFlags.Reports;
+				foreach (var Node in Nodes)
+				{
+					var requiredFlags = NodeInfoFlags.Reports;
 
-                if (!Node.Node.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
-                {
-                    await Node.Node.RefreshAsync(requiredFlags);
-                }
+					if (!Node.Node.AvailableInfo.HasFlag(requiredFlags) || isForce == true)
+					{
+						await Node.Node.RefreshAsync(requiredFlags);
+					}
 
-                foreach (var report in Node.Node.Reports)
-                {
-                    ReportView reportView = new ReportView(report.Report);
-                    reportsAll.Add(reportView);
-                }                
-            }
+					foreach (var report in Node.Node.Reports)
+					{
+						ReportView reportView = new ReportView(report.Report);
+						reportsAll.Add(reportView);
+					}
+				}
 
-            foreach (ReportGroupType type in (ReportType[])Enum.GetValues(typeof(ReportGroupType)))
-            {
-                var list = reportsAll.Where(x => x.GroupType == type);
+				foreach (ReportGroupType type in (ReportType[])Enum.GetValues(typeof(ReportGroupType)))
+				{
+					var list = reportsAll.Where(x => x.GroupType == type);
 
-                if (list.Count() > 0)
-                {
-					ReportsView item = new ReportsView(list.First().GroupType,
-                        list.First().GroupTypeDescription);
+					if (list.Count() > 0)
+					{
+						ReportsView item = new ReportsView(list.First().GroupType,
+							list.First().GroupTypeDescription);
 
-                    foreach (var element in list)
-                    {
-                        if (item.Where(x => x.Id == element.Id).Count() == 0 )
-                        {
-                            item.Add(element);
-                        }
-                    }
+						foreach (var element in list)
+						{
+							if (item.Where(x => x.Id == element.Id).Count() == 0)
+							{
+								item.Add(element);
+							}
+						}
 
-                    Reports.Add(item);
-                }                
-            }
+						Reports.Add(item);
+					}
+				}
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
         }
         
         public List<ReportsView> GetReports()
