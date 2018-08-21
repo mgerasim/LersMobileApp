@@ -45,7 +45,7 @@ namespace LersMobile.Services.BugReport
 			}
 			else
 			{
-				await ((MainPage)App.Current.MainPage).Detail.Navigation.PushAsync(new BugPage(title, exception, ex));
+				await ((MainPage)App.Current.MainPage).Detail.Navigation.PushModalAsync(new BugPage(title, exception, ex));
 			}
 		}
 

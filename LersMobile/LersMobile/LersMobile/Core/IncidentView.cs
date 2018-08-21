@@ -56,19 +56,12 @@ namespace LersMobile.Core
         /// <returns></returns>
         public async Task LoadLog()
         {
-			try
-			{
-				var incidentLog = await this.incident.GetLogAsync();
+			var incidentLog = await this.incident.GetLogAsync();
 
-				foreach (var record in incidentLog)
-				{
-					this.Log.Add(record);
-				}
-			}
-			catch (Exception exc)
+			foreach (var record in incidentLog)
 			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Load, exc.Message, exc);
-			}
+				this.Log.Add(record);
+			}			
         }
 
         /// <summary>
@@ -77,21 +70,13 @@ namespace LersMobile.Core
         /// <returns></returns>
         public async Task Close()
         {
-			try
-			{
-				await App.Core.EnsureConnected();
+			await App.Core.EnsureConnected();
 
-				await incident.CloseAsync();
+			await incident.CloseAsync();
 
-				OnPropertyChanged(nameof(IsActive));
-				OnPropertyChanged(nameof(StateImageSource));
-			}
-			catch (Exception exc)
-			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
-			}
+			OnPropertyChanged(nameof(IsActive));
+			OnPropertyChanged(nameof(StateImageSource));			
         }
-
 
         private void OnPropertyChanged(string propertyName) 
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

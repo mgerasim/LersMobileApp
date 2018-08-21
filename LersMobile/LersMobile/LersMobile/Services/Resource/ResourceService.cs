@@ -9,6 +9,20 @@ namespace LersMobile.Services.Resource
 {
     public static class ResourceService
     {
+
+		public static string NodeStateDesc(NodeState nodeState)
+		{
+			switch (nodeState)
+			{
+				case NodeState.Error: return Droid.Resources.Messages.NodeView_Sate_Error;
+				case NodeState.None: return Droid.Resources.Messages.NodeView_State_None;
+				case NodeState.Normal: return Droid.Resources.Messages.NodeView_State_Normal;
+				case NodeState.Warning: return Droid.Resources.Messages.NodeView_State_Warning;
+				default:
+					throw new NotSupportedException($"{Droid.Resources.Messages.Text_State_Not_Supported} {nodeState}");
+			}
+		}
+
 		/// <summary>
 		/// Возвращает имя изображения для типа системы точки учёта.
 		/// </summary>

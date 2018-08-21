@@ -62,13 +62,13 @@ namespace LersMobile.Core
 				AppDataStorage.Uri = uri.ToString();
                 AppDataStorage.Login = login;
 			}
-			catch (Lers.Networking.AuthorizationFailedException exc)
+			catch (Lers.Networking.AuthorizationFailedException)
 			{
 				// Произошла ошибка аутентификации. Нужно очистить токен и выдать ошибку.
 
 				ClearStoredToken();
 
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Auth, exc.Message, exc);
+				throw;
 			}
 		}
 
@@ -102,23 +102,15 @@ namespace LersMobile.Core
 
 		public async Task<NodeView[]> GetNodeDetail(int? nodeGroupId)
 		{
-			try
-			{
-				await EnsureConnected();
+			await EnsureConnected();
 
-				var getNodesTask = nodeGroupId.HasValue
-					? this.Server.Nodes.GetListAsync(nodeGroupId.Value)
-					: this.Server.Nodes.GetListAsync();
+			var getNodesTask = nodeGroupId.HasValue
+				? this.Server.Nodes.GetListAsync(nodeGroupId.Value)
+				: this.Server.Nodes.GetListAsync();
 
-				var nodes = await getNodesTask;
+			var nodes = await getNodesTask;
 
-				return nodes.Select(x => new NodeView(x)).ToArray();
-			}
-			catch (Exception exc)
-			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
-			}
-			return null;			
+			return nodes.Select(x => new NodeView(x)).ToArray();		
 		}
 
 		/// <summary>
@@ -127,62 +119,38 @@ namespace LersMobile.Core
 		/// <returns></returns>
 		public async Task<NotificationView[]> GetNotifications()
 		{
-			try
-			{
-				await EnsureConnected();
+			await EnsureConnected();
 
-				// Уведомления запрашиваем только за последние три месяца.
-				// Их может быть много, а толку от старых уведомлений нет.
+			// Уведомления запрашиваем только за последние три месяца.
+			// Их может быть много, а толку от старых уведомлений нет.
 
-				var endDate = DateTime.Now.AddDays(1);
-				var startDate = endDate.AddMonths(-3);
+			var endDate = DateTime.Now.AddDays(1);
+			var startDate = endDate.AddMonths(-3);
 
-				var list = await this.Server.Notifications.GetListAsync(startDate, endDate);
+			var list = await this.Server.Notifications.GetListAsync(startDate, endDate);
 
-				return list
-					.OrderByDescending(x => x.DateTime)
-					.Select(x => new NotificationView(x))
-					.ToArray();
-			}
-			catch (Exception exc)
-			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
-			}
-			return null;
+			return list
+				.OrderByDescending(x => x.DateTime)
+				.Select(x => new NotificationView(x))
+				.ToArray();			
 		}
 
         public async Task<DayIncidentList[]> GetNewIncidents(int? nodeGroupId)
         {
-			try
-			{
-				await EnsureConnected();
+			await EnsureConnected();
 
-				var incidents = await this.Server.Incidents.GetListNewAsync(nodeGroupId);
+			var incidents = await this.Server.Incidents.GetListNewAsync(nodeGroupId);
 
-				return GroupIncidentsByStartDate(incidents);
-			}
-			catch (Exception exc)
-			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
-			}
-			return null;
+			return GroupIncidentsByStartDate(incidents);
         }
 
         public async Task<DayIncidentList[]> GetIncidents(DateTime startDate, DateTime endDate, int? nodeGroupId)
         {
-			try
-			{
-				await EnsureConnected();
+			await EnsureConnected();
 
-				var incidents = await this.Server.Incidents.GetListAsync(startDate, endDate, nodeGroupId);
+			var incidents = await this.Server.Incidents.GetListAsync(startDate, endDate, nodeGroupId);
 
-				return GroupIncidentsByStartDate(incidents);
-			}
-			catch(Exception exc)
-			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
-			}
-			return null;
+			return GroupIncidentsByStartDate(incidents);			
         }
 
 		/// <summary>
@@ -192,19 +160,11 @@ namespace LersMobile.Core
 		/// <returns></returns>
 		public async Task<DayIncidentList[]> GetActiveIncidents(Lers.Diag.IIncidentContainer incidentContainer)
 		{
-			try
-			{
-				await EnsureConnected();
+			await EnsureConnected();
 
-				var incidents = await incidentContainer.GetActiveIncidents();
+			var incidents = await incidentContainer.GetActiveIncidents();
 
-				return GroupIncidentsByStartDate(incidents);
-			}
-			catch (Exception exc)
-			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
-			}
-			return null;
+			return GroupIncidentsByStartDate(incidents);			
 		}
 
         private static DayIncidentList[] GroupIncidentsByStartDate(Lers.Diag.Incident[] incidents)

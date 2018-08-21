@@ -48,40 +48,33 @@ namespace LersMobile.Core
 		/// <returns></returns>
 		public async Task PollCurrent(CancellationToken cancellationToken)
 		{
-			try
+			var core = App.Core;
+
+			await core.EnsureConnected();
+
+			var server = core.Server;
+
+			server.PollSessions.PollSessionChanged += PollSessions_PollSessionChanged;
+
+			var tcs = new TaskCompletionSource<bool>();
+
+			var pollSessionId = await this.measurePoint.PollCurrentAsync(new MeasurePointPollCurrentOptions
 			{
-				var core = App.Core;
+				StartMode = PollManualStartMode.Force
+			});
 
-				await core.EnsureConnected();
+			SubscribePollMessage(pollSessionId);
 
-				var server = core.Server;
+			this.tasks[pollSessionId] = tcs;
 
-				server.PollSessions.PollSessionChanged += PollSessions_PollSessionChanged;
-
-				var tcs = new TaskCompletionSource<bool>();
-
-				var pollSessionId = await this.measurePoint.PollCurrentAsync(new MeasurePointPollCurrentOptions
-				{
-					StartMode = PollManualStartMode.Force
-				});
-
-				SubscribePollMessage(pollSessionId);
-
-				this.tasks[pollSessionId] = tcs;
-
-				using (var registration = cancellationToken.Register(() => tcs.TrySetCanceled()))
-				{
-					await tcs.Task;
-				}
-
-				server.PollSessions.PollSessionChanged -= PollSessions_PollSessionChanged;
-
-				this.core.Server.RemoveNotification(PollLogMessageEventHandler);
-			}
-			catch (Exception exc)
+			using (var registration = cancellationToken.Register(() => tcs.TrySetCanceled()))
 			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+				await tcs.Task;
 			}
+
+			server.PollSessions.PollSessionChanged -= PollSessions_PollSessionChanged;
+
+			this.core.Server.RemoveNotification(PollLogMessageEventHandler);			
 		}
 
 

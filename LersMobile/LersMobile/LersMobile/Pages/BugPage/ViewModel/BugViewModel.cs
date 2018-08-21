@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LersMobile.Pages.BugPage.ViewModel
 {
@@ -117,7 +118,7 @@ namespace LersMobile.Pages.BugPage.ViewModel
 		/// <summary>
 		/// Отправка отчета на сервер телеметрии
 		/// </summary>
-		public async void Send()
+		public async Task Send()
 		{
 			var telemetryChannel = new InMemoryChannel(TelemetryServices.ServerEndPointAddress);
 
@@ -131,13 +132,15 @@ namespace LersMobile.Pages.BugPage.ViewModel
 			telemetryClient.Context.License.Type = App.Core.Server.License.LicenseType.ToString();
 
 			telemetryClient.Context.Token = DeviceService.GetIdentifier();
-			telemetryClient.Context.Component.Name = "MobileApp";
-			telemetryClient.Context.Component.Id = DeviceService.GetIdentifier();
+			telemetryClient.Context.Component.Name = "Lers.MobileApp";
+			telemetryClient.Context.Component.Id = "C2619827-070D-4DB1-A544-18B715227A74";
 			telemetryClient.Context.Component.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString();
 
+			telemetryClient.Context.Device.Id = DeviceService.GetIdentifier();
 			telemetryClient.Context.Device.OperatingSystem = Environment.OSVersion.VersionString;
 			telemetryClient.Context.Device.Language = System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
 			telemetryClient.Context.Device.OsArchitecture = DeviceService.GetProcessorArchitecture();
+			
 			telemetryClient.Context.Location.TimeZone = TimeZone.CurrentTimeZone.StandardName;
 
 			var properties = new Dictionary<string, string>();
@@ -148,7 +151,6 @@ namespace LersMobile.Pages.BugPage.ViewModel
 			await telemetryClient.TrackException(this._exception, this._message, properties);
 
 			PopupMessageService.ShowShort(Droid.Resources.Messages.Text_Report_successfully_sended);
-
 		}
 
 		/// <summary>

@@ -39,22 +39,11 @@ namespace LersMobile.Views
         /// </summary>
         public ObservableCollection<NodeStateView> DetailedState { get; private set; } = new ObservableCollection<NodeStateView>();
 
+		/// <summary>
+		/// Описание состояния объекта учёта
+		/// </summary>
+        public string State => ResourceService.NodeStateDesc(Node.State);
 
-        public string State
-		{
-			get
-			{
-				switch (this.Node.State)
-				{
-					case NodeState.Error: return Droid.Resources.Messages.NodeView_Sate_Error;
-					case NodeState.None: return Droid.Resources.Messages.NodeView_State_None;
-					case NodeState.Normal: return Droid.Resources.Messages.NodeView_State_Normal;
-					case NodeState.Warning: return Droid.Resources.Messages.NodeView_State_Warning;
-					default:
-						throw new NotSupportedException($"{Droid.Resources.Messages.Text_State_Not_Supported} {this.Node.State}");
-				}
-			}
-		}
 
 		internal NodeView(Node node)
 		{
@@ -67,38 +56,31 @@ namespace LersMobile.Views
         /// <returns></returns>
         public async Task LoadDetail()
         {
-			try
+			var requiredFlags = NodeInfoFlags.Serviceman | NodeInfoFlags.Customer | NodeInfoFlags.Systems;
+
+			if (!this.Node.AvailableInfo.HasFlag(requiredFlags))
 			{
-				var requiredFlags = NodeInfoFlags.Serviceman | NodeInfoFlags.Customer | NodeInfoFlags.Systems;
+				// Нужные данные ещё не загружены
 
-				if (!this.Node.AvailableInfo.HasFlag(requiredFlags))
+				await this.Node.RefreshAsync(requiredFlags);
+			}
+
+			// Заполняем список точек учёта.
+
+			if (this.MeasurePoints.Count == 0)
+			{
+				foreach (var measurePoint in this.Node.Systems.GetAllMeasurePoints())
 				{
-					// Нужные данные ещё не загружены
-
-					await this.Node.RefreshAsync(requiredFlags);
-				}
-
-				// Заполняем список точек учёта.
-
-				if (this.MeasurePoints.Count == 0)
-				{
-					foreach (var measurePoint in this.Node.Systems.GetAllMeasurePoints())
-					{
-						this.MeasurePoints.Add(new MeasurePointView(measurePoint));
-					}
-				}
-
-				if (this.Node.State != NodeState.Normal)
-				{
-					// Если состояние объекта отличается от нормального,
-					// загружаем диагностическую карточку.
-
-					await LoadDiagnostics();
+					this.MeasurePoints.Add(new MeasurePointView(measurePoint));
 				}
 			}
-			catch (Exception exc)
+
+			if (this.Node.State != NodeState.Normal)
 			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+				// Если состояние объекта отличается от нормального,
+				// загружаем диагностическую карточку.
+
+				await LoadDiagnostics();
 			}
         }
 
@@ -109,75 +91,68 @@ namespace LersMobile.Views
 		/// <returns></returns>
 		private async Task LoadDiagnostics()
         {
-			try
+			var node = this.Node;
+
+			var state = await node.GetDetailedState();
+
+			this.DetailedState.Clear();
+
+			if (state.CriticalIncidentCount > 0)
 			{
-				var node = this.Node;
-
-				var state = await node.GetDetailedState();
-
-				this.DetailedState.Clear();
-
-				if (state.CriticalIncidentCount > 0)
+				this.DetailedState.Add(new NodeStateView(NodeState.Error, Views.DetailedState.CriticalIncidents)
 				{
-					this.DetailedState.Add(new NodeStateView(NodeState.Error, Views.DetailedState.CriticalIncidents)
-					{
-						Text = String.Format(Droid.Resources.Messages.NodeView_CriticalIncident_Count, state.CriticalIncidentCount)
-					});
-				}
-
-				if (state.WarningIncidentCount > 0)
-				{
-					this.DetailedState.Add(new NodeStateView(NodeState.Warning, Views.DetailedState.Incidents)
-					{
-						Text = String.Format(Droid.Resources.Messages.NodeView_Warning_Incident_Count, state.WarningIncidentCount)
-					});
-				}
-
-				if (state.LastDataOverdue > 0)
-				{
-					this.DetailedState.Add(new NodeStateView(NodeState.Warning) { Text = String.Format(Droid.Resources.Messages.NodeView_Overdue_Data, state.LastDataOverdue) });
-				}
-
-				if (state.OverdueJobCount > 0)
-				{
-					this.DetailedState.Add(new NodeStateView(NodeState.Error) { Text = String.Format(Droid.Resources.Messages.NodeView_OverdueJobCount, state.OverdueJobCount) });
-				}
-
-				if (state.DaysToAdmissionDeadline.HasValue)
-				{
-					this.DetailedState.Add(new NodeStateView(NodeState.Warning)
-					{
-						Text = String.Format(Droid.Resources.Messages.NodeView_Admission_Deadline, state.AdmissionMeasurePoint.Title, state.DaysToAdmissionDeadline)
-					});
-				}
-
-				if (state.AdmissionDateOverdue.HasValue)
-				{
-					this.DetailedState.Add(new NodeStateView(NodeState.Error)
-					{
-						Text = String.Format(Droid.Resources.Messages.NodeView_Admission_Overdue, state.AdmissionMeasurePoint.Title, state.AdmissionDateOverdue)
-					});
-				}
-
-				if (state.DueEquipmentCalibrationCount > 0)
-				{
-					this.DetailedState.Add(new NodeStateView(NodeState.Warning)
-					{
-						Text = String.Format(Droid.Resources.Messages.NodeView_DueEquipmentCalibrationCount, state.DueEquipmentCalibrationCount)
-					});
-				}
-
-				if (state.OverdueEquipmentCalibrationCount > 0)
-				{
-					this.DetailedState.Add(new NodeStateView(NodeState.Error)
-					{
-						Text = String.Format(Droid.Resources.Messages.NodeView_OverdueEquipmentCalibrationCount, state.OverdueEquipmentCalibrationCount)
-					});
-				}
+					Text = String.Format(Droid.Resources.Messages.NodeView_CriticalIncident_Count, state.CriticalIncidentCount)
+				});
 			}
-			catch (Exception exc)
+
+			if (state.WarningIncidentCount > 0)
 			{
-				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+				this.DetailedState.Add(new NodeStateView(NodeState.Warning, Views.DetailedState.Incidents)
+				{
+					Text = String.Format(Droid.Resources.Messages.NodeView_Warning_Incident_Count, state.WarningIncidentCount)
+				});
+			}
+
+			if (state.LastDataOverdue > 0)
+			{
+				this.DetailedState.Add(new NodeStateView(NodeState.Warning) { Text = String.Format(Droid.Resources.Messages.NodeView_Overdue_Data, state.LastDataOverdue) });
+			}
+
+			if (state.OverdueJobCount > 0)
+			{
+				this.DetailedState.Add(new NodeStateView(NodeState.Error) { Text = String.Format(Droid.Resources.Messages.NodeView_OverdueJobCount, state.OverdueJobCount) });
+			}
+
+			if (state.DaysToAdmissionDeadline.HasValue)
+			{
+				this.DetailedState.Add(new NodeStateView(NodeState.Warning)
+				{
+					Text = String.Format(Droid.Resources.Messages.NodeView_Admission_Deadline, state.AdmissionMeasurePoint.Title, state.DaysToAdmissionDeadline)
+				});
+			}
+
+			if (state.AdmissionDateOverdue.HasValue)
+			{
+				this.DetailedState.Add(new NodeStateView(NodeState.Error)
+				{
+					Text = String.Format(Droid.Resources.Messages.NodeView_Admission_Overdue, state.AdmissionMeasurePoint.Title, state.AdmissionDateOverdue)
+				});
+			}
+
+			if (state.DueEquipmentCalibrationCount > 0)
+			{
+				this.DetailedState.Add(new NodeStateView(NodeState.Warning)
+				{
+					Text = String.Format(Droid.Resources.Messages.NodeView_DueEquipmentCalibrationCount, state.DueEquipmentCalibrationCount)
+				});
+			}
+
+			if (state.OverdueEquipmentCalibrationCount > 0)
+			{
+				this.DetailedState.Add(new NodeStateView(NodeState.Error)
+				{
+					Text = String.Format(Droid.Resources.Messages.NodeView_OverdueEquipmentCalibrationCount, state.OverdueEquipmentCalibrationCount)
+				});
 			}
 		}
     }
