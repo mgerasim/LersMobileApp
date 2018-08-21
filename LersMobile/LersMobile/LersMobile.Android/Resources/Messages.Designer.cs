@@ -250,6 +250,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Текущие.
+        /// </summary>
+        public static string MeasurePointArchivePage_DeviceDataType_Current {
+            get {
+                return ResourceManager.GetString("MeasurePointArchivePage_DeviceDataType_Current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Суточные.
         /// </summary>
         public static string MeasurePointArchivePage_DeviceDataType_Day {

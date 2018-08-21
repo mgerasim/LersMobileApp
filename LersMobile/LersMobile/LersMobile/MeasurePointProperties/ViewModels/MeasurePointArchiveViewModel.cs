@@ -22,14 +22,14 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 		/// </summary>
         private static String[] DaviceDataTypeDateStringFormat = new String[]
         {
-            "{0:dd.MM.yyyy}", "{0:dd.MM.yyyy HH:mm}", "{0:MM.yyyy}"
-        };
+            "{0:dd.MM.yyyy}", "{0:dd.MM.yyyy HH:mm}", "{0:MM.yyyy}", "{0:dd.MM.yyyy}"
+		};
 		/// <summary>
 		/// Типы данных: суточные, часовые, месячные
 		/// </summary>
         private static DeviceDataType[] DataTypes = new DeviceDataType[]
         {			
-            DeviceDataType.Day,	DeviceDataType.Hour,DeviceDataType.Month
+            DeviceDataType.Day,	DeviceDataType.Hour,DeviceDataType.Month, DeviceDataType.Current
         };
 
 		/// <summary>

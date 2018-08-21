@@ -623,4 +623,8 @@
     <value>Если по какой-либо причине в данный момент отправить отчет не удается, его можно сохранить в файл и передать по электронной почте на support@lers.ru.</value>
     <comment>Если по какой-либо причине в данный момент отправить отчет не удается, его можно сохранить в файл и передать по электронной почте на support@lers.ru.</comment>
   </data>
+  <data name="MeasurePointArchivePage_DeviceDataType_Current" xml:space="preserve">
+    <value>Текущие</value>
+    <comment>Текущие</comment>
+  </data>
 </root>

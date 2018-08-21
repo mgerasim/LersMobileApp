@@ -20,7 +20,7 @@ namespace LersMobile.Views
 
 		public string ImageSource => ResourceService.NodeImageSource(Node);
 
-		public string ServicemanName => this.Node.Serviceman?.Name;
+		public string ServicemanName => this.Node.Serviceman?.DisplayName;
 
 		public string CustomerTitle => this.Node.Customer?.Title;
 

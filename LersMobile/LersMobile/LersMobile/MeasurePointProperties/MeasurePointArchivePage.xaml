@@ -47,6 +47,7 @@
                         <local:Translate>MeasurePointArchivePage_DeviceDataType_Day</local:Translate>
                         <local:Translate>MeasurePointArchivePage_DeviceDataType_Hour</local:Translate>
                         <local:Translate>MeasurePointArchivePage_DeviceDataType_Month</local:Translate>
+                        <local:Translate>MeasurePointArchivePage_DeviceDataType_Current</local:Translate>
                     </Picker.Items>
                 </Picker>
 

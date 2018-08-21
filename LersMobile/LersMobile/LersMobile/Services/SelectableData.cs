@@ -40,11 +40,9 @@ namespace LersMobile.Core
             set
             {
                 isSelecting = value;
-                OnPropertyChanged(nameof(IsSelecting));
-                OnPropertyChanged(nameof(IsSelected));
-                OnPropertyChanged(nameof(IsUnselected));
             }
         }
+
 		/// <summary>
 		/// Признак того, что элемент данных не выбран
 		/// </summary>
