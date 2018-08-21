@@ -41,23 +41,23 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		
 		#region Команды
 
-		public readonly ICommand ItemTappedCommand;
+		public ICommand ItemTappedCommand { get; }
 
-		public readonly SearchCommand SearchCommand;
+		public SearchCommand SearchCommand { get; }
 
-		public readonly RefreshCommand RefreshCommand;
+		public RefreshCommand RefreshCommand { get; }
 
-		public readonly SelectingCommand SelectingCommand;
+		public SelectingCommand SelectingCommand { get; }
 
-		public readonly ReportCommand ReportCommand;
+		public ReportCommand ReportCommand { get; }
 
-		public readonly ReportMeasurePointsCommand ReportMeasurePointsCommand;
+		public ReportMeasurePointsCommand ReportMeasurePointsCommand { get; }
 
-        #endregion
+		#endregion
 
-        #region Binding свойства
+		#region Binding свойства
 
-        /// <summary>
+		/// <summary>
 		/// Список отображаемых объектов учёта.
 		/// </summary>
 		public SelectableData<NodeView>[] Nodes
@@ -157,7 +157,7 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// </summary>
         public NodesViewModel()
         {
-            _nodeGroups = new List<NodeGroupView>();
+ //           _nodeGroups = new List<NodeGroupView>();
             RefreshCommand = new RefreshCommand(this);
             SearchCommand = new SearchCommand(this);
             SelectingCommand = new SelectingCommand(this);
@@ -318,31 +318,39 @@ namespace LersMobile.Pages.NodesPage.ViewModel
 		/// <returns></returns>
         public async Task ReloadNodeGroups()
         {
-            if (this._nodeGroups.Count > 0)
-            {
-                return;
-            }            
-
-            this._nodeGroups.Add(new NodeGroupView(0, Droid.Resources.Messages.Text_All));
-			
-			_selectedGroup = NodeGroups.First(); // Все
-
-			var list = await App.Core.Server.NodeGroups.GetListAsync();
-
-            foreach(var item in list)
-            {
-                NodeGroupView nodeGroupView = new NodeGroupView(item.Id, item.Title);
-                _nodeGroups.Add(nodeGroupView);
-				if (item.Id == AppDataStorage.SelectedGroupId)
+			try
+			{
+				if (this._nodeGroups.Count > 0)
 				{
-					_selectedGroup = nodeGroupView;
+					return;
 				}
-            }
 
-			OnPropertyChanged(nameof(SelectedGroup));
-            OnPropertyChanged(nameof(NodeGroups));
-        }
+				this._nodeGroups.Add(new NodeGroupView(0, Droid.Resources.Messages.Text_All));
 
+				_selectedGroup = NodeGroups.First(); // Все
+
+				var list = await App.Core.Server.NodeGroups.GetListAsync();
+
+				foreach (var item in list)
+				{
+					NodeGroupView nodeGroupView = new NodeGroupView(item.Id, item.Title);
+					_nodeGroups.Add(nodeGroupView);
+					if (item.Id == AppDataStorage.SelectedGroupId)
+					{
+						_selectedGroup = nodeGroupView;
+					}
+				}
+
+				OnPropertyChanged(nameof(SelectedGroup));
+				OnPropertyChanged(nameof(NodeGroups));
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error,
+					Droid.Resources.Messages.NodeListPage_Error_Loaded + Environment.NewLine + exc.Message, exc);
+			}
+		}
+        
 		/// <summary>
 		/// Переход на страницу просмотра параметров объекта учета
 		/// </summary>

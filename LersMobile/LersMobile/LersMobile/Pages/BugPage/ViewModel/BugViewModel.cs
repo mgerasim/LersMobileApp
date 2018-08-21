@@ -1,6 +1,10 @@
 ﻿using Lers.Telemetry;
+using Lers.Telemetry.Channel;
 using LersMobile.Core;
 using LersMobile.Pages.BugPage.ViewModel.Commands;
+using LersMobile.Services.Device;
+using LersMobile.Services.PopupMessage;
+using LersMobile.Services.Telemetry;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,12 +48,12 @@ namespace LersMobile.Pages.BugPage.ViewModel
 		/// <summary>
 		/// Команда сохранения отчета по ошибке
 		/// </summary>
-		readonly public SaveCommand SaveCommand;
+		public SaveCommand SaveCommand { get; }
 
 		/// <summary>
 		/// Команда отправка отчета по ошибке
 		/// </summary>
-		readonly public SendCommand SendCommand;
+		public SendCommand SendCommand { get; }
 
 		#endregion
 		/// <summary>
@@ -115,6 +119,36 @@ namespace LersMobile.Pages.BugPage.ViewModel
 		/// </summary>
 		public async void Send()
 		{
+			var telemetryChannel = new InMemoryChannel(TelemetryServices.ServerEndPointAddress);
+
+#if DEBUG
+			telemetryChannel.SendingInterval = new TimeSpan(0, 0, 5);
+#else
+			telemetryChannel.SendingInterval = new TimeSpan(0, 10, 0);
+#endif
+			TelemetryClient telemetryClient = new TelemetryClient(telemetryChannel);
+
+			telemetryClient.Context.License.Type = App.Core.Server.License.LicenseType.ToString();
+
+			telemetryClient.Context.Token = DeviceService.GetIdentifier();
+			telemetryClient.Context.Component.Name = "MobileApp";
+			telemetryClient.Context.Component.Id = DeviceService.GetIdentifier();
+			telemetryClient.Context.Component.Version = "R27.2";
+
+			telemetryClient.Context.Device.OperatingSystem = Environment.OSVersion.VersionString;
+			telemetryClient.Context.Device.Language = System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
+			telemetryClient.Context.Device.OsArchitecture = DeviceService.GetProcessorArchitecture();
+			telemetryClient.Context.Location.TimeZone = TimeZone.CurrentTimeZone.StandardName;
+
+			var properties = new Dictionary<string, string>();
+
+			properties["username"] = Email;
+			properties["userdescription"] = Description;
+
+			await telemetryClient.TrackException(this._exception, this._message, properties);
+
+			PopupMessageService.ShowShort(Droid.Resources.Messages.Text_Report_successfully_sended);
+
 			await ((MainPage)App.Current.MainPage).Detail.Navigation.PopAsync();
 		}
 

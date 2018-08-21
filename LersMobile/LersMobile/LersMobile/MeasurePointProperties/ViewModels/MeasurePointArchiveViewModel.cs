@@ -67,12 +67,12 @@ namespace LersMobile.MeasurePointProperties.ViewModels
 		/// <summary>
 		/// Команда загрузки данных
 		/// </summary>
-        public LoadCommand LoadCommand { get; set; }
+        public LoadCommand LoadCommand { get; }
 
 		/// <summary>
 		/// Команда отображения панели фильтрации
 		/// </summary>
-        public ShowCommand ShowCommand { get; set; }
+        public ShowCommand ShowCommand { get; }
 
 		/// <summary>
 		/// Признак того, что панель фильтрации отображается

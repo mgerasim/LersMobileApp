@@ -102,15 +102,23 @@ namespace LersMobile.Core
 
 		public async Task<NodeView[]> GetNodeDetail(int? nodeGroupId)
 		{
-			await EnsureConnected();
+			try
+			{
+				await EnsureConnected();
 
-			var getNodesTask = nodeGroupId.HasValue
-				? this.Server.Nodes.GetListAsync(nodeGroupId.Value)
-				: this.Server.Nodes.GetListAsync();
+				var getNodesTask = nodeGroupId.HasValue
+					? this.Server.Nodes.GetListAsync(nodeGroupId.Value)
+					: this.Server.Nodes.GetListAsync();
 
-			var nodes = await getNodesTask;
+				var nodes = await getNodesTask;
 
-			return nodes.Select(x => new NodeView(x)).ToArray();
+				return nodes.Select(x => new NodeView(x)).ToArray();
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
+			return null;			
 		}
 
 		/// <summary>
@@ -119,38 +127,62 @@ namespace LersMobile.Core
 		/// <returns></returns>
 		public async Task<NotificationView[]> GetNotifications()
 		{
-			await EnsureConnected();
+			try
+			{
+				await EnsureConnected();
 
-			// Уведомления запрашиваем только за последние три месяца.
-			// Их может быть много, а толку от старых уведомлений нет.
+				// Уведомления запрашиваем только за последние три месяца.
+				// Их может быть много, а толку от старых уведомлений нет.
 
-			var endDate = DateTime.Now.AddDays(1);
-			var startDate = endDate.AddMonths(-3);
+				var endDate = DateTime.Now.AddDays(1);
+				var startDate = endDate.AddMonths(-3);
 
-			var list = await this.Server.Notifications.GetListAsync(startDate, endDate);
+				var list = await this.Server.Notifications.GetListAsync(startDate, endDate);
 
-			return list
-				.OrderByDescending(x => x.DateTime)
-				.Select(x => new NotificationView(x))
-				.ToArray();
+				return list
+					.OrderByDescending(x => x.DateTime)
+					.Select(x => new NotificationView(x))
+					.ToArray();
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
+			return null;
 		}
 
         public async Task<DayIncidentList[]> GetNewIncidents(int? nodeGroupId)
         {
-            await EnsureConnected();
+			try
+			{
+				await EnsureConnected();
 
-            var incidents = await this.Server.Incidents.GetListNewAsync(nodeGroupId);
+				var incidents = await this.Server.Incidents.GetListNewAsync(nodeGroupId);
 
-            return GroupIncidentsByStartDate(incidents);
+				return GroupIncidentsByStartDate(incidents);
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
+			return null;
         }
 
         public async Task<DayIncidentList[]> GetIncidents(DateTime startDate, DateTime endDate, int? nodeGroupId)
         {
-            await EnsureConnected();
+			try
+			{
+				await EnsureConnected();
 
-            var incidents = await this.Server.Incidents.GetListAsync(startDate, endDate, nodeGroupId);
+				var incidents = await this.Server.Incidents.GetListAsync(startDate, endDate, nodeGroupId);
 
-            return GroupIncidentsByStartDate(incidents);
+				return GroupIncidentsByStartDate(incidents);
+			}
+			catch(Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
+			return null;
         }
 
 		/// <summary>
@@ -160,11 +192,19 @@ namespace LersMobile.Core
 		/// <returns></returns>
 		public async Task<DayIncidentList[]> GetActiveIncidents(Lers.Diag.IIncidentContainer incidentContainer)
 		{
-			await EnsureConnected();
+			try
+			{
+				await EnsureConnected();
 
-			var incidents = await incidentContainer.GetActiveIncidents();
+				var incidents = await incidentContainer.GetActiveIncidents();
 
-			return GroupIncidentsByStartDate(incidents);
+				return GroupIncidentsByStartDate(incidents);
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
+			return null;
 		}
 
         private static DayIncidentList[] GroupIncidentsByStartDate(Lers.Diag.Incident[] incidents)

@@ -28,7 +28,7 @@ namespace LersMobile.Pages.ReportsPage.ViewModel
 		/// <summary>
 		/// Команда обновления списка отчетов
 		/// </summary>
-        public RefreshCommand RefreshCommand { get; set; }
+        public RefreshCommand RefreshCommand { get; }
 
         #endregion
 

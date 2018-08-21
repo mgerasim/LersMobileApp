@@ -43,7 +43,7 @@ namespace LersMobile.Pages.ReportPage.ViewModel
 		/// <summary>
 		/// Обработчик по нажатию генерации отчета
 		/// </summary>
-        public GenerateCommand GenerateCommand { get; protected set; }
+        public GenerateCommand GenerateCommand { get; }
 
         #endregion
 

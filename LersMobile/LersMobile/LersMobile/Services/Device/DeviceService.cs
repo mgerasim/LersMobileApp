@@ -16,5 +16,14 @@ namespace LersMobile.Services.Device
 		{
 			return DependencyService.Get<IDeviceService>().GetIdentifier();
 		}
+		/// <summary>
+		/// Получение архитектуры процессор устройства
+		/// </summary>
+		/// <returns></returns>
+		public static string GetProcessorArchitecture()
+		{
+			return DependencyService.Get<IDeviceService>().GetProcessorArchitecture();
+		}
+
 	}
 }

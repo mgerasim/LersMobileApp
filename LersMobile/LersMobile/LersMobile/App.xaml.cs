@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Threading;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using LersMobile.Services.BugReport;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace LersMobile
@@ -24,6 +25,8 @@ namespace LersMobile
 			Core.LoginRequired += Core_LoginRequired;
 
 			ShowLoginPage();
+
+			AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 		}
 		        
 		private void Core_LoginRequired(object sender, EventArgs e)
@@ -64,6 +67,12 @@ namespace LersMobile
 		protected override void OnResume ()
 		{
 			// Handle when your app resumes
+		}
+
+		private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+		{
+			var newExc = new Exception("CurrentDomainOnUnhandledException", unhandledExceptionEventArgs.ExceptionObject as Exception);
+			newExc.UnhandledException();
 		}
 	}
 }

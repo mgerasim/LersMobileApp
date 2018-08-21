@@ -2,6 +2,7 @@
 using Lers.Core;
 using Lers.Serialization.Extensions;
 using Lers.Utils;
+using LersMobile.Services.BugReport;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -47,33 +48,40 @@ namespace LersMobile.Core
 		/// <returns></returns>
 		public async Task PollCurrent(CancellationToken cancellationToken)
 		{
-			var core = App.Core;
-
-			await core.EnsureConnected();
-
-			var server = core.Server;
-
-			server.PollSessions.PollSessionChanged += PollSessions_PollSessionChanged;
-			
-			var tcs = new TaskCompletionSource<bool>();
-
-			var pollSessionId = await this.measurePoint.PollCurrentAsync(new MeasurePointPollCurrentOptions
+			try
 			{
-				StartMode = PollManualStartMode.Force
-			});
+				var core = App.Core;
 
-			SubscribePollMessage(pollSessionId);
+				await core.EnsureConnected();
 
-			this.tasks[pollSessionId] = tcs;
+				var server = core.Server;
 
-			using (var registration = cancellationToken.Register(() => tcs.TrySetCanceled()))
-			{
-				await tcs.Task;
+				server.PollSessions.PollSessionChanged += PollSessions_PollSessionChanged;
+
+				var tcs = new TaskCompletionSource<bool>();
+
+				var pollSessionId = await this.measurePoint.PollCurrentAsync(new MeasurePointPollCurrentOptions
+				{
+					StartMode = PollManualStartMode.Force
+				});
+
+				SubscribePollMessage(pollSessionId);
+
+				this.tasks[pollSessionId] = tcs;
+
+				using (var registration = cancellationToken.Register(() => tcs.TrySetCanceled()))
+				{
+					await tcs.Task;
+				}
+
+				server.PollSessions.PollSessionChanged -= PollSessions_PollSessionChanged;
+
+				this.core.Server.RemoveNotification(PollLogMessageEventHandler);
 			}
-
-			server.PollSessions.PollSessionChanged -= PollSessions_PollSessionChanged;
-
-			this.core.Server.RemoveNotification(PollLogMessageEventHandler);
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
 		}
 
 

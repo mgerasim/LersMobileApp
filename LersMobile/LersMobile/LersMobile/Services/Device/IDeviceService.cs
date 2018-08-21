@@ -14,5 +14,10 @@ namespace LersMobile.Services.Device
 		/// </summary>
 		/// <returns></returns>
 		string GetIdentifier();
+		/// <summary>
+		/// Получить архитектуру процессора
+		/// </summary>
+		/// <returns></returns>
+		string GetProcessorArchitecture();
 	}
 }

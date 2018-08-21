@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Lers;
+using LersMobile.Services.BugReport;
 using LersMobile.Services.Resource;
 using Xamarin.Forms;
 
@@ -30,10 +31,17 @@ namespace LersMobile.Core
 
 		internal async Task MarkAsReadAsync()
 		{
-			await this.Notification.MarkAsReadAsync();
+			try
+			{
+				await this.Notification.MarkAsReadAsync();
 
-			OnPropertyChanged(nameof(BackgroundColor));
-			OnPropertyChanged(nameof(FontAttribute));
+				OnPropertyChanged(nameof(BackgroundColor));
+				OnPropertyChanged(nameof(FontAttribute));
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
 		}
 
 		private void OnPropertyChanged(string propertyName)

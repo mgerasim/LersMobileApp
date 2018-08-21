@@ -619,4 +619,8 @@
     <value>Ошибка аутентификации</value>
     <comment>Ошибка аутентификации</comment>
   </data>
+  <data name="Text_Report_successfully_sended" xml:space="preserve">
+    <value>Отчёт успешно отправлен</value>
+    <comment>Отчёт успешно отправлен</comment>
+  </data>
 </root>

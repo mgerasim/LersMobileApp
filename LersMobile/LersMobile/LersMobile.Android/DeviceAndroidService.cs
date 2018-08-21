@@ -20,5 +20,16 @@ namespace LersMobile.Droid
 			mTelephonyMgr = (Android.Telephony.TelephonyManager)Forms.Context.GetSystemService(Android.Content.Context.TelephonyService);
 			return mTelephonyMgr.DeviceId;
 		}
+
+		/// <summary>
+		/// Получение архитектуры процессора
+		/// </summary>
+		/// <returns></returns>
+		/// <remarks>https://stackoverflow.com/questions/37112544/how-to-identify-processor-architecture-in-xamarin-android</remarks>
+		public string GetProcessorArchitecture()
+		{
+			string osArchitecture = Java.Lang.JavaSystem.GetProperty("os.arch");
+			return osArchitecture;
+		}
 	}
 }

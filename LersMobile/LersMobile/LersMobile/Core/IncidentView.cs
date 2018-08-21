@@ -1,4 +1,5 @@
-﻿using LersMobile.Services.Resource;
+﻿using LersMobile.Services.BugReport;
+using LersMobile.Services.Resource;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -55,12 +56,19 @@ namespace LersMobile.Core
         /// <returns></returns>
         public async Task LoadLog()
         {
-            var incidentLog = await this.incident.GetLogAsync();
+			try
+			{
+				var incidentLog = await this.incident.GetLogAsync();
 
-            foreach (var record in incidentLog)
-            {
-                this.Log.Add(record);
-            }
+				foreach (var record in incidentLog)
+				{
+					this.Log.Add(record);
+				}
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error_Load, exc.Message, exc);
+			}
         }
 
         /// <summary>
@@ -69,12 +77,19 @@ namespace LersMobile.Core
         /// <returns></returns>
         public async Task Close()
         {
-            await App.Core.EnsureConnected();
+			try
+			{
+				await App.Core.EnsureConnected();
 
-            await incident.CloseAsync();
+				await incident.CloseAsync();
 
-            OnPropertyChanged(nameof(IsActive));
-            OnPropertyChanged(nameof(StateImageSource));
+				OnPropertyChanged(nameof(IsActive));
+				OnPropertyChanged(nameof(StateImageSource));
+			}
+			catch (Exception exc)
+			{
+				BugReportService.HandleException(Droid.Resources.Messages.Text_Error, exc.Message, exc);
+			}
         }
 
 

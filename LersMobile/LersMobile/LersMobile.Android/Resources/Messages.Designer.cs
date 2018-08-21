@@ -1060,6 +1060,15 @@ namespace LersMobile.Droid.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отчёт успешно отправлен.
+        /// </summary>
+        public static string Text_Report_successfully_sended {
+            get {
+                return ResourceManager.GetString("Text_Report_successfully_sended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Акты.
         /// </summary>
         public static string Text_ReportGroupType_Acts {

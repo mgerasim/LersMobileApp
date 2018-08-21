@@ -56,7 +56,7 @@ namespace LersMobile
 
 					ShowPasswordControls(true);
 
-					await DisplayAlert(Droid.Resources.Messages.LoginPage_Error_Connect, exc.Message, "OK");
+					BugReportService.HandleException(Droid.Resources.Messages.LoginPage_Error_Connect, exc.Message, exc);
 				}
 				finally
 				{
