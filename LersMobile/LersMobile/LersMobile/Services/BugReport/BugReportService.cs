@@ -4,6 +4,7 @@ using LersMobile.Pages.BugPage;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace LersMobile.Services.BugReport
 {
@@ -33,20 +34,25 @@ namespace LersMobile.Services.BugReport
 				return;
 			}
 
-			if (App.Current.MainPage.GetType().Name is BugPage)
+			if (App.Current.MainPage is BugPage)
 			{
 				return;
 			}
-
-			if (App.Current.MainPage.GetType().Name == "LoginPage" )
-				
+			
+			Page mainPage = null;
+			// Определяем корневую страницу
+			if (App.Current.MainPage is LoginPage )				
 			{
-				App.Current.MainPage = new BugPage(title, exception, ex);			
+				// Во время авторизации корневая страница является LoginPage
+				mainPage = App.Current.MainPage;
 			}
 			else
 			{
-				await ((MainPage)App.Current.MainPage).Detail.Navigation.PushModalAsync(new BugPage(title, exception, ex));
+				// После авторизации корневая страница определяется в Detail как выбранная из главного меню
+				mainPage = ((MainPage)App.Current.MainPage).Detail;				
 			}
+			// Показываем отчёт об ошибке
+			await mainPage.Navigation.PushModalAsync(new BugPage(title, exception, ex));
 		}
 
 		/// <summary>
